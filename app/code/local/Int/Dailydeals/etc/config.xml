@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Int_Dailydeals>
+            <version>0.1.0</version>
+        </Int_Dailydeals>
+    </modules>
+    <frontend>
+			<events>
+                <!--<checkout_cart_product_add_after>
+                    <observers>
+                        <unique_event_name>
+                            <class>dailydeals/observer</class>
+                            <method>modifyPrice</method>
+                        </unique_event_name>
+                    </observers>
+                </checkout_cart_product_add_after>-->
+				
+				<!--<controller_action_predispatch>
+				<observers>
+				<controller_action_before>
+				<class>dispatcher/observer</class>
+				<method>hookToControllerActionPreDispatch</method>
+				</controller_action_before>
+				</observers>
+				</controller_action_predispatch>-->
+				
+				
+				<controller_action_predispatch>
+				<observers>
+				<controller_action_before>
+				<class>dailydeals/observer</class>
+				<method>loaddeal</method>
+				</controller_action_before>
+				</observers>
+				</controller_action_predispatch>
+				
+				
+            </events>
+         
+        <routers>
+            <dailydeals>
+                <use>standard</use>
+                <args>
+                    <module>Int_Dailydeals</module>
+                    <frontName>dailydeals</frontName>
+                </args>
+            </dailydeals>
+        </routers>
+        <layout>
+            <updates>
+                <dailydeals>
+                    <file>dailydeals.xml</file>
+                </dailydeals>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<dailydeals>
+				<use>admin</use>
+				<args>
+					<module>Int_Dailydeals</module>
+					<frontName>dailydeals</frontName>
+				</args>
+			</dailydeals>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<dailydeals module="dailydeals">
+				<title>Mutliple/Daily Deals</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="dailydeals">
+						<title>Manage Deals</title>
+						<sort_order>0</sort_order>
+						<action>dailydeals/adminhtml_dailydeals</action>
+					</items>
+					<settings module="dailydeals">
+						<title>Settings</title>
+						<sort_order>2</sort_order>
+						<action>adminhtml/system_config/edit/section/dailydeals/</action>
+					</settings>
+				</children>
+			</dailydeals>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<dailydeals>
+							<title>Dailydeals Module</title>
+							<sort_order>10</sort_order>
+								<children>
+									<items module="dailydeals">
+										<title>Manage Deals</title>
+										<sort_order>0</sort_order>
+									</items>
+									<settings module="dailydeals">
+										<title>Settings</title>
+										<sort_order>2</sort_order>
+									</settings>
+								</children>
+						</dailydeals>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<dailydeals>
+					<file>dailydeals.xml</file>
+				</dailydeals>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+	
+	 	<rewrite>
+			<int_dailydeals_checkout_onepage>
+			 <from><![CDATA[#^/checkout/onepage/#]]></from>
+			<to>/dailydeals/checkout_onepage/</to>
+			</int_dailydeals_checkout_onepage>
+
+			<int_dailydeals_checkout_cart>
+			 <from><![CDATA[#^/checkout/cart/#]]></from>
+			<to>/dailydeals/checkout_cart/</to>
+			</int_dailydeals_checkout_cart>					
+		</rewrite>	
+        <models>
+            <dailydeals>
+                <class>Int_Dailydeals_Model</class>
+                <resourceModel>dailydeals_mysql4</resourceModel>
+            </dailydeals>
+            <dailydeals_mysql4>
+                <class>Int_Dailydeals_Model_Mysql4</class>
+                <entities>
+                    <dailydeals>
+                        <table>dailydeals</table>
+                    </dailydeals>
+					 <dealviewer>
+                        <table>dealviewer</table>
+                    </dealviewer>
+                </entities>
+            </dailydeals_mysql4>
+        </models>
+        <resources>
+            <dailydeals_setup>
+                <setup>
+                    <module>Int_Dailydeals</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </dailydeals_setup>
+            <dailydeals_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </dailydeals_write>
+            <dailydeals_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </dailydeals_read>
+        </resources>
+        <blocks>
+            <dailydeals>
+                <class>Int_Dailydeals_Block</class>
+            </dailydeals>
+        </blocks>
+        <helpers>
+            <dailydeals>
+                <class>Int_Dailydeals_Helper</class>
+            </dailydeals>
+        </helpers>
+		<sales>            
+            <order>
+               <statuses>                    
+					 <quote translate="label">
+                        <label>Quote</label>
+                    </quote>
+                </statuses>
+                <states>
+					<quote translate="label">
+                        <label>Quote</label>
+                        <statuses>
+                            <quote default="1"/>
+                        </statuses>
+                        <visible_on_front>1</visible_on_front>
+                    </quote>                    
+                </states>
+            </order>           
+        </sales>        
+    </global>
+</config>

@@ -1,0 +1,14 @@
+    <customer_logged_in>
+    <reference name="customer_logged_in">
+        <block type="core/text_list" name="form.additional.info">
+            <block type="captcha/captcha" name="captcha">
+                <reference name="head">
+                    <action method="addJs"><file>mage/captcha.js</file></action>
+                </reference>
+                <action method="setFormId"><formId>customer_logged_in</formId></action>
+                <action method="setImgWidth"><width>230</width></action>
+                <action method="setImgHeight"><width>50</width></action>
+            </block>
+        </block>
+    </reference>
+</customer_logged_in>

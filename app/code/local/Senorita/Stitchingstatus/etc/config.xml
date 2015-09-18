@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Senorita_Stitchingstatus>
+            <version>0.1.0</version>
+        </Senorita_Stitchingstatus>
+    </modules>
+    <frontend>
+        <routers>
+            <stitchingstatus>
+                <use>standard</use>
+                <args>
+                    <module>Senorita_Stitchingstatus</module>
+                    <frontName>stitchingstatus</frontName>
+                </args>
+            </stitchingstatus>
+        </routers>
+        <layout>
+            <updates>
+                <stitchingstatus>
+                    <file>stitchingstatus.xml</file>
+                </stitchingstatus>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<stitchingstatus>
+				<use>admin</use>
+				<args>
+					<module>Senorita_Stitchingstatus</module>
+					<frontName>stitchingstatus</frontName>
+				</args>
+			</stitchingstatus>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<stitchingstatus module="stitchingstatus">
+				<title>Stitching Status</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="stitchingstatus">
+						<title>Manage Items</title>
+						<sort_order>0</sort_order>
+						<action>stitchingstatus/adminhtml_stitchingstatus</action>
+					</items>
+				</children>
+			</stitchingstatus>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<stitchingstatus translate="title" module="stitchingstatus">
+							<title>Stitchingstatus Module</title>
+							<sort_order>20001</sort_order>
+							<children>
+								<items translate="title" module="stitchingstatus">
+									<title>Manage Items</title>
+									<sort_order>0</sort_order>
+								</items>
+							</children>
+						</stitchingstatus>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<stitchingstatus>
+					<file>stitchingstatus.xml</file>
+				</stitchingstatus>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <stitchingstatus>
+                <class>Senorita_Stitchingstatus_Model</class>
+                <resourceModel>stitchingstatus_mysql4</resourceModel>
+            </stitchingstatus>
+            <stitchingstatus_mysql4>
+                <class>Senorita_Stitchingstatus_Model_Mysql4</class>
+                <entities>
+                    <stitchingstatus>
+                        <table>stitchingstatus</table>
+                    </stitchingstatus>
+                </entities>
+            </stitchingstatus_mysql4>
+        </models>
+        <resources>
+            <stitchingstatus_setup>
+                <setup>
+                    <module>Senorita_Stitchingstatus</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </stitchingstatus_setup>
+            <stitchingstatus_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </stitchingstatus_write>
+            <stitchingstatus_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </stitchingstatus_read>
+        </resources>
+        <blocks>
+            <stitchingstatus>
+                <class>Senorita_Stitchingstatus_Block</class>
+            </stitchingstatus>
+        </blocks>
+        <helpers>
+            <stitchingstatus>
+                <class>Senorita_Stitchingstatus_Helper</class>
+            </stitchingstatus>
+        </helpers>
+    </global>
+</config>

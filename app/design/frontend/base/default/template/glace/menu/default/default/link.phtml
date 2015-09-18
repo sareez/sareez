@@ -1,0 +1,41 @@
+<?php
+$_item     = $this->getItem();
+$_instance = $_item->getTypeInstance();
+$_level    = $_item->getLevel() - 1;
+?>
+<li <?php if ($_level == 0): ?> data-toggle="dropdown"<?php endif ?> class="level<?php echo $_level ?> nav-<?php echo $_level + 1 ?> <?php if ($this->getChildrenHtml()): ?>parent<?php endif ?> <?php if ($_level == 0): ?>level-top<?php endif ?>  <?php if ($this->getIsFirst()): ?> first<?php endif ?><?php if ($this->getIsLast()): ?> last<?php endif ?>">
+    <a href="<?php echo $_instance->getUrl() ?>" class="<?php if ($_level == 0): ?>level-top<?php endif ?>" style="<?php echo $_instance->getStyle() ?>">
+        <span style="<?php echo $_instance->getStyle() ?>"><?php echo $_item->getName() ?></span>
+    </a>
+
+    <?php if ($this->getChildrenHtml()): ?>
+        <ul class="level<?php echo $_level ?> <?php if ($_item->getChildrenByType('row')->count()): ?>rows <?php endif ?>">
+            <?php echo $this->getChildrenHtml() ?>
+        </ul>
+    <?php endif ?>
+
+    <?php if ($this->getChildrenHtml() && 0): ?>
+
+        <?php if ($_item->getLevel() == 1): ?>
+            <div class="sub"><div class="sub-container">
+        <?php endif ?>
+
+        <?php if ($_item->getChildrenByType('column')->count() == 0
+        && $_item->getChildrenByType('row')->count() == 0): ?>
+        <ul class="sub<?php echo $_item->getLevel() ?>">
+            <?php echo $this->getChildrenHtml() ?>
+        </ul>
+        <?php elseif ($_item->getChildrenByType('column')->count() == 0): ?>
+            <?php echo $this->getChildrenHtml() ?>
+        <?php else: ?>
+        <div class="columns columns-<?php echo $_item->getChildrenByType('column')->count() ?> sub<?php echo $_item->getLevel() ?>">
+            <?php echo $this->getChildrenHtml() ?>
+        </div>
+        <?php endif ?>
+
+        <?php if ($_item->getLevel() == 1): ?>
+            </div></div>
+        <?php endif ?>
+
+    <?php endif ?>
+</li>

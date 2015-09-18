@@ -1,0 +1,25 @@
+<?php
+class Sn_Sorder_Block_Adminhtml_Sorder_Grid_Renderer_Manufacturers extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
+{
+ 
+ 
+
+
+ public function render(Varien_Object $row)
+    {  
+	
+	    $value = $row->getData('product_id');  
+		
+		  
+ 
+$model = Mage::getModel('catalog/product');
+ 
+$_product = $model->load($value); 
+ 
+$ManuFCId = $_product->getManufacturersId();
+		return $ManuFCId;
+    }
+
+ 
+}
+?>

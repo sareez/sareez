@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category	Glace
+ * @package		Glace_Menumobile
+ * @author		Glace
+ * @copyright	Copyright 2012 Glace
+ */
+ -->
+<config>
+    <modules>
+        <Glace_Menumobile>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Glace_Menumobile>
+    </modules>
+</config> 

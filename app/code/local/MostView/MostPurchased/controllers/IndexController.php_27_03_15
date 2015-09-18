@@ -1,0 +1,47 @@
+<?php
+class MostView_MostPurchased_IndexController extends Mage_Core_Controller_Front_Action
+{
+    public function indexAction()
+    {
+    	
+    	/*
+    	 * Load an object by id 
+    	 * Request looking like:
+    	 * http://site.com/mostpurchased?id=15 
+    	 *  or
+    	 * http://site.com/mostpurchased/id/15 	
+    	 */
+    	/* 
+		$mostpurchased_id = $this->getRequest()->getParam('id');
+
+  		if($mostpurchased_id != null && $mostpurchased_id != '')	{
+			$mostpurchased = Mage::getModel('mostpurchased/mostpurchased')->load($mostpurchased_id)->getData();
+		} else {
+			$mostpurchased = null;
+		}	
+		*/
+		
+		 /*
+    	 * If no param we load a the last created item
+    	 */ 
+    	/*
+    	if($mostpurchased == null) {
+			$resource = Mage::getSingleton('core/resource');
+			$read= $resource->getConnection('core_read');
+			$mostpurchasedTable = $resource->getTableName('mostpurchased');
+			
+			$select = $read->select()
+			   ->from($mostpurchasedTable,array('mostpurchased_id','title','content','status'))
+			   ->where('status',1)
+			   ->order('created_time DESC') ;
+			   
+			$mostpurchased = $read->fetchRow($select);
+		}
+		Mage::register('mostpurchased', $mostpurchased);
+		*/
+
+			
+		$this->loadLayout();     
+		$this->renderLayout();
+    }
+}

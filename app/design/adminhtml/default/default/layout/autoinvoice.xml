@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <autoinvoice_adminhtml_autoinvoice_index>
+        <reference name="content">
+            <block type="autoinvoice/adminhtml_autoinvoice" name="autoinvoice" />
+        </reference>
+    </autoinvoice_adminhtml_autoinvoice_index>
+</layout>

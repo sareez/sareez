@@ -1,0 +1,148 @@
+<?php 
+// print_r($this->orderProcess());
+require_once("app/Mage.php");
+$app = Mage::app('');
+
+
+    $resource = Mage::getSingleton('core/resource');
+    $readConnection = $resource->getConnection('core_read');
+
+$salesModel=Mage::getModel("sales/order");
+$salesCollection = $salesModel->getCollection();
+
+$i=1;
+foreach($salesCollection as $order)
+{
+    
+    $orderId= $order->getIncrementId();
+    echo $orderId;
+    $orderIncrementId = $orderId;
+   // $orderIncrementId = $i;
+    
+    
+    $order = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId);
+    $items = $order->getAllVisibleItems();
+   
+  
+    
+    
+       // foreach($items as $item):
+    foreach($items as $item){
+              ?>
+
+<table width="100%" border="0" cellpadding="3" cellspacing="3">
+
+  <tr>
+    <td><b>Item Id</b></td>
+    <td><b>Product Id</b></td>
+    <td><b>Name</b></td>
+    <td><b>SKU</b></td>
+    <td><b>Quantity</b></td>
+    <td><b>Stock</b></td>
+    <td><b>Option Product</b></td>
+    <td><b>Option Product Price</b></td>
+    <td><b>Catalog Name</b></td>
+    <td><b>Manufacturers / Vendor</b></td>
+    <td><b>Manufacturer Design</b></td>
+  </tr>
+  <tr>
+    <td><?php echo $item->getItemId(); ?></td>
+    <td><?php echo $item->getProductId(); ?></td>
+    <td><?php echo $item->getName(); ?></td>
+    <td><?php echo $item->getSku(); ?></td>
+    <td><?php echo $item->getQtyOrdered(); ?></td>
+      <td><?php  
+      $product = Mage::getModel('catalog/product')->load($item->getProductId());
+      echo $qty = $product->getStockItem()->getQty(); 
+      ?></td>
+      
+      <td><?php
+    $product = Mage::getModel("catalog/product")->load($item->getId()); //product id
+    foreach ($product->getOptions() as $_option) {
+        $values = $_option->getValues();
+        foreach ($values as $v) {
+            print_r($v->getTitle());
+            //echo " | ";
+            //echo $v->price; 
+            echo "<br />";
+        }
+    }
+?></td>
+      
+      <td><?php
+    $product = Mage::getModel("catalog/product")->load($item->getId()); //product id
+    foreach ($product->getOptions() as $_option) {
+        $values = $_option->getValues();
+        foreach ($values as $v) {
+            //print_r($v->getTitle());
+            //echo " | ";
+            echo $v->price; 
+            echo "<br />";
+        }
+    }
+?></td>
+      
+      <td>
+          <?php
+          $_id = $item->getProductId();
+$_resource = Mage::getSingleton('catalog/product')->getResource();
+$optionValue = $_resource->getAttributeRawValue($_id,  'catalogmaster_id', Mage::app()->getStore());
+$optionValue;
+      
+
+
+    $query = "SELECT * FROM int_catalogmaster where catalog_id = '".$optionValue."'";
+    $results = $readConnection->fetchAll($query);
+    foreach($results as $r) { echo $r['catalog_name']; }
+
+
+      ?></td>
+      
+      <td>
+                    <?php
+          $_id = $item->getProductId();
+$_resource = Mage::getSingleton('catalog/product')->getResource();
+$optionValue = $_resource->getAttributeRawValue($_id,  'manufacturers_id', Mage::app()->getStore());
+$optionValue;
+
+
+    $query = "SELECT * FROM manufacturers where manufacturers_id = '".$optionValue."'";
+    $results = $readConnection->fetchAll($query);
+    foreach($results as $r) { echo $r['manufacturers_name']; }
+
+?>
+          
+          </td>
+          
+          <td> <?php
+          $_id = $item->getProductId();
+$_resource = Mage::getSingleton('catalog/product')->getResource();
+$optionValue = $_resource->getAttributeRawValue($_id,  'manufacturer_design', Mage::app()->getStore());
+echo $optionValue;
+
+
+//    $query = "SELECT * FROM manufacturers where manufacturers_id = '".$optionValue."'";
+//    $results = $readConnection->fetchAll($query);
+//    foreach($results as $r) { echo $r['manufacturers_name']; }
+
+?></td>
+          
+     
+      
+      
+  </tr>
+</table>
+<?php
+
+
+//$sql = "INSERT INTO `test_table` (`id`,`name`,`data`) VALUES ('1','EWA','Just for the testing..')";
+//$connection->query($sql);
+
+
+            
+} 
+        //endforeach;
+    
+ $i++;   
+}
+?>

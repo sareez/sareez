@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Itoris_AjaxMiniCart>
+			<active>true</active>
+			<codePool>local</codePool>
+			<depends>
+				<Mage_Checkout/>
+            </depends>
+		</Itoris_AjaxMiniCart>
+	</modules>
+</config>

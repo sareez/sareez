@@ -1,0 +1,658 @@
+<?php
+date_default_timezone_set("Asia/Kolkata");
+class Feed_Sales_Model_Order_Observer
+{
+    public function __contruct()
+    {
+
+    }
+
+    /**
+     * Exports new orders to an xml file
+     * @param Varien_Event_Observer $observer
+     * @return Feed_Sales_Model_Order_Observer
+     */
+    public function export_new_order($observer)
+    {
+		date_default_timezone_set("Asia/Kolkata");
+        Mage::log("reached export_new_order");
+        try
+        {
+	$event = $observer->getEvent();
+	$order = $event->getOrder();
+	//mage::log($order->getId());
+	//$ordersId=$this->getOrderId();	
+	$ordersId = $order->getId();
+	$IncrementId = $order->getIncrementId();	
+	$orderStatus = $order->getStatus();
+	$payment = $order->getPayment();
+	$shippingMethod = $order->getShippingMethod();
+	//include"db/connection.php";
+	//require_once '../../../../../../../app/Mage.php';
+    //Mage::app();		
+	$conn = mysql_connect("localhost","hbanfvqkdv","tXySfqDmQ3") or die("ERROR_OBS1::Not connected to SERVER"); 
+	$db = mysql_select_db("hbanfvqkdv",$conn) or die("ERROR_OBS2::Not connected to DATABASE");		 
+				
+				
+	//$sqlcmnt1="INSERT INTO `testing` SET `order_id`='".$ordersId."'";
+	//mysql_query($sqlcmnt1) or die("ERROR41::".mysql_error());
+	
+	//$sqlcmnt="INSERT INTO `sales_flat_order_item_stitching` SET `order_id`='".$ordersId."'";
+	//echo $sqlcmnt; die;
+	//mysql_query($sqlcmnt) or die("ERROR41::".mysql_error());
+	
+	
+	$order = Mage::getModel("sales/order")->load($ordersId); //load order by order id 
+	//$Incrementid = $order->getIncrementId();
+	$ordered_items = $order->getAllItems(); 
+	
+	foreach($ordered_items as $item){     //item detail     
+	$item_id = $item->getItemId(); //item id     
+	$product_id = $item->getProductId(); //product id          
+	$qtyo = $item->getQtyOrdered(); //ordered qty of item 
+	
+	$options = $item->getProductOptions(); 
+    $customOptions = $options['options'];   
+    if(!empty($customOptions))
+    {
+		$islahengastich_need = 0;
+		$issareezstich_need = 0;
+		$issalwarstich_need = 0;
+		$urlNew = '';
+		
+	foreach ($customOptions as $option)
+		{	
+		 if($option['option_type']== 'checkbox') 
+		   { 
+		   	  $option_value = $option['value'];
+		      $lahengastichingcount = substr_count( $option['value'], 'Lehenga');			 
+			  $sareezstichingcount = substr_count( $option['value'], 'Blouse');
+			  $salwarstichingcount = substr_count( $option['value'], 'Salwar');
+			  $standardpetticoatstichingcount = substr_count( $option['value'], 'Standard Petticoat');
+			  $customizepetticoatstichingcount = substr_count( $option['value'], 'Customize Petticoat');
+			  $prestitchingstichingcount = substr_count( $option['value'], 'Pre-Stitching');
+			 
+			 $product_stitching_type='';
+			 if($lahengastichingcount >0)
+			    {
+				  $product_stitching_type .='Lehenga,';
+				}
+			if($sareezstichingcount>0)
+				{
+				   $product_stitching_type .='Blouse,';
+				}
+			if($salwarstichingcount>0)
+				{
+				   $product_stitching_type .='Salwar,';
+				}
+			if($standardpetticoatstichingcount>0)
+				{
+				   $product_stitching_type .='Standard-Petticoat,';
+				}
+			if($customizepetticoatstichingcount>0)
+				{
+				   $product_stitching_type .='Customize-Petticoat,';
+				}
+			if($prestitchingstichingcount>0)
+				{
+				   $product_stitching_type .='Pre-Stitching,';
+				}		
+				
+				$product_stitching_type = rtrim($product_stitching_type,",");	
+		   }
+		   else
+		   {   
+		       $product_stitching_type = $option['label'];
+			   $option_value = $option['value'];
+			   }
+		   
+		}
+
+
+    }
+	
+	
+/*		foreach($ordered_items  as $item) {
+             $qty = $item->getQtyOrdered(); // Amount to add back on
+             $product = Mage::getModel('catalog/product')->load($item->getProductId());
+			
+			 
+			 
+			$options = $item->getProductOptions(); 
+			if($options)
+			{
+
+			$customOptions = $options['options'];   
+			if(!empty($customOptions))
+			{
+			foreach ($customOptions as $option)
+			{	
+			 if($option['label']== 'SELECT YOUR SIZE') 
+
+			   { 
+  
+				   
+				   $option_value = $option['value'];
+				   
+				   }
+			   
+			}
+			
+			
+			}
+			 
+			 
+			$attVal = $product->getOptions();
+			if($attVal){
+
+				$values = array();
+				foreach($attVal as $optionKey => $optionVal) {
+					foreach($optionVal->getValues() as $valuesKey => $valuesVal) {
+							$optionvalue = $valuesVal->getTitle();
+							if(trim($option_value) == trim($optionvalue))
+							{
+							$optionqty = $valuesVal->getCustomoptionsQty();
+							$set_qty = (int)$optionqty + (int)$qty;
+							$valuesVal->setCustomoptionsQty($set_qty);
+							$valuesVal->save();
+							$product->save();
+							}
+			
+						}
+					}
+				}
+			 
+			}
+
+      }
+*/	 
+	
+$model = Mage::getModel('catalog/product'); //getting product model
+ 
+$_product = $model->load($product_id); //getting product object for particular product id
+$categoryIds = $_product->getCategoryIds();
+if(in_array('273', $categoryIds))
+{
+   $qty = '1';
+   $qtys = $qtyo;
+}
+else
+{
+	$qty = $qtyo;
+	$qtys = '1';
+}
+$exprees_shipping_available = $_product->getAttributeText('exprees_shipping_available');
+$exprees_shipping = $_product->getExpreesShippingAvailable();
+$manufacturers_id = $_product->getManufacturersId();
+$catalogmaster_id = $_product->getCatalogmasterId();
+$manufacturer_design = $_product->getManufacturer_design();
+$sku = $_product->getSku();
+$qtyp = $_product->getStockItem()->getQty();
+/*if($qtyp>0)
+{
+$allocationstatus_id = 2 ;
+}
+else
+{
+$allocationstatus_id = 1 ;
+}*/
+
+/*if(($qtyp+$qty) <= 1 && $exprees_shipping = 33)
+{
+$exprees_shipping_available_pro = 75;
+
+	 $producte = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
+	 if ($producte) 
+	 {
+     $producte->setExpreesShippingAvailable($exprees_shipping_available_pro);
+	 $producte->save();
+	 unset($producte);
+     }
+
+}*/
+
+//echo date("Y/m/d H:i:s");
+
+$allocation_date = date("Y-m-d");
+
+$order_date = date("Y-m-d H:i:s");
+
+$date = date("Y-m-d H:i:s");
+
+if($exprees_shipping == 33){
+    $mod_date = strtotime($date."+ 2 days");
+}
+else if($exprees_shipping == 34){
+	$mod_date = strtotime($date."+ 5 days");
+	}
+else if($exprees_shipping == 35){
+	$mod_date = strtotime($date."+ 10 days");
+	}
+else if($exprees_shipping == 75){
+	$mod_date = strtotime($date."+ 20 days");
+	}
+else
+{
+	$mod_date = strtotime($date."+ 20 days");
+}
+
+
+
+
+for($x=0; $x<$qty; $x++){
+	
+	if($qtyp>0 && $x+1<= $qtyp)
+	{
+	$allocationstatus_id = 2 ;
+	}
+	else
+	{
+	$allocationstatus_id = 1 ;
+	if($exprees_shipping == 33)
+		{
+		$exprees_shipping_available = '25 days';
+		$mod_date = strtotime($date."+ 20 days");	
+		}
+	}
+$tentative_date = date("Y-m-d H:i:s",$mod_date);
+	
+$unique_stitching_id = $product_id."-".$ordersId."-".$item_id."-".$x;
+$sql="INSERT INTO `sales_flat_order_item_stitching` SET `stitchingstatus_id`='0',`tailormaster_id`='0',`comment`='',`qty`='".$qtys."',`item_id`='".$item_id."',`product_id`='".$product_id."',`sku`='".$sku."',`order_id`='".$ordersId."',`exprees_shipping_available`='".$exprees_shipping_available."',`manufacturers_id`='".$manufacturers_id."',`catalogmaster_id`='".$catalogmaster_id."',`manufacturer_design`='".$manufacturer_design."',`product_stitching_type`='".$product_stitching_type."',`option_value`='".$option_value."',`allocationstatus_id`='".$allocationstatus_id."',`allocation_date`='".$allocation_date."',`order_date`='".$order_date."',`tentative_date`='".$tentative_date."',`unique_stitching_id`='".$unique_stitching_id."',`increment_order_id`='".$IncrementId."' ,`order_status`='".$orderStatus."',`shipping_method`='".$shippingMethod."',`payment_method`='".$payment."'";
+
+mysql_query($sql) or die("ERROR4::".mysql_error());
+
+//$allocateupdt="UPDATE `ordercsv` SET `allocationstatus_id`='".$allocationstatus_id."',`allocation_date`='".$allocation_date."' WHERE `productid`='".$product_id."',`order_id`='".$ordersId."'";
+
+//mysql_query($allocateupdt) or die("ERROR4::".mysql_error());
+
+}
+$product_stitching_type = '';
+$option_value = '';
+$exprees_shipping_available = '';
+$manufacturers_id = '';
+$catalogmaster_id = '';
+$manufacturer_design = '';
+$allocationstatus_id = '';
+$tentative_date = '';
+}
+
+			
+        }
+        catch (Exception $e)
+        {
+            Mage::log("order import failed.\n"); 
+        }
+        return $this;
+    }
+	
+	
+	public function save_order($observer)
+    {
+		date_default_timezone_set("Asia/Kolkata");
+        Mage::log("reached export_new_order");
+        try
+        {
+	$event = $observer->getEvent();
+	$order = $event->getOrder();
+	//mage::log($order->getId());
+	//$ordersId=$this->getOrderId();	
+	$ordersId = $order->getId();
+	$orderStatus = $order->getStatus();
+	$payment = $order->getPayment()->getMethodInstance()->getTitle();
+	//$payment = $order->getPayment();	
+	//include"db/connection.php";			
+	$conn = mysql_connect("localhost","hbanfvqkdv","tXySfqDmQ3") or die("ERROR_OBS1::Not connected to SERVER"); 
+	$db = mysql_select_db("hbanfvqkdv",$conn) or die("ERROR_OBS2::Not connected to DATABASE");		 
+				
+				
+	//$sqlcmnt1="INSERT INTO `testing` SET `order_id`='".$ordersId."'";
+	//mysql_query($sqlcmnt1) or die("ERROR41::".mysql_error());
+	
+	//$sqlcmnt="INSERT INTO `sales_flat_order_item_stitching` SET `order_id`='".$ordersId."'";
+	//echo $sqlcmnt; die;
+	//mysql_query($sqlcmnt) or die("ERROR41::".mysql_error());
+	
+	
+	$order = Mage::getModel("sales/order")->load($ordersId); //load order by order id 
+	//$Incrementid = $order->getIncrementId();
+	$ordered_items = $order->getAllItems(); 
+	
+	foreach($ordered_items as $item){     //item detail     
+	$item_id = $item->getItemId(); //item id     
+	$product_id = $item->getProductId(); //product id          
+	$qty = $item->getQtyOrdered(); //ordered qty of item 
+	
+	
+
+	for($x=0; $x<$qty; $x++){
+	$unique_stitching_id = $product_id."-".$ordersId."-".$item_id."-".$x;
+	$sqls="UPDATE `sales_flat_order_item_stitching` SET `order_status`='".$orderStatus."',`payment_method`='".$payment."' WHERE `unique_stitching_id`='".$unique_stitching_id."'";
+	
+	mysql_query($sqls) or die("ERROR4::".mysql_error());
+	}
+	
+	}
+
+			
+        }
+        catch (Exception $e)
+        {
+            Mage::log("order Update failed.\n"); 
+        }
+        return $this;
+    }
+	
+	public function save_cancel_order($observer)
+    {
+		date_default_timezone_set("Asia/Kolkata");
+        Mage::log("reached save_cancel_order");
+        try
+        {
+	$event = $observer->getEvent();
+	$order = $event->getOrder();
+	//mage::log($order->getId());
+	//$ordersId=$this->getOrderId();	
+	$ordersId = $order->getId();	
+	$order = Mage::getModel("sales/order")->load($ordersId); //load order by order id 
+	//$Incrementid = $order->getIncrementId();
+	$ordered_items = $order->getAllItems(); 
+	
+	foreach($ordered_items as $item){     //item detail     
+	$item_id = $item->getItemId(); //item id     
+	$product_id = $item->getProductId(); //product id          
+	$qty = $item->getQtyOrdered(); //ordered qty of item 
+	$model = Mage::getModel('catalog/product'); //getting product model
+	 
+	$_product = $model->load($product_id); //getting product object for particular product id
+	$exprees_shipping_available = $_product->getAttributeText('exprees_shipping_available');
+	$manufacturers_id = $_product->getManufacturersId();
+	$catalogmaster_id = $_product->getCatalogmasterId();
+	$manufacturer_design = $_product->getManufacturer_design();
+	$sku = $_product->getSku();
+	$qtyp = $_product->getStockItem()->getQty();
+	
+	if($qtyp > 0)
+	{
+	$exprees_shipping_available_pro = 33;
+	$producte1 = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
+	 if ($producte1) 
+	 {
+     $producte1->setExpreesShippingAvailable($exprees_shipping_available_pro);
+	 $producte1->save();
+	 unset($producte1);
+     }
+	}
+	/*else
+	{
+		$exprees_shipping_available_pro = 75;
+		$producte2 = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
+	 if ($producte2) 
+	 {
+     $producte2->setExpreesShippingAvailable($exprees_shipping_available_pro);
+	 $producte2->save();
+	 unset($producte2);
+     }
+	}*/
+	
+	//$allocation_date = date("Y-m-d");
+
+
+	 
+}
+
+			
+        }
+        catch (Exception $e)
+        {
+            Mage::log("order import failed.\n"); 
+        }
+        return $this;
+    }
+	
+	public function order_shipment_bknaba($observer)
+    {
+		date_default_timezone_set("Asia/Kolkata");   
+	$shipment = $observer->getEvent()->getShipment();
+	$event = $observer->getEvent();
+	$trackingNumbers=Mage::getResourceModel('sales/order_shipment_track_collection')->addAttributeToSelect('*')->addAttributeToFilter('parent_id',$shipment->getId());
+	$trackingNumbers->getSelect()->order('entity_id desc')->limit(1);
+	$trackData = $trackingNumbers->getData();
+	$unique_stitching_id = $trackData[0]['unique_stitching_id'];
+	$track_number = $trackData[0]['track_number'];
+	$shipping_date = date("Y-m-d");
+	$title = $trackData[0]['title'];
+	$conn = mysql_connect("localhost","hbanfvqkdv","tXySfqDmQ3") or die("ERROR_OBS::Not connected to SERVER"); 
+	$db = mysql_select_db("hbanfvqkdv",$conn) or die("ERROR_OBS::Not connected to DATABASE");	
+				
+	$sqlship="UPDATE `sales_flat_order_item_stitching` SET `currier_title`='".$title."',`shipping_date`='".$shipping_date."',`stitchingstatus_id`='15',`track_number`='".$track_number."' WHERE `unique_stitching_id`='".$unique_stitching_id."'";
+
+mysql_query($sqlship) or die("ERROR4::".mysql_error());
+	}
+	
+	public function order_shipment($observer)
+    {
+	date_default_timezone_set("Asia/Kolkata"); 
+	//date_default_timezone_set('UTC');  
+	$shipment = $observer->getEvent()->getShipment();
+	$event = $observer->getEvent();
+	$trackingNumbers=Mage::getResourceModel('sales/order_shipment_track_collection')->addAttributeToSelect('*')->addAttributeToFilter('parent_id',$shipment->getId());
+	$trackingNumbers->getSelect()->order('entity_id desc')->limit(1);
+	//$trackingNumbers->getSelect()->order('entity_id desc');
+	$trackData = $trackingNumbers->getData();
+	$unique_stitching_id = $trackData[0]['unique_stitching_id'];
+	$track_number = $trackData[0]['track_number'];
+	$send_mail_customer = $trackData[0]['send_mail_customer'];
+	//echo count($trackData);
+	//echo "<pre>"; print_r($trackData);
+	//echo "Naba-Observer"; die;
+			
+	//$shipping_date = date("Y-m-d");
+	$shipping_date = $trackData[0]['shipping_date'];
+	$title = $trackData[0]['title'];
+	$conn = mysql_connect("localhost","hbanfvqkdv","tXySfqDmQ3") or die("ERROR_OBS::Not connected to SERVER"); 
+	$db = mysql_select_db("hbanfvqkdv",$conn) or die("ERROR_OBS::Not connected to DATABASE");	
+	
+	$UniqueStitchingIdArr = explode(",", $unique_stitching_id);			
+	for($x=0; $x<count($UniqueStitchingIdArr); $x++){
+		$UniqueStitchingId = $UniqueStitchingIdArr[$x];
+		
+		$sqlship="UPDATE `sales_flat_order_item_stitching` SET `currier_title`='".$title."',`shipping_date`='".$shipping_date."',`stitchingstatus_id`='15',`track_number`='".$track_number."' WHERE `unique_stitching_id`='".$UniqueStitchingId."'";
+		
+		mysql_query($sqlship) or die("ERROR4::".mysql_error());
+	}
+	
+	if($trackData[0]['carrier_code']=='fedex'){	
+		$website='http://www.fedex.com/in/';
+	} else if($trackData[0]['carrier_code']=='dhl'){	
+		$website='http://www.dhl.com/en.html';
+	} else if($trackData[0]['carrier_code']=='bluedart'){	
+		$website='http://www.bluedart.com';
+	} else if($trackData[0]['carrier_code']=='aramex'){	
+		$website='http://www.aramex.com/';
+	} else if($trackData[0]['carrier_code']=='dhlint'){	
+		$website='http://www.dhl.com/en.html';
+	} else if($trackData[0]['carrier_code']=='FedEx_COD'){	
+		$website='http://www.fedex.com/in/';
+	} else if($trackData[0]['carrier_code']=='usps'){	
+		$website='http://www.usps.com';
+	} else if($trackData[0]['carrier_code']=='ups'){	
+		$website='http://www.ups.com';
+	} else if($trackData[0]['carrier_code']=='handDelivery'){	
+		$website='';
+	} else if($trackData[0]['carrier_code']=='tnt'){	
+		$website='http://www.tnt.com';
+	} else if($trackData[0]['carrier_code']=='INDIA_POST'){	
+		$website='http://www.indiapost.gov.in/speednettracking.aspx';
+	} else {}
+		
+	$comment='The following product(s) has been shipped:<br><br>'; 
+	 	
+	$skuArr = explode(",", $trackData[0]['sku']);			
+	/*for($x=0; $x<count($skuArr); $x++){
+		$skuId = $skuArr[$x];
+		$comment .='SKU-'.$skuId.'[QTY- 1]<br>';
+	 }*/
+	 
+	 //echo count($skuArr)."Naba"; die;
+	 if(count($trackData)>0){
+	 $result = array_count_values($skuArr);
+	 foreach ($result as $key => $val) {
+		 $comment .='SKU-'.rtrim($key,"-").'  [QTY- '.$val.']<br>';
+	 }
+	 
+		$comment .='<br>Courier Name :'.$trackData[0]['title'].'<br>
+					Tracking ID  :'.$trackData[0]['track_number'].'<br><br>
+					Shipping Date : '.date("j M Y",strtotime($shipping_date)).'<br><br>';
+		
+		// Start Check qty_ordered and qty_shipped Equal or Not
+					
+		$ss="SELECT * FROM  `sales_flat_order_item_stitching` WHERE  `order_id` ='".$trackData[0]['order_id']."' AND `allocationstatus_id` <> 3";
+		$qq = mysql_query($ss) or die("ERROR_QTY_SHIPPED::".mysql_error());
+		$qtyordered = mysql_num_rows($qq);
+		
+		$ss1="SELECT * FROM  `sales_flat_order_item_stitching` WHERE  `order_id` ='".$trackData[0]['order_id']."' AND `allocationstatus_id` <> 3 AND `stitchingstatus_id`=15";
+		$qq1 = mysql_query($ss1) or die("ERROR_QTY_SHIPPED1::".mysql_error());
+		$qtyshipped = mysql_num_rows($qq1);
+
+		if($qtyordered > $qtyshipped){
+			
+		$qty_shipped_status='And the following remaining product(s) will be shipped very soon.<br><br>';
+		$sql_ord="SELECT sku, COUNT(*) as cnt FROM  `sales_flat_order_item_stitching` WHERE  `order_id` ='".$trackData[0]['order_id']."' AND `allocationstatus_id` <> 3 AND `stitchingstatus_id` <> 15 GROUP BY sku";
+		$query_ord = mysql_query($sql_ord) or die("ERROR_QTY_SHIPPED::".mysql_error());
+		while($row_ord=mysql_fetch_array($query_ord)){
+			$total = (int)$row_ord['cnt'];
+			$qty_shipped_status .='SKU -'.rtrim($row_ord['sku'],"-").' [QTY- '.$total.']<br>';
+		}
+		
+		$comment .= $qty_shipped_status;
+		} 
+					
+		// End Check qty_ordered and qty_shipped Equal or Not
+		
+		$comment .='<br>You can track the progress of the parcel by visiting this link '.$website.'<br>
+					If you need any further information on this shipment feel free to contact us. Happy Shopping !';
+					
+	   	//echo $comment; die;
+		if($send_mail_customer==1){
+			$send_mail=1;
+		} else {
+			$send_mail=0;
+		}
+		
+		$parent_id = $trackData[0]['order_id'];			
+		$sqlcomment="INSERT INTO `sales_flat_order_status_history` SET `parent_id`='".$parent_id."',`is_customer_notified`='".$send_mail."',`is_visible_on_front`='1',`status`='shipped',`entity_name`='order',`created_at`='".date("Y-m-d H:i:s")."',`comment`='".$comment."'";		
+		mysql_query($sqlcomment) or die("ERROR_COMMENT::".mysql_error());
+		
+// Start Sending Mail to Customer Email Addresses...............		
+		$sql9="SELECT `increment_id`,`customer_email`,`customer_firstname`,`customer_lastname` FROM  `sales_flat_order` WHERE `entity_id` ='".$trackData[0]['order_id']."'";
+		$query9 = mysql_query($sql9) or die("ERROR_ORD::".mysql_error());
+		$row9=mysql_fetch_array($query9);
+		$customer_email = $row9['customer_email'];
+		$customer_firstname = $row9['customer_firstname'];
+		$customer_lastname = $row9['customer_lastname'];
+		$org_order_id = $row9['increment_id'];
+		if($send_mail_customer==1){
+			
+		$to = $customer_email;
+		$bcc = "Sareez"." <shipping@sareez.com>";
+		$admin_email = "Sareez"." <shipping@sareez.com>";
+		$subject ="Shipment of items in order ".$org_order_id." by Sareez.com";
+		
+		$body = "Hi!".'<br><br>';
+		$body .= $comment.'<br><br>';
+		$body .= 'Thank You';
+		
+		
+		$headers = 'From: '.$admin_email. "\r\n";
+		$headers .= "Reply-To: ".$admin_email."\r\n";
+		$headers .= 'Bcc: '.$bcc. "\r\n";
+		$headers .= 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		
+		@mail($to,$subject,$body,$headers);			
+			
+		}		
+		
+// Start Sending Mail to Customer Email Addresses...............				
+	 }
+	
+	}		
+	
+	public function save_order_pay($event)
+    {
+        $order = $event->getInvoice()->getOrder(); // Mage_Sales_Model_Order
+        $items = $order->getAllVisibleItems();
+    //echo 'Pay Order';
+	//exit;
+        foreach($items  as $item) {
+             $qty = $item->getQtyOrdered(); // Amount to add back on
+             $product = Mage::getModel('catalog/product')->load($item->getProductId());
+			 $centralqty = $product->getStockItem()->getQty();
+			 $exprees_shipping = $product->getExpreesShippingAvailable();
+			 $updateqty = (int)$centralqty - (int)$qty ;
+			 $stockItem = Mage::getModel('cataloginventory/stock_item')->loadByProduct($item->getProductId()); 
+			 $stockItem->setQty($updateqty);
+	         $stockItem->save();
+			 $product->save();
+			 
+			 /*$options = $item->getProductOptions(); 
+			if($options)
+			{
+				
+			$customOptions = $options['options'];   
+			if(!empty($customOptions))
+			{
+			foreach ($customOptions as $option)
+			{	
+			 if($option['label']== 'SELECT YOUR SIZE') 
+
+			   {   
+				   
+				   $option_value = $option['value'];
+				   
+				   }
+			   
+			}
+			
+			
+			}
+			 
+			 
+			$attVal = $product->getOptions();
+			if($attVal){
+				$values = array();
+				foreach($attVal as $optionKey => $optionVal) {
+					foreach($optionVal->getValues() as $valuesKey => $valuesVal) {
+							$optionvalue = $valuesVal->getTitle();
+							if(trim($option_value) == trim($optionvalue))
+							{
+							$optionqty = $valuesVal->getCustomoptionsQty();
+							$set_qty = (int)$optionqty - (int)$qty;
+						
+							$valuesVal->setCustomoptionsQty($set_qty);
+							$valuesVal->save();
+							$product->save();
+							}
+			
+						}
+					}
+				}
+			 
+			}*/
+			 
+			 
+				if($updateqty <= 0 && $exprees_shipping = 33)
+				{
+				$exprees_shipping_available_pro = 75;
+				$product->setExpreesShippingAvailable($exprees_shipping_available_pro);
+				$product->save();
+				unset($product); 
+				}
+			 
+             /**
+              * Here you would load the product and add this amount back on
+              */
+     }
+   }
+}
+?>

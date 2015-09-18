@@ -1,0 +1,145 @@
+<?php
+
+class Int_Catalogmaster_Block_Adminhtml_Catalogmaster_Grid extends Mage_Adminhtml_Block_Widget_Grid
+{
+  public function __construct()
+  {
+      parent::__construct();
+      $this->setId('catalogmasterGrid');
+      $this->setDefaultSort('catalog_name');
+      $this->setDefaultDir('ASC');
+      $this->setSaveParametersInSession(true);
+  }
+  
+  protected function _getStore() {
+        $storeId = (int) $this->getRequest()->getParam('store', 0);
+        return Mage::app()->getStore($storeId);
+    }
+ 
+  protected function _prepareCollection()
+  {
+  
+	  $store = $this->_getStore();
+	      $collection = Mage::getModel('catalogmaster/catalogmaster')->getCollection();
+	  
+	  
+	  if ($store->getId()) {
+        	//$collection->addFieldToFilter('websites', array('eq' => $store->getId() ));
+			$collection->addStoreFilter($store);
+           // $collection->addStoreFilter($store);
+        }
+		
+		
+      $this->setCollection($collection);
+      return parent::_prepareCollection();
+  }
+
+  protected function _prepareColumns()
+  {
+      $this->addColumn('catalog_id', array(
+          'header'    => Mage::helper('catalogmaster')->__('ID'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'catalog_id',
+      ));
+
+      $this->addColumn('catalog_name', array(
+          'header'    => Mage::helper('catalogmaster')->__('Name'),
+          'align'     =>'left',
+          'index'     => 'catalog_name',
+      ));
+	  
+      $this->addColumn('no_of_products', array(
+          'header'    => Mage::helper('catalogmaster')->__('NO Of Products'),
+          'align'     =>'left',
+          'index'     => 'no_of_products',
+      ));
+
+	
+   
+      
+	  
+      $this->addColumn('price', array(
+          'header'    => Mage::helper('catalogmaster')->__('Price'),
+          'align'     => 'left',
+          'width'     => '80px',
+          'index'     => 'price',
+          'type'      => 'options',
+          'options'   => array(
+              1 => 'Yes',
+              0 => 'No',
+          ),
+      ));
+      
+      $this->addColumn('fabric', array(
+          'header'    => Mage::helper('catalogmaster')->__('Fabric'),
+          'align'     => 'left',
+          'width'     => '80px',
+          'index'     => 'fabric',
+          'type'      => 'options',
+          'options'   => array(
+              1 => 'Yes',
+              0 => 'No',
+          ),
+      ));
+        $this->addColumn('action',
+            array(
+                'header'    =>  Mage::helper('catalogmaster')->__('Action'),
+                'width'     => '100',
+                'type'      => 'action',
+                'getter'    => 'getId',
+                'actions'   => array(
+                    array(
+                        'caption'   => Mage::helper('catalogmaster')->__('Edit'),
+                        'url'       => array('base'=> '*/*/edit'),
+                        'field'     => 'id'
+                    )
+                ),
+                'filter'    => false,
+                'sortable'  => false,
+                'index'     => 'stores',
+                'is_system' => true,
+        ));
+		
+		$this->addExportType('*/*/exportCsv', Mage::helper('catalogmaster')->__('CSV'));
+		$this->addExportType('*/*/exportXml', Mage::helper('catalogmaster')->__('XML'));
+	  
+      return parent::_prepareColumns();
+  }
+
+    protected function _prepareMassaction()
+    {
+        $this->setMassactionIdField('catalogmaster_id');
+        $this->getMassactionBlock()->setFormFieldName('catalogmaster');
+
+        $this->getMassactionBlock()->addItem('delete', array(
+             'label'    => Mage::helper('catalogmaster')->__('Delete'),
+             'url'      => $this->getUrl('*/*/massDelete'),
+             'confirm'  => Mage::helper('catalogmaster')->__('Are you sure?')
+        ));
+
+        $statuses = Mage::getSingleton('catalogmaster/status')->getOptionArray();
+
+        array_unshift($statuses, array('label'=>'', 'value'=>''));
+        $this->getMassactionBlock()->addItem('status', array(
+             'label'=> Mage::helper('catalogmaster')->__('Change status'),
+             'url'  => $this->getUrl('*/*/massStatus', array('_current'=>true)),
+             'additional' => array(
+                    'visibility' => array(
+                         'name' => 'status',
+                         'type' => 'select',
+                         'class' => 'required-entry',
+                         'label' => Mage::helper('catalogmaster')->__('Status'),
+                         'values' => $statuses
+                     )
+             )
+        ));
+        return $this;
+    }
+
+  public function getRowUrl($row)
+  {
+      return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+  }
+
+}

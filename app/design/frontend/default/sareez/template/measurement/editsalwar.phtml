@@ -1,0 +1,26 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl()?>highslide/highslide_area.css">
+<div class="page-title editblouse_title"><h1>Make a choice</h1></div>
+<div class="choiceCont">
+                     <h3 class="file_mgnt_edit_subheading">Please Select Measurement Option</h3>
+               <div class="choiceLftCont">
+                 <p> Please click on the following button if you want to provide Readymade Size </p>
+                 <div>
+                     <?php  $params = $this->getRequest()->getParams() ?>
+																  <?php  if($params['pid'] && $params['oid']){ $readyMadeUrl = $this->getUrl('measurement/index/readymadesalwar').'?pid='.$params['pid'].'&oid='.$params['oid']; } else { $readyMadeUrl = '#';	} ?>
+                 </div>
+                 <a style="text-decoration:none;" href="<?php echo $readyMadeUrl ?>">
+                   <input type="button" value="Select Ready-Made Size" name="submit" class="button_mes_edit">
+                   </a> </a>
+               </div>
+               <div class="choiceLftCont_right">
+                 <p>Please click on the following button if you want to submit Custom Measurement</p>
+                 <a style="text-decoration:none" href="<?php echo $this->getUrl('measurement/index/customsalwar').'?pid='.$params['pid'].'&oid='.$params['oid'];?>"><!--<input type="button" value="Submit Custom Measurement">-->
+                   <input type="button" value="Submit Custom Measurement" name="submit" class="button_mes_edit">
+                   </a>
+               </div>
+             </div>
+             <div class="choiceCont_se">
+              <h3 class="file_mgnt_edit_subheading">You can submit this measurement form later.</h3>
+             
+               <p>You can submit this measurment form later from your "My Account" section.</p>
+             </div>

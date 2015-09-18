@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Int_Measurementadmin>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Int_Measurementadmin>
+    </modules>
+</config> 

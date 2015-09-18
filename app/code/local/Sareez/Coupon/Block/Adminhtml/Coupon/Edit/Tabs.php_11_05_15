@@ -1,0 +1,43 @@
+<?php
+
+class Sareez_Coupon_Block_Adminhtml_Coupon_Edit_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
+{
+
+  public function __construct()
+  {
+      parent::__construct();
+      $this->setId('coupon_tabs');
+      $this->setDestElementId('edit_form');
+      $this->setTitle(Mage::helper('coupon')->__('Rule Information'));
+  }
+
+  protected function _beforeToHtml()
+  {
+
+	$this->addTab('form_section', array(
+		'label'     => Mage::helper('coupon')->__('Rule Information'),
+		'title'     => Mage::helper('coupon')->__('Rule Information'),
+		'content'   => $this->getLayout()->createBlock('coupon/adminhtml_coupon_edit_tab_form')->toHtml(),
+	));
+	
+	$this->addTab('form_section1', array(
+		'label'     => Mage::helper('coupon')->__('Condition'),
+		'title'     => Mage::helper('coupon')->__('Condition'),
+		'content'   => $this->getLayout()->createBlock('coupon/adminhtml_coupon_edit_tab_condition')->toHtml(),
+	));
+	
+	$this->addTab('form_section2', array(
+		'label'     => Mage::helper('coupon')->__('Manage Coupon Codes'),
+		'title'     => Mage::helper('coupon')->__('Manage Coupon Codes'),
+		'content'   => $this->getLayout()->createBlock('coupon/adminhtml_coupon_edit_tab_forms')->toHtml(),
+	));
+	
+	$this->addTab('form_section3', array(
+		'label'     => Mage::helper('coupon')->__('Coupon Codes'),
+		'title'     => Mage::helper('coupon')->__('Coupon Codes'),
+		'content'   => $this->getLayout()->createBlock('coupon/adminhtml_coupon_grids')->toHtml(),
+	));
+	  
+      return parent::_beforeToHtml();
+  }
+}

@@ -1,0 +1,110 @@
+<script>
+
+	
+	setTimeout(function(){ latest_trending_designs('latesttrendingdesignsone'); }, 1000);
+
+	
+
+
+	function latest_trending_designs(url) {
+		
+		
+		
+		document.getElementById(url).innerHTML = '<div class="latestTrendingDesigns"><img src="<?php echo Mage::getBaseUrl(); ?>images/495.GIF"  /></div>';
+		// alert(url);
+    
+	if (url == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById(url).innerHTML = xmlhttp.responseText;
+            }
+        }
+
+
+		if(url=='latesttrendingdesignsone')
+		{
+		 xmlhttp.open("GET","<?php echo Mage::getBaseUrl(); ?>mostviewed/index/"+url, false);
+		} else {
+		 xmlhttp.open("GET","<?php echo Mage::getBaseUrl(); ?>mostviewed/index/"+url, true);
+		}
+	
+		
+        xmlhttp.send();
+    }
+}
+
+
+
+
+</script>
+<?php
+$object = Mage::getModel('designs/designs')->load(1);
+$collection = Mage::getModel('designs/designs')->getCollection();
+
+
+?> 
+            
+            
+
+<div class="new-product">
+	<div class="new-product-heading">
+        <p class="new-product-heading-title"><strong>Latest Trending Designs </strong><br></p><p class="new-product-heading-tagline">Check out latest hot selling, most wished &amp; most added designs in shopping cart.</p><p></p>
+    </div>	
+    
+	<div class="new-product-tabs">
+		<div class="new-product-tab-01 active" onclick="latest_trending_designs('latesttrendingdesignsone')" >
+			<p align="center">SAREES</p>
+		</div>
+		<div class="new-product-tab-02" onclick="latest_trending_designs('latesttrendingdesignstwo')" >
+			<p align="center">SALWAR KAMEEZ</p>
+		</div>
+		<div class="new-product-tab-03" onclick="latest_trending_designs('latesttrendingdesignsthree')" >
+			<p align="center" >LEHENGA CHOLI</p>
+		</div>
+	</div>
+	<div class="new-product-slider">
+    		<!-- Sarees -->
+
+
+<div class="new-product-slider-tab-01" id="latesttrendingdesignsone"></div>
+<div class="new-product-slider-tab-02" style="margin-top: -2000px;" id="latesttrendingdesignstwo"></div>
+<div class="new-product-slider-tab-03" style="margin-top: -2000px;" id="latesttrendingdesignsthree"></div>
+
+    
+    <div class="new-product-slider-buttons" style="display: none;">
+			<div class="new-product-left-slider-button">
+				<span><strong>&lt;</strong></span>
+			</div>
+			<div class="new-product-right-slider-button">
+				<span><strong>&gt;</strong></span>
+			</div>
+		</div>
+    </div>
+
+        
+        <div style="
+    padding-right: 4px;
+    padding-left: 5px;background:#fcf5e3;
+    ">
+      <a href="Javascript:void(0)">
+        <div class="new_product_trendz_link">
+            <p class="new_product_trendz_button">VIEW MORE</p>
+        </div>
+    </a>
+    </div>
+		
+
+		
+</div>
+
+         

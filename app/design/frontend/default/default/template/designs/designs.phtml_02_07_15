@@ -1,0 +1,217 @@
+<?php
+$object = Mage::getModel('designs/designs')->load(1);
+$collection = Mage::getModel('designs/designs')->getCollection();
+
+
+?> 
+            
+            
+
+<div class="new-product">
+	<div class="new-product-heading">
+        <p class="new-product-heading-title"><strong>Latest Trending Designs </strong><br></p><p class="new-product-heading-tagline">Check out latest hot selling, most wished &amp; most added designs in shopping cart.</p><p></p>
+    </div>	
+    
+	<div class="new-product-tabs">
+		<div class="new-product-tab-01 active">
+			<p align="center">SAREES</p>
+		</div>
+		<div class="new-product-tab-02">
+			<p align="center">SALWAR KAMEEZ</p>
+		</div>
+		<div class="new-product-tab-03">
+			<p align="center">LEHENGA CHOLI</p>
+		</div>
+	</div>
+	<div class="new-product-slider">
+    		<!-- Sarees -->
+
+
+<div class="new-product-slider-tab-01">
+
+    <?php  
+//    $connection = Mage::getSingleton('core/resource')->getConnection('core_write');
+//    $readConnection = $resource->getConnection('core_read');
+    
+    
+$resource = Mage::getSingleton('core/resource');
+$readConnection = $resource->getConnection('core_read');
+    
+    
+    
+    $query = "SELECT * FROM ordercsv where sku like '%SA%' order by order_id desc limit 0,9";
+    $_sareeCollection = $readConnection->fetchAll($query);
+   // foreach($_sareeCollection as $_sareeCollections){
+    //{ 
+//     echo $sarees['catalog_name']; 
+//    } 
+    
+    
+    
+    
+	//$_sareeCollection = $this->getLatestTrendingDesignsSaree();     
+	$ltdsk = 1;
+    foreach($_sareeCollection as $_sareeCollections){
+    ?>
+    
+	<?php if($ltdsk==1){ ?>
+    <div class="new-product-slider-01" style="margin-left: -456px;" >
+    <?php } ?>
+    
+    <?php if($ltdsk==4){ ?>
+    <div class="new-product-slider-02" style="margin-left: 0px; ">
+    <?php } ?>
+    
+    <?php if($ltdsk==7){ ?>
+    <div class="new-product-slider-03" style="margin-left: 456px;">
+    <?php } ?>
+         <div class="img">
+             
+             <?php 
+           
+             
+             
+//            $model = Mage::getModel('catalog/product'); //getting product model
+//            $_product = $model->load($productid); 
+             
+        $productid = $_sareeCollections['productid']; 
+        $obj = Mage::getModel('catalog/product');
+        $_product = $obj->load($productid); 
+
+//
+//// Enter your Product Id in $product_id
+//
+//
+// get Product's name
+// echo $_product->getName();
+             
+             ?> 
+             
+            <a href="<?php echo $_product->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(142, 213); ?>"></a>
+            <p align="center" class="price"> <?php echo $_formattedActualPrice = Mage::helper('core')->currency($_product->getPrice(),true,false); ?> </p>
+            <a href="<?php echo $_product->getProductUrl(); ?>"><p align="center" class="shop-button">SHOP NOW</p></a>
+            </div>
+    
+	<?php if($ltdsk==3 || $ltdsk==6 || $ltdsk==9){ ?></div><?php } ?>
+    
+    <?php
+	$ltdsk++;
+    }
+    ?>
+    </div>
+
+
+<!--Salwars-->
+	<div class="new-product-slider-tab-02" style="margin-top: -2000px;">
+    <?php    
+    
+        $query = "SELECT * FROM ordercsv where sku like '%SL%' order by order_id desc limit 0,9";
+    $_salwarCollection = $readConnection->fetchAll($query);
+    
+    
+	// $_salwarCollection = $this->getLatestTrendingDesignsSalwar();    
+	$ltd = 1;
+    foreach($_salwarCollection as $_salwarCollections){
+        
+        $productid = $_salwarCollections['productid']; 
+        $obj = Mage::getModel('catalog/product');
+        $_product = $obj->load($productid); 
+    ?>
+    
+	<?php if($ltd==1){ ?>
+     <div class="new-product-slider-01" style="display: none; margin-left: -456px;">
+    <?php } ?>
+    
+    <?php if($ltd==4){ ?>
+    <div class="new-product-slider-02" style="margin-left: 0px; display: none;">
+    <?php } ?>
+    
+    <?php if($ltd==7){ ?>
+    <div class="new-product-slider-03" style="margin-left: 456px; display: none;">
+    <?php } ?>
+         <div class="img">
+            <a href="<?php echo $_product->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(142, 213); ?>"></a>
+            <p align="center" class="price"><?php echo $_formattedActualPrice = Mage::helper('core')->currency($_product->getPrice(),true,false); ?></p>
+            
+            <a href="<?php echo $_product->getProductUrl(); ?>"><p align="center" class="shop-button">SHOP NOW</p></a>
+            </div>
+    
+	<?php if($ltd==3 || $ltd==6 || $ltd==9){ ?></div><?php } ?>
+    
+    <?php
+	$ltd++;
+    }
+    ?>
+    </div>
+
+
+<!--Lahengas-->
+	<div class="new-product-slider-tab-03" style="margin-top: -2000px;">
+    <?php       
+    
+            $query = "SELECT * FROM ordercsv where sku like '%LL%' order by order_id desc limit 0,9";
+    $_lehengaCollection = $readConnection->fetchAll($query);
+    
+	//$_lehengaCollection = $this->getLatestTrendingDesignsLehenga(); 
+	$ltd = 1;
+    foreach($_lehengaCollection as $_lehengaCollections){
+        
+        $productid = $_lehengaCollections['productid']; 
+        $obj = Mage::getModel('catalog/product');
+        $_product = $obj->load($productid); 
+        
+    ?>
+    
+	<?php if($ltd==1){ ?>
+     <div class="new-product-slider-01" style="display: none; margin-left: -456px;">
+    <?php } ?>
+    
+    <?php if($ltd==4){ ?>
+    <div class="new-product-slider-02" style="margin-left: 0px; display: none;">
+    <?php } ?>
+    
+    <?php if($ltd==7){ ?>
+    <div class="new-product-slider-03" style="margin-left: 456px; display: none;">
+    <?php } ?>
+         <div class="img">
+            <a href="<?php echo $_product->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(142, 213); ?>"></a>
+            <p align="center" class="price"> <?php echo $_formattedActualPrice = Mage::helper('core')->currency($_product->getPrice(),true,false); ?></p>
+            <a href="<?php echo $_product->getProductUrl(); ?>"><p align="center" class="shop-button">SHOP NOW</p></a>
+            </div>
+    
+	<?php if($ltd==3 || $ltd==6 || $ltd==9){ ?></div><?php } ?>
+    
+    <?php
+	$ltd++;
+    }
+    ?>
+    </div>
+
+    
+    <div class="new-product-slider-buttons" style="display: none;">
+			<div class="new-product-left-slider-button">
+				<span><strong>&lt;</strong></span>
+			</div>
+			<div class="new-product-right-slider-button">
+				<span><strong>&gt;</strong></span>
+			</div>
+		</div>
+    </div>
+
+        
+        <div style="
+    padding-right: 4px;
+    padding-left: 5px;background:#fcf5e3;
+    ">
+      <a href="Javascript:void(0)">
+        <div class="new_product_trendz_link">
+            <p class="new_product_trendz_button"></p>
+        </div>
+    </a>
+    </div>
+		
+
+		
+</div>
+
+         

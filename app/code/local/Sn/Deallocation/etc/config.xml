@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sn_Deallocation>
+            <version>0.1.0</version>
+        </Sn_Deallocation>
+    </modules>
+    <frontend>
+        <routers>
+            <deallocation>
+                <use>standard</use>
+                <args>
+                    <module>Sn_Deallocation</module>
+                    <frontName>deallocation</frontName>
+                </args>
+            </deallocation>
+        </routers>
+        <layout>
+            <updates>
+                <deallocation>
+                    <file>deallocation.xml</file>
+                </deallocation>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<deallocation>
+				<use>admin</use>
+				<args>
+					<module>Sn_Deallocation</module>
+					<frontName>deallocation</frontName>
+				</args>
+			</deallocation>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<deallocation module="deallocation">
+				<title>Deallocation</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="deallocation">
+						<title>De-Allocation Management</title>
+						<sort_order>0</sort_order>
+						<action>deallocation/adminhtml_deallocation</action>
+					</items>
+				</children>
+			</deallocation>
+		</menu>
+		
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<deallocation>
+							<title>Deallocation Module</title>
+							<sort_order>2009</sort_order>
+								<children>
+									<items module="deallocation">
+										<title>Manage Stock</title>
+										<sort_order>0</sort_order>
+									</items>
+								</children>
+						</deallocation>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		
+		<!--<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Sn_Deallocation>
+							<title>Deallocation Module</title>
+							<sort_order>10</sort_order>
+						</Sn_Deallocation>
+					</children>
+				</admin>
+			</resources>
+		</acl>-->
+		<layout>
+			<updates>
+				<deallocation>
+					<file>deallocation.xml</file>
+				</deallocation>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <deallocation>
+                <class>Sn_Deallocation_Model</class>
+                <resourceModel>deallocation_mysql4</resourceModel>
+            </deallocation>
+            <deallocation_mysql4>
+                <class>Sn_Deallocation_Model_Mysql4</class>
+                <entities>
+                    <deallocation>
+                        <table>deallocation</table>
+                    </deallocation>
+                </entities>
+            </deallocation_mysql4>
+        </models>
+        <resources>
+            <deallocation_setup>
+                <setup>
+                    <module>Sn_Deallocation</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </deallocation_setup>
+            <deallocation_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </deallocation_write>
+            <deallocation_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </deallocation_read>
+        </resources>
+        <blocks>
+            <deallocation>
+                <class>Sn_Deallocation_Block</class>
+            </deallocation>
+        </blocks>
+        <helpers>
+            <deallocation>
+                <class>Sn_Deallocation_Helper</class>
+            </deallocation>
+        </helpers>
+    </global>
+</config>

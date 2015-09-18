@@ -1,0 +1,135 @@
+<?php 
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_AJAXMINICART
+ * @copyright  Copyright (c) 2013 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+<div id="ajax_mini_cart" style="display: none;">
+	<div id="ajax_mini_cart_loading_mask" style="display: none;"></div>
+	<div class="ajax-mini-cart-message" style="display: none;"><?php echo $this->__('No items in your shopping cart') ?></div>
+	<div class="ajax-mini-cart-content-box" style="display: none;">
+		<div class="ajax-mini-cart-products">
+			<?php
+			/** @var $cart Mage_Checkout_Model_Cart */
+			$cart = Mage::getSingleton('checkout/cart');
+			$priceInclTax = Mage::helper('tax')->displayCartPriceInclTax();
+			$checkoutHelper = Mage::helper('checkout');
+			?>
+			<?php /** @var $item Mage_Sales_Model_Quote_Item */ ?>
+			<?php foreach ($cart->getItems() as $item): ?>
+				<?php if (!$item->getParentItemId()): ?>
+					<?php $isVisibleProduct = $item->getProduct()->isVisibleInSiteVisibility(); ?>
+					<div class="ajax-mini-cart-product item-<?php echo $item->getId() ?>">
+						<div class="ajax-mini-cart-product-actions"><div class="delete">X</div><div class="edit"></div></div>
+						<img class="ajax-mini-cart-product-image" src="<?php echo Mage::helper('catalog/image')->init($item->getProduct(), 'small_image')->resize(90); ?>"/>
+						<div class="ajax-mini-cart-product-info">
+							<div class="ajax-mini-cart-product-name">
+								<?php if ($isVisibleProduct): ?><a href="<?php echo $item->getProduct()->getProductUrl(); ?>"><?php endif; ?>
+									<?php echo $item->getProduct()->getName() ?>
+								<?php if ($isVisibleProduct): ?></a><?php endif; ?>
+							</div>
+							<div class="ajax-mini-cart-product-loader" style="display: none;"></div>
+							<div class="ajax-mini-cart-product-options">
+								<?php echo $this->getLayout()->createBlock('itoris_ajaxminicart/product_info')->setItem($item)->toHtml() ?>
+							</div>
+							<div class="ajax-mini-cart-product-totals">
+								<?php $itemPrice = $priceInclTax ? $checkoutHelper->getPriceInclTax($item) : $item->getCalculationPrice(); ?>
+								<span class="qty"><?php echo $item->getTotalQty() ?></span> x <span class="price"><?php echo Mage::app()->getStore()->formatPrice($itemPrice) ?></span>
+							</div>
+						</div>
+					</div>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</div>
+		<div class="ajax-mini-cart-total">
+			<?php echo $this->__('Total') ?>: <span class="grand-total"><?php echo Mage::app()->getStore()->formatPrice($cart->getQuote()->getGrandTotal(), false) ?></span>
+		</div>
+		<div class="ajax-mini-cart-buttons">
+			<div class="ajax-mini-cart-button-loader" style="display: none;"></div>
+			<button type="button" class="button remove-all-button">
+				<span><span><?php echo $this->__('Remove All') ?></span></span>
+			</button>
+			<button type="button" class="button" onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>');">
+				<span><span><?php echo $this->__('View cart') ?></span></span>
+			</button>
+            
+            
+            <button type="button" class="button" onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>');">
+				<span><span><?php echo $this->__('Checkout') ?></span></span>
+			</button>
+			<?php /*?><button type="button" class="button" onclick="setLocation('<?php echo $this->getUrl('checkout/onepage') ?>');">
+				<span><span><?php echo $this->__('Checkout') ?></span></span>
+			</button><?php */?>
+		</div>
+	</div>
+	<div class="ajax_mini_cart_shadow ajax_mini_cart_shadow_right_top"></div>
+	<div class="ajax_mini_cart_shadow ajax_mini_cart_shadow_right"></div>
+	<div class="ajax_mini_cart_shadow ajax_mini_cart_shadow_bottom_left"></div>
+	<div class="ajax_mini_cart_shadow ajax_mini_cart_shadow_bottom"></div>
+	<div class="ajax_mini_cart_shadow ajax_mini_cart_shadow_bottom_right"></div>
+</div>
+<div id="ajax_mini_cart_icon" style="display: none;"></div>
+
+
+<div id="ajax_mini_cart_product_options" class="product-options" style="display: none;">
+	<div id="ajax_mini_cart_product_options_close_icon"></div>
+	<div id="ajax_mini_cart_product_options_loader" style="display: none;"></div>
+	<form id="ajax_mini_cart_product_options_form" action="<?php echo $this->getUrl('ajaxminicart/cart/add') ?>" enctype="multipart/form-data" method="post" style="display: none;">
+		<input type="hidden" name="use_iframe" value="1" />
+		<input type="hidden" id="ajax_mini_cart_product_options_form_item_id" name="id" value="" />
+		<div class="ajax-mini-cart-options-header"><span></span></div>
+		<div class="ajax-mini-cart-options-body"></div>
+		<div class="ajax-mini-cart-options-footer">
+			<div class="add-to-cart-box">
+				<label for="ajax_mini_cart_popup_qty"><?php echo $this->__('Qty') ?>: </label>
+				<input id="ajax_mini_cart_popup_qty" type="text" class="qty" name="qty"/>
+				<button type="button" class="button add-to-cart">
+					<span><span><?php echo Mage::helper('checkout')->__('Add to Cart') ?></span></span>
+				</button>
+				<button type="button" class="button update-cart" style="display: none;">
+					<span><span><?php echo Mage::helper('checkout')->__('Update Cart') ?></span></span>
+				</button>
+			</div>
+			<button type="button" class="button cancel">
+				<span><span><?php echo $this->__('Cancel') ?></span></span>
+			</button>
+			<span id="minicart-product-price-#{product_id}" class="regular-price"></span>
+			<input type="hidden" name="product" id="ajax_mini_cart_popup_product_id" value="166" />
+		</div>
+	</form>
+</div>
+<div id="ajax_mini_cart_mask" style="display: none;"></div>
+<div id="ajax_mini_cart_message" style="display: none;"><span></span></div>
+<script type="text/javascript">
+	ajaxMiniCartProductTemplate = '<div class="ajax-mini-cart-product-actions"><div class="delete">X</div><div class="edit"></div></div>'
+									+ '<img class="ajax-mini-cart-product-image" src="#{image_url}"/>'
+									+ '<div class="ajax-mini-cart-product-info">'
+									+ '<div class="ajax-mini-cart-product-name">#{edit_link_begin}#{product_name}#{edit_link_end}</div>'
+									+ '<div class="ajax-mini-cart-product-loader" style="display: none;"></div>'
+									+ '<div class="ajax-mini-cart-product-options">#{options_html}</div>'
+									+ '<div class="ajax-mini-cart-product-totals">'
+									+ '<span class="qty">#{qty}</span> x <span class="price">#{price}</span>'
+									+ '</div></div>';
+	Event.observe(window, 'load', function() {
+		miniCart = new AjaxMiniCart(<?php echo $this->getCartConfigJson() ?>);
+	});
+</script>

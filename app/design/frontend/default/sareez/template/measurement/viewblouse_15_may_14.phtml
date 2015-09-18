@@ -1,0 +1,67 @@
+<?php
+
+if(Mage::getSingleton('customer/session')->isLoggedIn())
+ {
+	 $customerId = Mage::getModel('customer/session')->getCustomer()->getId();
+ }
+$mforusermodel = Mage::getModel('measurement/measurementforuser')->getCollection()
+->AddFieldToFilter('user_id' , $customerId)
+->AddFieldToFilter('measurement_id' , array('gt' => 0) )
+->getData();
+
+
+
+?>
+
+<table>
+<tr>
+<td>
+
+<?php foreach ($mforusermodel as $mforusermodelarray) {  ?>
+<?php
+$mformeasurmentmodel = Mage::getModel('measurement/measurement')->getCollection()
+->AddFieldToFilter('measurement_id' ,$mforusermodelarray['measurement_id'])
+->AddFieldToFilter('measurement_type' ,'blouse')
+->getData();
+if(count($mformeasurmentmodel)>0)
+{
+?>
+<table cellspacing="0" cellpadding="0" class="accHistoryMTbl">
+	<tbody>
+		<tr>
+		<td class="accShippedto"><span class="selectedRed"><b><?php echo $mformeasurmentmodel[0]['measurement_name'] ?></b></span></td>
+		<td class="accOrderCost">&nbsp;</td>
+		<td style="padding-bottom:2px;"><a href="<?php echo $this->getUrl('measurement/index/measurementhistory'); ?>?m_id=<?php echo $mforusermodelarray['measurement_id'] ?>"><img width="52" height="20" border="0" alt="View" src="includes/languages/english/images/buttons/small_view.gif"></a></td>
+		</tr>
+		<tr>
+		<td class="accShippedto">Measured On : <?php echo $mformeasurmentmodel[0]['doi'] ?> </td>
+		<td class="accOrderCost">Attached with<span class="selectedRed"><b> <?php if($mforusermodelarray['products_id']){ echo " 1 "; } else { echo " 0 ";}?></b></span> products.</td>
+		<td style="padding-bottom:2px;"></td>
+		</tr>
+		<tr>
+		<td class="accShippedto">Measured For : <?php echo $mformeasurmentmodel[0]['measurement_type'] ?></td>
+		<td class="accOrderCost"><b>Status : </b></td>
+		<td style="padding-bottom:2px;"><?php if($mforusermodelarray['products_id']){ echo " In Use "; } else { echo " Not in use ";}?></td>
+		</tr>
+		<tr>
+		<td class="accShippedto">&nbsp;</td>
+		<td class="accOrderCost">&nbsp;</td>
+		<td style="padding-bottom:2px;"></td>
+		</tr>
+		<tr>
+		<td style="height:10px;" colspan="3" class="accShippedto">&nbsp;</td>
+		</tr>
+		<tr>
+		<td colspan="3" class="accShippedto"><b>Order # : </b><a style="color:#BF070D;" href=""><?php if($mforusermodelarray['order_id']){ echo $mforusermodelarray['order_id']; } else { echo "no order";}?></a></td>
+		</tr>
+	</tbody>
+</table>
+<?php
+ }
+ 
+ }
+?>
+</td>
+</tr>
+
+</table>

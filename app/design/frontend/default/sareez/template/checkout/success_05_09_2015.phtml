@@ -1,0 +1,399 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<!-- Barilliance Thank you page tag-->
+	<script type='text/javascript'>
+	var barilliance_sid=21433;
+
+	function cbar_cookieval(name) {   match = document.cookie.match('(?:^|;)\\s?' + name + '=(.*?)(?:;|$)');    return match && unescape(match[1]);}
+	document.write("<img height='1' width='1' style='border-style:none;' alt=''  src='http://barilliance.net/thankyou_pix.php?sid="+barilliance_sid+"&uid="+cbar_cookieval('cbar_uid')+"&ts="+Math.ceil(10000*Math.random())+"' />");
+	</script>
+<!-- End Barilliance Thank you page tag-->                                
+                                                                     
+ 
+                                                                     
+
+
+<!-- start :Referral Candy Tracking Code on 070815 by Asgar--> 
+<script type='text/javascript'>
+!function(d,s) {
+  var rc = d.location.protocol + "//go.referralcandy.com/purchase/uaxmkrq35reu1skljeuvmz2au.js";
+  var js = d.createElement(s);
+  js.src = rc;
+  var fjs = d.getElementsByTagName(s)[0];
+  fjs.parentNode.insertBefore(js,fjs);
+}(document,"script");
+</script>
+<!-- end :Referral Candy Tracking Code on 070815 by Asgar--> 
+
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('successbanner')->toHtml();?>
+<div class="page_success_edit">
+<div class="page-title title_success">
+    <h1><?php echo $this->__('Your order has been received.') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<h2 class="sub-title sub_success_title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+
+<?php if ($this->getOrderId()):?>
+<?php if ($this->getCanViewOrder()) :?>
+    <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+ 
+    
+    <!-- /////////////////////////////  DATA INSERT >>  //////////////////////////////////////////// -->
+    <?php
+require_once("app/Mage.php");
+$app = Mage::app('');
+$resource = Mage::getSingleton('core/resource');
+$readConnection = $resource->getConnection('core_read');
+
+$salesModel=Mage::getModel("sales/order");
+$salesCollection = $salesModel->getCollection();
+
+
+    
+	
+	
+	$orderIncrementId = $this->escapeHtml($this->getOrderId());
+	$GLOBALS['orderId'] = $orderIncrementId; 
+	
+	$order = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId);
+	
+    $items = $order->getAllVisibleItems();
+	
+
+    $orderData = $order->getData();
+    
+
+  
+    ?>
+<table width="100%" border="1" cellpadding="3" cellspacing="3" style="display: none;">
+
+  <tr>
+
+        <td><b>Product Id</b></td>
+        <td><b>Name</b></td>
+        
+        <td><b>CategoryIds</b></td>
+        
+        
+        <td><b>SKU</b></td>
+        <td><b>Quantity</b></td>
+        <td><b>Stock</b></td>
+        <td><b>Option Product</b></td>
+        <td><b>Option Product Price</b></td>
+        <td><b>Catalog Name</b></td>
+        <td><b>Manufacturers / Vendor</b></td>
+        <td><b>Manufacturer Design</b></td>
+        <td><b>Order Date</b></td>
+        <td><b>Product Allocation Status</b></td>
+        <td><b>Product Allocation Date</b></td>
+  </tr>
+<?php
+    
+   
+    foreach($items as $item){
+        
+        
+        
+
+              ?>
+
+
+  <tr>
+
+
+      
+    <td><?php echo $item->getProductId(); $GLOBALS['productid'] = $item->getProductId(); ?></td>
+    <td><?php echo $item->getName(); $GLOBALS['name'] = $item->getName(); ?></td>
+    
+    <td><?php       
+    
+    $product = Mage::getModel('catalog/product')->load($item->getProductId());
+    $cats = $product->getCategoryIds(); 
+
+    // print_r($cats);
+    
+    foreach ($cats as $catid)
+        { 
+         // $catid.",";
+         $catids .= $catid.",";
+        }
+    
+   echo rtrim($catids, ',');
+   $GLOBALS['catids'] = rtrim($catids, ',');
+?></td>
+    
+    
+    <td><?php echo $item->getSku(); $GLOBALS['sku'] = $item->getSku(); ?></td>
+    <td><?php echo $GLOBALS['getQtyOrdered'] = $item->getQtyOrdered(); ?></td>
+      <td><?php  
+      $product = Mage::getModel('catalog/product')->load($item->getProductId());
+      echo $qty = $product->getStockItem()->getQty(); 
+      $GLOBALS['qty_avaliable']=$qty;
+      ?></td>
+      
+      <td><?php
+    $product = Mage::getModel("catalog/product")->load($item->getId()); //product id
+    foreach ($product->getOptions() as $_option) {
+        $values = $_option->getValues();
+        
+        $GLOBALS['option_value'] = $values;
+        foreach ($values as $v) {
+            print_r($v->getTitle());
+            //echo " | ";
+            //echo $v->price; 
+            echo "<br />";
+        }
+    }
+?></td>
+      
+      <td><?php
+//    $product = Mage::getModel("catalog/product")->load($item->getId()); //product id
+//    foreach ($product->getOptions() as $_option) {
+//        $values = $_option->getValues();
+//        foreach ($values as $v) {
+//            //print_r($v->getTitle());
+//            //echo " | ";
+//            echo $v->price; 
+//            echo "<br />";
+//        }
+//    }
+//    
+    
+    
+    
+             /////////////////////////////////////////////////////////////////
+     $options = $item->getProductOptions();
+    $customOptions = $options['options'];   
+   if(!empty($customOptions))
+   {
+
+
+foreach ($customOptions as $option)
+{	   
+//echo  $optionTitle = $option['label'];
+//echo "<br />";
+//echo $optionId = $option['option_id'];
+//echo "<br />";
+//echo $optionType = $option['type'];
+//echo "<br />";
+echo $optionName = $option['value'];
+$GLOBALS['optionName'] = $option['value'];
+//echo "<br />";
+//$piece = explode("-", $optionValue);
+//
+//for($i=0;$i<=count($piece); $i++){
+//
+//echo $piece[$i];
+//echo "<br />";
+//}
+
+
+
+// echo $option->value;
+}
+
+   }
+    /////////////////////////////////////////////////////////////////
+?></td>
+      
+      <td>
+          <?php
+          $_id = $item->getProductId();
+$_resource = Mage::getSingleton('catalog/product')->getResource();
+$optionValue = $_resource->getAttributeRawValue($_id,  'catalogmaster_id', Mage::app()->getStore());
+echo $optionValue;
+      
+
+
+    $query = "SELECT * FROM int_catalogmaster where catalog_id = '".$optionValue."'";
+    $results = $readConnection->fetchAll($query);
+    foreach($results as $r) { echo $r['catalog_name']; $GLOBALS['catalog_name']=$r['catalog_name']; }
+
+
+
+      ?></td>
+      
+      <td>
+                    <?php
+          $_id = $item->getProductId();
+$_resource = Mage::getSingleton('catalog/product')->getResource();
+$optionValue = $_resource->getAttributeRawValue($_id,  'manufacturers_id', Mage::app()->getStore());
+$optionValue;
+
+
+    $query = "SELECT * FROM manufacturers where manufacturers_id = '".$optionValue."'";
+    $results = $readConnection->fetchAll($query);
+    foreach($results as $r) { echo $r['manufacturers_name']; $GLOBALS['manufac_name'] = $r['manufacturers_name']; }
+
+?>
+          
+          </td>
+          
+          <td> 
+		  <?php
+          $_id = $item->getProductId();
+$_resource = Mage::getSingleton('catalog/product')->getResource();
+$manufact_design = $_resource->getAttributeRawValue($_id,  'manufacturer_design', Mage::app()->getStore());
+echo $manufact_design;
+$GLOBALS['design'] = $manufact_design;
+?>
+</td>
+          
+     
+          <td><?php echo $order->getCreatedAt(); $GLOBALS['orderdate'] = $order->getCreatedAt();  ?></td>
+       <td><?php  
+	  
+	     $query = "SELECT * FROM sales_flat_order_item_stitching where order_id = '".$GLOBALS['entityId']."' and product_id = '".$item->getProductId()."'";
+    $results = $readConnection->fetchAll($query);
+	$i=1;
+    foreach($results as $values) { 
+	if($i=="1"){
+	  
+		  if($values['allocationstatus_id'] == "1")
+		  {
+			echo "Pending.";  
+			$product_allocation_status = "Pending.";
+		  } else if($values['allocationstatus_id'] == "2"){
+			echo "Complete.";  
+			$product_allocation_status = "Complete.";
+		  } else if($values['allocationstatus_id'] == "3"){
+			echo "Cancle.";  
+			$product_allocation_status = "Cancle.";
+		  }
+                  
+                  $GLOBALS['allocationstatus_id'] = $values['allocationstatus_id'];
+		  
+	}
+	   $i++; 
+	  }
+      ?></td>
+       <td>
+       <?php
+        $query = "SELECT * FROM sales_flat_order_item_stitching where order_id = '".$GLOBALS['entityId']."' and product_id = '".$item->getProductId()."'";
+    $results = $readConnection->fetchAll($query);
+	$i=1;
+    foreach($results as $values) { 
+	if($i=="1"){
+
+	  echo $values['allocation_date'];
+          $GLOBALS['allocation_date'] = $values['allocation_date'];
+	}
+	   
+	   $i++;
+	   } 
+	   ?></td>
+  </tr>
+
+<?php
+
+$connection = Mage::getSingleton('core/resource')->getConnection('core_write');
+
+    $query = "SELECT * FROM ordercsv where order_id = '".$GLOBALS['orderId']."' and sku = '".$GLOBALS['sku']."'";
+    $results = $readConnection->fetchAll($query);
+    
+    if(count($results)>0)
+	{
+        
+    } else {
+		
+		
+		if($GLOBALS['getQtyOrdered']=="" || $GLOBALS['getQtyOrdered']=="0"){
+			$getQtyOrdered =  "0";
+			} else {
+				$getQtyOrdered = $GLOBALS['getQtyOrdered'];
+				}
+
+ $sql = "INSERT INTO ordercsv set
+     
+
+
+     
+     
+        order_id             = '".$GLOBALS['orderId']."',
+        categories_id        = '".$GLOBALS['catids']."',
+        productid            = '".$GLOBALS['productid']."',
+        product_name         = '".$GLOBALS['name']."',
+        sku                  = '".$GLOBALS['sku']."',
+        design_no            = '".$GLOBALS['design']."',
+        manufacturer         = '".$GLOBALS['manufac_name']."',
+        catalog_name         = '".$GLOBALS['catalog_name']."',
+        stock_available      = '".$GLOBALS['qty_avaliable']."',
+        option_name          = '".$GLOBALS['optionName']."',
+        order_date           = '".$GLOBALS['orderdate']."',
+	quantity             = '".$getQtyOrdered."',
+        allocationstatus_id  = '".$GLOBALS['allocationstatus_id']."',
+        allocation_date      = '".$GLOBALS['allocation_date']."',
+        download_status      = 'N'";
+
+$connection->query($sql);
+
+	}
+            
+} 
+
+?>
+  <tr>
+       <td colspan="13">&nbsp;</td>
+  </tr>
+  </table>
+
+	<!-- ///////////////////////////////////////////////////////////////////////// -->
+    
+    
+<?php  else :?>
+    <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?>
+    </p>
+<?php endif;?>
+    <p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+<?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
+    <p>
+        <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
+        <?php echo $this->getChildHtml() ?>
+    </p>
+<?php endif;?>
+<?php endif;?>
+
+<?php if ($this->getAgreementRefId()): ?>
+    <p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+<?php endif;?>
+
+<?php if ($profiles = $this->getRecurringProfiles()):?>
+<p><?php echo $this->__('Your recurring payment profiles:'); ?></p>
+<ul class="disc">
+<?php foreach($profiles as $profile):?>
+<?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+    <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
+<?php endforeach;?>
+</ul>
+<?php endif;?>
+
+<div class="buttons-set success_button">
+    <button type="button" class="button edit_success_button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>
+
+</div>
+

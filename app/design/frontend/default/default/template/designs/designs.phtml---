@@ -1,0 +1,222 @@
+<!--<h4><?php // echo $this->__('Module List') ?></h4>-->
+            <?php
+			$object = Mage::getModel('designs/designs')->load(1);
+			 $collection = Mage::getModel('designs/designs')->getCollection();
+			                //	$values = $this->getDesigns();
+				
+				//print_r($values);
+                
+                /*
+                    This shows how to load specific fields from a record in the database.
+                    1) Note the load(15), this corresponds to saying "select * from table where table_id = 15"
+                    2) You can then just use the get(fieldname) to pull specific data from the table.
+                    3) If you have a field named news_id, then it becomes getNewsId, etc.
+                */
+                /*
+                $news = Mage::getModel('designs/designs')->load(15);
+                echo $news->getNewsId();
+                echo $news->getTitle();
+                echo $news->getContent();
+                echo $news->getStatus();
+                */
+                
+                /*
+                    This shows an alternate way of loading datas from a record using the database the "Magento Way" (using blocks and controller).
+ 					Uncomment blocks in /app/code/local/Namespace/Module/controllers/IndexController.php if you want to use it.
+
+               */
+                /*
+                $object = $this->getDesigns();
+                echo 'id: '.$object['test_id'].'<br/>';
+				echo 'title: '.$object['title'].'<br/>';
+				echo 'content: '.$object['content'].'<br/>';
+				echo 'status: '.$object['status'].'<br/>';
+                */            
+            
+            
+                /*
+                    This shows how to load multiple rows in a collection and save a change to them.
+                    1) The setPageSize function will load only 5 records per page and you can set the current Page with the setCurPage function.
+                    2) The $collection->walk('save') allows you to save everything in the collection after all changes have been made.
+                */
+                /*
+                $i = 0;
+                
+                $collection = Mage::getModel('designs/designs')->getCollection();
+                $collection->setPageSize(5);
+                $collection->setCurPage(2);
+                $size = $collection->getSize();
+                $cnt = count($collection);
+                foreach ($collection as $item) {
+                    $i = $i+1;
+                    $item->setTitle($i);
+                    echo $item->getTitle();
+                }
+
+                $collection->walk('save');
+                */
+                
+                /*
+                    This shows how to load a single record and save a change.
+                    1) Note the setTitle, this corresponds to the table field name, title, and then you pass it the text to change.
+                    2) Call the save() function only on a single record.
+                */
+                /*
+                $object = Mage::getModel('designs/designs')->load(1);
+                $object->setTitle('This is a changed title');
+                $object->save();
+				*/
+
+            ?> 
+            
+            
+
+<div class="new-product">
+	<div class="new-product-heading">
+        <p class="new-product-heading-title"><strong>Latest Trending Designs </strong><br></p><p class="new-product-heading-tagline">Check out latest hot selling, most wished &amp; most added designs in shopping cart.</p><p></p>
+    </div>	
+    
+	<div class="new-product-tabs">
+		<div class="new-product-tab-01 active">
+			<p align="center">SAREES</p>
+		</div>
+		<div class="new-product-tab-02">
+			<p align="center">SALWAR KAMEEZ</p>
+		</div>
+		<div class="new-product-tab-03">
+			<p align="center">LEHENGA CHOLI</p>
+		</div>
+	</div>
+	<div class="new-product-slider">
+    		<!-- Sarees -->
+<?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('latest_trending_designs')->toHtml();?>
+
+<div class="new-product-slider-tab-01">
+
+    <?php  
+	$_sareeCollection = $this->getLatestTrendingDesignsSaree();     
+	$ltdsk = 1;
+    foreach($_sareeCollection as $_sareeCollections){
+    ?>
+    
+	<?php if($ltdsk==1){ ?>
+    <div class="new-product-slider-01" style="margin-left: -456px;" >
+    <?php } ?>
+    
+    <?php if($ltdsk==4){ ?>
+    <div class="new-product-slider-02" style="margin-left: 0px; ">
+    <?php } ?>
+    
+    <?php if($ltdsk==7){ ?>
+    <div class="new-product-slider-03" style="margin-left: 456px;">
+    <?php } ?>
+         <div class="img">
+            <a href="<?php echo $_sareeCollections->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_sareeCollections, 'small_image')->resize(142, 213); ?>"></a>
+            <p align="center" class="price"> $ <?php echo number_format($_sareeCollections->getPrice(), 2, '.', ''); ?></p>
+            <a href="<?php echo $_sareeCollections->getProductUrl(); ?>"><p align="center" class="shop-button">SHOP NOW</p></a>
+            </div>
+    
+	<?php if($ltdsk==3 || $ltdsk==6 || $ltdsk==9){ ?></div><?php } ?>
+    
+    <?php
+	$ltdsk++;
+    }
+    ?>
+    </div>
+
+
+<!--Salwars-->
+	<div class="new-product-slider-tab-02" style="margin-top: -2000px;">
+    <?php    
+	$_salwarCollection = $this->getLatestTrendingDesignsSalwar();    
+	$ltd = 1;
+    foreach($_salwarCollection as $_salwarCollections){
+    ?>
+    
+	<?php if($ltd==1){ ?>
+     <div class="new-product-slider-01" style="display: none; margin-left: -456px;">
+    <?php } ?>
+    
+    <?php if($ltd==4){ ?>
+    <div class="new-product-slider-02" style="margin-left: 0px; display: none;">
+    <?php } ?>
+    
+    <?php if($ltd==7){ ?>
+    <div class="new-product-slider-03" style="margin-left: 456px; display: none;">
+    <?php } ?>
+         <div class="img">
+            <a href="<?php echo $_salwarCollections->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_salwarCollections, 'small_image')->resize(142, 213); ?>"></a>
+            <p align="center" class="price"> $ <?php echo number_format($_salwarCollections->getPrice(), 2, '.', ''); ?></p>
+            <a href="<?php echo $_salwarCollections->getProductUrl(); ?>"><p align="center" class="shop-button">SHOP NOW</p></a>
+            </div>
+    
+	<?php if($ltd==3 || $ltd==6 || $ltd==9){ ?></div><?php } ?>
+    
+    <?php
+	$ltd++;
+    }
+    ?>
+    </div>
+
+
+<!--Lahengas-->
+	<div class="new-product-slider-tab-03" style="margin-top: -2000px;">
+    <?php       
+	$_lehengaCollection = $this->getLatestTrendingDesignsLehenga(); 
+	$ltd = 1;
+    foreach($_lehengaCollection as $_lehengaCollections){
+    ?>
+    
+	<?php if($ltd==1){ ?>
+     <div class="new-product-slider-01" style="display: none; margin-left: -456px;">
+    <?php } ?>
+    
+    <?php if($ltd==4){ ?>
+    <div class="new-product-slider-02" style="margin-left: 0px; display: none;">
+    <?php } ?>
+    
+    <?php if($ltd==7){ ?>
+    <div class="new-product-slider-03" style="margin-left: 456px; display: none;">
+    <?php } ?>
+         <div class="img">
+            <a href="<?php echo $_lehengaCollections->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_lehengaCollections, 'small_image')->resize(142, 213); ?>"></a>
+            <p align="center" class="price"> $ <?php echo number_format($_lehengaCollections->getPrice(), 2, '.', ''); ?></p>
+            <a href="<?php echo $_lehengaCollections->getProductUrl(); ?>"><p align="center" class="shop-button">SHOP NOW</p></a>
+            </div>
+    
+	<?php if($ltd==3 || $ltd==6 || $ltd==9){ ?></div><?php } ?>
+    
+    <?php
+	$ltd++;
+    }
+    ?>
+    </div>
+
+    
+    <div class="new-product-slider-buttons" style="display: none;">
+			<div class="new-product-left-slider-button">
+				<span><strong>&lt;</strong></span>
+			</div>
+			<div class="new-product-right-slider-button">
+				<span><strong>&gt;</strong></span>
+			</div>
+		</div>
+    </div>
+
+        
+        <div style="
+    padding-right: 4px;
+    padding-left: 5px;background:#fcf5e3;
+    ">
+      <a href="Javascript:void(0)">
+        <div class="new_product_trendz_link">
+            <p class="new_product_trendz_button">VIEW MORE</p>
+        </div>
+    </a>
+    </div>
+		
+
+		
+</div>
+
+         

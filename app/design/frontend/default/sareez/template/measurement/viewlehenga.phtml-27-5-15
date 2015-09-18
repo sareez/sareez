@@ -1,0 +1,109 @@
+<script type="text/javascript" src="<?php echo $this->getSkinUrl() ?>highslide/wz_tooltip.js"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl() ?>highslide/tip_balloon.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl() ?>highslide/highslide_area1.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl() ?>highslide/highslide.css" />
+<script type="text/javascript" src="<?php echo $this->getSkinUrl() ?>highslide/highslide-with-html.js"></script>
+<script>
+    hs.graphicsDir = '<?php echo $this->getSkinUrl() ?>highslide/graphics/';
+    hs.outlineType = 'rounded-white';
+    hs.showCredits = false;
+    hs.wrapperClassName = 'draggable-header';
+    hs.allowWidthReduction = true;
+    hs.allowHeightReduction = true;
+</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl() ?>highslide/highslide-fun.js"></script>
+<style>
+    .highslide-maincontent {
+        display: none;
+    }
+</style> 
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl() . 'css/popup.css' ?>">
+
+<?php
+if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+    $customerId = Mage::getModel('customer/session')->getCustomer()->getId();
+}
+$mforusermodel = Mage::getModel('measurement/measurementforuser')->getCollection()
+        ->AddFieldToFilter('user_id', $customerId)
+        ->AddFieldToFilter('measurement_id', array('gt' => 0))
+        ->getData();
+?>
+<div class="page-title">
+    <h1>Custom-make to your size</h1>
+</div>
+<form action="" method="post" name="measure" id="measure">
+    <input type="hidden" name="measurement_type" value="salwar">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr>
+                <td align="left" valign="top">
+<?php $abc=array(); foreach ($mforusermodel as $mforusermodelarray) { ?>
+    <?php
+    $mformeasurmentmodel = Mage::getModel('measurement/measurement')->getCollection()
+            ->AddFieldToFilter('measurement_id', $mforusermodelarray['measurement_id'])
+            ->AddFieldToFilter('measurement_type', 'lehenga')
+            ->getData();
+
+				
+	$abc[] = count($mformeasurmentmodel); 
+    if (count($mformeasurmentmodel) > 0) {
+
+        ?>
+                            <table width="100%" cellpadding="0" cellspacing="0" class="accHistoryMTbl">
+                                <tbody>
+                                    <tr>
+                                        <td width="33%" align="left" valign="middle" class="accShippedto"><span class="selectedRed"><b><?php echo $mformeasurmentmodel[0]['measurement_name'] ?></b></span></td>
+                                        <td width="33%" align="left" valign="middle" class="accOrderCost">&nbsp;</td>
+                                        <td width="33%" align="left" valign="middle" style="padding-bottom:2px;"><a href="<?php echo $this->getUrl('measurement/index/measurementhistory'); ?>?m_id=<?php echo $mforusermodelarray['measurement_id'] ?>"><img border="0" src="<?php echo $this->getSkinUrl() ?>images/small_view.png" alt="View" /></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="33%" align="left" valign="middle" class="accShippedto">Measured On : <?php echo $mformeasurmentmodel[0]['doi'] ?> </td>
+                                        <td width="33%" align="left" valign="middle" class="accOrderCost">Attached with<span class="selectedRed"><b> <?php if ($mforusermodelarray['products_id']) {
+                        echo " 1 ";
+                    } else {
+                        echo " 0 ";
+                    } ?> </b></span> products.</td>
+                                        <td width="33%" align="left" valign="middle" style="padding-bottom:2px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="33%" align="left" valign="middle" class="accShippedto">Measured For : <?php echo $mformeasurmentmodel[0]['measurement_type'] ?></td>
+                                        <td width="33%" align="left" valign="middle" class="accOrderCost"><b>Status : </b><?php if ($mforusermodelarray['products_id']) {
+                        echo " In Use ";
+                    } else {
+                        echo " Not in use ";
+                    } ?> </td>
+                                        <td width="33%" align="left" valign="middle" style="padding-bottom:2px;">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="33%" align="left" valign="middle" class="accShippedto">&nbsp;</td>
+                                        <td width="33%" align="left" valign="middle" class="accOrderCost">&nbsp;</td>
+                                        <td width="33%" align="left" valign="middle" style="padding-bottom:2px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" align="left" valign="middle" class="accShippedto"><b>Order # : </b><a href="" class="email"><?php if ($mforusermodelarray['order_id']) {
+                        echo $mforusermodelarray['order_id'];
+                    } else {
+                        echo "no order";
+                    } ?></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" align="left" valign="middle" class="accShippedto">&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+        <?php
+    } 
+}
+//print_r($abc);
+if(!in_array(1,$abc)){
+	echo "No Measurement";
+}
+?>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" valign="top">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+
+</form>

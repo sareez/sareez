@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+* 
+* Do not edit or add to this file if you wish to upgrade the module to newer
+* versions in the future. If you wish to customize the module for your 
+* needs please contact us to https://www.milople.com/magento-extensions/contact-us.html 
+* 
+* @category    Ecommerce
+* @package     Indies_Whatsappshare
+* @copyright   Copyright (c) 2015 Milople Technologies Pvt. Ltd. All Rights Reserved.
+* @url	       https://www.milople.com/magento-extensions/whatsapp-share.html
+*
+* Milople was known as Indies Services earlier.
+*
+*/
+-->
+<config>
+    <modules>
+        <Indies_Whatsappshare>
+            <version>1.1.0</version>
+			<name>WhatsApp Share</name>
+			<url>https://www.milople.com/magento-extensions/whatsapp-share.html</url>
+        </Indies_Whatsappshare>
+    </modules>
+    <frontend>
+        <routers>
+            <whatsappshare>
+                <use>standard</use>
+                <args>
+                    <module>Indies_Whatsappshare</module>
+                    <frontName>WhatsApp Share</frontName>
+                </args>
+            </whatsappshare>
+        </routers>
+        <layout>
+            <updates>
+                <whatsappshare>
+                    <file>whatsappshare.xml</file>
+                </whatsappshare>
+            </updates>
+        </layout>
+		<translate>
+			<modules>
+				<Indies_Whatappshare>
+					<files>
+						<default>Indies_Whatappshare.csv</default>
+					</files>
+				</Indies_Whatappshare>
+			</modules>
+		</translate>
+    </frontend>
+    <admin>
+        <routers>
+			<whatsappshare>
+				<use>admin</use>
+				<args>
+					<module>Indies_Whatsappshare</module>
+					<frontName>WhatsApp Share</frontName>
+				</args>
+			</whatsappshare>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<whatsappshare module="whatsappshare">
+				<title>WhatsApp Share</title>
+				<sort_order>70</sort_order>               
+				<children>
+					<configuration module="whatsappshare">
+						<title>Configuration</title>
+						<sort_order>20</sort_order>
+						<action>adminhtml/system_config/edit/section/whatsappshare</action>
+					</configuration>
+				</children>
+			</whatsappshare>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Indies_Whatsappshare>
+							<title>whatsappshare Module Menu</title>
+							<sort_order>10</sort_order>
+						</Indies_Whatsappshare>
+						<system>
+							<children>
+								<config>
+									<children>
+										<whatsappshare translate="title" module="whatsappshare">
+											<title>whatsappshare Module Configuration</title>
+										</whatsappshare>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<whatsappshare>
+					<file>whatsappshare.xml</file>
+				</whatsappshare>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Indies_Whatappshare>
+					<files>
+						<default>Indies_Whatappshare.csv</default>
+					</files>
+				</Indies_Whatappshare>
+			</modules>
+		</translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <whatsappshare>
+                <class>Indies_Whatsappshare_Model</class>
+                <resourceModel>whatsappshare_mysql4</resourceModel>
+            </whatsappshare>
+            <whatsappshare_mysql4>
+                <class>Indies_Whatsappshare_Model_Mysql4</class>
+                <entities>
+                    <whatsappshare>
+                        <table>whatsappshare</table>
+                    </whatsappshare>
+                </entities>
+            </whatsappshare_mysql4>
+        </models>
+        <resources>
+            <whatsappshare_setup>
+                <setup>
+                    <module>Indies_Whatsappshare</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </whatsappshare_setup>
+            <whatsappshare_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </whatsappshare_write>
+            <whatsappshare_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </whatsappshare_read>
+        </resources>
+        <blocks>
+            <whatsappshare>
+                <class>Indies_Whatsappshare_Block</class>
+            </whatsappshare>
+        </blocks>
+        <helpers>
+            <whatsappshare>
+                <class>Indies_Whatsappshare_Helper</class>
+            </whatsappshare>
+        </helpers>
+    </global>
+</config>

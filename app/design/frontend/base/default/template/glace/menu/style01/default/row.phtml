@@ -1,0 +1,14 @@
+<?php
+$_item = $this->getItem();
+?>
+<?php if ($this->getChildrenHtml()): ?>
+    <?php if ($_item->getChildrenByType('column')->count() == 0): ?>
+    <ul style="<?php echo $_item->getTypeInstance()->getStyle() ?>">
+        <?php echo $this->getChildrenHtml() ?>
+    </ul>
+    <?php else: ?>
+    <div class="columns columns-<?php echo $_item->getChildrenByType('column')->count() ?>" style="<?php echo $_item->getTypeInstance()->getStyle() ?>">
+        <?php echo $this->getChildrenHtml() ?>
+    </div>
+    <?php endif ?>
+<?php endif ?>

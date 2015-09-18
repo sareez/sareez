@@ -1,0 +1,78 @@
+<?php if(Mage::getStoreConfig('heaven7_previousnext/general/enabled_select',Mage::app()->getStore())==1
+			&& (Mage::getStoreConfig('heaven7_previousnext/general/position_select',Mage::app()->getStore())=="both"
+			|| Mage::getStoreConfig('heaven7_previousnext/general/position_select',Mage::app()->getStore())=="before")):?>
+	<?php
+	/** @var $previous_product Mage_Catalog_Model_Product */
+	$previous_product = $this->helper('previousnext')->getPreviousProduct();
+
+	/** @var $previous_product Mage_Catalog_Model_Product */
+	$next_product = $this->helper('previousnext')->getNextProduct();
+	?>
+	<div class="previous_next_before_box block-1">
+	<div class="block-title-1">
+	<?php if ($previous_product!==false && Mage::getStoreConfig('heaven7_previousnext/previous/enabled_select',Mage::app()->getStore())==1):?>
+		<?php $label = Mage::getStoreConfig('heaven7_previousnext/previous/label',Mage::app()->getStore());?>
+		<?php $label = str_replace("#product#", $previous_product->getName(), $label);?>
+
+		<?php $openin = Mage::getStoreConfig('heaven7_previousnext/previous/openin_select',Mage::app()->getStore());?>
+
+		<?php switch(Mage::getStoreConfig('heaven7_previousnext/previous/type_select',Mage::app()->getStore())){
+			case 'link':
+		?>
+			<span class="previous_link_box"><a class="previous_link" href="<?php echo $previous_product->getProductUrl();?>" <?php echo ($openin=="new_tab"?"target='_blank'":"");?>><?php echo $label;?></a></span>
+			<div class="next_sep">|</div>
+		<?php
+			break;
+
+			case 'button':
+		?>
+			<span class="previous_button_box"><button class="previous_button button" type="button" onclick="<?php if ($openin=="new_tab"){ ?>window.open('<?php echo $previous_product->getProductUrl();?>', target='_blank')<?php }else{ ?>location.href='<?php echo $previous_product->getProductUrl();?>'<?php }?>" value="<?php //echo $label;?>" >
+			<span><span><?php echo $label;?>
+			</span></span>
+			</button></span>
+		<?php
+			break;
+		}
+		?>
+		<?php elseif ($previous_product===false
+		&& $next_product!==false
+		&& Mage::getStoreConfig('heaven7_previousnext/next/enabled_select',Mage::app()->getStore())==1): ?>
+	<span class="previous_empty">
+		<button class="previous_button button" type="button" >
+			<span><span>
+			</span></span>
+		</button>
+	</span>
+	<?php endif;?>
+
+	<?php if ($next_product!==false && Mage::getStoreConfig('heaven7_previousnext/next/enabled_select',Mage::app()->getStore())==1):?>
+		<?php $label = Mage::getStoreConfig('heaven7_previousnext/next/label',Mage::app()->getStore());?>
+		<?php $label = str_replace("#product#", $next_product->getName(), $label);?>
+
+		<?php $openin = Mage::getStoreConfig('heaven7_previousnext/next/openin_select',Mage::app()->getStore());?>
+
+		<?php switch(Mage::getStoreConfig('heaven7_previousnext/next/type_select',Mage::app()->getStore())){
+			case 'link':
+				?>
+				<span class="next_link_box"><a class="next_link" href="<?php echo $next_product->getProductUrl();?>" <?php echo ($openin=="new_tab"?"target='_blank'":"");?>><?php echo $label;?></a></span>
+			<?php
+				break;
+
+			case 'button':
+				?>
+				<div class="next_button_box"><button class="next_button button" type="button" onclick="<?php if ($openin=="new_tab"){ ?>window.open('<?php echo $next_product->getProductUrl();?>', target='_blank')<?php }else{ ?>location.href='<?php echo $next_product->getProductUrl();?>'<?php }?>" value="<?php //echo $label;?>">
+				<span><span><?php echo $label;?>
+				</span></span>
+				</button></div>
+			<?php
+				break;
+		}
+		?>
+		<?php elseif ($next_product===false
+		&& $previous_product!==false
+		&& Mage::getStoreConfig('heaven7_previousnext/previous/enabled_select',Mage::app()->getStore())==1): ?>
+	<span class="next_empty"></span>
+	<?php endif;?>
+	</div><!--end block title-->
+	</div>
+<?php endif;?>

@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sareez_Coupon>
+            <version>0.1.0</version>
+        </Sareez_Coupon>
+    </modules>
+    <frontend>
+        <routers>
+            <coupon>
+                <use>standard</use>
+                <args>
+                    <module>Sareez_Coupon</module>
+                    <frontName>coupon</frontName>
+                </args>
+				
+				
+
+				
+            </coupon>
+        </routers>
+        <layout>
+            <updates>
+                <coupon>
+                    <file>coupon.xml</file>
+                </coupon>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<coupon>
+				<use>admin</use>
+				<args>
+					<module>Sareez_Coupon</module>
+					<frontName>coupon</frontName>
+				</args>
+				
+				
+
+				
+			</coupon>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<coupon module="coupon">
+				<title>Coupon</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="coupon">
+						<title>Shopping Cart Price Rules</title>
+						<sort_order>0</sort_order>
+						<action>coupon/adminhtml_coupon</action>
+					</items>
+					
+					
+		
+
+					
+				</children>
+			</coupon>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Sareez_Coupon>
+							<title>Coupon Module</title>
+							<sort_order>10</sort_order>
+						</Sareez_Coupon>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<coupon>
+					<file>coupon.xml</file>
+				</coupon>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <coupon>
+                <class>Sareez_Coupon_Model</class>
+                <resourceModel>coupon_mysql4</resourceModel>
+            </coupon>
+            <coupon_mysql4>
+                <class>Sareez_Coupon_Model_Mysql4</class>
+                <entities>
+                    <coupon>
+                        <table>coupon</table>
+                    </coupon>
+					
+			
+					
+                </entities>
+            </coupon_mysql4>
+        </models>
+        <resources>
+            <coupon_setup>
+                <setup>
+                    <module>Sareez_Coupon</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </coupon_setup>
+            <coupon_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </coupon_write>
+            <coupon_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </coupon_read>
+        </resources>
+        <blocks>
+            <coupon>
+                <class>Sareez_Coupon_Block</class>
+            </coupon>
+        </blocks>
+        <helpers>
+            <coupon>
+                <class>Sareez_Coupon_Helper</class>
+            </coupon>
+        </helpers>
+    </global>
+</config>

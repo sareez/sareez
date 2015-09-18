@@ -1,0 +1,37 @@
+<?php
+$_item = $this->getItem();
+$_instance = $_item->getTypeInstance();
+?>
+<li class="level<?php echo $_item->getLevel() ?> <?php echo $_instance->getClass() ?>">
+    <a href="<?php echo $_instance->getUrl() ?>" style="<?php echo $_instance->getStyle() ?>" class="<?php if ($_instance->getNote()): ?>note<?php endif ?>">
+        <?php echo $_item->getName() ?>
+        <?php if ($_instance->getNote()): ?>
+            <div class="note"><?php echo $_instance->getNote() ?></div>
+        <?php endif ?>
+    </a>
+
+    <?php if ($this->getChildrenHtml()): ?>
+
+        <?php if ($_item->getLevel() == 1): ?>
+            <div class="sub"><div class="sub-container">
+        <?php endif ?>
+
+        <?php if ($_item->getChildrenByType('column')->count() == 0
+        && $_item->getChildrenByType('row')->count() == 0): ?>
+        <ul class="sub<?php echo $_item->getLevel() ?>">
+            <?php echo $this->getChildrenHtml() ?>
+        </ul>
+        <?php elseif ($_item->getChildrenByType('column')->count() == 0): ?>
+            <?php echo $this->getChildrenHtml() ?>
+        <?php else: ?>
+        <div class="columns columns-<?php echo $_item->getChildrenByType('column')->count() ?> sub<?php echo $_item->getLevel() ?>">
+            <?php echo $this->getChildrenHtml() ?>
+        </div>
+        <?php endif ?>
+
+        <?php if ($_item->getLevel() == 1): ?>
+            </div></div>
+        <?php endif ?>
+
+    <?php endif ?>
+</li>

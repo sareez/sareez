@@ -1,0 +1,191 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Customer login form template
+ *
+ * @see Mage_Customer_Block_Form_Login
+ */
+ 
+
+?>
+<?php
+$users = mage::getModel('customer/customer')->getCollection()->getData();
+$abc='';
+foreach ($users as $user){
+   $abc.= '"'.$user['email'].'",'; 
+}
+$c= substr($abc,0, -1);
+?>
+
+<script language="javascript" type="text/javascript">
+  function submitDetailsForm() {
+	  	
+	var emailId = document.getElementById('email');
+		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	
+		if (!filter.test(emailId.value)) {		
+			document.getElementById("emailval").innerHTML = "Please provide a valid email address";
+			email.focus;
+			return false;
+	 	}else{
+			document.getElementById("emailval").innerHTML = "";
+		}
+		
+		var emailVal1=document.getElementById('email').value;
+		var fruits = [<?php echo $c;?>];
+		var a = fruits.indexOf(emailVal1);
+		//alert(fruits);
+		if(a==-1){		
+			document.getElementById("emailval").innerHTML = "Email Address Doesn't Exists";
+			return false;
+		}else{		
+			document.getElementById("emailval").innerHTML = "";			
+		}
+		
+		var x = document.forms["login-form"]["login[password]"].value;
+		if (x == null || x == "") {     
+				document.getElementById("passN").innerHTML = "Password must be filled out";
+				return false;
+			}else{					
+				
+			
+				jQuery.ajax({
+					type: "POST",
+					url: "http://www.sareees.com/login_ajax.php",
+					data: {"Pass": x, "emailId": emailVal1},
+					success: function(result){					
+					if(result=="b"){
+					
+						return true;
+						<?php $_SESSION['passw']="r"; ?>
+						//alert("true");				
+						return true;
+						
+					} else if(result=="a"){
+						//alert("false");
+						<?php  $_SESSION['passw']="wr"; ?>
+					}
+							
+				}});
+				
+		<?php if($_SESSION['passw']=="r"){ ?>		
+			//alert("xx");
+			 return true;
+		<?php } else if($_SESSION['passw']=="wr"){?>
+			//alert("yy");
+			return true;
+		<?php }?>
+	
+		}
+		
+		
+			
+		
+			
+	    
+
+}
+</script>
+
+<div class="account-login customLogin">
+    <div class="page-title-1">
+        <h1><?php echo $this->__('Login') ?></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php /* Extensions placeholder */ ?>
+    <?php echo $this->getChildHtml('customer.form.login.extra')?>
+    
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+     <div id="emailval"></div>
+      <div id="passN"></div>
+      <div id="passKKKK"></div>
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <div class="col2-set">
+           
+            <div class="col-2-copy registered-users">
+                <div class="content_copy">
+                  
+                    <ul class="form-list list_form">
+                        <li>
+                      
+                            <label for="email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                            <div class="input-box">
+                                <input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text login_input required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+                            </div>
+                        </li>
+                        <li>
+                        
+                            <label for="pass" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                            <div class="input-box">
+                                <input type="password" name="login[password]" class="input-text login_input required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+                            </div>
+                        </li>
+                        <?php echo $this->getChildHtml('form.additional.info'); ?>
+                    </ul>
+                    <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+                </div>
+            </div>
+        </div>
+        <div class="col2-set">
+          
+            <div class="col-2-copy-button registered-users">
+                <div class="buttons-set-copy">
+                    <!--<a href="<?php //echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php //echo $this->__('Forgot Your Password?') ?></a>-->
+                    <button type="submit" class="button_login" title="<?php echo $this->__('Login') ?>" name="send" id="send2" onClick='return submitDetailsForm()'><span><span><?php echo $this->__('Login') ?></span></span></button>
+                </div>
+            </div>
+			<div class="forgot_password_edit">
+			<a href="<?php echo Mage::getBaseUrl();?>customer/account/forgotpassword/" >Forgot  your password?</a>
+			</div>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form', true);
+    //]]>
+    </script>
+</div>
+<div class="devider"></div>
+<ul class="gs-login  gs-login-login">
+<li class="last">
+<a title="Login with Facebook" onclick="gomageSocialFBLogin();return false;" href="#">
+<img src="<?php echo $this->getSkinUrl('images/custom-fb.jpg');?>"  />                  
+</a>
+</li>	
+</ul>
+
+
+
+
+
+
+<!--<ul class="gs-login  gs-login-login">
+		
+<li class="last">
+	        <fb:login-button v="2" onlogin="gomageSocialFBCheckLogin()" scope="email" login_text="" class=" fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=874981339229905&amp;container_width=0&amp;locale=en_US&amp;scope=email&amp;sdk=joey"><span style="vertical-align: bottom; width: 65px; height: 22px;"><iframe width="1000px" height="1000px" frameborder="0" name="f16121d32e1cf8" allowtransparency="true" scrolling="no" title="fb:login_button Facebook Social Plugin" style="border: medium none; visibility: visible; width: 65px; height: 22px;" src="http://www.facebook.com/plugins/login_button.php?app_id=874981339229905&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2F6Dg4oLkBbYq.js%3Fversion%3D41%23cb%3Df1da345e8b27ecc%26domain%3Dwww.sareees.com%26origin%3Dhttp%253A%252F%252Fwww.sareees.com%252Ff3ca09c3c9405e4%26relation%3Dparent.parent&amp;container_width=0&amp;locale=en_US&amp;scope=email&amp;sdk=joey" class=""></iframe></span></fb:login-button>
+	</li>	</ul>-->

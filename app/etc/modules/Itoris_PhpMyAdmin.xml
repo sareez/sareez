@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Itoris_PhpMyAdmin>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Itoris_PhpMyAdmin>
+	</modules>
+</config>

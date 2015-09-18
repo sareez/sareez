@@ -1,0 +1,91 @@
+<?php //if(getIsHomePage()) { ?>
+<?php if( $this->getUrl('') == $this->getUrl('*/*/*', array('_current'=>true, '_use_rewrite'=>true)) ){ ?>
+<?php //if(Mage::getStoreConfig('testimonial/general_option/enable_sidebar') == 1):?>
+	<?php $latestTestimonial = $this->getTestimonialsLast()?>
+	<?php if(count($latestTestimonial) > 0):?>
+	<?php /*?><link type="text/css" href="<?php echo $this->getSkinUrl('css/magebuzz/testimonial.css')?>" rel="stylesheet">
+	<div class="block block-testimonial-sidebar">
+		<div class="block-title">
+			<strong><span><?php echo $this->__('Latest Testimonial')?></span></strong>
+		</div>
+		<div class="block-content">
+			<?php foreach($latestTestimonial as $_item):?>
+				<div class="testimonial-sidebar-content">
+					<div class="std">
+						   <?php
+                                $count = $this->getNumberWordsOnSidebar();
+								$_description = $_item->getTestimonial();
+								$short_desc = $this->getContentTestimonialSidebar($_description, $count);
+								echo $short_desc;
+						   ?>
+						<a href="<?php echo $this->getUrl('testimonial')?>#<?php echo $_item->getName();?>" title=""><?php echo "View more"?></a>
+					</div>
+					<div class="name-date-testimonial">
+						<h6 class="name"><?php echo $_item->getName();?></h6>
+						<h6 class="date"><?php echo date('F d, Y',Mage::getModel('core/date')->gmtTimestamp ( $_item->getCreatedTime()));?></h6>
+					</div>
+				</div>
+			<?php endforeach;?>
+		</div>
+	</div><?php */?>
+    
+    
+    
+    
+      <div class="new_testimonials">
+    <div class="testimonials-title"><strong>Customer Testimonials</strong></div>
+    <div class="testimonials-slider">
+    
+    <?php //if(Mage::getStoreConfig('testimonial/general_option/enable_sidebar') == 1):?>
+	<?php //$latestTestimonial = $this->getTestimonialsLast()?>
+	<?php //if(count($latestTestimonial) > 0):?>
+    
+    <?php
+	$testi =1;
+	 foreach($latestTestimonial as $_item):?>
+    
+    
+    
+                           
+                             <div class="testimonials-slide-0<?php echo $testi; ?>" <?php if($testi == 1){ ?>style="display: block;"<?php } else { ?>style="display: none;"<?php } ?>>
+            				<p><?php
+                                $count = $this->getNumberWordsOnSidebar();
+								$_description = $_item->getTestimonial();
+								$short_desc = $this->getContentTestimonialSidebar($_description, $count);
+								echo $short_desc;
+						   ?></p>
+            <p class="testimonials-author"><?php echo ucwords($_item->getName());?>(<?php echo strtoupper($_item->getAddress());?>)</p>
+        </div>
+    
+    
+    <?php $testi++; endforeach;?>
+    	<?php //endif ?>
+<?php //endif ?>
+    
+    
+
+       
+	   
+	           
+    </div>
+    
+    <div class="testimonials-read-more">
+        <div>
+            <a class="testimonials-read-more-button" href="<?php echo Mage::getBaseUrl(); ?>testimonial/">Read More Testimonials &gt;&gt;</a><p></p>
+        </div>
+        <div class="testimonials-slider-pointer">
+            <div class="testimonials-slider-pointer-04" style="background: none repeat scroll 0% 0% rgb(240, 102, 98);"></div>
+            <div class="testimonials-slider-pointer-03" style="background: none repeat scroll 0% 0% rgb(240, 102, 98);"></div>
+            <div class="testimonials-slider-pointer-02" style="background: none repeat scroll 0% 0% rgb(240, 102, 98);"></div>
+            <div class="testimonials-slider-pointer-01" style="background: none repeat scroll 0% 0% rgb(181, 32, 52);"></div>
+        </div>
+    </div>
+</div>
+    
+    
+    
+    
+    
+	<?php endif ?>
+<?php //endif ?>
+<?php } ?>

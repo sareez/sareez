@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Senorita_Autoinvoice>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Senorita_Autoinvoice>
+    </modules>
+</config> 

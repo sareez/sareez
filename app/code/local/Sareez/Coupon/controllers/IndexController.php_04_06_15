@@ -1,0 +1,159 @@
+<?php
+class Sareez_Coupon_IndexController extends Mage_Core_Controller_Front_Action
+{
+    public function indexAction()
+    {
+    	
+    	/*
+    	 * Load an object by id 
+    	 * Request looking like:
+    	 * http://site.com/coupon?id=15 
+    	 *  or
+    	 * http://site.com/coupon/id/15 	
+    	 */
+    	/* 
+		$coupon_id = $this->getRequest()->getParam('id');
+
+  		if($coupon_id != null && $coupon_id != '')	{
+			$coupon = Mage::getModel('coupon/coupon')->load($coupon_id)->getData();
+		} else {
+			$coupon = null;
+		}	
+		*/
+		
+		 /*
+    	 * If no param we load a the last created item
+    	 */ 
+    	/*
+    	if($coupon == null) {
+			$resource = Mage::getSingleton('core/resource');
+			$read= $resource->getConnection('core_read');
+			$couponTable = $resource->getTableName('coupon');
+			
+			$select = $read->select()
+			   ->from($couponTable,array('coupon_id','title','content','status'))
+			   ->where('status',1)
+			   ->order('created_time DESC') ;
+			   
+			$coupon = $read->fetchRow($select);
+		}
+		Mage::register('coupon', $coupon);
+		*/
+
+			
+		$this->loadLayout();     
+		$this->renderLayout();
+    }
+	
+	
+	public function editAction(){
+		
+		$coupon = $this->getRequest()->getParam('q');
+		$coupon_id = $this->getRequest()->getParam('coupon_id');
+		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+		$query ="update generatedcoupon set coupon_code = '".$coupon."' where generatedcoupon_id = '".$coupon_id."'";
+		$confirm = $write->query($query);
+		if($confirm){ echo "Data inserted successfully!"; }
+		
+	}
+	
+	public function deleteAction(){
+		
+		$coupon = $this->getRequest()->getParam('q');
+		$coupon_id = $this->getRequest()->getParam('coupon_id');
+		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+		$query ="delete from generatedcoupon where generatedcoupon_id = '".$coupon_id."'";
+		$confirm = $write->query($query);
+		if($confirm){ echo "Data deleted successfully!"; }
+		
+	}
+	
+	public function fetchallAction(){
+		
+		$coupon_cat = $this->getRequest()->getParam('coupon_cat');
+		//$coupon_id = $this->getRequest()->getParam('coupon_id');
+		$readresult = Mage::getSingleton('core/resource')->getConnection('core_write');
+		$query ="select * from generatedcoupon where coupon_id='".$coupon_cat."' order by generatedcoupon_id desc"; //  
+		?>
+        <table class="data" width="100%" border="1" cellspacing="0" cellpadding="10">
+  <tr class="even">
+    <td class="a-center on-mouse"><strong>ID</strong></td>
+    <td class="on-mouse"><strong>Coupon code</strong></td>
+    <td class="a-center on-mouse"><strong>Status</strong></td>
+    <td class="a-center on-mouse"><strong>Option</strong></td>
+  </tr>
+        <?php
+		$i=1;
+		$results = $readresult->fetchAll($query);
+		foreach ($readresult->fetchAll($query) as $result) {
+		?>
+  <tr class="pointer">
+    <td class="a-center on-mouse"><?php echo $i; ?></td>
+    <td class="on-mouse"><?php echo $result['coupon_code']; ?></td>
+    <td class="a-center on-mouse">Yes</td>
+    <td class="a-center on-mouse">
+    <a href="Javascript:void(0)" onclick="coupon_edit('<?php echo $i; ?>')">Edit</a> | 
+    <a href="Javascript:void(0)"  onclick="deleteAction('<?php echo $i; ?>')" >Delete</a></td>
+  </tr>
+  <tr class="even" >
+    <td colspan="5" class="a-center on-mouse">
+    <div  style=" display:none;" id="form<?php echo $i; ?>" >
+        <table width="100%" border="0" cellspacing="3" cellpadding="3">
+          <tr>
+            <td width="28%">&nbsp;</td>
+            <td width="2%">&nbsp;</td>
+            <td width="70%">&nbsp;</td>
+          </tr>
+          <tr>
+            <td><strong>Coupon code</strong></td>
+            <td>:</td>
+            <td align="left">
+              <input type="text" name="coupon_code<?php echo $i; ?>" id="coupon_code<?php echo $i; ?>" value="<?php echo $result['coupon_code']; ?>" />
+             <input type="hidden" name="coupon_id<?php echo $i; ?>" id="coupon_id<?php echo $i; ?>" value="<?php echo $result['generatedcoupon_id']; ?>" />
+   <input type="hidden" name="coupon_cat<?php echo $i; ?>" id="coupon_cat<?php echo $i; ?>" value="<?php //echo getUriSegment(6); ?>" />
+                
+            </td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td align="left">
+              <input type="button" name="button" id="button" value="Submit" onclick="editAction('<?php echo $i; ?>')" />
+            </td>
+          </tr>
+        </table>
+    </div>
+    </td>
+    </tr>
+        <?php
+		$i++;
+			}
+	?>
+    </table>
+    <script>
+function coupon_edit(id){
+	
+	
+	
+	if(document.getElementById('form'+id).style.display=="block")
+	{
+	//	alert(id);
+	 document.getElementById('form'+id).style.display="none";
+	} else if(document.getElementById('form'+id).style.display=="none")
+		{
+			// alert(id);
+		 document.getElementById('form'+id).style.display="block";
+		}
+	
+}
+</script>
+    <?php
+	//}
+		
+	}
+	
+
+ 
+	
+		
+}

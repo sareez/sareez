@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <MyExtensions_Checkout>
+            <version>0.1.0</version>
+        </MyExtensions_Checkout>
+    </modules>
+  
+    <frontend>
+        <routers>
+            <checkout>
+                <args>
+                    <modules>
+                        <MyExtensions_Checkout before="Mage_Checkout">MyExtensions_Checkout</MyExtensions_Checkout>
+                    </modules>
+                </args>
+            </checkout>
+        </routers>
+    </frontend>
+</config>

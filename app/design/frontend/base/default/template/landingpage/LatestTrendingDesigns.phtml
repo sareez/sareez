@@ -1,0 +1,141 @@
+<?php
+/*//////////////////////////////// Best Selling Saree Category 
+$saree = 3;
+$_sareeCategory = Mage::getModel('catalog/category')->load(4);
+
+$_sareeCollection = Mage::getResourceModel('catalog/product_collection')
+->addCategoryFilter($_sareeCategory)
+->addAttributeToSelect('*')
+->setOrder('ordered_qty', 'desc')
+->setPageSize($saree);
+$_sareeCollection->load();
+
+//////////////////////////////// Best Selling SALWAR KAMEEZ Category 
+
+$salwar = 3;
+$_salwarCategory = Mage::getModel('catalog/category')->load(41);
+$_salwarCollection = Mage::getResourceModel('catalog/product_collection')
+->addCategoryFilter($_salwarCategory)
+->addAttributeToSelect('*')
+->setOrder('ordered_qty', 'desc')
+->setPageSize($salwar);
+$_salwarCollection->load();
+
+
+//////////////////////////////// Best Selling LEHENGA CHOLI Category 
+$lehenga = 3;
+$_lehengaCategory = Mage::getModel('catalog/category')->load(73);
+
+$_lehengaCollection = Mage::getResourceModel('catalog/product_collection')
+->addCategoryFilter($_lehengaCategory)
+->addAttributeToSelect('*')
+->setOrder('ordered_qty', 'desc')
+->setPageSize($lehenga);
+$_lehengaCollection->load();*/
+
+
+////////////////////////////
+
+//$_sareeCollection = $this->sarees();
+// $_sareeCollection = Mage::registry('sarees');
+
+ //print_r($_sareeCollection); exit;
+
+?>
+aaaaaaaaaaaaaaa
+	<?php /*?><div class="new-product-slider-tab-01">
+    <?php       
+	$ltdsk = 1;
+    foreach($_sareeCollection as $_sareeCollections){
+    ?>
+    
+	<?php if($ltdsk==1){ ?>
+    <div class="new-product-slider-01" style="margin-left: -456px;" >
+    <?php } ?>
+    
+    <?php if($ltdsk==4){ ?>
+    <div class="new-product-slider-02" style="margin-left: 0px; ">
+    <?php } ?>
+    
+    <?php if($ltdsk==7){ ?>
+    <div class="new-product-slider-03" style="margin-left: 456px;">
+    <?php } ?>
+         <div class="img">
+            <a href="<?php echo $_sareeCollections->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_sareeCollections, 'small_image')->resize(142, 213); ?>"></a>
+            <p align="center" class="price"> $ <?php echo number_format($_sareeCollections->getPrice(), 2, '.', ''); ?></p>
+            <a href="<?php echo $_sareeCollections->getProductUrl(); ?>"><p align="center" class="shop-button">SHOP NOW</p></a>
+            </div>
+    
+	<?php if($ltdsk==3 || $ltdsk==6 || $ltdsk==9){ ?></div><?php } ?>
+    
+    <?php
+	$ltdsk++;
+    }
+    ?>
+    </div>
+
+
+<!--Salwars-->
+	<div class="new-product-slider-tab-02" style="margin-top: -2000px;">
+    <?php       
+	$ltd = 1;
+    foreach($_salwarCollection as $_salwarCollections){
+    ?>
+    
+	<?php if($ltd==1){ ?>
+     <div class="new-product-slider-01" style="display: none; margin-left: -456px;">
+    <?php } ?>
+    
+    <?php if($ltd==4){ ?>
+    <div class="new-product-slider-02" style="margin-left: 0px; display: none;">
+    <?php } ?>
+    
+    <?php if($ltd==7){ ?>
+    <div class="new-product-slider-03" style="margin-left: 456px; display: none;">
+    <?php } ?>
+         <div class="img">
+            <a href="<?php echo $_salwarCollections->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_salwarCollections, 'small_image')->resize(142, 213); ?>"></a>
+            <p align="center" class="price"> $ <?php echo number_format($_salwarCollections->getPrice(), 2, '.', ''); ?></p>
+            <a href="<?php echo $_salwarCollections->getProductUrl(); ?>"><p align="center" class="shop-button">SHOP NOW</p></a>
+            </div>
+    
+	<?php if($ltd==3 || $ltd==6 || $ltd==9){ ?></div><?php } ?>
+    
+    <?php
+	$ltd++;
+    }
+    ?>
+    </div>
+
+
+<!--Lahengas-->
+	<div class="new-product-slider-tab-03" style="margin-top: -2000px;">
+    <?php       
+	$ltd = 1;
+    foreach($_lehengaCollection as $_lehengaCollections){
+    ?>
+    
+	<?php if($ltd==1){ ?>
+     <div class="new-product-slider-01" style="display: none; margin-left: -456px;">
+    <?php } ?>
+    
+    <?php if($ltd==4){ ?>
+    <div class="new-product-slider-02" style="margin-left: 0px; display: none;">
+    <?php } ?>
+    
+    <?php if($ltd==7){ ?>
+    <div class="new-product-slider-03" style="margin-left: 456px; display: none;">
+    <?php } ?>
+         <div class="img">
+            <a href="<?php echo $_lehengaCollections->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_lehengaCollections, 'small_image')->resize(142, 213); ?>"></a>
+            <p align="center" class="price"> $ <?php echo number_format($_lehengaCollections->getPrice(), 2, '.', ''); ?></p>
+            <a href="<?php echo $_lehengaCollections->getProductUrl(); ?>"><p align="center" class="shop-button">SHOP NOW</p></a>
+            </div>
+    
+	<?php if($ltd==3 || $ltd==6 || $ltd==9){ ?></div><?php } ?>
+    
+    <?php
+	$ltd++;
+    }
+    ?>
+    </div><?php */?>

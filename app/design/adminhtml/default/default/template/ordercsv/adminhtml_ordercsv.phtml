@@ -1,0 +1,66 @@
+<?php echo $this->getLayout()->createBlock('core/html_calendar')->setTemplate('page/js/calendar.phtml')->toHtml();?>
+<?php echo $this->getChildHtml('html_calendar') ?>
+
+
+<form name="form2" method="get" action="<?php //echo Mage::getBaseUrl(); ?>http://www.sareez.com/csv_upload/csv_data_update.php" >
+<table width="100%" border="0" cellspacing="3" cellpadding="3">
+  <tr>
+    <td width="33%">&nbsp;</td>
+    <td width="2%">&nbsp;</td>
+    <td width="65%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+<!--      <input type="text" name="shipping_pickup_at_store_date" id="shipping_pickup_at_store_date">-->
+        <label for="date_pick"><?php echo $this->__('Select Date') ?> </label>
+<!--<img style="" title="Select Date" id="date_pick" alt="" src="<?php // echo $this->getSkinUrl("images/calendar.gif");?> "/>-->
+<input type="text" name="date_pick" id="date_pick" value=""/>
+<script type="text/javascript">
+// <![CDATA[
+Calendar.setup({
+inputField : 'date_pick',
+ifFormat : '%Y-%m-%d',
+//ifFormat : '%m-%d-%Y',
+showsTime: false,
+// button : 'date_select_trig',
+singleClick : true,
+//disableFunc: function(date) {
+////disable previous day in datepicker
+//var now= new Date();
+//if(date.getFullYear()<now.getFullYear())
+//{
+//return true;
+//}
+//if(date.getFullYear()==now.getFullYear())
+//{
+//if(date.getMonth()<now.getMonth())
+//{
+//return true;
+//}
+//}
+//if(date.getMonth()==now.getMonth())
+//{
+//if(date.getDate()<now.getDate())
+//{
+//return true;
+//}
+//}
+//},
+});
+// ]]>
+</script>
+   </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+      <input type="submit" name="button" id="button" value="Order Request To Vendor">&nbsp;&nbsp;
+      <input type="submit" name="button2" id="button2" value="Order Process To Stitching Depertment"></td>
+      <input type="hidden" name="process" value="download" >
+  <input type="hidden" name="current_url" value="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" >
+  </tr>
+</table>
+</form>

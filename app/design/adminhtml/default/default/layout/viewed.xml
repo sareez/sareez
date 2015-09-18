@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <viewed_adminhtml_viewed_index>
+        <reference name="content">
+            <block type="viewed/adminhtml_viewed" name="viewed" />
+        </reference>
+    </viewed_adminhtml_viewed_index>
+</layout>

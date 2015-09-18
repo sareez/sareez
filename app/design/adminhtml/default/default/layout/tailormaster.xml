@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <tailormaster_adminhtml_tailormaster_index>
+        <reference name="content">
+            <block type="tailormaster/adminhtml_tailormaster" name="tailormaster" />
+        </reference>
+    </tailormaster_adminhtml_tailormaster_index>
+</layout>

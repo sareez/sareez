@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ma2_PopupLogin>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Catalog />
+                <Mage_Cms />
+            </depends>
+        </Ma2_PopupLogin>
+    </modules>
+</config>

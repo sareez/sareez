@@ -1,0 +1,140 @@
+<script>
+function editAction(id) {
+     document.getElementById("txtHint").innerHTML = '<img src="<?php echo $this->getSkinUrl('images/per_load.GIF'); ?>"  />';
+	var str = document.getElementById("coupon_code"+id).value;
+	// var coupon_id = id;
+	
+	var coupon_id = document.getElementById("coupon_id"+id).value;
+	
+	
+	
+	//alert(coupon_id);
+	
+	if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+				totalBody();
+            }
+        }
+        xmlhttp.open("GET","<?php echo Mage::getBaseUrl(); ?>coupon/index/edit?q="+str+"&coupon_id="+coupon_id,true);
+        xmlhttp.send();
+    }
+}
+
+
+function deleteAction(id) {
+    document.getElementById("txtHint").innerHTML = '<img src="<?php echo $this->getSkinUrl('images/per_load.GIF'); ?>"  />';
+	//var str = document.getElementById("coupon_code"+id).value;
+	// var coupon_id = id;
+	
+	var coupon_id = document.getElementById("coupon_id"+id).value;
+	
+	
+	
+	 //alert(coupon_id);
+	
+	if (coupon_id == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+				totalBody();
+            }
+        }
+        xmlhttp.open("GET","<?php echo Mage::getBaseUrl(); ?>coupon/index/delete?coupon_id="+coupon_id,true);
+        xmlhttp.send();
+    }
+}
+
+
+//setInterval(function(){ totalBody(); }, 3000);
+setTimeout(function(){ totalBody() }, 1000);
+
+function totalBody() {
+ //   document.getElementById("bodyPart").innerHTML = '<img src="<?php //echo $this->getSkinUrl('images/per_load.GIF'); ?>"  />';
+	var coupon_cat = <?php echo getUriSegment(6); ?>;
+	//var str = document.getElementById("coupon_code"+id).value;
+	// var coupon_id = id;
+	
+
+	//alert("");
+	
+	
+
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("bodyPart").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","<?php echo Mage::getBaseUrl(); ?>coupon/index/fetchall?coupon_cat="+coupon_cat,true);
+        xmlhttp.send();
+ 
+}
+
+
+</script>
+<div class="grid">
+<?php 
+function getUriSegments() {
+    return explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+}
+ 
+function getUriSegment($n) {
+    $segs = getUriSegments();
+    return count($segs)>0&&count($segs)>=($n-1)?$segs[$n]:'';
+}
+ 
+//echo getUriSegment(6); 
+
+?>
+<span id="txtHint"></span>
+<span id="bodyPart">
+
+</span>
+</div>
+
+
+<script>
+function coupon_edit(id){
+	
+	
+	
+	if(document.getElementById('form'+id).style.display=="block")
+	{
+	//	alert(id);
+	 document.getElementById('form'+id).style.display="none";
+	} else if(document.getElementById('form'+id).style.display=="none")
+		{
+			// alert(id);
+		 document.getElementById('form'+id).style.display="block";
+		}
+	
+}
+</script>

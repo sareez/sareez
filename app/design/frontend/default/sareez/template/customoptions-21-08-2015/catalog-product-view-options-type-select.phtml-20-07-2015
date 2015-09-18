@@ -1,0 +1,177 @@
+<?php
+/**
+ * MageWorx
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageWorx EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageworx.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.mageworx.com/ for more information
+ *
+ * @category   MageWorx
+ * @package    MageWorx_CustomOptions
+ * @copyright  Copyright (c) 2013 MageWorx (http://www.mageworx.com/)
+ * @license    http://www.mageworx.com/LICENSE-1.0.html
+ */
+
+/**
+ * Advanced Product Options extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_CustomOptions
+ * @author     MageWorx Dev Team
+ */
+
+/* @var $this Mage_Catalog_Block_Product_View_Options_Type_Select */ 
+?>
+
+<!--Start: ViewContent pixel event added on 06-07-2015 by Naba-->
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '306487626192434']);
+})();
+
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+<?php
+$product = Mage::registry('current_product');
+if ($product) //sometimes need check for instanse, use instanseof
+{
+	$products_id = $product->getId();
+	$products_model = $product->getSku();
+?>
+<?php if (strpos($products_model,'SA') !== false || strpos($products_model,'SL') !== false || strpos($products_model,'LL') !== false) { ?>
+window._fbq.push(['track', 'ViewContent', {
+  content_ids: ['<?php echo (int)$products_id; ?>'],
+<?php if (strpos($products_model,'SA') !== false) { ?>  
+  product_catalog_id: ['782974751792826'],
+<?php } else if (strpos($products_model,'SL') !== false) {?>  
+  product_catalog_id: ['1429320734028858'],
+<?php } else if (strpos($products_model,'LL') !== false) {?> 
+  product_catalog_id: ['741950172585455'],
+<?php } else {} ?>
+  content_type: 'product'
+}]);
+<?php 
+	} else {} 
+}
+?>
+</script> 
+
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=306487626192434&amp;ev=PixelInitialized" /></noscript>
+
+<!--End: ViewContent pixel event added on 06-07-2015 by Naba-->	
+
+<?php
+$_option = $this->getOption();
+$helper = Mage::helper('customoptions');
+$valuesHtml = $this->getValuesHtml(); 
+if ($valuesHtml): ?>
+<?php
+$isSizeChart = 0;
+if($this->htmlEscape($_option->getTitle()) == 'SELECT YOUR SIZE'){
+    $isSizeChart = 1;
+}
+?>
+
+<div <?php if ($helper->hideDependentOption() && $_option->getIsDependent() || $_option->getViewMode()==2) { ?>style="display: none;"<?php } ?>
+class="easy-customization option<?php if ($helper->isSpecifyingCssClassEnabled() && $_option->getDivClass()) echo ' '.$_option->getDivClass() ?>">
+<p><?php echo $this->htmlEscape($_option->getTitle()) ?><?php if ($_option->getIsRequire(true)): ?><span class="required">&nbsp;*</span><?php endif; ?></p>
+<?php if ($_option->getDescription()): ?><p class="note"><?php echo $_option->getDescription() ?></p><?php endif; ?>
+<p<?php if ($_option->decoratedIsLast) { ?> class="last"<?php } ?>>
+    <?php echo $valuesHtml ?>
+    <?php if ($_option->getIsRequire(true)): ?>
+    <?php if ($_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_RADIO || $_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_CHECKBOX): ?>
+                <span id="options-<?php echo $_option->getId() ?>-container"></span>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php if ($helper->isQntyInputEnabled() && $_option->getQntyInput() && $_option->getType()!=Mage_Catalog_Model_Product_Option::OPTION_TYPE_CHECKBOX && $_option->getType()!=MageWorx_CustomOptions_Model_Catalog_Product_Option::OPTION_TYPE_MULTISWATCH): ?>
+        <span class="qty-holder">
+            <label class="label-qty"><?php echo $helper->getDefaultOptionQtyLabel() ?> <input type="text" class="input-text qty <?php if ($_option->getIsRequire(true)) echo 'validate-greater-than-zero'; else echo 'validate-zero-or-greater'; ?>" value="<?php echo ($_option->getOptionQty()?$_option->getOptionQty():1) ?>" maxlength="12" id="options_<?php echo $_option->getId() ?>_qty" name="options_<?php echo $_option->getId() ?>_qty" onchange="opConfig.reloadPrice(); <?php if ($_option->getOptionSetQtyProduct()) { ?>optionSetQtyProduct.setQty()<?php } ?>" onKeyPress="if(event.keyCode==13){opConfig.reloadPrice(); <?php if ($_option->getOptionSetQtyProduct()) { ?>optionSetQtyProduct.setQty()<?php } ?>}"></label>
+        </span>
+    <?php endif; ?>
+</p>
+</div>
+
+<?php endif; ?>
+
+<?php if($isSizeChart == 1){ ?>
+
+<script type="text/javascript">
+function loadPopupBox() {	// To Load the Popupbox
+    jQuery('#popup_box').fadeIn("slow");
+}
+jQuery(document).ready( function() {			
+    jQuery('#popupBoxClose').click( function() {			
+            unloadPopupBox();
+    });
+    function unloadPopupBox() {	// TO Unload the Popupbox
+        jQuery('#popup_box').fadeOut("slow");
+    }
+});
+</script>
+<div class="size-chart"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img width="54" height="22" src="<?php echo $this->getSkinUrl() ?>images/size-guide.jpg"></a></div>
+<div id="light" class="white_content_size">	<!-- OUR PopupBox DIV-->
+        <h1>Size Guide</h1>
+         <?php
+        
+        //$categoryId = Mage::registry('current_category')->getId(); 
+		//$_helper = $this->helper('catalog/output');
+		$_product = $this->getProduct(); 
+		//echo "NABA"; echo "<pre>"; print_r($_product->getId()); die;
+		//$productID = $_product->getId();
+		$skuCode = $_product->getSku(); 
+		//$productCategory = Mage::getModel('catalog/product')->load($productID);
+		//echo "<pre>"; print_r($_product);
+		//echo "<pre>"; print_r($productCategory);
+		//$categoryId = $productCategory->getCategoryIds();
+		//echo "<pre>"; print_r($categoryId);
+		//$categoryId == "157";
+        if(strpos($skuCode,'SH') !== false){
+         	$imageName = "Mens_shewani_size_chart.jpg";
+		} else if(strpos($skuCode,'KR') !== false){
+         	$imageName = "kurta_size_chart.jpg";
+		} else if(strpos($skuCode,'KSL') !== false){
+         	$imageName = "kids_size_chart_kameez.jpg";
+		} else if(strpos($skuCode,'SL') !== false){
+         	$imageName = "readymade_salwar.jpg";
+		} else if(strpos($skuCode,'BLS') !== false){
+         	$imageName = "designer_blouses.jpg";
+		} else if(strpos($skuCode,'PC') !== false){
+         	$imageName = "designer_petticoat.jpg";
+		} else if(strpos($skuCode,'KLL') !== false){
+         	$imageName = "kids_size_chart_lehenga.jpg";
+		} else if(strpos($skuCode,'KSA') !== false){
+         	$imageName = "kids_size_chart_saree.jpg";
+		} else if(strpos($skuCode,'KT') !== false){
+         	$imageName = "kurty.jpg";
+		//} else if(strpos($skuCode,'WC') !== false){ //Waist Coat
+         	//$imageName = "size_chart_5.jpg";
+        } else {
+         	$imageName = "size_chart_5.jpg";
+        }
+		//echo $productID."NABA".$categoryId."NABA".$imageName; 
+        ?> 
+        <img border="0" alt="size chart" src="<?php echo $this->getSkinUrl().'images/'.$imageName; ?>">
+       
+<!--<img width="571" height="155" border="0" alt="size chart" src="<?php //echo $this->getSkinUrl() ?>images/size_chart_5.jpg">-->
+        <a class="size_close" href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="<?php echo $this->getSkinUrl() ?>images/dialog_close.png"></a>
+</div>
+<div id="fade" class="black_overlay_size"></div>
+<?php } ?>
+

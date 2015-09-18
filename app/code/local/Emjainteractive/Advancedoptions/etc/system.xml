@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <emjainteractive translate="label" module="emjainteractive_advancedoptions">
+            <label>Emjainteractive</label>
+            <sort_order>0</sort_order>
+        </emjainteractive>
+    </tabs>
+    <sections>
+        <advancedoptions translate="label" module="emjainteractive_advancedoptions">
+            <class>separator-top</class>
+            <label>Advancedoptions</label>
+            <tab>emjainteractive</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>40</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <checkout_cart translate="label">
+                    <label>Checkout Cart</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <add_button_label translate="label">
+                            <label>Add Button Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </add_button_label>
+                        <edit_button_label translate="label">
+                            <label>Edit Button Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </edit_button_label>
+                        <edited_message translate="label">
+                            <label>Edited Message</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </edited_message>
+                        <remove_button_label translate="label">
+                            <label>Remove Button Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </remove_button_label>
+                        <removed_message translate="label">
+                            <label>Removed Message</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </removed_message>
+                    </fields>
+                </checkout_cart>
+            </groups>
+        </advancedoptions>
+    </sections>
+</config>

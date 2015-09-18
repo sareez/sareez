@@ -1,0 +1,618 @@
+<?php 
+require_once("app/Mage.php");
+$app = Mage::app('');
+
+
+//$where=" WHERE 1 AND stock_available<=0";
+//$where =" WHERE allocationstatus_id = 1 ";
+$where =" WHERE 1 ";
+if(isset($_REQUEST['flag']) && $_REQUEST['flag']==2){
+	
+	//print_r($_REQUEST);
+	if($_REQUEST['product_sku']!=''){
+	  $sku_code=$_REQUEST['product_sku'];
+	$where.=" AND `sku` = '$sku_code'";
+	
+
+	}else{
+		
+		 $manufacture=$_REQUEST['manufacture'];
+		 $design_no=$_REQUEST['design_no'];
+			$where.=" AND `manufacturer_design` = '$design_no' AND `manufacturers_id` = '$manufacture'";	
+	}
+	
+	//$sku_code=trim($_REQUEST['product_sku']);
+//header("Location:http://www.sareez.com/index.php/outorder/adminhtml_outorder/index/key/e2a8a5261d41f2c0a68d63406e045fd8/?product_sku=&design_no=&manufacture=&manufacture=0&design_no=&product_sku=$sku_code&button=Submit&current_url=http%3A%2F%2Fwww.sareez.com%2Findex.php%2Foutorder%2Fadminhtml_outorder%2Findex%2Fkey%2Fe2a8a5261d41f2c0a68d63406e045fd8%2F&flag=2");
+//exit();
+	
+	//$display="block";
+}else{
+	$display="none";
+}
+
+
+
+
+$conn = mysql_connect("localhost","hbanfvqkdv","tXySfqDmQ3") or die("ERROR::Not connected to SERVER"); 
+$db = mysql_select_db("hbanfvqkdv",$conn) or die("ERROR::Not connected to DATABASE");
+
+
+
+$write = Mage::getSingleton('core/resource')->getConnection('core_read');
+$sql="SELECT * FROM `sales_flat_order_item_stitching` $where";
+//echo $sql."KKK";
+$readresult=$write->query($sql);
+
+
+?>
+
+<table width="100%" border="1" cellpadding="3" cellspacing="3" style="display:<?php echo $display;?>;">
+
+  <tr>
+        <td><b>SKU Code</b></td>
+        <td><b>Man Model</b></td>
+        <td><b>Name</b></td>
+        <td><b>Price</b></td>
+        <td><b>Manufacture Price</b></td>
+       <!-- <td><b>Order Id</b></td>-->
+        <!--<td><b>Color</b></td>-->
+        <td><b>Stock</b></td>
+        <!--<td><b>Qty</b></td>-->
+        <td><b>Image</b></td>
+  </tr>
+
+
+<?php
+
+
+while ($rowff = $readresult->fetch() ) {
+	$sku_code = $rowff['sku'];
+}
+
+//echo $sku_code;
+$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku_code);
+$stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product);
+// print_r($stock->getQty());
+
+
+// print_r($product);
+ 
+if($product){
+?>
+<tr>
+    <td><?php echo $sku_code; ?></td>
+    <td><?php echo $product->getManufacturerDesign(); //echo $manufacturer; ?></td>
+    <td><?php echo $product->getName(); ?></td>
+    <td><?php echo '$'.$product->getPrice(); ?></td>
+    <td><?php echo 'Rs.'.$product->getMsrp();?></td>
+   <!-- <td><?php //echo $order_id; ?></td>-->
+    <!--<td><?php //echo $product->getAttributeText('color'); ?></td>-->
+    <td><?php  $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product); echo $stock->getQty(); 
+	//print_r($stock->getData())
+	
+	?></td>
+    
+     <!--<td><?php //echo $fffqty1; ?></td>-->
+    
+    <td><a href="<?php echo $product->getProductUrl();?>"><img border="0" width="100" src=<?php echo Mage::getModel('catalog/product_media_config')->getMediaUrl( $product->getSmallImage() );?>></a></td>
+<tr>
+ <?php
+  }
+  else {
+?>
+  <tr>
+        <td colspan="10" align="center"><span style="color:red;">No Record(s) Found!!</span></td>
+  </tr>
+<?php }
+ 	
+//} 
+?>
+</table>
+ 
+
+<form name="form2" method="get" action="" >
+<?php /*?><form name="form2" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>" ><?php */?>
+<input type="hidden" name="product_sku" id="product_sku" value="<?php echo $_REQUEST['product_sku'];?>"/>
+<input type="hidden" name="design_no" id="design_no" value="<?php echo $_REQUEST['design_no'];?>"/>
+<input type="hidden" name="manufacture" id="manufacture" value="<?php echo $_REQUEST['manufacture'];?>"/>
+<table width="100%" border="0" cellspacing="3" cellpadding="3">
+  <tr>
+    <td width="33%">&nbsp;</td>
+    <td width="2%">&nbsp;</td>
+    <td width="65%">&nbsp;</td>
+  </tr>
+  
+  
+  <tr>
+    <td align="right"><b><?php echo $this->__('Select Manufacture :') ?></b></td>
+    <td>&nbsp;</td>
+    <td>
+    <?php
+$sqlmanu = "select * from manufacturers where 1 ";
+$resmanu = mysql_query($sqlmanu);
+	
+	 ?>
+    
+    <select name="manufacture">
+<?php while ($rowmanu = mysql_fetch_array($resmanu)){ ?>
+
+<option value="<?php echo $rowmanu['manufacturers_id']; ?>"><?php echo $rowmanu['manufacturers_name']; ?></option>
+
+<?php } ?>
+</select>
+</td>
+  </tr>
+  
+  
+  <tr>
+    <td align="right"><b><?php echo $this->__('Enter Design No :') ?></b></td>
+    <td>&nbsp;</td>
+    <td><input type="text" name="design_no" id="design_no" value=""/></td>
+  </tr>
+  <tr>
+  
+  
+  
+  
+  
+    <tr>
+    <td align="right"></td>
+    <td>&nbsp;</td>
+    <td><b>Or</b></td>
+  </tr>
+  
+  
+  <tr>
+    <td align="right"><b><?php echo $this->__('Product Sku :') ?></b></td>
+    <td>&nbsp;</td>
+    <td><input type="text" name="product_sku" id="product_sku" value=""/></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+      <input type="submit" name="button" id="button" value="Submit">&nbsp;&nbsp;
+      <!--<input type="submit" name="button2" id="button2" value="Order Process">--></td>
+ <?php /*?> <input type="hidden" name="current_url" value="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" ><?php */?>
+  <input type="hidden" name="flag" value="2" />
+  
+  </tr>
+</table>
+</form>
+
+<?php 
+if(isset($_REQUEST['flag']) && $_REQUEST['flag']==9){
+
+$product_sku = $_REQUEST['product_sku'];
+ $stock_enter_text = $_REQUEST['stock_enter_text'];
+ $quantity = ($_REQUEST['quantity']+$stock_enter_text);
+
+
+$aid=$_REQUEST['id'];
+/*echo $_REQUEST['stock_enter_text'];
+
+if(strpos($aid,':') !== false) {
+    echo 'true';
+}else{
+	 echo 'false';
+}
+*/
+
+if($_REQUEST['tot_cel']=='' && $_REQUEST['quantity']==''){
+		$product_id = Mage::getModel("catalog/product")->getIdBySku( $product_sku ); 
+		$stockItem =Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_id);
+		  $stock_quantity = ($stockItem['qty']+$stock_enter_text);
+		 $stockItem->setData('qty', (integer)$stock_quantity);
+		//$stockItem->setData('', (integer)$stock_quantity);
+		$stockItem->save();
+		
+
+	//header('Location: http://www.sareez.com/index.php/outorder/adminhtml_outorder/index/key/e2a8a5261d41f2c0a68d63406e045fd8/');
+	
+}elseif($_REQUEST['stock_enter_text']=='' && strpos($aid,':') !== false) {
+		
+		
+		$productQty = Mage::getModel("catalog/product")->getIdBySku( $product_sku ); 
+	$stockItem =Mage::getModel('cataloginventory/stock_item')->loadByProduct($productQty);
+	//echo "<pre>";
+	if($stockItem->getQty() >= $_REQUEST['stock_enter_text']){
+		
+			foreach($_REQUEST['id'] as $selected) {
+		
+		//print_r($selected);
+			$order_id = explode(":", $selected);
+			
+			$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+			$result=$write->query("SELECT increment_id FROM `sales_flat_order` WHERE `entity_id` =".$order_id[1]);
+			$row = $result->fetch();
+		
+			$sql10="UPDATE `sales_flat_order_item_stitching` SET `allocationstatus_id`='2',`allocation_date`='".date("Y-m-d")."', `download_status_process` = 'N',`allocated_by` = 'Manual' WHERE `id`='".$selected."'";
+					  //echo $sql10; die;
+					   mysql_query($sql10) or die("ERROR10::".mysql_error());
+					  
+		
+		}
+	$countId = count($_REQUEST['id']);
+		
+		
+		  $stock_quantity = ($_REQUEST['quantity']-$countId);
+		
+		$product_id = Mage::getModel("catalog/product")->getIdBySku( $product_sku ); 
+		
+		$stockItem =Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_id);
+		$stockItem->setData('qty', (integer)$stock_quantity);
+		 $stockItem->setData('', (integer)$stock_quantity);
+		$stockItem->save();
+		
+		if($quantity > 0)
+		{
+			$products_express ='33';
+			$simpleProduct = Mage::getModel('catalog/product')->loadByAttribute('sku',$product_sku);	
+					if($simpleProduct) {
+						$simpleProduct->setExpreesShippingAvailable($products_express);
+						$simpleProduct->save();
+			}
+		}
+	}
+		//header('Location: http://www.sareez.com/index.php/outorder/adminhtml_outorder/index/key/e2a8a5261d41f2c0a68d63406e045fd8/');
+		
+		
+	
+} else if($_REQUEST['stock_enter_text']!=='' && strpos($aid,':') !== false) {
+			//echo "3333333333333333333333";exit;
+	
+	$productQty = Mage::getModel("catalog/product")->getIdBySku( $product_sku ); 
+	$stockItem =Mage::getModel('cataloginventory/stock_item')->loadByProduct($productQty);
+	//echo "<pre>";
+	if($stockItem->getQty()<=0){
+	//exit;
+	 $countId = count($_REQUEST['id']);
+	
+
+		foreach($_REQUEST['id'] as $selected) {
+		
+		//if($key == $_REQUEST['stock_enter_text']){
+			$order_id = explode(":", $selected);
+			
+			$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+			$result=$write->query("SELECT increment_id FROM `sales_flat_order` WHERE `entity_id` =".$order_id[1]);
+			$row = $result->fetch();
+		
+			$sql10="UPDATE `sales_flat_order_item_stitching` SET `allocationstatus_id`='2',`allocation_date`='".date("Y-m-d")."', `download_status_process` = 'N' ,`allocated_by` = 'Manual' WHERE `id`='".$selected."'";
+					  // echo $sql10; die;
+					   mysql_query($sql10) or die("ERROR10::".mysql_error());
+					  
+			//}
+		}
+		
+				   
+		
+		$stock_quantity = ($_REQUEST['quantity']+$stock_enter_text);
+		$product_id = Mage::getModel("catalog/product")->getIdBySku( $product_sku ); 
+		
+		$stockItem =Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_id);
+		$stockItem->setData('qty', (integer)$stock_quantity);
+		 $stockItem->setData('', (integer)$stock_quantity);
+		$stockItem->save();
+		
+		if($quantity > 0)
+		{
+			$products_express ='33';
+			$simpleProduct = Mage::getModel('catalog/product')->loadByAttribute('sku',$product_sku);	
+					if($simpleProduct) {
+						$simpleProduct->setExpreesShippingAvailable($products_express);
+						$simpleProduct->save();
+			}
+		}
+	}elseif($stockItem->getQty()>=0){
+		
+	  $countId = count($_REQUEST['id']);
+	
+
+		
+		
+				   
+		if($stock_enter_text==$countId){
+			//echo "11111";exit;
+			
+			foreach($_REQUEST['id'] as $selected) {
+		
+		//print_r($selected);
+			$order_id = explode(":", $selected);
+			
+			$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+			$result=$write->query("SELECT increment_id FROM `sales_flat_order` WHERE `entity_id` =".$order_id[1]);
+			$row = $result->fetch();
+		
+			$sql10="UPDATE `sales_flat_order_item_stitching` SET `allocationstatus_id`='2',`allocation_date`='".date("Y-m-d")."', `download_status_process` = 'N',`allocated_by` = 'Manual'  WHERE `id`='".$selected."'";
+					  //echo $sql10; die;
+					   mysql_query($sql10) or die("ERROR10::".mysql_error());
+					  
+		
+		}
+		
+		
+		
+			
+	
+		}elseif($stock_enter_text > $countId){
+			
+			//echo "2222";exit;
+			foreach($_REQUEST['id'] as $key=>$selected) {
+		
+		
+			$order_id = explode(":", $selected);
+			
+			$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+			$result=$write->query("SELECT increment_id FROM `sales_flat_order` WHERE `entity_id` =".$order_id[1]);
+			$row = $result->fetch();
+		
+			$sql10="UPDATE `sales_flat_order_item_stitching` SET `allocationstatus_id`='2',`allocation_date`='".date("Y-m-d")."', `download_status_process` = 'N',`allocated_by` = 'Manual'  WHERE `id`='".$selected."'";
+					  // echo $sql10; die;
+					   mysql_query($sql10) or die("ERROR10::".mysql_error());
+					  
+		}
+		
+		
+			$qtyVal= $stock_enter_text-$countId;
+		$stock_quantity = ($_REQUEST['quantity']+$qtyVal);
+		$product_id = Mage::getModel("catalog/product")->getIdBySku( $product_sku ); 
+		
+		$stockItem =Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_id);
+		$stockItem->setData('qty', (integer)$stock_quantity);
+		 $stockItem->setData('', (integer)$stock_quantity);
+		$stockItem->save();
+		}elseif($stock_enter_text < $countId){
+			
+			//echo "333";exit;
+			foreach($_REQUEST['id'] as $key=>$selected) {
+		
+		//if($key==$_REQUEST['stock_enter_text']){
+			//echo "test";exit;
+			$order_id = explode(":", $selected);
+			
+			$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+			$result=$write->query("SELECT increment_id FROM `sales_flat_order` WHERE `entity_id` =".$order_id[1]);
+			$row = $result->fetch();
+		
+			$sql10="UPDATE `sales_flat_order_item_stitching` SET `allocationstatus_id`='2',`allocation_date`='".date("Y-m-d")."', `download_status_process` = 'N',`allocated_by` = 'Manual'  WHERE `id`='".$selected."'";
+					  // echo $sql10; die;
+					   mysql_query($sql10) or die("ERROR10::".mysql_error());
+					  
+			//}
+		}
+		
+		
+		
+			$qtyVal= $countId-$stock_enter_text;
+		$stock_quantity = ($_REQUEST['quantity']-$qtyVal);
+		$product_id = Mage::getModel("catalog/product")->getIdBySku( $product_sku ); 
+		
+		$stockItem =Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_id);
+		$stockItem->setData('qty', (integer)$stock_quantity);
+		 $stockItem->setData('', (integer)$stock_quantity);
+		$stockItem->save();
+		
+		
+		
+		
+		}
+		
+		if($quantity > 0)
+		{
+			$products_express ='33';
+			$simpleProduct = Mage::getModel('catalog/product')->loadByAttribute('sku',$product_sku);	
+					if($simpleProduct) {
+						$simpleProduct->setExpreesShippingAvailable($products_express);
+						$simpleProduct->save();
+			}
+		}
+		
+		
+	}
+		
+		
+		//header('Location: http://www.sareez.com/index.php/outorder/adminhtml_outorder/index/key/e2a8a5261d41f2c0a68d63406e045fd8/');
+
+} else {
+	
+	//($_REQUEST['stock_enter_text']=='' && strpos($aid,':')!== true) 
+			//echo "22222222222222222";exit;
+		 $stock_quantity = ($_REQUEST['quantity']+$stock_enter_text);
+		$product_id = Mage::getModel("catalog/product")->getIdBySku( $product_sku ); 
+		
+		$stockItem =Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_id);
+		$stockItem->setData('qty', (integer)$stock_quantity);
+		 $stockItem->setData('', (integer)$stock_quantity);
+		$stockItem->save();
+		
+		if($quantity > 0)
+		{
+			$products_express ='33';
+			$simpleProduct = Mage::getModel('catalog/product')->loadByAttribute('sku',$product_sku);	
+					if($simpleProduct) {
+						$simpleProduct->setExpreesShippingAvailable($products_express);
+						$simpleProduct->save();
+			}
+		}
+		
+	//header('Location: http://www.sareez.com/index.php/outorder/adminhtml_outorder/index/key/e2a8a5261d41f2c0a68d63406e045fd8/');
+}
+
+
+}
+
+?>
+
+<form name="form3" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+<input type="hidden" name="product_sku" id="product_sku" value="<?php echo $_REQUEST['product_sku'];?>" />
+<?php
+$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku_code);
+$stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product); 
+?>
+<input type="hidden" name="quantity" value="<?php echo $stock->getQty(); ?>" />
+<input type="hidden" name="id" value="<?php echo $stock->getId(); ?>" />
+
+<table width="100%" border="1" cellpadding="3" cellspacing="3" style="display:<?php echo $display;?>;">
+  <tr>
+  <td><b>Order Id</b></td>
+   <td><b>Date</b></td>
+        <td><b>SKU Code</b></td>
+        
+        <td><b>Man Model</b></td>
+        <td><b>Name</b></td>
+        <td><b>Price</b></td>
+        
+        <td><b>Payment</b></td>
+        <td><b>Order Status</b></td>
+        <td><b>Options</b></td>
+        <!--<td><b>Color</b></td>-->
+        <td><b>Stock</b></td>
+        <td><b>R/Qty</b></td>
+       
+        <td><b>&nbsp;</b></td>
+  </tr>
+
+<?php
+
+
+if($_REQUEST['product_sku']!=''){
+	 $sku_code=$_REQUEST['product_sku'];
+	//$where1=" WHERE 1 AND `stock_available` <=0";
+	$where1=" WHERE 1 ";
+	$where1.=" AND `sku` = '$sku_code'";
+	}else{
+		$where1=" WHERE 1 ";
+		 $manufacture=$_REQUEST['manufacture'];
+		 $design_no=$_REQUEST['design_no'];
+		$where1.=" AND `manufacturer_design` = '$design_no' AND `manufacturers_id` = '$manufacture'";	
+	}
+
+
+
+
+$sql1="SELECT * FROM `sales_flat_order_item_stitching` $where1";
+$readresult1=$write->query($sql);
+
+$y=1;
+if(count($readresult1)>0){
+while ($rowRes = $readresult1->fetch() ) {
+	
+	$sku_code = $rowRes['sku'];
+$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku_code);
+ $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product); 
+ 
+//if($stock->getQty()<=0 && $rowRes['allocationstatus_id']!=2){
+	if($rowRes['allocationstatus_id']!=2){
+	//echo "chinmay";exit;
+?>
+<tr>
+<td><?php echo $rowRes['increment_order_id'];?></td>
+ <td><?php echo $rowRes['order_date']; ?></td>
+    <td><?php echo $rowRes['sku']; ?></td>
+   
+    <td><?php echo $rowRes['manufacturer_design']; ?></td>
+    <td><?php echo $product->getName(); ?></td>
+    <td><?php echo "$ ".$product->getPrice(); ?></td>
+    
+    <td><?php echo $rowRes['payment_method'];?></td>
+    <td><?php echo $rowRes['order_status'];?></td>
+    <td><?php echo $rowRes['option_value'];?></td>
+    <!--<td><?php //echo $product->getAttributeText('color'); ?></td>-->
+    <td><?php echo $stock->getQty(); 
+	//print_r($stock->getData())	
+	?>
+    </td>
+    <td>1<?php //echo $rowRes['r_quantity']; ?></td>    
+   
+    <td>
+
+    <input type="checkbox" name="id[]" id="id" value="<?php echo $rowRes['id'].":".$rowRes['order_id'];?>" />
+    </td>
+<tr>
+ <?php
+  }
+  $y++;
+} }else {
+?>
+  <tr>
+        <td align="center" colspan="10"><span style="color:red;">No Record(s) Found!!</span></td>
+  </tr>
+
+<?php } ?>
+</table>
+
+
+<table width="100%" border="0" cellspacing="3" cellpadding="3" style="display:<?php echo $display;?>;">
+
+ <div id="stock_enter_text"></div>
+ <div id="demo"></div>
+  <tr>
+    <td width="33%">&nbsp;</td>
+    <td width="2%">&nbsp;</td>
+    <td width="65%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right"><b><?php echo $this->__('Enter Stock Quantity:') ?></b></td>
+    <td>&nbsp;</td>
+    <td><input type="text" name="stock_enter_text" id="stock_enter_text" value=""/></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+        <input type="submit" name="button2" id="button2" value="Submit" onClick='return submitRegestrationForm()'>&nbsp;&nbsp;
+        <input type="hidden" name="tot_cel" value=<?php echo $x; ?> >
+        <!--<input type="submit" name="button2" id="button2" value="Order Process">--></td>
+        <input type="hidden" name="current_url" value="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" >
+        <input type="hidden" name="flag" value="9" />
+  </tr>
+</table>
+
+</form>
+ <!--	<script language="javascript" type="text/javascript">
+  function submitRegestrationForm() {
+	  //alert('chinmay');
+	  var vals = jQuery('input:checkbox[name="id[]"]:checked').map(function () {
+    return this.value;
+}).get();
+//document.getElementById("demo").innerHTML = vals.length;
+//alert(document.getElementById("demo").innerHTML);
+if(vals.length>document.forms["form3"]["stock_enter_text"].value){
+	
+	document.getElementById("demo").innerHTML = "Please Enter Stock Quantity value selected checkbox or more ";
+	return false;	
+} else {
+	document.getElementById("demo").innerHTML = "";
+}
+  
+
+		 var c = document.forms["form3"]["stock_enter_text"].value;	
+	
+if (c == null || c == "") {		
+		document.getElementById("stock_enter_text").innerHTML = "Please Enter Stock Quantity";
+		return false;
+	} 	
+else if(isNaN(c)){
+document.getElementById("stock_enter_text").innerHTML = "Please Enter valid number";
+		return false;
+
+}else{
+document.getElementById("stock_enter_text").innerHTML = "";
+return true;
+}
+		
+		
+  }
+  </script>-->
+		
+<?php 
+	//if($_REQUEST['product_sku']!=''){
+		
+	//$sku_code=trim($_REQUEST['product_sku']);
+	//header("Location:http://www.sareez.com/index.php/outorder/adminhtml_outorder/index/key/e2a8a5261d41f2c0a68d63406e045fd8/?product_sku=&design_no=&manufacture=&manufacture=0&design_no=&product_sku=$sku_code&button=Submit&current_url=http%3A%2F%2Fwww.sareez.com%2Findex.php%2Foutorder%2Fadminhtml_outorder%2Findex%2Fkey%2Fe2a8a5261d41f2c0a68d63406e045fd8%2F&flag=2");
+	
+
+	
+	//}
+?>

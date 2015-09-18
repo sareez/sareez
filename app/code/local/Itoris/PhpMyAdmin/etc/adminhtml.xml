@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<config>
+	<menu>
+		<system>
+			<children>
+				<itoris_extensions>
+					<children>
+						<phpmyadmin translate="title" module="itoris_phpmyadmin">
+							<title>phpMyAdmin</title>
+							<action>itoris_phpmyadmin/admin_index</action>
+							<sort_order>70</sort_order>
+						</phpmyadmin>
+					</children>
+				</itoris_extensions>
+			</children>
+		</system>
+	</menu>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<itoris_extensions>
+								<children>
+									<phpmyadmin translate="title" module="itoris_phpmyadmin">
+										<title>phpMyAdmin</title>
+									</phpmyadmin>
+								</children>
+							</itoris_extensions>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

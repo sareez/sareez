@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Int_Measurementadmin>
+            <version>0.1.0</version>
+        </Int_Measurementadmin>
+    </modules>
+    <admin>
+        <routers>
+			<measurementadmin>
+				<use>admin</use>
+				<args>
+					<module>Int_Measurementadmin</module>
+					<frontName>measurementadmin</frontName>
+				</args>
+			</measurementadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<measurementadmin module="measurementadmin">
+				<title>Measurement</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="measurementadmin">
+						<title>Manage Items</title>
+						<sort_order>0</sort_order>
+						<action>measurementadmin/measurement</action>
+					</items>
+				</children>
+			</measurementadmin>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Int_Measurementadmin>
+							<title>Measurement Module</title>
+							<sort_order>10</sort_order>
+						</Int_Measurementadmin>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<measurementadmin>
+					<file>measurementadmin.xml</file>
+				</measurementadmin>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+    	<models>
+            <measurementadmin>
+                <class>Int_Measurementadmin_Model</class>
+                <resourceModel>measurementstyle_mysql4</resourceModel>
+            </measurementadmin>
+            <measurementstyle_mysql4>
+                <class>Int_Measurementadmin_Model_Mysql4</class>
+                <entities>
+                    <measurementstyle>
+                        <table>measurement_style</table>
+                    </measurementstyle>
+                </entities>
+            </measurementstyle_mysql4>
+        </models>
+		<blocks>
+			<measurementadmin>
+				<class>Int_Measurementadmin_Block</class>
+			</measurementadmin>
+		</blocks>
+		<helpers>
+			<measurementadmin>
+				<class>Int_Measurementadmin_Helper</class>
+			</measurementadmin>
+		</helpers>
+    </global>
+</config>

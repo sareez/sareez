@@ -1,0 +1,421 @@
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/wz_tooltip.js"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/tip_balloon.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl()?>highslide/highslide_area1.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl()?>highslide/highslide.css" />
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/highslide-with-html.js"></script>
+<script>
+hs.graphicsDir = '<?php echo $this->getSkinUrl()?>highslide/graphics/';
+hs.outlineType = 'rounded-white';
+hs.showCredits = false;
+hs.wrapperClassName = 'draggable-header';
+hs.allowWidthReduction=true;
+hs.allowHeightReduction=true;
+</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/highslide-fun.js"></script>
+<style>
+.highslide-maincontent {
+display: none;
+}
+</style> 
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl().'css/popup.css'?>">
+<?php
+echo Mage::app()->getLayout()->getMessagesBlock()->getGroupedHtml();
+$pId 		= $this->getRequest()->getParam('pid');
+$order_id	= $this->getRequest()->getParam('oid');
+
+$mforusermodel = Mage::getModel('measurement/measurementforuser')->getCollection()
+->AddFieldToFilter('products_id' , $pId)
+->AddFieldToFilter('order_id' , $order_id)
+->getData();
+
+if(count($mforusermodel) > 0 )
+    {
+	$readymade_id = $mforusermodel[0]['readymade_id'];
+	$mforreadymademodel = Mage::getModel('measurement/measurementforreadymade')->getCollection()
+	->AddFieldToFilter('readymade_id' , $readymade_id)
+	->getData();
+	
+	$blouse_rdmd_reasymade_size = $mforreadymademodel[0]['blouse_rdmd_reasymade_size'];
+	$blouse_rdmd_sleeves_length = $mforreadymademodel[0]['blouse_rdmd_sleeves_length'];
+    $blouse_rdmd_length = $mforreadymademodel[0]['blouse_rdmd_length'];
+	$petticoat_rdmd_length = $mforreadymademodel[0]['petticoat_rdmd_length'];
+	$instructions = $mforreadymademodel[0]['instructions'];
+		
+    }
+    else
+    {
+	$blouse_rdmd_reasymade_size = '';
+	$blouse_rdmd_sleeves_length = '';
+        $blouse_rdmd_length = '';
+	$petticoat_rdmd_length = '';
+	$instructions = '';
+	
+	
+    }
+
+$product 	= Mage::getModel('catalog/product')->load($pId);
+if($product->getId()){
+
+}
+?>
+<div class="page-title title_blouse"><h1 class="measurement_heading">Select Your Readymade Size</h1></div>
+<table cellspacing="0" cellpadding="0" class="Prod_ListingMain">
+	<tbody>	
+	
+	<tr>
+	<td>
+	<table width="100%" cellspacing="0" cellpadding="0">
+	
+	<tbody><tr>
+	<!--Readymade Section -->
+	<td id="formreadymade">
+	<table width="100%" cellspacing="0" cellpadding="0">
+	<form  action="<?php echo Mage::getUrl('measurement/index/submitreadymadeblouse/'); ?>" method="post" name="readymade_measure" id="readymade_measure">
+	<tbody><tr>
+	<td align="center">
+	
+	<table width="680" border="0" cellspacing="0" cellpadding="0" class="address_book_text">
+	<tbody>
+	
+	
+	<tr>
+	<td align="right" valign="top">&nbsp;</td>
+	<td align="center" valign="top">&nbsp;</td>
+	<td colspan="2" align="left" valign="top">&nbsp;</td>
+	</tr>
+		
+	<tr>
+	<td width="86" valign="middle" align="left" rowspan="4">
+	<span class="scartbdr sc-items">
+	<strong>
+	<a href="<?php echo $this->getUrl().$product->getUrlPath()?>" onmouseover="Tip('&lt;img src=<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(276,415)?> width=276 height=415 border=0 alt=Designer Embroidered Party Lehenga Saree; Lemon Yellow Net Embroidered Party and Festival Lehenga Style Saree title=Designer Embroidered Party Lehenga Saree; Lemon Yellow Net Embroidered Party and Festival Lehenga Style Saree&gt;', BALLOON, true, ABOVE, true, OFFSETX, -17, PADDING, 14)" onmouseout="UnTip()">
+	<img width="74" height="112" border="0" alt="" src="<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(74,112)?>">
+	</a>									
+	</strong>
+	</span>
+	</td>
+	
+	<td width="54" valign="top" height="22" align="left">
+	<p><strong>Code :</strong></p>						
+	</td>
+	<td width="560" valign="top" align="left"><p><?php echo $product->getSku()?></p></td>
+	</tr>
+	
+	<tr>
+	<td valign="top" height="22" align="left"><p><strong>Name :</strong></p></td>
+	<td width="560" valign="top" align="left"><p><?php echo $product->getName()?></p></td>
+	</tr>
+	
+	<tr>
+	<td valign="top" height="22" align="left"><p><strong>Price :</strong></p></td>
+	<td width="560" valign="top" align="left"><p><?php echo Mage::helper('core')->currency($product->getFinalPrice())?></p></td>
+	</tr>
+	
+	<tr>
+	<td valign="top" align="left">&nbsp;</td>
+	<td width="560" valign="top" align="left">&nbsp;</td>
+	</tr>
+	
+    <tr>
+    <td align="right" valign="top">&nbsp;</td>
+    <td align="center" valign="top">&nbsp;</td>
+    <td colspan="2" align="left" valign="top">&nbsp;</td>
+    </tr>                 
+	</tbody></table>
+	
+	
+	
+	<table cellspacing="0" cellpadding="0" class="address_book_heading">
+	    <tbody><tr>
+	    <td width="544" class="address_book_heading"><strong>You can submit this measurement form later.</strong></td>
+	    <td width="179" class="accOdrStat">&nbsp;</td>
+	    </tr>
+	    </tbody>
+	 </table>
+	
+	
+	<table cellspacing="0" cellpadding="0" class="address_book_text">
+	
+	<tbody>
+	<tr>
+    <td align="right" valign="top">&nbsp;</td>
+    <td align="center" valign="top">&nbsp;</td>
+    <td colspan="2" align="left" valign="top">&nbsp;</td>
+    </tr>
+	<tr>
+	<td width="582">You can submit this measurment form later from your "My Account" section.</td>
+        <td width="116" valign="top" height="26" align="right"><a href="<?php echo $this->getUrl()?>"><input type="button" name="submit_later_btn" class="button_mes" value="Submit Later"></a> </td>
+	</tr>
+	<tr>
+    <td align="right" valign="top">&nbsp;</td>
+    <td align="center" valign="top">&nbsp;</td>
+    <td colspan="2" align="left" valign="top">&nbsp;</td>
+    </tr>
+	</tbody></table>
+	
+	
+	<table cellspacing="0" cellpadding="0" class="address_book_heading">
+	<tbody><tr>
+	<td width="544" class="address_book_heading"><strong>Instructions</strong></td>
+	<td width="179" class="accOdrStat">&nbsp;</td>
+	</tr>
+	</tbody></table>
+	
+	
+	
+	
+	<table width="706" border="0" cellspacing="0" cellpadding="0" class="address_book_text">
+	<!--Form Element Section Start Here For Ready Made Sizes-->
+	
+	<tbody>
+	<tr>
+    <td align="right" valign="top">&nbsp;</td>
+    <td align="center" valign="top">&nbsp;</td>
+    <td colspan="2" align="left" valign="top">&nbsp;</td>
+    </tr>
+        <tr>
+	<td valign="middle" align="center">
+         <ul class="add_link_ul">
+             <li>Your specification of sizes and styles are subject to the kind of fabric and limitations. Our expert designers' team might not find all your selections practically suitable. In such cases you might be intimated to select some other style compatible with the fabric. </li>
+             <li>In cases where certain extreme values have been put in the measurement form, we usually try to round them off. But we can attempt exact measurements on special requests.</li>
+             <li>In case of any major issue regarding cost or any extra charge estimated by our team of designers, you would be contacted for your choice or opinion.</li>
+             <li>In case of any discrepancy or confusion regarding the measurement values we will get back to you for clarification. If we are unable to contact you within 7 days or there is no response from your end, then we would have to depend on the experience and judgement of our experts' team. We would not be liable to re-tailor the dress on further requests made by you.</li>
+             <li>We also accept specimen clothes that fit you the best. The best-fit specimen can be sent to us so that we could work with confidence and perfection. The said specimen shall be returned to you along with the new garment.</li>
+             <li>For any queries or assistance mail us at <a class="email" href="mailto:measurement@sareez.com">measurement@sareez.com</a>.</li>
+             
+         </ul>
+        </td>
+        </tr>
+	<tr>
+	
+	<td valign="middle" height="30" align="left"><strong>USEFUL CONVERSIONS:</strong></td>
+	</tr>
+	<tr>
+	
+	<td valign="top" height="16" align="left"><span style="text-align:justify;padding-right:10px;" class="carttext">1 inch = 2.54 cm. </span></td>
+	</tr>
+	<tr>
+	
+	<td valign="top" height="16" align="left"><span style="text-align:justify;padding-right:10px;" class="carttext">10 cm = 3.9 inches    or    100 cm = 1 metre = 39 inches</span></td>
+	</tr>														
+	 <tr>
+     <td align="right" valign="top">&nbsp;</td>
+     <td align="center" valign="top">&nbsp;</td>
+     <td colspan="2" align="left" valign="top">&nbsp;</td>
+     </tr>	
+	<tr>
+	<td valign="top" align="left" >
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">		
+	<tbody>
+	
+	<tr>
+	<td colspan="4">
+	<table width="100%" cellspacing="0" cellpadding="0">
+	<tbody><tr>
+	<td width="318" valign="middle" align="left" class="form_area_heading"><strong>Select Readymade Size For Blouse-Petticoat</strong></td>
+	<td valign="middle" align="right" class="form_area_heading1" colspan="4">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+	</tr>																
+	</tbody></table>
+	</td>
+	</tr>	
+	
+																	
+	
+	
+	<input type="hidden" value="<?php echo $this->getRequest()->getParam('pid') ?>" name="products_id">
+	<input type="hidden" value="<?php echo $readymade_id; ?>" name="readymade_id" id="readymade_id">
+	<input type="hidden" value="Blouse-Petticoat" name="reopt" id="reopt">
+	<input type="hidden" value="<?php ?>" name="page" id="page">
+	<input type="hidden" value="<?php echo $this->getRequest()->getParam('oid') ?>" name="order_id" id="order_id">
+	<input type="hidden" value="Blouse-Petticoat" name="readymade_type" id="readymade_type">
+	
+	 <tr>
+ <td align="right" valign="top">&nbsp;</td>
+ <td align="center" valign="top">&nbsp;</td>
+ <td colspan="2" align="left" valign="top">&nbsp;</td>
+ </tr>	
+		    
+	<tr>
+	<td valign="top" height="22" align="right"><strong>Ready Made Blouse (Top)</strong></td>
+	<td valign="top" align="center" width="2%">&nbsp;</td>
+	<td valign="top" align="left" class="form_small_ass" colspan="2">&nbsp;</td>
+	<td valign="top" align="center" rowspan="22"></td>
+	</tr>
+	
+	
+	
+	
+	
+	<tr>
+	<td valign="top" align="right">Blouse ReadyMade Size <span class="redText">*</span></td>
+	<td valign="top" align="center">:</td>
+	<td valign="top" align="left" class="form_small_ass" colspan="2">
+	<select id="blouse_rdmd_reasymade_size" name="blouse_rdmd_reasymade_size" class="select_box">
+	<option selected="selected" value="">Select</option>
+	<?php  for($i=30;$i<=44;$i=$i+(1/2)){ ?>
+	<option value="<?php echo $i ?>" <?php if($i == $blouse_rdmd_reasymade_size){ ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+	<?php } ?>																   
+	</select>&nbsp;in Inches &nbsp;	
+	
+	<img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Sleeve Length' })" title="" alt="" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/images/help_icon.jpg" id="BRS">
+	<div class="highslide-maincontent"><div class="area1"><div class="area1"> 
+	<table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+	<tbody><tr>
+	<td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/images/utsav/Sleeve-Length.jpg"></td>
+	<td width="220" valign="top" align="left" class="popup1_left">
+	<p class="heading_text"><strong>How to measure "Readymade Size" ?</strong></p>
+	<p class="text">Demo Text.</p></td>
+	</tr>
+	</tbody></table>							  
+	</div></div>																	
+		      
+	</div></td>
+	</tr>
+	
+	
+																
+	
+	<tr>
+	<td valign="top" align="right">Sleeve Lengths<span class="redText">*</span></td>
+	
+	<td valign="top" align="center">:</td>
+	<td valign="top" align="left" class="form_small_ass" colspan="2">
+	<select id="blouse_rdmd_sleeves_length" name="blouse_rdmd_sleeves_length" class="select_box">
+	<option selected="selected" value="">Select</option>
+	<option value="Sleeveless">Sleeveless</option>
+	<?php  for($i=3;$i<=23;$i=$i+(1/2)){ ?>
+	<option value="<?php echo $i ?>"  <?php if($i == $blouse_rdmd_sleeves_length){ ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+	<?php } ?>
+	</select>&nbsp;in Inches &nbsp;	
+	
+	<img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Sleeve Length' })" title="" alt="" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/images/help_icon.jpg" id="SL">
+	<div class="highslide-maincontent"><div class="area1"><div class="area1"> 
+	<table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+	<tbody><tr>
+	<td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/images/utsav/Sleeve-Length.jpg"></td>
+	<td width="220" valign="top" align="left" class="popup1_left">
+	<p class="heading_text"><strong>How to measure "Sleeve Length" ?</strong></p>
+	<p class="text">Starting from the outside edge of shoulder bone upto the desired length.</p></td>
+	</tr>
+	</tbody></table>							  
+	</div></div>															  
+	
+	</div></td>
+	</tr>
+	<tr>
+	<td valign="top" align="right"> Blouse Length <span class="redText">*</span></td>
+	<td valign="top" align="center">:</td>
+	<td valign="top" align="left" class="form_small_ass" colspan="2">
+	<select style="width: 70px;" id="blouse_rdmd_length" name="blouse_rdmd_length" class="select_box">
+	<option selected="selected" value="">Select</option>
+	<?php  for($i=10;$i<=17;$i=$i+(1/2)){ ?>
+	<option value="<?php echo $i ?>"  <?php if($i == $blouse_rdmd_length){ ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+	<?php } ?>
+	</select>&nbsp;in Inches &nbsp;	
+	<img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Blouse Length' })" title="" alt="" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/images/help_icon.jpg" id="BL">
+	<div class="highslide-maincontent"><div class="area1"> 
+	<table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+	<tbody><tr>
+	<td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/images/blouse_length.jpg"></td>
+	<td width="220" valign="top" align="left" class="popup1_left">
+	<p class="heading_text"><strong>How to measure "Blouse Length" ?</strong></p>
+	<p class="text"> Place the tip of the tape on any side of your neck and bring it down the back to a desired length just below the bust.</p></td>
+	</tr>
+	</tbody></table>	
+	</div>
+	</div>																  
+	</td>
+	</tr>
+	<tr>
+	<td valign="top" height="22" align="right"><strong>Petticoat (Bottom Skirt)</strong></td>
+	<td valign="top" align="center">&nbsp;</td>
+	<td valign="top" align="left" class="form_small_ass" colspan="2">&nbsp;</td>
+	</tr>
+	
+	
+	<tr>
+	<td valign="top" align="right">Petticoat Waist <span class="redText">*</span></td>
+	<td valign="top" align="center">:</td>
+	<td valign="top" align="left" class="form_small_ass" colspan="2">
+	<select style="width: 70px;" id="petticoat_rdmd_length" name="petticoat_rdmd_length" class="select_box">
+	<option selected="selected" value="">Select</option>
+	<option value="Standard">Standard</option>																
+	<?php  for($i=39;$i<=50;$i=$i+(1/2)){ ?>
+	<option value="<?php echo $i ?>" <?php if($i == $petticoat_rdmd_length){ ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+	<?php } ?>
+	</select>&nbsp;in Inches &nbsp;
+	
+	<img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Petticoat Length' })" title="" alt="" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/images/help_icon.jpg" id="PL">
+	<div class="highslide-maincontent"><div class="area1"> 
+	<table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+	<tbody><tr>
+	<td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/images/petticoat_length.jpg"></td>
+	<td width="220" valign="top" align="left" class="popup1_left">
+	<p class="heading_text"><strong>How to measure "Petticoat Length" ?</strong></p>
+	<p class="text"> Place the tip of the tape on any side of your waist or hipbone, depending on where you wear you lehnga or saree. Then let it fall down straight. Hold it slightly above your ankles.</p></td>
+	</tr>
+	</tbody></table>	
+	</div></div>															  
+	
+	</td>
+	</tr>
+	
+	
+	
+	<tr>
+	<td valign="top" align="right">Instruction (if any)<br>Maximum 500 characters<span class="redText">&nbsp;</span></td>
+	<td valign="top" align="center">:</td>
+	<td valign="top" align="left" class="form_small_ass" colspan="2">
+	<textarea onclick="textCounter(document.readymade_measure.instructions,document.readymade_measure.remLen,500)"
+	onkeydown="textCounter(document.readymade_measure.instructions,document.readymade_measure.remLen,500)"
+	onfocus="textCounter(document.readymade_measure.instructions,document.readymade_measure.remLen,500)" rows="3" cols="45" class="carttext" name="instructions" id="instructions">
+	    <?php echo $instructions; ?>
+	</textarea>
+	<br>
+	<span class="carttext">You have
+	<input type="text" style="border-width:0;text-align:center;width:40px" value="500" class="input_area" name="remLen" readonly="">
+	characters left.</span>							  
+	
+	<div class="highslide-maincontent"> 
+	<p>
+	<img src="<?php echo $this->getSkinUrl()?>highslide/images/sleeve_length.jpg">
+	</p>
+	<p>
+	Starting from the outside edge of shoulder bone and measure upto the desired length.
+	</p>
+	</div>
+	
+	</td>
+	</tr>
+	<tr>
+	<td valign="top" align="right"></td>
+	<td valign="top" align="center"></td>
+	<td valign="top" align="left" class="form_small_ass" colspan="2">
+        <input type="submit" name="readymadeSubmit" value="Submit" class="button_mes"/>&nbsp;&nbsp;<input class="button_mes" type="reset" name="reset" value="Reset">
+        </td></tr>
+        </tbody></table>
+	</td>
+	</tr>
+	<!--Form Element Section Ends Here For Ready Made Sizes-->										
+	
+	</tbody></table>
+	
+														
+	
+	</td>
+	</tr>		
+	
+	</tbody>
+	</form>
+	
+	</table>
+	</td>
+	<!--Readymade Section End-->
+	
+	</tr>	
+	</tbody></table>
+	</td>
+	</tr>
+
+	</tbody>
+</table>

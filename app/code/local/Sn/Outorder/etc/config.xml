@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sn_Outorder>
+            <version>0.1.0</version>
+        </Sn_Outorder>
+    </modules>
+    <frontend>
+        <routers>
+            <outorder>
+                <use>standard</use>
+                <args>
+                    <module>Sn_Outorder</module>
+                    <frontName>outorder</frontName>
+                </args>
+            </outorder>
+        </routers>
+        <layout>
+            <updates>
+                <outorder>
+                    <file>outorder.xml</file>
+                </outorder>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<outorder>
+				<use>admin</use>
+				<args>
+					<module>Sn_Outorder</module>
+					<frontName>outorder</frontName>
+				</args>
+			</outorder>
+        </routers>
+    </admin>
+    <adminhtml>
+	<!--	<menu>
+			<outorder module="outorder">
+				<title>Stock Manager</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="outorder">
+						<title>Manage Stock</title>
+						<sort_order>0</sort_order>
+						<action>outorder/adminhtml_outorder</action>
+					</items>
+				</children>
+			</outorder>
+		</menu>-->
+		
+		<menu>
+			<outorder module="outorder">
+				<title>Stock Manager</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="outorder">
+						<title>Allocation Management</title>
+						<sort_order>0</sort_order>
+						<action>outorder/adminhtml_outorder</action>
+					</items>
+					<sub_menu2 translate="title">
+						<title>De-Allocation Management</title>
+						<sort_order>10</sort_order>
+						<action>deallocation/adminhtml_deallocation</action>
+					</sub_menu2>
+					<!--<sub_menu1 translate="title" >
+						<title>Allocation Management</title>
+						<sort_order>0</sort_order>
+						<action>outorder/adminhtml_outorder</action>
+					</sub_menu1>
+					<sub_menu2 translate="title">
+						<title>De-Allocation Management</title>
+						<sort_order>10</sort_order>
+						<action>deallocation/adminhtml_deallocation</action>
+					</sub_menu2>-->
+				</children>
+			</outorder>
+		</menu>
+		
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<outorder>
+							<title>Outorder Module</title>
+							<sort_order>2009</sort_order>
+								<children>
+									<items module="outorder">
+										<title>Manage Stock</title>
+										<sort_order>0</sort_order>
+									</items>
+								</children>
+						</outorder>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<outorder>
+					<file>outorder.xml</file>
+				</outorder>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <outorder>
+                <class>Sn_Outorder_Model</class>
+                <resourceModel>outorder_mysql4</resourceModel>
+            </outorder>
+            <outorder_mysql4>
+                <class>Sn_Outorder_Model_Mysql4</class>
+                <entities>
+                    <outorder>
+                        <table>outorder</table>
+                    </outorder>
+                </entities>
+            </outorder_mysql4>
+        </models>
+        <resources>
+            <outorder_setup>
+                <setup>
+                    <module>Sn_Outorder</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </outorder_setup>
+            <outorder_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </outorder_write>
+            <outorder_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </outorder_read>
+        </resources>
+        <blocks>
+            <outorder>
+                <class>Sn_Outorder_Block</class>
+            </outorder>
+        </blocks>
+        <helpers>
+            <outorder>
+                <class>Sn_Outorder_Helper</class>
+            </outorder>
+        </helpers>
+    </global>
+</config>

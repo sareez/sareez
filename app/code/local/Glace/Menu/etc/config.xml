@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Glace_Menu>
+            <version>1.0.5</version>
+        </Glace_Menu>
+    </modules>
+    <global>
+        <models>
+            <menu>
+                <class>Glace_Menu_Model</class>
+                <resourceModel>glace_resource</resourceModel>
+            </menu>
+            <glace_resource>
+                <class>Glace_Menu_Model_Resource</class>
+                <entities>
+                    <menu>
+                        <table>glace_menu</table>
+                    </menu>
+                    <menu_store>
+                        <table>glace_menu_store</table>
+                    </menu_store>
+                    <item>
+                        <table>glace_menu_item</table>
+                    </item>
+                    <item_store>
+                        <table>glace_menu_item_store</table>
+                    </item_store>
+                </entities>
+            </glace_resource>
+        </models>
+        <blocks>
+            <menu>
+                <class>Glace_Menu_Block</class>
+            </menu>
+        </blocks>
+        <helpers>
+            <menu>
+                <class>Glace_Menu_Helper</class>
+            </menu>
+        </helpers>
+        <resources>
+            <menu_setup>
+                <setup>
+                    <module>Glace_Menu</module>
+                </setup>
+            </menu_setup>
+        </resources>
+    </global>
+    <adminhtml>
+    	<menu>
+            <cms_ideas>
+        	<title>CMS IDEAS</title>
+			<sort_order>100</sort_order>
+            	<children>
+                    <menu module="menu">
+                        <title>Manage Menu</title>
+                        <sort_order>30</sort_order>
+                        <action>menu/adminhtml_menu/index</action>
+                    </menu>
+                    <settings module="menu">
+                         <title>Settings</title>
+                         <sort_order>60</sort_order>
+                     	 <action>adminhtml/system_config/edit/section/menu</action>
+                     </settings>
+                </children>
+            </cms_ideas>
+        </menu>
+        <acl>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <menu translate="title" >
+                                            <title>Easy Create Menu By CMSIDEAS</title>
+                                            <sort_order>50</sort_order>
+                                        </menu>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                        <cms_ideas>
+				        	<title>CMS IDEAS</title>
+							<sort_order>100</sort_order>
+				            	<children>
+	                                <menu translate="title" module="menu">
+	                                    <title>Manage Menu</title>
+	                                    <sort_order>30</sort_order>
+	                                </menu>
+	                                <settings module="menu">
+				                         <title>Settings</title>
+				                         <sort_order>60</sort_order>
+				                     </settings>
+	                            </children>
+                        </cms_ideas>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <menu>
+                    <file>glace/menu.xml</file>
+                </menu>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Glace_Menu>
+                    <files>
+                        <default>Glace_Menu.csv</default>
+                    </files>
+                </Glace_Menu>
+            </modules>
+        </translate>
+    </adminhtml>
+    <admin>
+        <routers>
+            <menu>
+                <use>admin</use>
+                <args>
+                    <module>Glace_Menu</module>
+                    <frontName>menu</frontName>
+                </args>
+            </menu>
+        </routers>
+    </admin>
+    <frontend>
+        <translate>
+            <modules>
+                <Glace_Menu>
+                    <files>
+                        <default>Glace_Menu.csv</default>
+                    </files>
+                </Glace_Menu>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <menu>
+                    <file>glace/menu.xml</file>
+                </menu>
+            </updates>
+        </layout>
+    </frontend>
+    
+    <default>
+        <menu>
+			<tabs>
+				<thresholdmobile>767</thresholdmobile>
+			</tabs>
+        </menu>
+    </default>
+</config>

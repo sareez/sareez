@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+* 
+* Do not edit or add to this file if you wish to upgrade the module to newer
+* versions in the future. If you wish to customize the module for your 
+* needs please contact us to https://www.milople.com/magento-extensions/contact-us.html 
+* 
+* @category    Ecommerce
+* @package     Indies_Whatsappshare
+* @copyright   Copyright (c) 2015 Milople Technologies Pvt. Ltd. All Rights Reserved.
+* @url	       https://www.milople.com/magento-extensions/whatsapp-share.html
+*
+* Milople was known as Indies Services earlier.
+*
+*/
+-->
+<config>
+	<tabs>
+       	<indies_services translate="label">
+      		<label>Indies Services</label>
+       		<sort_order>250</sort_order>
+       	</indies_services>
+	</tabs>
+	<sections>
+       	<whatsappshare translate="label" module="whatsappshare">
+       		<label>WhatsApp Share</label>
+       		<tab>indies_services</tab>
+			<frontend_type>text</frontend_type>
+       		<sort_order>10</sort_order>
+       		<show_in_default>1</show_in_default>
+       		<show_in_website>1</show_in_website>
+       		<show_in_store>1</show_in_store>
+			<groups>
+				<license_status_group translate="label">
+					<label>License and Status</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<serial_key translate="label">
+							<label>Serial Key</label>
+							<backend_model>whatsappshare/observer</backend_model> 
+							<frontend_type>text</frontend_type>
+							<validate>required-entry</validate>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</serial_key>
+						<status translate="label">
+							<label>Status</label>
+							<frontend_type>select</frontend_type>
+							<source_model>whatsappshare/adminhtml_system_config_source_status</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</status>
+					</fields>
+				</license_status_group>
+				<whatsappshare_options>
+				<label>WhatsApp Options</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+				<fields>
+				<size translate="label">
+							<label>Size of Button</label>
+							<frontend_type>select</frontend_type>
+							<source_model>whatsappshare/adminhtml_system_config_source_size</source_model>
+							<!--<source_model>whatsappshare/adminhtml_system_config_source_size</source_model>-->
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+				</size>
+				
+				<message translate="label">
+				<label>Message</label>
+				<frontend_type>text</frontend_type>
+					<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+				</message>
+				</fields>
+				</whatsappshare_options>
+			</groups>
+		</whatsappshare>
+	</sections>
+</config>

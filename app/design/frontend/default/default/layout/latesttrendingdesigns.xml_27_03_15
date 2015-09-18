@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <latesttrendingdesigns_index_index>
+        <reference name="content">
+            <block type="latesttrendingdesigns/latesttrendingdesigns" name="latesttrendingdesigns" template="latesttrendingdesigns/latesttrendingdesigns.phtml" />
+        </reference>
+    </latesttrendingdesigns_index_index>
+</layout> 

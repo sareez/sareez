@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <dailydeals_adminhtml_dailydeals_index>
+        <reference name="content">
+            <block type="dailydeals/adminhtml_dailydeals" name="dailydeals" />
+        </reference>
+    </dailydeals_adminhtml_dailydeals_index>
+    
+   <dailydeals_adminhtml_dailydeals_edit>
+   <reference name="head">
+    <action method="addJs"><script>jquery-1.7.2.min.js</script></action>
+    <action method="addJs" ><script>noconflict.js</script></action>
+       </reference>
+   </dailydeals_adminhtml_dailydeals_edit>
+    
+    
+</layout>

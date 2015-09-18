@@ -1,0 +1,18 @@
+<?php
+$_item = $this->getItem();
+?>
+<?php if ($this->getChildrenHtml()): ?>
+    <?php if ($_item->getChildrenByType('column')->count() == 0): ?>
+    <li style="<?php echo $_item->getTypeInstance()->getStyle() ?>">
+        <ul>
+            <?php echo $this->getChildrenHtml() ?>
+        </ul>
+    </li>
+    <?php else: ?>
+    <li class="columns columns-<?php echo $_item->getChildrenByType('column')->count() ?>" style="<?php echo $_item->getTypeInstance()->getStyle() ?>">
+        <ul>
+            <?php echo $this->getChildrenHtml() ?>
+        </ul>
+    </li>
+    <?php endif ?>
+<?php endif ?>

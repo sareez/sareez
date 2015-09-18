@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Emjainteractive_Advancedoptions>
+            <version>0.1.0</version>
+        </Emjainteractive_Advancedoptions>
+    </modules>
+    <global>
+        <blocks>
+            <emjainteractive_advancedoptions>
+                <class>Emjainteractive_Advancedoptions_Block</class>
+            </emjainteractive_advancedoptions>
+            <checkout>
+                <rewrite>
+                    <cart_item_renderer>Emjainteractive_Advancedoptions_Block_Checkout_Cart_Item_Renderer</cart_item_renderer>
+                    <cart_item_renderer_configurable>Emjainteractive_Advancedoptions_Block_Checkout_Cart_Item_Renderer_Configurable</cart_item_renderer_configurable>
+                </rewrite>
+            </checkout>
+        </blocks>
+        <helpers>
+            <emjainteractive_advancedoptions>
+                <class>Emjainteractive_Advancedoptions_Helper</class>
+            </emjainteractive_advancedoptions>
+        </helpers>
+        <models>
+            <emjainteractive_advancedoptions>
+                <class>Emjainteractive_Advancedoptions_Model</class>
+            </emjainteractive_advancedoptions>
+        </models>
+        <events>
+            <checkout_cart_update_items_before>
+                <observers>
+                    <emjainteractive_advancedoptions>
+                        <class>emjainteractive_advancedoptions/checkout_cart_observer</class>
+                        <method>updateCartOptions</method>
+                    </emjainteractive_advancedoptions>
+                </observers>
+            </checkout_cart_update_items_before>
+        </events>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <emjainteractive_advancedoptions>
+                    <file>emjainteractive/advancedoptions.xml</file>
+                </emjainteractive_advancedoptions>
+            </updates>
+        </layout>
+    </frontend>
+    <default>
+        <advancedoptions>
+            <checkout_cart>
+                <add_button_label>Add Options</add_button_label>
+                <edit_button_label>Edit Options</edit_button_label>
+                <remove_button_label>Remove Options</remove_button_label>
+                <removed_message>Custom options removed. Press Update Shopping Cart button to apply changes.</removed_message>
+                <edited_message>Press Update Shopping Cart button to apply changes.</edited_message>
+            </checkout_cart>
+        </advancedoptions>
+    </default>
+</config>

@@ -1,0 +1,2537 @@
+<SCRIPT LANGUAGE="JavaScript">
+function getSelectedSleeveStyle() {
+	var ret = -1;
+	var pR = document.getElementsByName('rdo_sleeve_style');
+	for(var i=0; i<pR.length; i++) {
+	if(document.getElementsByName('rdo_sleeve_style')[i].checked == true) {
+	ret = i;
+	break;
+	}
+	}
+	return ret;
+}
+function getSelectedFrontNeckStyle() {
+	var ret = -1;
+	var pR = document.getElementsByName('rdo_front_neck_style');
+	for(var i=0; i<pR.length; i++) {
+	if(document.getElementsByName('rdo_front_neck_style')[i].checked == true) {
+	ret = i;
+	break;
+	}
+	}
+	return ret;
+}
+function getSelectedBackNeckStyle() {
+	var ret = -1;
+	var pR = document.getElementsByName('rdo_back_neck_style');
+	for(var i=0; i<pR.length; i++) {
+	if(document.getElementsByName('rdo_back_neck_style')[i].checked == true) {
+	ret = i;
+	break;
+	}
+	}
+	return ret;
+}
+function getSelectedLehngaStyle() {
+	var ret = -1;
+	var pR = document.getElementsByName('rdo_lehnga_style');
+	for(var i=0; i<pR.length; i++) {
+	if(document.getElementsByName('rdo_lehnga_style')[i].checked == true) {
+	ret = i;
+	break;
+	}
+	}
+	return ret;
+}
+function getSelectedKameezStyle() {
+	var ret = -1;
+	var pR = document.getElementsByName('rdo_kameez_style');
+	for(var i=0; i<pR.length; i++) {
+	if(document.getElementsByName('rdo_kameez_style')[i].checked == true) {
+	ret = i;
+	break;
+	}
+	}
+	return ret;
+}
+function getSelectedSalwarStyle() {
+	var ret = -1;
+	var pR = document.getElementsByName('rdo_salwar_style');
+	for(var i=0; i<pR.length; i++) {
+	if(document.getElementsByName('rdo_salwar_style')[i].checked == true) {
+	ret = i;
+	break;
+	}
+	}
+	return ret;
+}
+
+function getSelectedChuridarStyle() {
+	var ret = -1;
+	var pR = document.getElementsByName('rdo_churidar_style');
+	for(var i=0; i<pR.length; i++) {
+	if(document.getElementsByName('rdo_churidar_style')[i].checked == true) {
+	ret = i;
+	break;
+	}
+	}
+	return ret;
+}
+
+
+
+function getSelectedTrouserStyle() {
+	var ret = -1;
+	var pR = document.getElementsByName('rdo_trouser_style');
+	for(var i=0; i<pR.length; i++) {
+	if(document.getElementsByName('rdo_trouser_style')[i].checked == true) {
+	ret = i;
+	break;
+	}
+	}
+	return ret;
+}
+
+function getSelectedMeasurementId(){
+	var ret = -1;
+	var pR = document.getElementsByName('rdo_measurement_id');
+	for(var i=0; i<pR.length; i++) {
+	if(document.getElementsByName('rdo_measurement_id')[i].checked == true) {
+	ret = i;
+	break;
+	}
+	}
+	return ret;
+}
+
+function set_sleeve_style() {
+    var i = getSelectedSleeveStyle();
+	document.getElementById('sleeve_style').value=document.getElementsByName('rdo_sleeve_style')[i].value;
+    //alert("You chose " + document.getElementsByName('songs')[i].value + ".");
+}
+function set_front_neck_style() {
+    var i = getSelectedFrontNeckStyle();
+	document.getElementById('front_neck_style').value=document.getElementsByName('rdo_front_neck_style')[i].value;
+    //alert("You chose " + document.getElementsByName('songs')[i].value + ".");
+}
+function set_back_neck_style() {
+    var i = getSelectedBackNeckStyle();
+	document.getElementById('back_neck_style').value=document.getElementsByName('rdo_back_neck_style')[i].value;
+    //alert("You chose " + document.getElementsByName('songs')[i].value + ".");
+}
+function set_lehnga_style() {
+    var i = getSelectedLehngaStyle();
+	document.getElementById('lehnga_style').value=document.getElementsByName('rdo_lehnga_style')[i].value;
+    //alert("You chose " + document.getElementsByName('songs')[i].value + ".");
+}
+function set_kameez_style() {
+    var i = getSelectedKameezStyle();
+	document.getElementById('kameez_style').value=document.getElementsByName('rdo_kameez_style')[i].value;
+    //alert("You chose " + document.getElementsByName('songs')[i].value + ".");
+}
+function set_salwar_style() {
+    var i = getSelectedSalwarStyle();
+	document.getElementById('salwar_style').value=document.getElementsByName('rdo_salwar_style')[i].value;
+    //alert("You chose " + document.getElementsByName('songs')[i].value + ".");
+}
+
+function set_churidar_style() {
+    var i = getSelectedChuridarStyle();
+	document.getElementById('churidar_style').value=document.getElementsByName('rdo_churidar_style')[i].value;
+    //alert("You chose " + document.getElementsByName('songs')[i].value + ".");
+}
+
+function set_trouser_style() {
+    var i = getSelectedTrouserStyle();
+	document.getElementById('trouser_style').value=document.getElementsByName('rdo_trouser_style')[i].value;
+    //alert("You chose " + document.getElementsByName('songs')[i].value + ".");
+}
+
+function set_measurement_id(str) {
+    var i = getSelectedMeasurementId();
+	document.location.href=str+document.getElementsByName('rdo_measurement_id')[i].value;
+    //alert("You chose " + document.getElementsByName('songs')[i].value + ".");
+}
+
+</SCRIPT>
+
+<h4>
+<?php echo $this->__('Add Measurement') ?>
+</h4>
+<?php 
+
+
+	$type = $_REQUEST['type'];	
+	if($type == '1')
+    {
+		$show_measure='Blouse-Petticoat';
+		$style_for = 'Blouse';
+    }
+	elseif($option_arr[0]=='2')
+    {
+		$show_measure='Blouse';
+		$style_for = 'Blouse';
+    }
+	elseif($option_arr[0]=='3')
+    {
+		$show_measure='Petticoat';
+		$style_for = 'Blouse';
+	}	
+	elseif($option_arr[0]=='4')
+    {
+		$show_measure='Salwar';
+		$style_for = 'Kameez';
+	}	
+	elseif($option_arr[0]=='5')
+    {
+		$show_measure='Lehnga-Choli';
+		$style_for = 'Choli';
+	}	
+	elseif($option_arr[0]=='6')
+    {
+		$show_measure='Sherwani';
+		$style_for = 'Trouser';
+	}
+
+?>
+<table class="bodyArea" cellpadding="0" cellspacing="0" >
+  <tr>	  	
+		<td width="100%" valign="top">
+		
+		<form action="<?php echo $this->getFormAction(); ?>" id="measure" method="post" onsubmit="return validate(document.measure);">
+		<table class="ProdListingMain" cellpadding="0" cellspacing="0" >
+       
+			<tr>
+				<td align="center">
+					<table cellpadding="0" cellspacing="0" class="address_book_heading">
+						<tr>
+							<td width="544" class="address_book_heading"><strong>Custom-make to your size</strong></td>
+							<td width="179" class="accOdrStat">&nbsp;</td>
+						</tr>
+					</table>
+					
+					<table cellpadding="0" cellspacing="0" class="address_book_heading">
+                      <tr>
+                        <td width="544" class="address_book_heading"><strong>Instructions</strong></td>
+                        <td width="179" class="accOdrStat">&nbsp;</td>
+                      </tr>
+                    </table>
+					<table width="680" border="0" cellspacing="0" cellpadding="0" class="address_book_text">
+                      <INPUT type="hidden" name="products_id" value="<?= $_REQUEST['products_id']  ?>">
+                      <INPUT type="hidden" id="measurement_id" name="measurement_id" value="<?= $_REQUEST['measurement_id']?>">
+                      <INPUT type="hidden" id="meopt" name="meopt" value="<?= $show_measure ?>">
+					  <INPUT type="hidden" id="page" name="page" value="<?= (isset($_REQUEST['page']))?$_REQUEST['page']:'' ?>">
+					  <INPUT type="hidden" id="order_id" name="order_id" value="<?= (isset($_REQUEST['order_id']))?$_REQUEST['order_id']:'' ?>">
+
+                      <tr>
+                        <td width="26" align="center" valign="middle"><img src="" width="5" height="5" /></td>
+                        <td height="40" align="left" valign="middle">Your specification of sizes and styles are subject to the kind of fabric and limitations. Our expert designers' team might not find all your selections practically suitable. In such cases you might be intimated to select some other style compatible with the fabric.                                                     </td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="middle"><img src="" width="5" height="5" /></td>
+                        <td height="40" align="left" valign="middle"><span class="carttext" style="text-align:justify;padding-right:10px;">In cases where certain extreme values have been put in the measurement form, we usually try to round them off. But we can attempt exact measurements on special requests.</span></td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="middle"><img src="" width="5" height="5" /></td>
+                        <td height="40" align="left" valign="middle"><span class="carttext" style="text-align:justify;padding-right:10px;">In case of any major issue regarding cost or any extra charge estimated by our team of designers, you would be contacted for your choice or opinion.</span></td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="middle"><img src="" width="5" height="5" /></td>
+                        <td height="40" align="left" valign="top"><span class="carttext" style="text-align:justify;padding-right:10px;">In case of any discrepancy or confusion regarding the measurement values we will get back to you for clarification. If we are unable to contact you within 7 days or there is no response from your end, then we would have to depend on the experience and judgement of our experts' team. We would not be liable to re-tailor the dress on further requests made by you.</span></td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="middle"><img src="" width="5" height="5" /></td>
+                        <td height="40" align="left" valign="middle"><span class="carttext" style="text-align:justify;padding-right:10px;">We also accept specimen clothes that fit you the best. The best-fit specimen can be sent to us so that we could work with confidence and perfection. The said specimen shall be returned to you along with the new garment.</span></td>
+                      </tr>
+                    
+                      <tr>
+                        <td align="center" valign="middle"><img src="" width="5" height="5" /></td>
+                        <td height="30" align="left" valign="middle">For any queries or assistance mail us at <a href="mailto:measurement@sareez.com" class="email">measurement@sareez.com</a>.</td>
+                      </tr>
+					  <tr>
+                        <td align="center" valign="middle">&nbsp;</td>
+                        <td height="30" align="left" valign="middle"><strong>USEFUL CONVERSIONS:</strong></td>
+                      </tr>
+                      <tr>
+                        <td align="center" valign="middle">&nbsp;</td>
+                        <td height="16" align="left" valign="top"><span class="carttext" style="text-align:justify;padding-right:10px;">1 inch = 2.54 cm. </span></td>
+                      </tr>
+					  <tr>
+                        <td align="center" valign="middle">&nbsp;</td>
+                        <td height="16" align="left" valign="top"><span class="carttext" style="text-align:justify;padding-right:10px;">10 cm = 3.9 inches    or    100 cm = 1 metre = 39 inches</span></td>
+                      </tr>
+                     
+                      <tr>
+                        <td align="center" valign="middle"><img src="" width="5" height="5" /></td>
+                        <td height="20" align="left" valign="middle" class="redText">
+									<a class="redText" href="index.htm" onclick="return hs.htmlExpand(this, { headingText: 'Create new using previous measurement' })"> 
+									<b>Click here to create new using previous measurement </b>&nbsp;
+										<img src="" title="Previos Measurements"  style="cursor:pointer; margin-top:3px;" height="18" width="19">
+									</a>
+								  
+								  
+								  <div class="highslide-maincontent">
+								  <div class="area1">
+								    <table width="580" border="1" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="290" align="left" valign="top"><table width="280" border="0" cellspacing="0" cellpadding="0">					
+									  
+									  </td>
+									  <td width="290" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong><?= $heading ?></strong></p>
+									  <br />
+									  <p class="text" align="left">The left column contains &quot;<?= $heading ?>&quot;. Choose the measurement and click on the &quot;Set Measurement&quot; button to populate the measurement. You can edit on this measurement by not changing the measurement name OR save a new measurement with new measurement name using the this measurement information. </p><br />
+									  <br />
+									  <p class="heading_text">&nbsp;</p>
+									  </td>
+									</tr>
+								  </table>
+								  </div>
+								</div>
+					  	</td>
+					  </tr>
+                    </table>
+					
+					<table width="704" border="0" cellpadding="0" cellspacing="0" class="address_book_text">
+                      <tr>
+                        <td align="left" valign="middle" class="form_area_heading"><img src="http://static.sareez.com/images/form_arrow.jpg" />&nbsp;&nbsp;<strong>Your Information</strong></td>
+                        <td align="center" valign="top" class="form_area_heading">&nbsp;</td>
+                        <td width="514" colspan="2" align="right" valign="middle" class="form_area_heading1">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+                      </tr>
+                      <tr>
+                        <td align="right" valign="top">&nbsp;</td>
+                        <td align="center" valign="top">&nbsp;</td>
+                        <td colspan="2" align="left" valign="top">&nbsp;</td>
+                      </tr>
+					 <?php
+
+						$info_query = tep_db_query("select customers_firstname as cfname, customers_lastname as clname, customers_email_address as cemail from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$customer_id . "'");
+						$info = tep_db_fetch_array($info_query); 
+					?>
+                      <tr>
+                        <td width="171" align="right" valign="top">Full Name <span class="redText">*</span></td>
+                        <td width="19" align="center" valign="top">:</td>
+                        <td colspan="2" align="left" valign="top"><input type="text" name="fname" id="fname" size="30" class="input_area" value="<?php echo $info['cfname']. " " . $info['clname'] ?>" readonly="readonly" /></td>
+                      </tr>
+                      <tr>
+                        <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                        <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                        <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="right" valign="top">Email Id <span class="redText">*</span></td>
+                        <td align="center" valign="top">:</td>
+                        <td colspan="2" align="left" valign="top"><input type="text" name="email" id="email" class="input_area" size="30" value="<?php echo $info['cemail'] ?>" readonly="readonly" /></td>
+                      </tr>
+                              <?php
+
+						if(isset($_REQUEST['measurement_id']) && $_REQUEST['measurement_id']!=""){
+
+							  $measurement_query = tep_db_query("select * from measurement where measurement_id = '" . (int)$_REQUEST['measurement_id'] . "'");
+							  $measurement_info = tep_db_fetch_array($measurement_query); 
+							  //general
+							  $measurement_name=$measurement_info['measurement_name'];
+							  $body_garment=$measurement_info['body_garment'];
+							  $around_bust=$measurement_info['around_bust'];
+							  $around_above_waist=$measurement_info['around_above_waist'];
+							  $shoulder=$measurement_info['shoulder'];
+							  $sleeve_style=$measurement_info['sleeve_style'];
+							  $sleeve_length=$measurement_info['sleeve_length'];
+							  $arm_hole=$measurement_info['around_arm_hole'];
+							  $around_arm=$measurement_info['around_arm'];
+							  $front_neck_style=$measurement_info['front_neck_style'];
+							  $front_neck_depth=$measurement_info['front_neck_depth'];
+							  $back_neck_style=$measurement_info['back_neck_style'];
+							  $back_neck_depth=$measurement_info['back_neck_depth'];
+							  $closing_side=$measurement_info['closing_side'];
+							  $closing_with=$measurement_info['closing_with'];
+							  $lining=$measurement_info['lining'];
+							  $around_waist=$measurement_info['around_waist'];
+							  $around_hips=$measurement_info['around_hips'];
+							  $your_height=$measurement_info['your_height'];
+							  $instructions=$measurement_info['instructions'];
+							  //blouse
+							  $blouse_length=$measurement_info['blouse_length'];
+							  //petticoat
+							  $petticoat_length=$measurement_info['petticoat_length'];
+							  //salwar
+							  $kameez_length=$measurement_info['kameez_length'];
+							  $kameez_style=$measurement_info['kameez_style'];
+							  $salwar_length=$measurement_info['salwar_length'];
+							  $salwar_style=$measurement_info['salwar_style'];
+							  $around_bottom=$measurement_info['around_bottom'];
+							  $salwar_fitings=$measurement_info['salwar_fitings'];
+							  
+							  $around_thigh=$measurement_info['around_thigh'];
+							  $around_knee=$measurement_info['around_knee'];
+							  $around_calf=$measurement_info['around_calf'];
+							  $around_ankle=$measurement_info['around_ankle'];
+							  $churidar_style=$measurement_info['churidar_style'];
+							  
+							  //lehnga choli
+							  $choli_length=$measurement_info['choli_length'];
+							  $lehnga_style=$measurement_info['lehnga_style'];
+							  $lehenga_length=$measurement_info['lehenga_length'];
+							  $elastic=$measurement_info['elastic'];
+							  
+							  //sherwani//////////////////////////////////////////////////////////////////////////////
+							  $around_neck=$measurement_info['around_neck'];
+							  $across_shoulders=$measurement_info['across_shoulders'];
+							  $sleeve_length=$measurement_info['sleeve_length'];
+							  $around_arm=$measurement_info['around_arm'];
+							  $arm_hole=$measurement_info['around_arm_hole'];
+							  $around_wrist=$measurement_info['around_wrist'];
+							  $around_chest=$measurement_info['around_chest'];
+							  $around_navel=$measurement_info['around_navel'];
+							  $around_waist=$measurement_info['around_waist'];
+							  $around_hips=$measurement_info['around_hips'];
+							  $top_length=$measurement_info['top_length'];
+							  $crotch=$measurement_info['crotch'];
+							  
+							  $trouser_inseam=$measurement_info['trouser_inseam'];
+							  $around_thigh=$measurement_info['around_thigh'];
+							  $around_knee=$measurement_info['around_knee'];
+							  $around_calf=$measurement_info['around_calf'];
+							  $around_ankle=$measurement_info['around_ankle'];
+							  $trouser_length=$measurement_info['trouser_length'];
+							  $trouser_style=$measurement_info['trouser_style'];
+							  
+							  $shoe_length=$measurement_info['shoe_length'];
+							  $shoe_width=$measurement_info['shoe_width'];
+							  $head_circumference=$measurement_info['head_circumference'];
+							  
+
+						}else{
+							  //general
+							  $measurement_name='';
+							  $body_garment='';
+							  $around_bust='';
+							  $around_above_waist='';
+							  $shoulder='';
+							  $sleeve_style='';
+							  $sleeve_length='';
+							  $arm_hole='';
+							  $around_arm='';
+							  $front_neck_style='';
+							  $front_neck_depth='';
+							  $back_neck_style='';
+							  $back_neck_depth='';
+							  $closing_side='';
+							  $closing_with='';
+							  $lining='';
+							  $around_waist='';
+							  $around_hips='';
+							  $your_height='';
+							  $instructions='';
+							  //blouse
+							  $blouse_length='';
+							  //petticoat
+							  $petticoat_length='';
+							  //salwar
+							  $kameez_length='';
+							  $kameez_style='';
+							  $salwar_length='';
+							  $salwar_style='';
+							  $around_bottom='';
+							  $salwar_fitings='';
+							  
+							  $around_thigh='';
+							  $around_knee='';
+							  $around_calf='';
+							  $around_ankle='';
+							  $churidar_style='';
+							  
+							  //lehnga choli
+							  $choli_length='';
+							  $lehnga_style='';
+							  $lehenga_length='';
+							  $elastic='';
+							  
+							  //sherwani////////////////////////////////////////////////////////////////////////////////
+							  $around_neck='';
+							  $across_shoulders='';
+							  $sleeve_length='';
+							  $around_arm='';
+							  $arm_hole='';
+							  $around_wrist='';
+							  $around_chest='';
+							  $around_navel='';
+							  $around_waist='';
+							  $around_hips='';
+							  $top_length='';
+							  $crotch='';
+							  
+							  $trouser_inseam='';
+							  $around_thigh='';
+							  $around_knee='';
+							  $around_calf='';
+							  $around_ankle='';
+							  $trouser_length='';
+							  $trouser_style='';
+							  
+							  $shoe_length='';
+							  $shoe_width='';
+							  $head_circumference='';
+							  
+							  
+
+						}
+
+						if(isset($_REQUEST['measurement_name']) && $_REQUEST['measurement_name'] != "") $measurement_name=$_REQUEST['measurement_name'];
+						if(isset($_REQUEST['body_garment']) && $_REQUEST['body_garment'] != "") $body_garment=$_REQUEST['body_garment'];
+						if(isset($_REQUEST['around_bust']) && $_REQUEST['around_bust'] != "") $around_bust=$_REQUEST['around_bust'];
+						if(isset($_REQUEST['around_above_waist']) && $_REQUEST['around_above_waist'] != "") $around_above_waist=$_REQUEST['around_above_waist'];
+						if(isset($_REQUEST['shoulder']) && $_REQUEST['shoulder'] != "") $shoulder=$_REQUEST['shoulder'];
+						if(isset($_REQUEST['sleeve_style']) && $_REQUEST['sleeve_style'] != "") $sleeve_style=$_REQUEST['sleeve_style'];
+						if(isset($_REQUEST['sleeve_length']) && $_REQUEST['sleeve_length'] != "") $sleeve_length=$_REQUEST['sleeve_length'];
+						if(isset($_REQUEST['arm_hole']) && $_REQUEST['arm_hole'] != "") $arm_hole=$_REQUEST['arm_hole'];
+						if(isset($_REQUEST['around_arm']) && $_REQUEST['around_arm'] != "") $around_arm=$_REQUEST['around_arm'];
+						if(isset($_REQUEST['front_neck_style']) && $_REQUEST['front_neck_style'] != "") $front_neck_style=$_REQUEST['front_neck_style'];
+						if(isset($_REQUEST['front_neck_depth']) && $_REQUEST['front_neck_depth'] != "") $front_neck_depth=$_REQUEST['front_neck_depth'];
+						if(isset($_REQUEST['back_neck_style']) && $_REQUEST['back_neck_style'] != "") $back_neck_style=$_REQUEST['back_neck_style'];
+						if(isset($_REQUEST['back_neck_depth']) && $_REQUEST['back_neck_depth'] != "") $back_neck_depth=$_REQUEST['back_neck_depth'];
+						if(isset($_REQUEST['closing_side']) && $_REQUEST['closing_side'] != "") $closing_side=$_REQUEST['closing_side'];
+						if(isset($_REQUEST['closing_with']) && $_REQUEST['closing_with'] != "") $closing_with=$_REQUEST['closing_with'];
+						if(isset($_REQUEST['lining']) && $_REQUEST['lining'] != '') $lining=$_REQUEST['lining'];
+						if(isset($_REQUEST['around_waist']) && $_REQUEST['around_waist'] != "") $around_waist=$_REQUEST['around_waist'];
+						if(isset($_REQUEST['around_hips']) && $_REQUEST['around_hips'] != "") $around_hips=$_REQUEST['around_hips'];
+						if(isset($_REQUEST['your_height']) && $_REQUEST['your_height'] != "") $height=$_REQUEST['your_height'];
+						if(isset($_REQUEST['instructions']) && $_REQUEST['instructions'] != "") $instructions=$_REQUEST['instructions'];
+
+						 
+						if(isset($_REQUEST['blouse_length']) && $_REQUEST['blouse_length'] != "") $blouse_length=$_REQUEST['blouse_length'];
+						if(isset($_REQUEST['petticoat_length']) && $_REQUEST['petticoat_length'] != "") $petticoat_length=$_REQUEST['petticoat_length'];
+						if(isset($_REQUEST['kameez_length']) && $_REQUEST['kameez_length'] != '') $kameez_length=$_REQUEST['kameez_length'];
+						if(isset($_REQUEST['kameez_style']) && $_REQUEST['kameez_style'] != "") $kameez_style=$_REQUEST['kameez_style'];
+						if(isset($_REQUEST['salwar_length']) && $_REQUEST['salwar_length'] != "") $salwar_length=$_REQUEST['salwar_length'];
+						if(isset($_REQUEST['salwar_style']) && $_REQUEST['salwar_style'] != "") $salwar_style=$_REQUEST['salwar_style'];
+						if(isset($_REQUEST['around_bottom']) && $_REQUEST['around_bottom'] != "") $around_bottom=$_REQUEST['around_bottom'];
+						if(isset($_REQUEST['salwar_fitings']) && $_REQUEST['salwar_fitings'] != "") $salwar_fitings=$_REQUEST['salwar_fitings'];
+
+						if(isset($_REQUEST['around_thigh']) && $_REQUEST['around_thigh'] != "") $around_thigh=$_REQUEST['around_thigh'];
+						if(isset($_REQUEST['around_knee']) && $_REQUEST['around_knee'] != "") $around_knee=$_REQUEST['around_knee'];
+						if(isset($_REQUEST['around_calf']) && $_REQUEST['around_calf'] != "") $around_calf=$_REQUEST['around_calf'];
+						if(isset($_REQUEST['around_ankle']) && $_REQUEST['around_ankle'] != "") $around_ankle=$_REQUEST['around_ankle'];
+						if(isset($_REQUEST['churidar_style']) && $_REQUEST['churidar_style'] != "") $around_ankle=$_REQUEST['churidar_style'];
+						
+						if(isset($_REQUEST['choli_length']) && $_REQUEST['choli_length'] != "") $choli_length=$_REQUEST['choli_length'];
+						if(isset($_REQUEST['lehnga_style']) && $_REQUEST['lehnga_style'] != "") $lehnga_style=$_REQUEST['lehnga_style'];
+						if(isset($_REQUEST['lehenga_length']) && $_REQUEST['lehenga_length'] != "") $lehenga_length=$_REQUEST['lehenga_length'];
+						if(isset($_REQUEST['elastic']) && $_REQUEST['elastic'] != "") $elastic=$_REQUEST['elastic'];
+						
+						//sherwani//////////////////////////////////////////////////////////////////////////////////
+						if(isset($_REQUEST['around_neck']) && $_REQUEST['around_neck'] != "") $around_neck=$_REQUEST['around_neck'];
+						if(isset($_REQUEST['across_shoulders']) && $_REQUEST['across_shoulders'] != "") $across_shoulders=$_REQUEST['across_shoulders'];
+						if(isset($_REQUEST['sleeve_length']) && $_REQUEST['sleeve_length'] != "") $sleeve_length=$_REQUEST['sleeve_length'];
+						if(isset($_REQUEST['around_arm']) && $_REQUEST['around_arm'] != "") $around_arm=$_REQUEST['around_arm'];
+						if(isset($_REQUEST['arm_hole']) && $_REQUEST['arm_hole'] != "") $arm_hole=$_REQUEST['arm_hole'];
+						if(isset($_REQUEST['around_wrist']) && $_REQUEST['around_wrist'] != "") $around_wrist=$_REQUEST['around_wrist'];
+						if(isset($_REQUEST['around_chest']) && $_REQUEST['around_chest'] != "") $around_chest=$_REQUEST['around_chest'];
+						if(isset($_REQUEST['around_navel']) && $_REQUEST['around_navel'] != "") $around_navel=$_REQUEST['around_navel'];
+						if(isset($_REQUEST['around_waist']) && $_REQUEST['around_waist'] != "") $around_waist=$_REQUEST['around_waist'];
+						if(isset($_REQUEST['around_hips']) && $_REQUEST['around_hips'] != "") $around_hips=$_REQUEST['around_hips'];
+						if(isset($_REQUEST['top_length']) && $_REQUEST['top_length'] != "") $top_length=$_REQUEST['top_length'];
+						if(isset($_REQUEST['crotch']) && $_REQUEST['crotch'] != "") $crotch=$_REQUEST['crotch'];
+						if(isset($_REQUEST['trouser_inseam']) && $_REQUEST['trouser_inseam'] != "") $trouser_inseam=$_REQUEST['trouser_inseam'];
+						if(isset($_REQUEST['around_thigh']) && $_REQUEST['around_thigh'] != "") $around_thigh=$_REQUEST['around_thigh'];
+						if(isset($_REQUEST['around_knee']) && $_REQUEST['around_knee'] != "") $around_knee=$_REQUEST['around_knee'];
+						if(isset($_REQUEST['around_calf']) && $_REQUEST['around_calf'] != "") $around_calf=$_REQUEST['around_calf'];
+						if(isset($_REQUEST['around_ankle']) && $_REQUEST['around_ankle'] != "") $around_ankle=$_REQUEST['around_ankle'];
+						if(isset($_REQUEST['trouser_length']) && $_REQUEST['trouser_length'] != "") $trouser_length=$_REQUEST['trouser_length'];
+						if(isset($_REQUEST['trouser_style']) && $_REQUEST['trouser_style'] != "") $trouser_style=$_REQUEST['trouser_style'];
+						if(isset($_REQUEST['shoe_length']) && $_REQUEST['shoe_length'] != "") $shoe_length=$_REQUEST['shoe_length'];
+						if(isset($_REQUEST['shoe_width']) && $_REQUEST['shoe_width'] != "") $shoe_width=$_REQUEST['shoe_width'];
+						if(isset($_REQUEST['head_circumference']) && $_REQUEST['head_circumference'] != "") $head_circumference=$_REQUEST['head_circumference'];
+						
+						
+						
+						
+						
+					 ?>
+                      <tr>
+                        <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                        <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                        <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td width="171" align="right" valign="top">Measurement Name <span class="redText">*</span></td>
+                        <td width="19" align="center" valign="top">:</td>
+                        <td colspan="2" align="left" valign="top" class="form_small_ass"><input type="text" name="measurement_name" id="measurement_name" size="30" class="input_area" value="<?php echo $measurement_name ?>" />&nbsp; </td>
+                      </tr>
+                      
+					  <tr>
+                        <td width="171" align="right" valign="top">&nbsp;</td>
+                        <td width="19" align="center" valign="top">&nbsp;</td>
+                        <td colspan="2" align="left" valign="top" class="form_small_ass">
+						( Your measurement will be saved with this keyword, which will be helpful to you later / next<br /> time you fill in the measurement form. Example. Mom Measurement, Sister etc. )						</td>
+                      </tr>
+                      <tr>
+                        <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                        <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                        <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td align="left" valign="middle" class="form_area_heading"><img src="images/form_arrow.jpg" />&nbsp;&nbsp;<strong>Measurement For</strong></td>
+                        <td align="center" valign="top" class="form_area_heading">&nbsp;</td>
+                        <td colspan="2" align="right" valign="middle" class="form_area_heading1"></td>
+                      </tr>
+                      <tr>
+                        <td align="right" valign="top">&nbsp;</td>
+                        <td align="center" valign="top">&nbsp;</td>
+                        <td colspan="2" align="left" valign="top">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td width="171" align="right" valign="top">Body <span class="redText">&nbsp;</span></td>
+                        <td width="19" align="center" valign="top">:</td>
+                        <td colspan="2" align="left" valign="top"><input name="body_garment" type="radio" value="body" <?php if($body_garment=='body' || $body_garment=='') { echo 'checked'; } ?>/></td>
+                      </tr>
+					  <tr>
+                        <td width="171" align="right" valign="top"><span class="redText">&nbsp;</span></td>
+                        <td width="19" align="center" valign="top">&nbsp;</td>
+                        <td colspan="2" align="left" valign="top" class="form_small_ass">(You want to submit your body measurement and our tailor will give suitable loosening as per tailoring)</td>
+					  </tr>
+					  <tr>
+                        <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                        <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                        <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                      </tr>
+                      <tr>
+					  <tr>
+                        <td width="171" align="right" valign="top">Garment <span class="redText">&nbsp;</span></td>
+                        <td width="19" align="center" valign="top">:</td>
+                        <td colspan="2" align="left" valign="top"><input name="body_garment" type="radio" value="garment" <?php if($body_garment=='garment') { echo 'checked'; } ?> /></td>
+                      </tr>
+					  <tr>
+                        <td width="171" align="right" valign="top"><span class="redText">&nbsp;</span></td>
+                        <td width="19" align="center" valign="top">&nbsp;</td>
+                        <td colspan="2" align="left" valign="top" class="form_small_ass">(If you want to submit ready garment measurement)</td>
+					  </tr>
+                      
+                      
+					  
+                      <tr> </tr>
+                    </table>
+					
+					
+					<table width="706" border="0" cellpadding="0" cellspacing="0" class="address_book_text">
+                      
+                      <tr>
+                        <td width="318" align="left" valign="middle" class="form_area_heading"><img src="http://static.sareez.com/images/form_arrow.jpg" />&nbsp;&nbsp;<strong><?php echo ($show_measure=='Sherwani')? 'Measurement (Top)': 'Measurement';?></strong></td>
+                        <td  colspan="2" align="right" valign="middle" class="form_area_heading1">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" align="left" valign="top"><table width="700" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td width="167">&nbsp;</td>
+                            <td width="20">&nbsp;</td>
+                            <td width="320">&nbsp;</td>
+                            <td width="5">&nbsp;</td>
+                          </tr>
+						  
+						  <?php if($show_measure=='Sherwani') {?>
+                          <tr>
+                            <td align="right" valign="top">1. Around Neck <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							<!--<SELECT class="select_box" name="around_neck" id="around_neck" style="width:70px;" onChange="">
+								<OPTION value="" <?php if($around_neck==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+                                 <?php
+								  for($i=25 ;$i<=70;$i=$i+(1/2)){
+								  ?>
+                                 <OPTION value="<?php echo $i ?>" <?php if($around_neck==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+                                 <?php } ?>
+                             </SELECT>-->
+							 
+							 <input type="text" name="around_neck" id="around_neck" size="30" class="input_area" value="<?php echo $around_neck ?>" />
+							 
+                              &nbsp;in Inches &nbsp;
+							  <img id="AB" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Neck' })" />
+							  
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Neck.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Neck" ?</strong></p>
+									  <p class="text">Measure around your neck in circumference.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                            <td width="188" rowspan="34" align="center" valign="top"><!--<img src="images/body_img1.jpg" width="174" height="327" /><img src="images/body_img2.jpg" width="146" height="371" />-->&nbsp;</td>
+                          </tr>
+						  <?php }else{?>						  
+						  <tr>
+                            <td align="right" valign="top">1. Around Bust <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							<SELECT class="select_box" name="around_bust" id="around_bust" style="width:70px;" onChange="">
+								<OPTION value="" <?php if($around_bust==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+                                 <?php
+								  for($i=25 ;$i<=70;$i=$i+(1/2)){
+								  ?>
+                                 <OPTION value="<?php echo $i ?>" <?php if($around_bust==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+                                 <?php } ?>
+                             </SELECT>
+                              &nbsp;in Inches &nbsp;
+							  <img id="AB" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Bust' })" />
+							  
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/around_bust.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Bust" ?</strong></p>
+									  <p class="text">Fullest part of the bust is to be measured by placing the tape well under the arms winding straight across the back and coming back to the front.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                            <td width="188" rowspan="34" align="center" valign="top"><img src="http://static.sareez.com/images/body_img1.jpg" width="174" height="327" /><img src="http://static.sareez.com/images/body_img2.jpg" width="146" height="371" /></td>
+                          </tr>
+						  <?php }?>
+						  
+                          <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						  <?php if($show_measure=='Sherwani'){?>
+                          <tr>
+                            <td align="right" valign="top">2. Across Shoulders <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="across_shoulders" id="across_shoulders" style="width:70px;" onChange="">
+								  <OPTION value="" <?php if($across_shoulders==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								  <?php
+									for($i=20 ;$i<=65;$i=$i+(1/2)){
+								   ?>
+								   <OPTION value="<?php echo $i ?>" <?php if($across_shoulders==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+                               <?php } ?>
+                               </SELECT>-->
+							   
+							   <input type="text" name="across_shoulders" id="across_shoulders" size="30" class="input_area" value="<?php echo $across_shoulders ?>" />
+							   
+                              &nbsp;in Inches &nbsp;
+							  <img id="AAW" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Shoulders' })" />
+							  <div class="highslide-maincontent"><div class="area1">
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Across-Shoulders.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Across Shoulders" ?</strong></p>
+									  <p class="text"> The horizontal width from one shoulder point to other shoulder point, take measurement from back side of shoulder.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							</td>
+                          </tr>
+                          <?php }else{?>						  
+						  <tr>
+                            <td align="right" valign="top">2. Around Above Waist <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="around_above_waist" id="around_above_waist" style="width:70px;" onChange="">
+								  <OPTION value="" <?php if($around_above_waist==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								  <?php
+									for($i=20 ;$i<=65;$i=$i+(1/2)){
+								   ?>
+								   <OPTION value="<?php echo $i ?>" <?php if($around_above_waist==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+                               <?php } ?>
+                               </SELECT>
+                              &nbsp;in Inches &nbsp;
+							  <img id="AAW" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Above Waist' })" />
+							  <div class="highslide-maincontent"><div class="area1">
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/around_above_waist.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Above Waist" ?</strong></p>
+									  <p class="text"> For this place the tape immediately below the bust.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							</td>
+                          </tr>
+						  <?php }?>
+						  
+						  <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						  <?php if($show_measure!='Sherwani') {?>						  
+						  <tr>
+                            <td align="right" valign="top">3. Shoulder <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="shoulder" id="shoulder" style="width:70px;" onChange="">
+								<OPTION value="" <?php if($shoulder==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+					 			for($i=13 ;$i<=20;$i=$i+(1/2)){
+					  			?>
+								<OPTION value="<?php echo $i ?>" <?php if($shoulder==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>
+                              &nbsp;in Inches &nbsp;
+							  <img id="S" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Shoulder' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/shoulder.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Shoulder" ?</strong></p>
+									  <p class="text">This measure has to be taken by placing the tip of the tape one any one shoulder point and stretching it straight from the back to the other shoulder point. Point means the point where you shoulder meets you arm joint.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>                          
+						  
+						  <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <?php }?>
+						  
+						  <?php if($show_measure=='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top">3. Sleeve Length <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="sleeve_length" id="sleeve_length" style="width:70px;" onChange="">
+								<OPTION value="" <?php if($sleeve_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=0 ;$i<=23;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($sleeve_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  
+							  <input type="text" name="sleeve_length" id="sleeve_length" size="30" class="input_area" value="<?php echo $sleeve_length ?>" />
+							  
+                              &nbsp;in Inches &nbsp;
+							  <img id="SL" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Sleeve Length' })" />
+							  <div class="highslide-maincontent"><div class="area1"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Sleeve-Length.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Sleeve Length" ?</strong></p>
+									  <p class="text">Starting from the outside edge of shoulder bone upto the desired length.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  <?php }else{?>
+						  <tr>
+                            <td align="right" valign="top">4. Sleeve Length <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="sleeve_length" id="sleeve_length" style="width:70px;" onChange="">
+								<OPTION value="" <?php if($sleeve_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=0 ;$i<=23;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($sleeve_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>
+                              &nbsp;in Inches &nbsp;
+							  <img id="SL" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Sleeve Length' })" />
+							  <div class="highslide-maincontent"><div class="area1"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/sleeve_length.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Sleeve Length" ?</strong></p>
+									  <p class="text">This is a vertical measurement. The tip of the tape on the arm joint and stretch it straight down to a desired length. Sleeves can be very short, short, medium, just above elbow, quarter length or full length.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  <?php }?>
+                          <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <?php if($show_measure!='Sherwani') {?>						  
+                            <tr>
+                              <td align="right" valign="top" > Sleeve Style <span class="redText">*</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  
+								<input type="text" class="input_area" name="sleeve_style" id="sleeve_style" value="<?= $sleeve_style ?>" readonly="readonly" />
+								<a href="index.htm" onclick="return hs.htmlExpand(this, { headingText: 'Set Sleeve Style' })"> &nbsp;<img src="http://static.sareez.com/images/search_style_btn.jpg" title="Set Sleeve Style"  style="cursor:pointer; margin-top:3px;"></a>
+								  <div class="highslide-maincontent">
+								  <div class="area">
+									<?php
+									//$sql_sleeve_style="SELECT * FROM style WHERE style_category='Sleeve Style' AND style_for = '".$style_for."' order by style_name";
+									//$query_sleeve_style = tep_db_query($sql_sleeve_style);
+									//while ($sleeve_style_arr = tep_db_fetch_array($query_sleeve_style)) { 
+									?>
+									
+									<div class="popup_area">
+									<?php // echo tep_image(DIR_WS_IMAGES . $sleeve_style_arr['style_image'], $sleeve_style_arr['style_name'], '107', '107','hspace="5"');?>
+									<br />
+									
+									<div class="setMeasRbox"><INPUT TYPE="radio" NAME="rdo_sleeve_style" VALUE="<?= $sleeve_style_arr['style_name']?>" <?php if($sleeve_style==$sleeve_style_arr['style_name']){ echo "CHECKED"; } ?>></div> <div class="setMeas"><?= $sleeve_style_arr['style_name']?> </div>	
+									</div>									
+								 <?php } ?>
+									</div>
+									<P>&nbsp;</P>
+									<P align="center">
+									 <?php //echo tep_image_button('set_style.jpg', 'Set Style','style="cursor:pointer;" onClick="set_sleeve_style();return hs.close(this)"'); ?>
+									</P>
+								  </div>							  
+							  </td>
+                            </tr>
+							<tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <?php }?>						
+                          
+						  <?php if($show_measure=='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top">4. Around Arm Hole <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="arm_hole" id="arm_hole" style="width: 70px;">
+								<OPTION value="" <?php if($arm_hole==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=5 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($arm_hole==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  
+							  <input type="text" name="arm_hole" id="arm_hole" size="30" class="input_area" value="<?php echo $arm_hole ?>" />
+							  
+                              &nbsp;in Inches &nbsp;
+							  <img id="AAH" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Arm Hole' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Arm-Hole.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Arm Hole" ?</strong></p>
+									  <p class="text">From the highest point on shoulder measure around arm hole with your arm hanging down.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  <?php }else {?>
+						  <tr>
+                            <td align="right" valign="top">5. Around Arm Hole <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="arm_hole" id="arm_hole" style="width: 70px;">
+								<OPTION value="" <?php if($arm_hole==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=5 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($arm_hole==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>
+                              &nbsp;in Inches &nbsp;
+							  <img id="AAH" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Arm Hole' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/around_arm_hole.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Arm Hole" ?</strong></p>
+									  <p class="text">For this measurement, keep you arms hanging and relaxed. Place the tip of the tape on the shoulder point as you did for the sleeves. But this time drop it to the back, bring it below the under arm and at the shoulder point to complete the circle.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  <?php }?>	
+                          <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						  <?php if($show_measure=='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top">5. Around Arm/Biceps <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="around_arm" id="around_arm" style="width: 70px;">
+								<OPTION value="" <?php if($around_arm==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=5 ;$i<=25;$i=$i+(1/2)){
+								 ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_arm==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  
+							  <input type="text" name="around_arm" id="around_arm" size="30" class="input_area" value="<?php echo $around_arm ?>" />
+							  
+                              &nbsp;in Inches &nbsp;
+							  <img id="AA" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Arm' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Arm.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Arm/Biceps" ?</strong></p>
+									  <p class="text">Measure the middle of the biceps keeping the arms relaxed.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  <?php }else {?>
+						  <tr>
+                            <td align="right" valign="top">6. Around Arm <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="around_arm" id="around_arm" style="width: 70px;">
+								<OPTION value="" <?php if($around_arm==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=5 ;$i<=25;$i=$i+(1/2)){
+								 ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_arm==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>
+                              &nbsp;in Inches &nbsp;
+							  <img id="AA" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Arm' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/around_arm.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Arm" ?</strong></p>
+									  <p class="text">For this keep your arms relaxed. Place the tape on the middle of your biceps, take it round your relaxed arm and complete the circle.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  <?php }?>
+						  
+                          <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						  <?php if($show_measure=='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top">6. Around Wrist <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="around_wrist" id="around_wrist" style="width: 70px;">
+								<OPTION value="" <?php if($around_wrist==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=1 ;$i<=8;$i=$i+(1/2)){
+								 ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_wrist==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  
+							  <input type="text" name="around_wrist" id="around_wrist" size="30" class="input_area" value="<?php echo $around_wrist ?>" />
+							  
+                              &nbsp;in Inches &nbsp;
+							  <img id="FND" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Wrist' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Wrist.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Wrist" ?</strong></p>
+									  <p class="text"> Measure around the wrist of your arm.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  <?php }else {?>
+						  <tr>
+                            <td align="right" valign="top">7. Front Neck Depth <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="front_neck_depth" id="front_neck_depth" style="width: 70px;">
+								<OPTION value="" <?php if($front_neck_depth==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=1 ;$i<=8;$i=$i+(1/2)){
+								 ?>
+								<OPTION value="<?php echo $i ?>" <?php if($front_neck_depth==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>
+                              &nbsp;in Inches &nbsp;
+							  <img id="FND" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Front Neck Depth' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/front_neck_depth.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Front Neck Depth" ?</strong></p>
+									  <p class="text"> For this place the tip of the tape on the any one side of your neck and stretch it diagonally to the centre just above you bust to your desired depth.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  <?php }?>
+						  
+						  
+                          <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						    <?php if($show_measure!='Sherwani') {?>
+                            <tr>
+                              <td align="right" valign="top" > Front Neck Style <span class="redText">*</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+								<input type="text" class="input_area" name="front_neck_style" id="front_neck_style" value="<?= $front_neck_style ?>" readonly="readonly" />
+								<a href="index.htm" onclick="return hs.htmlExpand(this, { headingText: 'Set Front neck style' })">
+								<img src="http://static.sareez.com/images/search_style_btn.jpg" title="Set Front Neck Style" style="cursor:pointer" />
+								</a>
+								  <div class="highslide-maincontent">
+								  <div class="area">
+									<?php
+									//$sql_front_neck_style="SELECT * FROM style WHERE style_category='Front Neck Style' AND style_for = '".$style_for."' order by style_name";
+									//$query_front_neck_style = tep_db_query($sql_front_neck_style);
+									//while ($front_neck_style_arr = tep_db_fetch_array($query_front_neck_style)) { 
+									?>
+									
+									<div class="popup_area">
+									<?php // echo tep_image(DIR_WS_IMAGES . $front_neck_style_arr['style_image'], $front_neck_style_arr['style_name'], '107', '107','hspace="5"');?>
+									<br />
+									
+									<div class="setMeasRbox"><INPUT TYPE="radio" NAME="rdo_front_neck_style" VALUE="<?= $front_neck_style_arr['style_name']?>" <?php if($front_neck_style==$front_neck_style_arr['style_name']){ echo "CHECKED"; } ?>></div> <div class="setMeas"><?= $front_neck_style_arr['style_name']?></div>	
+									</div>									
+									 <?php //} ?>
+									</div>
+									<P>&nbsp;</P>
+									<P align="center">
+									<?php echo tep_image_button('set_style.jpg', 'Set Style','style="cursor:pointer;" onClick="set_front_neck_style();return hs.close(this)"'); ?>
+									</P>
+								  </div>
+							  </td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                            <?php }?>							
+						
+						  <?php if($show_measure=='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top">7. Around Chest�<span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="around_chest" id="around_chest" style="width: 70px;">
+								<OPTION value="" <?php if($around_chest==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=1 ;$i<=10;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_chest==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  
+							  <input type="text" name="around_chest" id="around_chest" size="30" class="input_area" value="<?php echo $around_chest ?>" />
+							  
+                              &nbsp;in Inches &nbsp;
+							  <img id="BND" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Chest' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Chest�.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Chest" ?</strong></p>
+									  <p class="text"> Measure the fullest part of your chest while keeping the tape a little loose for comfort.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  
+						  <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						  <?php }else {?>	
+						  <tr>
+                            <td align="right" valign="top">8. Back Neck Depth <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="back_neck_depth" id="back_neck_depth" style="width: 70px;">
+								<OPTION value="" <?php if($back_neck_depth==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=1 ;$i<=10;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($back_neck_depth==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>
+                              &nbsp;in Inches &nbsp;
+							  <img id="BND" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Back Neck Depth' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/Back_neck_depth.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Back Neck Depth" ?</strong></p>
+									  <p class="text"> Similar to the Front Neck Depth. Place the tip of the tape on the side of you neck and stretch it back to a desired point on the spine.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+                          <?php }?>					  
+						  
+						  <?php if($show_measure!='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+                          <tr>
+                              <td align="right" valign="top" > Back Neck Style <span class="redText">*</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+								<input type="text" class="input_area" name="back_neck_style" id="back_neck_style" value="<?= $back_neck_style ?>"  readonly="readonly"/>
+								<a href="index.htm" onclick="return hs.htmlExpand(this, { headingText: 'Set Back neck style' })">
+								<img src="http://static.sareez.com/images/search_style_btn.jpg" title="Set Back Neck Style" style="cursor:pointer" />
+								</a>
+								  <div class="highslide-maincontent">
+								  <div class="area">
+									<?php
+									//$sql_back_neck_style="SELECT * FROM style WHERE style_category='Back Neck Style' AND style_for = '".$style_for."' order by style_name";
+									//$query_back_neck_style = tep_db_query($sql_back_neck_style);
+									//while ($back_neck_style_arr = tep_db_fetch_array($query_back_neck_style)) { 
+									?>
+									 
+									<div class="popup_area">
+									<?php // echo tep_image(DIR_WS_IMAGES . $back_neck_style_arr['style_image'], $back_neck_style_arr['style_name'], '107', '107','hspace="5"');?>
+									<br />
+									
+									<div class="setMeasRbox"><INPUT TYPE="radio" NAME="rdo_back_neck_style" VALUE="<?= $back_neck_style_arr['style_name']?>" <?php if($back_neck_style==$back_neck_style_arr['style_name']){ echo "CHECKED"; } ?>></div> <div class="setMeas"><?= $back_neck_style_arr['style_name']?></div>	
+									</div>	
+									<?php //} ?>								
+									 </div>
+									<P>&nbsp;</P>
+									<P align="center">
+									  <?php //echo tep_image_button('set_style.jpg', 'Set Style','style="cursor:pointer;" onClick="set_back_neck_style();return hs.close(this)"'); ?>
+									</P>
+								  </div>
+							  </td>
+                            </tr>
+                          <?php }?>
+						  
+						  <?php if($show_measure=='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top">8. Around Navel�<span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="around_navel" id="around_navel" style="width: 70px;">
+								<OPTION value="" <?php if($around_navel==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=1 ;$i<=10;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_navel==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  
+							  <input type="text" name="around_navel" id="around_navel" size="30" class="input_area" value="<?php echo $around_navel ?>" />
+							  
+                              &nbsp;in Inches &nbsp;
+							  <img id="BND" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Navel' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Navel.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Navel" ?</strong></p>
+									  <p class="text"> Measure around your belly keeping the tape straight from front and back.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  
+						   <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						  <?php }?>						 
+						  
+						  <?php if($show_measure=='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top">9. Around Waist�<span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="around_waist" id="around_waist" style="width: 70px;">
+								<OPTION value="" <?php if($around_waist==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=1 ;$i<=10;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_waist==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  
+							  <input type="text" name="around_waist" id="around_waist" size="30" class="input_area" value="<?php echo $around_waist ?>" />
+							  
+                              &nbsp;in Inches &nbsp;
+							  <img id="BND" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Waist' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Waist.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Waist" ?</strong></p>
+									  <p class="text"> Measure around the waist keeping the tape straight from front and back.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>	
+						  
+						  <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						  <?php }?>						  
+						  
+						  <?php if($show_measure=='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top">10. Around Hips�<span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="around_hips" id="around_hips" style="width: 70px;">
+								<OPTION value="" <?php if($around_hips==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=1 ;$i<=10;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_hips==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  
+							  <input type="text" name="around_hips" id="around_hips" size="30" class="input_area" value="<?php echo $around_hips ?>" />
+							  
+                              &nbsp;in Inches &nbsp;
+							  <img id="BND" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Hips' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Hips.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Hips" ?</strong></p>
+									  <p class="text"> Measure around the upper part of the hip keeping the tape straight from front and back.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  
+						  <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  	
+						  <?php }?>						  
+						  
+						  <?php if($show_measure=='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top">11. Top Length/Sherwani Length�<span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="top_length" id="top_length" style="width: 70px;">
+								<OPTION value="" <?php if($top_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=1 ;$i<=10;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($top_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  
+							  <input type="text" name="top_length" id="top_length" size="30" class="input_area" value="<?php echo $top_length ?>" />
+							  
+                              &nbsp;in Inches &nbsp;
+							  <img id="BND" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Top Length/Sherwani Length' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Sherwani-Length.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Top Length/Sherwani Length" ?</strong></p>
+									  <p class="text"> Starting from the high point of your shoulder down to the desired length.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  
+						  <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  	
+						  <?php }?>					  
+						  
+						  <?php if($show_measure=='Sherwani') {?>
+						  <tr>
+                            <td align="right" valign="top">12. Crotch�<span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="crotch" id="crotch" style="width: 70px;">
+								<OPTION value="" <?php if($crotch==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=1 ;$i<=10;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($crotch==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  
+							  <input type="text" name="crotch" id="crotch" size="30" class="input_area" value="<?php echo $crotch ?>" />
+							  
+                              &nbsp;in Inches &nbsp;
+							  <img id="BND" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Crotch' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Crotch.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Crotch" ?</strong></p>
+									  <p class="text"> Measure from center front waist through crotch to center back waist.</p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							  </td>
+                          </tr>	
+						  <?php }?>
+						  
+						  
+						  <?php if($show_measure=='Lehnga-Choli' ){ ?>
+                          <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td align="right" valign="top">11. Lining <span class="redText">&nbsp;</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass"><INPUT type="checkbox" id="lining" name="lining" value="1" <?php if($lining != ''){ ?>checked="checked"<?php } ?> >&nbsp;</a>
+							
+							  <img id="L" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Lining' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/noImg.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>What is "Lining" ?</strong></p>
+									  <p class="text"> It is a same colored thin cloth partly stitched inside heavily embroidered blouse so that it is comfortable. </p></td>
+									</tr>
+								  </table>							  
+							  </div></div>
+							</td>
+                          </tr>
+						  <?php } ?>
+						  <?php if($show_measure=='Salwar' || $show_measure=='Lehnga-Choli' ){ ?>
+                          <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td align="right" valign="top">12. Around Waist <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="around_waist" id="around_waist" style="width:70px;" onChange="" >
+								<OPTION value="" <?php if($around_waist==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=25 ;$i<=65;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_waist==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>
+                              &nbsp;in Inches &nbsp;
+							  <img id="AW" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Waist' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/Around_Waist.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Waist" ?</strong></p>
+									  <p class="text">This is for the petticoat/lehnga. Place the tape below the navel and just above you hipbone or waist turn it straight round the back and complete the circle.</p></td>
+									</tr>
+								  </table>	
+							  </div>
+							  </td>
+                          </tr>
+                          <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td align="right" valign="top">13. Around Hips <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="around_hips" id="around_hips" style="width:70px;" onChange="" >
+								<OPTION value="" <?php if($around_hips==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=26 ;$i<=75;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_hips==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>
+                              &nbsp;in Inches &nbsp;
+							  <img id="AH" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Hips' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/around_hips.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Hips" ?</strong></p>
+									  <p class="text">This is similar to �Around Waist�, but this time place the tape on the upper part of the hip, that is slightly below the hip bone and make a complete circle.</p></td>
+									</tr>
+								  </table>	
+							  </div>
+							  </td>
+                          </tr>
+						  
+                          <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td align="right" valign="top">14. Your Height <span class="redText">*</span></td>
+                            <td align="center" valign="top">:</td>
+                            <td colspan="2"  align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" id="your_height" name="your_height">
+								<OPTION value="" <?php if($your_height==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=0 ;$i<=7;$i=$i+(1/10)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if(trim($i)==trim($your_height)){ ?> selected="selected" <?php } ?>>
+								<?php $ht=explode('.',$i); if($ht[1]!=''){echo $ht[0].'\''.$ht[1].'\'\'';}else{echo $ht[0].'\'';} ?>
+								</OPTION>
+								<?php } ?>
+							  </SELECT>
+                              &nbsp;in feet &amp; Inches &nbsp;
+							  <img id="YH" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Your Height' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/your_height.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure your "Height" ?</strong></p>
+									  <p class="text">Stand with your feet slightly apart, back straight and set against a wall. Place the tip of the tape on the floor at your heel and stretch it to the top of your head.</p></td>
+									</tr>
+								  </table>	
+							  </div>
+							  </td>
+                          </tr>
+						  <?php } ?>
+                          <tr>
+                            <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                            <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                            <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                          </tr>
+                        </table></td>
+                      </tr>
+                    </table>
+					<table width="706" border="0" cellpadding="0" cellspacing="0" class="address_book_text">
+                     <?php if($show_measure=='Blouse-Petticoat' || $show_measure=='Blouse' || $show_measure=='Petticoat' ){ ?>
+					  <tr>
+                        <td width="175" align="left" valign="middle" class="form_area_heading"><img src="http://static.sareez.com/images/form_arrow.jpg" />&nbsp;&nbsp;<strong>For Saree Only</strong></td>
+                        <td width="531" colspan="2" align="right" valign="middle" class="form_area_heading1">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+                      </tr>
+					  <?php } ?>
+                     <?php if($show_measure=='Salwar' ){ ?>
+					  <tr>
+                        <td width="175" align="left" valign="middle" class="form_area_heading"><img src="http://static.sareez.com/images/form_arrow.jpg" />&nbsp;&nbsp;<strong>For Salwar Only</strong></td>
+                        <td width="531" colspan="2" align="right" valign="middle" class="form_area_heading1">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+                      </tr>
+					  <?php } ?>
+					  
+					 <?php if($show_measure=='Sherwani' ){ ?>
+					  <tr>
+                        <td width="175" align="left" valign="middle" class="form_area_heading"><img src="http://static.sareez.com/images/form_arrow.jpg" />&nbsp;&nbsp;<strong>Trouser (Bottom)</strong></td>
+                        <td width="531" colspan="2" align="right" valign="middle" class="form_area_heading1">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+                      </tr>
+					  <?php } ?>
+					  
+                     <?php if($show_measure=='Lehnga-Choli' ){ ?>
+					  <tr>
+                        <td width="175" align="left" valign="middle" class="form_area_heading"><img src="http://static.sareez.com/images/form_arrow.jpg" />&nbsp;&nbsp;<strong>For Lehnga-Choli Only</strong></td>
+                        <td width="531" colspan="2" align="right" valign="middle" class="form_area_heading1">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+                      </tr>
+					  <?php } ?>
+                      <tr>
+                        <td colspan="3" align="left" valign="top"><table width="700" border="0" cellspacing="0" cellpadding="0">
+                     		<tr>
+                              <td width="175">&nbsp;</td>
+                              <td width="531">&nbsp;</td>
+                              <td width="320">&nbsp;</td>
+                              <td width="5">&nbsp;</td>
+                            </tr> 
+                     <?php if($show_measure=='Blouse-Petticoat' || $show_measure=='Blouse' ){ ?>
+                            <tr>
+                              <td height="22" align="right" valign="top"><strong>Blouse (Top)</strong></td>
+                              <td align="center" valign="top">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">&nbsp;</td>
+                              <td width="188" rowspan="22" align="center" valign="top"></td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                          <tr>
+                              <td align="right" valign="top">1. Blouse Length <span class="redText">*</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+								<SELECT class="select_box" name="blouse_length" id="blouse_length" style="width: 70px;">
+                                   <OPTION value="" <?php if($blouse_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+                                    <?php
+									 for($i=12 ;$i<=20;$i=$i+(1/2)){
+									  ?>
+									<OPTION value="<?php echo $i ?>" <?php if($blouse_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+									<?php } ?>
+								  </SELECT>&nbsp;in Inches &nbsp;	
+							  <img id="BL" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Blouse Length' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/blouse_length.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Blouse Length" ?</strong></p>
+									  <p class="text"> Place the tip of the tape on any side of your neck and bring it down the back to a desired length just below the bust.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							<?php } ?>
+                     <?php if($show_measure=='Blouse-Petticoat' || $show_measure=='Petticoat' ){ ?>
+                            <tr>
+                              <td height="22" align="right" valign="top"><strong>Petticoat (Bottom Skirt)</strong></td>
+                              <td align="center" valign="top">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top">1. Petticoat Length <span class="redText">*</span></td>
+                              <td align="center" valign="top">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="petticoat_length" id="petticoat_length" style="width: 70px;" >
+								<OPTION value="" <?php if($petticoat_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=30 ;$i<=45;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($petticoat_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>&nbsp;in Inches &nbsp;
+							  
+							  <img id="PL" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Petticoat Length' })" />
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/petticoat_length.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Petticoat Length" ?</strong></p>
+									  <p class="text"> Place the tip of the tape on any side of your waist or hipbone, depending on where you wear you lehnga or saree. Then let it fall down straight. Hold it slightly above your ankles.</p></td>
+									</tr>
+								  </table>	
+							  </div>							  </td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							<?php } ?>
+                     <?php if($show_measure=='Salwar'){ ?>
+                            <tr>
+                              <td height="22" align="right" valign="top"><strong>Top</strong></td>
+                              <td align="center" valign="top">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">&nbsp;</td>
+                              <td width="188" rowspan="22" align="center" valign="top"></td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                           <tr>
+                              <td align="right" valign="top">1. Kameez Style <span class="redText">*</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+								<input type="text" class="input_area" name="kameez_style" id="kameez_style" value="<?= $kameez_style ?>" readonly="readonly" />
+								<a href="index.htm" onclick="return hs.htmlExpand(this, { headingText: 'Set Kameez Style' })">
+								<img src="http://static.sareez.com/images/search_style_btn.jpg" title="Set Kameez Style" style="cursor:pointer" />								</a>
+								  <div class="highslide-maincontent">
+								  <div class="area">
+									<?php
+									//$sql_kameez_style="SELECT * FROM style WHERE style_category='Kameez Style' order by style_name";
+									//$query_kameez_style = tep_db_query($sql_kameez_style);
+									//while ($kameez_style_arr = tep_db_fetch_array($query_kameez_style)) { 
+									?>
+									 
+									<div class="popup_area">
+									<?php //echo tep_image(DIR_WS_IMAGES . $kameez_style_arr['style_image'], $kameez_style_arr['style_name'], '107', '107','hspace="5"');?>
+									<br />
+									
+									<div class="setMeasRbox"><INPUT TYPE="radio" NAME="rdo_kameez_style" VALUE="<?= $kameez_style_arr['style_name']?>" <?php if($kameez_style==$kameez_style_arr['style_name']){ echo "CHECKED"; } ?>></div>	<div class="setMeas"><?= $kameez_style_arr['style_name']?></div>
+									</div>	
+									<?php //} ?>								
+									 </div>
+									<P>&nbsp;</P>
+									<P align="center">
+									  <?php echo tep_image_button('set_style.jpg', 'Set Style','style="cursor:pointer;" onClick="set_kameez_style();return hs.close(this)"'); ?>									</P>
+								  </div>							  </td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top">2. Kameez Length <span class="redText">&nbsp;</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="kameez_length" id="kameez_length" style="width: 70px;" >
+								<OPTION value="" <?php if($kameez_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=30 ;$i<=45;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($kameez_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+								<OPTION value="46-50" <?php if($kameez_length=='46-50'){ ?>selected="selected" <?php } ?>><?php echo "46-50"; ?></OPTION>
+								<OPTION value="51-55" <?php if($kameez_length=='51-55'){ ?>selected="selected" <?php } ?>><?php echo "51-55"; ?></OPTION>
+							  </SELECT>&nbsp;in Inches &nbsp;
+							  
+							  <img id="KL" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Kameez Length' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/kameez_length.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Kameez Length" ?</strong></p>
+									  <p class="text"> For this place the tip of the tape on the middle of any one shoulder and bring it straight below or above the knee as desired.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td height="22" align="right" valign="top"><strong>Bottom</strong></td>
+                              <td align="center" valign="top">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top">1. Salwar/Churidar/Patiala Length <span class="redText">&nbsp;</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="salwar_length" id="salwar_length" style="width: 70px;" >
+								<OPTION value="" <?php if($salwar_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=30 ;$i<=45;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($salwar_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>&nbsp;in Inches &nbsp;
+							  
+							  <img id="SL" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Salwar Length' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/salwar_length.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Salwar Length" ?</strong></p>
+									  <p class="text"> To measure, place the tip of the tape just above the hipbone and ask someone to hold it at your heels. Do not bend or lean to one side while the measurement is being taken.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top">2. Salwar Style <span class="redText">*</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+								<input type="text" class="input_area" name="salwar_style" id="salwar_style" value="<?= $salwar_style;?>" readonly="readonly" />
+								<a href="index.htm" onclick="return hs.htmlExpand(this, { headingText: 'Set Salwar Style' })">
+								<img src="http://static.sareez.com/images/search_style_btn.jpg" title="Set Salwar Style" style="cursor:pointer" />								</a>
+								  <div class="highslide-maincontent">
+								  <div class="area">
+									<div class="popup_area">
+									<br />
+									<div class="setMeasRbox"><INPUT TYPE="radio" NAME="rdo_salwar_style" VALUE="<?= $salwar_style_arr['style_name']?>" <?php if($salwar_style==$salwar_style_arr['style_name']){ echo "CHECKED"; } ?>></div>	<div class="setMeas"><?= $salwar_style_arr['style_name']?></div>
+									</div>	
+									 </div>
+									<P>&nbsp;</P>
+									<P align="center">
+									</P>
+								  </div>							  
+								  </td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+					       <tr>
+                              <td align="right" valign="top">3. Around Bottom </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="around_bottom" id="around_bottom" style="width: 70px;" >
+								<OPTION value="" <?php if($around_bottom==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=5 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_bottom==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>&nbsp;in Inches &nbsp;
+							  
+							  <img id="ABT" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Bottom' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/around_bottom.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Bottom" ?</strong></p>
+									  <p class="text"> This measurement is for loose salwar or patiala bottom.Place the tip of the tape on the ankle and bring it round to complete the circle.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							<!----the below row is commented by asgar as per email request on 040113---
+                            <tr>
+                              <td align="right" valign="top">4. Garment Fit Description <span class="redText">&nbsp;</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass"><input name="salwar_fitings" type="radio" value="TF" <?php //if($salwar_fitings=='TF' ) { echo 'checked'; } ?> />&nbsp;Tight Fit&nbsp;&nbsp;<input name="salwar_fitings" type="radio" value="CF" <?php //if($salwar_fitings=='CF' ) { echo 'checked'; } ?>/>&nbsp;Common Fit&nbsp;&nbsp;<input name="salwar_fitings" type="radio" value="EF" <?php //if($salwar_fitings=='EF' || $body_garment=='') { echo 'checked'; } ?> />&nbsp;Easy Fit&nbsp;&nbsp;&nbsp;							  </td>
+                            </tr>-->
+							
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+                        <tr>
+                        <td width="175" align="left" valign="middle" class="form_area_heading"><img src="http://static.sareez.com/images/form_arrow.jpg" />&nbsp;&nbsp;<strong>For Churidar Only</strong></td>
+                        <td colspan="4" align="right" valign="middle" class="form_area_heading1">[ <span class="redText">*</span> marked fields are mandatory ]&nbsp;</td>
+						</tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top">1. Around Thigh </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="around_thigh" id="around_thigh" style="width: 70px;" >
+								<OPTION value="" <?php if($around_thigh==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=14 ;$i<=45;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_thigh==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>&nbsp;in Inches &nbsp;
+							  
+							  <img id="AT" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Thigh' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/around_thigh.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Thigh" ?</strong></p>
+									  <p class="text"> For the salwar or churidar (bottom) place the tape on the widest part of your thai and measure the circumference. It should be tight for churidars and loose for salwars and patialas. </p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top">2. Around Knee </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="around_knee" id="around_knee" style="width: 70px;" >
+								<OPTION value="" <?php if($around_knee==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=8 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_knee==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>&nbsp;in Inches &nbsp;
+							  
+							  <img id="AK" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Knee' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/around_knee.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Knee" ?</strong></p>
+									  <p class="text"> Place the tip of the tape on your knee, bring it straight roun to complete the circle. Make it tight for churidars and loose for salwars and patialas.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top">3. Around Calf </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="around_calf" id="around_calf" style="width: 70px;" >
+								<OPTION value="" <?php if($around_calf==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=8 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_calf==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>&nbsp;in Inches &nbsp;
+							  
+							  <img id="AC" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Calf' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/around_calf.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Calf" ?</strong></p>
+									  <p class="text"> This measurement is taken by placing the tip of the tape on the calf and bringing it round to complete the circle.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top">4. Around Ankle </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="around_ankle" id="around_ankle" style="width: 70px;" >
+								<OPTION value="" <?php if($around_ankle==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=4 ;$i<=15;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_ankle==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>&nbsp;in Inches &nbsp;
+							  
+							  <img id="AAN" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Ankle' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/around_ankle.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Ankle" ?</strong></p>
+									  <p class="text"> Place the tip of the tape on your knee, bring it straight roun to complete the circle. Make it tight for churidars and loose for salwars and patialas.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<!-- for churidar style-->
+															<tr>
+															  <td align="right" valign="top">5. Churidar Style <span class="redText">*</span></td>
+															  <td align="center" valign="top">:</td>
+															  <td colspan="2" align="left" valign="top" class="form_small_ass">
+																<input type="text" class="input_area" name="churidar_style" id="churidar_style" value="<?= $churidar_style;?>" readonly="readonly" />
+																<a href="index.htm" onclick="return hs.htmlExpand(this, { headingText: 'Set Churidar Style' })">
+																<img src="images/search_style_btn.jpg" title="Set Salwar Style" style="cursor:pointer" />																</a>
+																  <div class="highslide-maincontent">
+																  <div class="area">
+																	<?php
+																	//$sql_churidar_style="SELECT * FROM style WHERE style_category='Churidar Style' order by style_name";
+																	//$query_churidar_style = tep_db_query($sql_churidar_style);
+																	//while ($churidar_style_arr = tep_db_fetch_array($query_churidar_style)) { 
+																	?>
+																	 
+																	<div class="popup_area">
+																	<? //echo tep_image(DIR_WS_IMAGES . $churidar_style_arr['style_image'], $churidar_style_arr['style_name'], '107', '107','hspace="5"');?>
+																	<br />
+																	
+																	<div class="setMeasRbox"><INPUT TYPE="radio" NAME="rdo_churidar_style" VALUE="<?= $churidar_style_arr['style_name']?>" <?php if($churidar_style==$churidar_style_arr['style_name']){ echo "CHECKED"; } ?>></div>	<div class="setMeas"><?= $churidar_style_arr['style_name']?></div>
+																	</div>	
+																	<?php //} ?>								
+																	 </div>
+																	<P>&nbsp;</P>
+																	<P align="center">
+																	  <?php //echo tep_image_button('set_style.jpg', 'Set Style','style="cursor:pointer;" onClick="set_churidar_style();return hs.close(this)"'); ?>																	</P>
+																  </div>															  </td>
+															</tr>
+															<tr>
+															  <td align="right" valign="top" class="form_divider">&nbsp;</td>
+															  <td align="center" valign="top" class="form_divider">&nbsp;</td>
+															  <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+															</tr>															
+															<!-- end -->
+							
+							
+							
+							<?php } ?>
+							
+					 <?php if($show_measure=='Sherwani'){?>
+                            
+                            <tr>
+                              <td align="right" valign="top">1. Trouser Inseam <span class="redText">*</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="trouser_inseam" id="trouser_inseam" style="width: 70px;" >
+								<OPTION value="" <?php if($trouser_inseam==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=30 ;$i<=45;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($trouser_inseam==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							   <input type="text" name="trouser_inseam" id="trouser_inseam" size="30" class="input_area" value="<?php echo $trouser_inseam ?>" />&nbsp;in Inches &nbsp;
+							  
+							  <img id="SL" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Trouser Inseam' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Trouser-Inseam�.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Trouser Inseam" ?</strong></p>
+									  <p class="text"> Measure from the crotch, where two legs join to the bottom of the leg.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                            
+					       <tr>
+                              <td align="right" valign="top">2. Around Thigh </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="around_thigh" id="around_thigh" style="width: 70px;" >
+								<OPTION value="" <?php if($around_thigh==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=5 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_thigh==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  <input type="text" name="around_thigh" id="around_thigh" size="30" class="input_area" value="<?php echo $around_thigh ?>" />&nbsp;in Inches &nbsp;
+							  
+							  <img id="ABT" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Thigh' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Thigh�.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Thigh" ?</strong></p>
+									  <p class="text"> Measure around the widest part of the upper leg while standing straight.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<tr>
+                              <td align="right" valign="top">3. Around Knee </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="around_knee" id="around_knee" style="width: 70px;" >
+								<OPTION value="" <?php if($around_knee==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=5 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_knee==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  <input type="text" name="around_knee" id="around_knee" size="30" class="input_area" value="<?php echo $around_knee ?>" />&nbsp;in Inches &nbsp;
+							  
+							  <img id="ABT" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Knee' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Knee.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Knee" ?</strong></p>
+									  <p class="text"> Measure around the knee a bit loose.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<tr>
+                              <td align="right" valign="top">4. Around Calf </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="around_calf" id="around_calf" style="width: 70px;" >
+								<OPTION value="" <?php if($around_calf==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=5 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_calf==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  <input type="text" name="around_calf" id="around_calf" size="30" class="input_area" value="<?php echo $around_calf ?>" />&nbsp;in Inches &nbsp;
+							  
+							  <img id="ABT" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Calf' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Calf.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Calf" ?</strong></p>
+									  <p class="text"> Measure the girth around the largest part of the calf.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<tr>
+                              <td align="right" valign="top">5. Around Ankle </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="around_ankle" id="around_ankle" style="width: 70px;" >
+								<OPTION value="" <?php if($around_ankle==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=5 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($around_ankle==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  <input type="text" name="around_ankle" id="around_ankle" size="30" class="input_area" value="<?php echo $around_ankle ?>" />&nbsp;in Inches &nbsp;
+							  
+							  <img id="ABT" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Around Ankle' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Around-Ankle.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Ankle" ?</strong></p>
+									  <p class="text"> Measure around the ankle a bit loose.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<tr>
+                              <td align="right" valign="top">6. Trouser Length <span class="redText">*</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="trouser_length" id="trouser_length" style="width: 70px;" >
+								<OPTION value="" <?php if($trouser_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=5 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($trouser_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  <input type="text" name="trouser_length" id="trouser_length" size="30" class="input_area" value="<?php echo $trouser_length ?>" />&nbsp;in Inches &nbsp;
+							  
+							  <img id="ABT" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Trouser Length' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Trouser-Length�.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Trouser Length" ?</strong></p>
+									  <p class="text"> Starting from the waistband down to the desired length.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>                          							
+                            
+							<tr>
+                              <td align="right" valign="top"> Trouser Style <span class="redText">&nbsp;</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+								
+								<SELECT class="select_box" name="trouser_style" id="trouser_style" style="width: 160px;" >
+								<!--<OPTION value="" <?php if($trouser_style==''){ ?>selected="selected" <?php } ?>>Select</OPTION>-->
+								
+								<OPTION value="As shown in picture" <?php if($trouser_style=='As shown in picture' || $trouser_style==''){ ?>selected="selected" <?php } ?>>As shown in picture</OPTION>
+								<OPTION value="Normal Pant" <?php if($trouser_style=='Normal Pant'){ ?>selected="selected" <?php } ?>>Normal Pant</OPTION>
+								<OPTION value="Churidar" <?php if($trouser_style=='Churidar'){ ?>selected="selected" <?php } ?>>Churidar</OPTION>
+								<OPTION value="Patiala" <?php if($trouser_style=='Patiala'){ ?>selected="selected" <?php } ?>>Patiala</OPTION>
+								<OPTION value="Dhoti" <?php if($trouser_style=='Dhoti'){ ?>selected="selected" <?php } ?>>Dhoti</OPTION>
+							  </SELECT>							  </td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+					  		<tr>
+                        		<td width="175" align="left" valign="middle" class="form_area_heading"><img src="http://static.sareez.com/images/form_arrow.jpg" />&nbsp;&nbsp;<strong>Shoes/Turban </strong></td>
+                        		<td width="531" colspan="2" align="right" valign="middle" class="form_area_heading1">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+                      		</tr>
+							
+							<tr>
+                              <td width="175">&nbsp;</td>
+                              <td width="531">&nbsp;</td>
+                              <td width="320">&nbsp;</td>
+                              <td width="5">&nbsp;</td>
+                            </tr> 					 
+                           
+							<tr>
+                              <td align="right" valign="top">1. Shoe Length </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="shoe_length" id="shoe_length" style="width: 70px;" >
+								<OPTION value="" <?php if($shoe_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=14 ;$i<=45;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($shoe_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  <input type="text" name="shoe_length" id="shoe_length" size="30" class="input_area" value="<?php echo $shoe_length ?>" />&nbsp;in Inches &nbsp;
+							  
+							  <img id="AT" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Shoe Length' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Shoe Length.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Shoe Length" ?</strong></p>
+									  <p class="text"> Coming Soon. </p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top">2. Shoe Width </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="shoe_width" id="shoe_width" style="width: 70px;" >
+								<OPTION value="" <?php if($shoe_width==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=8 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($shoe_width==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  <input type="text" name="shoe_width" id="shoe_width" size="30" class="input_area" value="<?php echo $shoe_width ?>" />&nbsp;in Inches &nbsp;
+							  
+							  <img id="AK" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Shoe Width' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Shoe-Width.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Shoe Width" ?</strong></p>
+									  <p class="text"> Coming Soon.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top">3. Head Circumference </td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <!--<SELECT class="select_box" name="head_circumference" id="head_circumference" style="width: 70px;" >
+								<OPTION value="" <?php if($head_circumference==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=8 ;$i<=25;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($head_circumference==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>-->
+							  <input type="text" name="head_circumference" id="head_circumference" size="30" class="input_area" value="<?php echo $head_circumference ?>" />&nbsp;in Inches &nbsp;
+							  
+							  <img id="AC" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Head Circumference' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images_2/utsav/Head-circumference.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Head Circumference" ?</strong></p>
+									  <p class="text"> Coming Soon.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>							
+							
+			<?php }?>		
+							
+                     <?php if($show_measure=='Lehnga-Choli'){ ?>
+                            <tr>
+                              <td height="22" align="right" valign="top"><strong>Top</strong></td>
+                              <td align="center" valign="top">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">&nbsp;</td>
+                              <td width="188" rowspan="22" align="center" valign="top"></td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+					       <tr>
+                              <td align="right" valign="top">1. Choli Length <span class="redText">&nbsp;</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="choli_length" id="choli_length" style="width: 70px;" >
+								<OPTION value="" <?php if($choli_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=10 ;$i<=20;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($choli_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>&nbsp;in Inches &nbsp;
+							  
+							  <img id="CL" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Choli Length' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/Choli_length.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Choli Length" ?</strong></p>
+									  <p class="text"> Place the tip of the tape on any side of your neck and bring it down the back to a desired length just below the bust.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td height="22" align="right" valign="top"><strong>Bottom</strong></td>
+                              <td align="center" valign="top">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top">1. Lehnga Style <span class="redText">*</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+								<input type="text" class="input_area" name="lehnga_style" id="lehnga_style" value="<?= $lehnga_style;?>" readonly="readonly" />
+								<a href="index.htm" onclick="return hs.htmlExpand(this, { headingText: 'Set Lehnga Style' })">
+								<img src="images/search_style_btn.jpg" title="Set Lehnga Style" style="cursor:pointer" />								</a>
+								  <div class="highslide-maincontent">
+								  <div class="area">
+									<?php
+									//$sql_lehnga_style="SELECT * FROM style WHERE style_category='Lehnga Style' order by style_name";
+									//$query_lehnga_style = tep_db_query($sql_lehnga_style);
+									//while ($lehnga_style_arr = tep_db_fetch_array($query_lehnga_style)) { 
+									?>
+									 
+									<div class="popup_area">
+									<? //echo tep_image(DIR_WS_IMAGES . $lehnga_style_arr['style_image'], $lehnga_style_arr['style_name'], '107', '107','hspace="5"');?>
+									<br />
+									
+									<div class="setMeasRbox"><INPUT TYPE="radio" NAME="rdo_lehnga_style" VALUE="<?= $lehnga_style_arr['style_name']?>" <?php if($lehnga_style==$lehnga_style_arr['style_name']){ echo "CHECKED"; } ?>></div>	<div class="setMeas"><?= $lehnga_style_arr['style_name']?></div>
+									</div>	
+									<?php //} ?>								
+									 </div>
+									<P>&nbsp;</P>
+									<P align="center">
+									  <?php //echo tep_image_button('set_style.jpg', 'Set Style','style="cursor:pointer;" onClick="set_lehnga_style();return hs.close(this)"'); ?>									</P>
+								  </div>							  </td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+					       <tr>
+                              <td align="right" valign="top">2. Lehenga Length <span class="redText">&nbsp;</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+							  <SELECT class="select_box" name="lehenga_length" id="lehenga_length" style="width: 70px;" >
+								<OPTION value="" <?php if($lehenga_length==''){ ?>selected="selected" <?php } ?>>Select</OPTION>
+								<?php
+								 for($i=30 ;$i<=60;$i=$i+(1/2)){
+								  ?>
+								<OPTION value="<?php echo $i ?>" <?php if($lehenga_length==$i){ ?>selected="selected" <?php } ?>><?php echo $i ?></OPTION>
+								<?php } ?>
+							  </SELECT>&nbsp;in Inches &nbsp;
+							  
+							  <img id="LL" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Lehenga Length' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="images/utsav/S2706.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Lehenga Length" ?</strong></p>
+									  <p class="text"> Place the tip of the tape on any side of your waist or hipbone, depending on where you wear you lehnga or saree. Then let it fall down straight. Hold it slightly above your ankles.</p></td>
+									</tr>
+								  </table>	
+							  </div>								</td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+		                    <tr>
+                              <td align="right" valign="top">3. Back Elastic <span class="redText">&nbsp;</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass"><input name="elastic" id="elastic" type="checkbox" value="yes" />
+							  <img id="BE" src="http://static.sareez.com/images/help_icon.jpg" style="cursor:pointer" alt="Help" border="0" title="Help" onclick="return hs.htmlExpand(this, { headingText: 'Back Elastic' })" />
+							  <div class="highslide-maincontent"> 
+								 <table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+									<tr>
+									  <td width="360" align="left" valign="top" class="popup1_right"><img src="http://static.sareez.com/images/utsav/noImg.jpg" /></td>
+									  <td width="220" align="left" valign="top" class="popup1_left">
+									  <p class="heading_text"><strong>What is "Back Elastic" ?</strong></p>
+									  <p class="text"> Its recommended </p></td>
+									</tr>
+								  </table>	
+							  </div>							  </td>
+                            </tr>
+                            <tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+							<?php } ?>
+							<tr>
+                              <td align="right" valign="top">Instruction (if any)<br />Maximum 500 characters<span class="redText">&nbsp;</span></td>
+                              <td align="center" valign="top">:</td>
+                              <td colspan="2" align="left" valign="top" class="form_small_ass">
+<textarea id="instructions" name="instructions" class="carttext" cols="45" rows="3" onFocus="textCounter(document.measure.instructions,document.measure.remLen,500)" onKeyDown="textCounter(document.measure.instructions,document.measure.remLen,500)" onClick="textCounter(document.measure.instructions,document.measure.remLen,500)"><?php echo $instructions ?></textarea>
+							  <BR>
+							  <SPAN class="carttext">You have
+							  <INPUT readonly="" name="remLen" type="text" class="input_area" value="500" style="border-width:0;text-align:center;width:40px">
+							  characters left.</SPAN>							  
+							  
+							  <div class="highslide-maincontent"> 
+							  <P>
+							  <img src="http://static.sareez.com/images/utsav/sleeve_length.jpg" />							  </P>
+							  <p>
+							  Starting from the outside edge of shoulder bone and measure upto the desired length.							  </p>
+							  </div>							  </td>
+                            </tr>
+							<tr>
+                              <td align="right" valign="top" class="form_divider">&nbsp;</td>
+                              <td align="center" valign="top" class="form_divider">&nbsp;</td>
+                              <td colspan="2" align="left" valign="top" class="form_divider">&nbsp;</td>
+                            </tr>
+                        </table></td>
+                      </tr>
+                    </table>
+					<table cellpadding="0" cellspacing="0" class="address_book_btn">
+						<tr>
+							<td colspan="2" class="accOdrNumber">						  </td>
+							<td width="396" class="accOdrStat">
+							<?php //echo tep_image_submit('button_confirm.gif','Confirm'); ?>
+							&nbsp;<img src="images/reset.jpg" onClick="document.measure.reset()" border="0" style="cursor:pointer;" /></td>
+						</tr>
+					</table>
+					
+					
+			  </td>
+			</tr>
+		</table>
+		</form>
+		
+		</td>
+	</tr>
+</table>
+

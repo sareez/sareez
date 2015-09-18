@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <modules>
+    <Heaven7_Previousnext>
+      <version>1.0.0</version>
+    </Heaven7_Previousnext>
+  </modules>
+ 
+
+  <default>
+    <catalog>
+      <previousnext></previousnext>
+    </catalog>
+  </default>
+  
+  
+  <frontend>
+        <layout>
+            <updates>
+                <previousnext>
+                    <file>previousnext.xml</file>
+                </previousnext>
+            </updates>
+        </layout>
+    </frontend>
+    
+	<global>
+        <models>
+            <previousnext>
+                <class>Heaven7_Previousnext_Model</class>
+            </previousnext>
+        </models>
+
+        <helpers>
+            <previousnext>
+                <class>Heaven7_Previousnext_Helper</class>
+            </previousnext>
+        </helpers>
+     </global>
+     
+     <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Heaven71</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <heaven7_previousnext>
+                                            <title>Heaven7 Extended Previous Next Product</title>
+                                        </heaven7_previousnext>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+            <translate>
+                <modules>
+                    <Heaven7_Previousnext>
+                        <files>
+                            <default>Heaven7_Extendedpreviousnext.csv</default>
+                        </files>
+                    </Heaven7_Previousnext>
+                </modules>
+            </translate>
+    </adminhtml>
+
+    <default>
+        <heaven7_previousnext>
+            <general>
+                <enabled_select>1</enabled_select>
+                <position_select>both</position_select>
+            </general>
+            <previous>
+                <enabled_select>1</enabled_select>
+                <type_select>link</type_select>
+                <openin_select>same_tab</openin_select>
+                <label>« Previous (#product#)</label>
+            </previous>
+            <next>
+                <enabled_select>1</enabled_select>
+                <type_select>link</type_select>
+                <openin_select>same_tab</openin_select>
+                <label>Next » (#product#)</label>
+            </next>
+        </heaven7_previousnext>
+    </default>
+</config>

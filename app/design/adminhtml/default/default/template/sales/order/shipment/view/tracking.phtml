@@ -1,0 +1,222 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+date_default_timezone_set("Asia/Kolkata");
+?>
+<?php /** @var $this Mage_Adminhtml_Block_Sales_Order_Shipment_View_Tracking */ ?>
+<?php echo $this->getLayout()->createBlock('core/html_calendar')->setTemplate('page/js/calendar.phtml')->toHtml();?>
+<?php echo $this->getChildHtml('html_calendar') ?>
+
+<div class="field-row grid" id="shipment_tracking_info">
+<table cellspacing="0" class="data">
+    <col width="100" />
+    <col />
+    <col />
+    <col width="80" />
+    <thead>
+        <tr class="headings">
+            <th width="20%"><?php echo Mage::helper('sales')->__('SKU') ?></th>
+            <th width="20%"><?php echo Mage::helper('sales')->__('Stitching Id') ?></th>
+            <th width="20%"><?php echo Mage::helper('sales')->__('Courier Name') ?></th>
+            <th width="15%"><?php echo Mage::helper('sales')->__('Shipping Date') ?></th>
+            <th width="15%"><?php echo Mage::helper('sales')->__('Tracking Number') ?></th>
+            <th width="10%"><?php echo Mage::helper('sales')->__('Action') ?></th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <?php
+			$_order = $this->getShipment()->getOrder();
+			$orderid = $_order->getEntityId();
+			$resource = Mage::getSingleton('core/resource');
+			$readConnection = $resource->getConnection('core_read');
+			$query = "SELECT * FROM ".$resource->getTableName('sales_flat_order_item_stitching')." WHERE `order_id`='".$orderid."' and `stitchingstatus_id`='14' ";
+			//echo $query;
+			$results = $readConnection->fetchAll($query);
+			//$stitchingids = $results[0]['unique_stitching_id'];
+			
+			/*echo '<pre>'; print_r($results); echo "<br>";
+			$stitchingIdArr=array();
+			for($x=0; $x<count($results); $x++){
+				$stitchingIdArr[$x] = $results[$x]['unique_stitching_id'];	 
+			}
+			echo '<pre>'; print_r($stitchingIdArr); echo "AAAA<br>";*/
+
+            $_tracks = $this->getShipment()->getAllTracks();
+			$stitchingIdViewArr=array();
+			$i=0;
+			foreach ($_tracks as $_track){
+				//$aa[$i] = $this->escapeHtml($_track->getUnique_stitching_id());
+				$stitchingIdViewArr[] = $this->escapeHtml($_track->getUnique_stitching_id());
+			}
+			//echo "<pre>"; print_r($stitchingIdViewArr);
+			
+			?>
+            
+            <!--<input class="input-text" type="text" id="unique_stitching_id" name="unique_stitching_id" value="" />-->
+            <!--<td>
+            <select name="unique_stitching_id" class="select" style="width:110px">
+                    <option value="0">--Select One--</option>
+                    <?php for($x=0; $x<count($results); $x++){
+						//foreach ($_tracks as $_track){
+							//if($this->escapeHtml($_track->getUnique_stitching_id()) <> $results[$x]['unique_stitching_id'] ){
+							$ss = $results[$x]['unique_stitching_id'];	 
+							if(!in_array($ss, $stitchingIdViewArr)) { ?>
+                    <option value="<?php echo $results[$x]['unique_stitching_id']; ?>"><?php echo $results[$x]['unique_stitching_id']; ?> (<?php echo $results[$x]['sku']; ?>)</option>
+                    <?php //}}
+					
+					}} ?>
+             </select>
+            </td>-->
+            
+            <td>
+            <?php $y=1; for($x=0; $x<count($results); $x++){ ?>
+            <input class="input-text" type="text" id="tracking_sku" name="sku[]" value="<?php echo $results[$x]['sku']; ?>" />
+            <div style="margin-top:2px;">&nbsp;</div>
+            <?php } ?>
+            </td>
+            
+            <td>
+            <?php $y=1; for($x=0; $x<count($results); $x++){ ?>
+            <input class="input-text" type="text" id="tracking_unique_stitching_id" name="unique_stitching_id[]" value="<?php echo $results[$x]['unique_stitching_id']; ?>" />
+            <div style="margin-top:2px;">&nbsp;</div>
+            <?php } ?>
+            </td>
+            
+            <td>
+                <select name="carrier" class="select" style="width:210px" onchange="selectCarrier(this)">
+                    <?php foreach ($this->getCarriers() as $_code=>$_name): ?>
+                    <option value="<?php echo $_code ?>"><?php echo $this->escapeHtml($_name) ?></option>
+                    <?php endforeach; ?>
+                    <option value="FirstFlight">FirstFlight</option>
+                    <option value="DTDC">DTDC</option>
+                    <option value="INDIA_POST">INDIA POST</option>
+                    <option value="FedEx_COD">FedEx COD</option>
+                    <option value="FirstFlight_COD">FirstFlight COD</option>
+                    <option value="skynet">Skynet</option>
+                    <option value="megacitycourier">Megacity Courier</option>
+                    <option value="SkyNetDomestic">SkyNet Domestic</option>
+                    <option value="handDelivery">Hand Delivery</option>
+                </select>
+            </td>
+            <td>
+            <input class="input-text" type="hidden" id="tracking_title" name="title" value="" />
+            <input class="input-text" type="text" id="tracking_date" name="tracking_date" value="<?php echo date("Y-m-d H:i:s");?>" />
+<script type="text/javascript">
+// <![CDATA[
+Calendar.setup({
+inputField : 'tracking_date',
+ifFormat : '%Y-%m-%d %H:%M:%S',
+//ifFormat : '%m-%d-%Y',
+showsTime: true,
+// button : 'date_select_trig',
+singleClick : true,
+//disableFunc: function(date) {
+////disable previous day in datepicker
+//var now= new Date();
+//if(date.getFullYear()<now.getFullYear())
+//{
+//return true;
+//}
+//if(date.getFullYear()==now.getFullYear())
+//{
+//if(date.getMonth()<now.getMonth())
+//{
+//return true;
+//}
+//}
+//if(date.getMonth()==now.getMonth())
+//{
+//if(date.getDate()<now.getDate())
+//{
+//return true;
+//}
+//}
+//},
+});
+// ]]>
+</script>
+            </td>
+            <td><input class="input-text" type="text" id="tracking_number" name="number" value="" /></td>
+            <td class="last">
+			<?php echo $this->getSaveButtonHtml() ?>
+            <br /><br />Send Mail to Customer&nbsp; <input type="checkbox" name="sendMail" value="1" checked="checked"/>
+            </td>
+        </tr>
+    </tfoot>
+<?php if($_tracks = $this->getShipment()->getAllTracks()): ?>
+    <tbody>
+    <?php $i=0;foreach ($_tracks as $_track):$i++ ?>
+        <tr class="<?php echo ($i%2==0)?'even':'odd' ?>">
+            <td>
+			<?php 
+			//echo $this->escapeHtml($_track->getSku());
+			$pieces = explode(",", $this->escapeHtml($_track->getSku()));
+			for($i=0; $i<count($pieces); $i++){
+				echo $pieces[$i]."<br>";
+			}
+			?>
+            
+            </td>
+            <td><?php //echo $this->escapeHtml($_track->getUnique_stitching_id()) ?>
+            <?php 
+			//echo $this->escapeHtml($_track->getSku());
+			$pieces = explode(",", $this->escapeHtml($_track->getUnique_stitching_id()));
+			for($i=0; $i<count($pieces); $i++){
+				echo $pieces[$i]."<br>";
+			}
+			?>
+            </td>
+            <td><?php echo $this->escapeHtml($_track->getTitle()); ?><?php //echo $this->escapeHtml($this->getCarrierTitle($_track->getCarrierCode())) ?></td>
+            <td><?php echo $this->escapeHtml($_track->getShipping_date()) ?></td>
+            <td>
+                <?php if ($_track->isCustom()): ?>
+                <?php echo $this->escapeHtml($_track->getNumber()) ?>
+                <?php else: ?>
+                <a href="#" onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($_track) ?>','trackorder','width=800,height=600,resizable=yes,scrollbars=yes')"><?php echo $this->escapeHtml($_track->getNumber()) ?></a>
+                <div id="shipment_tracking_info_response_<?php echo $_track->getId() ?>"></div>
+                <?php endif; ?>
+            </td>
+            <td class="last"><a href="#" onclick="deleteTrackingNumber('<?php echo $this->getRemoveUrl($_track) ?>'); return false;"><?php echo Mage::helper('sales')->__('Delete') ?></a></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+<?php endif; ?>
+</table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function selectCarrier(elem) {
+    var option = elem.options[elem.selectedIndex];
+    $('tracking_title').value = option.value && option.value != 'custom' ? option.text : '';
+}
+
+function deleteTrackingNumber(url) {
+    if (confirm('<?php echo Mage::helper('sales')->__('Are you sure?') ?>')) {
+        submitAndReloadArea($('shipment_tracking_info').parentNode, url)
+    }
+}
+//]]>
+</script>

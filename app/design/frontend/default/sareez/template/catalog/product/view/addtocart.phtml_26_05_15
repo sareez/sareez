@@ -1,0 +1,141 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php $adminqty = (int)Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product)->getQty();
+// exit;
+
+ ?>
+<?php if($_product->isSaleable()): ?>
+    <div class="add-to-cart cart_to_add">
+    <div class="opqty">
+        <?php if(!$_product->isGrouped()): ?>
+        <label for="qty"><?php echo $this->__('SELECT QUANTITY :') ?></label>
+        <?php /*?><select class="input-text qty" name="qty" id="qty">
+		<?php $i = 1 ?>
+        <?php do { ?>
+        <option value="<?php echo $i?>"><?php echo $i?><?php $i++ ?></option>
+        <?php } while ($i <= $adminqty) ?></select><?php */?>
+        
+        
+        <?php if($adminqty <= 0){?>
+         <select class="input-text qty" name="qty" id="qty">
+		<?php for($qty=1; $qty<=25; $qty++){ ?>
+        <option value="<?php echo $qty; ?>"><?php echo $qty; ?></option>
+        <?php } ?>
+        </select>
+        
+        <?php } else { ?>
+        
+        <select class="input-text qty" name="qty" id="qty">
+		<?php for($qty=1; $qty<=$adminqty; $qty++){ ?>
+        <option value="<?php echo $qty; ?>"><?php echo $qty; ?></option>
+        <?php } ?>
+        </select>
+        
+        <?php } ?>
+        
+        
+        <?php endif; ?>
+        </div>
+        <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart-edit" onclick="productAddToCartForm.submit(this),windowclose()"><span><span><?php echo $buttonTitle ?></span></span></button>
+        
+		
+		
+		
+		
+		
+		
+		
+		<script>
+		function windowclose(){
+			// top.document.getElementById('light').style.display="none";
+			
+			setTimeout(function(){ windowclose_two(); }, 3000);
+			}
+			
+			function windowclose_two()
+			{
+			 top.document.getElementById('light').style.display="none";
+			 alert("Your Product has been added to cart successfully!");
+			}
+			
+		</script>
+		
+		
+		
+        
+        
+        
+        
+        
+        
+        
+        
+   
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<?php echo $this->getChildHtml('', true, true) ?>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+<?php endif; ?>

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Npm_Commission>
+            <codePool>local</codePool>
+            <active>true</active>
+        </Npm_Commission>
+    </modules>
+</config>

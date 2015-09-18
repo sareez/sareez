@@ -1,0 +1,116 @@
+<?php
+/**
+ * MagenMarket.com
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Edit or modify this file with yourown risk.
+ *
+ * @category    Extensions
+ * @package     Ma2_PopupLogin free
+ * @copyright   Copyright (c) 2013 MagenMarket. (http://www.magenmarket.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+**/
+/* $Id: popuplogin.phtml 4 2013-11-05 07:30:56Z linhnt $ */
+?>
+
+<div id="ma2popuplogin_src"  style="display:none;">
+	<dl id="tabsLoginRegister" class="tabsLoginRegister tab-list">
+		<dt id="tab_login" class="tab first">
+			<span  style="text-decoration: none;">
+				<?php echo $this->helper('PopupLogin')->__('Login'); ?>
+			</span>
+		</dt>
+		<dd  id="tab-form-login" class="tab-container" style="display:block;">
+			<div class="tab-content">
+				<?php
+				 echo $this->getLayout()->createBlock('customer/form_login')->setTemplate('ma2_popuplogin/form/login.phtml')->toHtml();
+				?>
+			</div>
+		</dd>
+		<dt id="tab_register" class="tab last">
+			<span  style="text-decoration: none;">
+				<?php echo $this->helper('PopupLogin')->__('Register');?>
+			</span>
+		</dt>
+		<dd id="tab-form-register" class="tab-container" style="display:none;">
+			<div class="tab-content">
+			<?php
+			 echo $this->getLayout()->createBlock('customer/form_register')->setTemplate('ma2_popuplogin/form/register.phtml')->toHtml();
+			?>
+			</div>
+		</dd>
+	</dl>
+</div>
+ <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form', true);
+    //]]>
+    </script>
+<script type="text/javascript">
+//<![CDATA[
+	function openMyPopup(){
+    var win = Dialog.info($('ma2popuplogin_src').innerHTML, {
+			className:"ma2_popup magento",
+			id:"ma2popuplogin_new",
+			closable:true,
+			resizable:false,
+			draggable:true,
+			windowClassName:"ma2_popup_login",
+			title:'<?php echo $this->escapeHtml($this->__("Login or Register")); ?>',
+			width:300,
+			minHeight:260,
+			maxHeight:650,
+			recenterAuto:true,
+			zIndex:1000
+		});
+    
+		if($$('#tabsLoginRegister .tab'))
+		{
+			$$('#tabsLoginRegister .tab').each(function(item){
+				item.observe('click', function(event){
+					var tabContainer = item.next('dd');
+					var pwindowHeight = event.target.measure('height');
+					if(tabContainer){
+						$$('#tabsLoginRegister .tab').each(function(item){
+							item.removeClassName('active')
+						});
+						$$('#tabsLoginRegister dd').each(function(item){
+							item.hide()
+						});
+						item.addClassName('active');
+						tabContainer.show();
+						pwindowHeight += tabContainer.measure('height');
+					}
+					Windows.focusedWindow.setSize(300, pwindowHeight+3);
+					Windows.focusedWindow._center();
+				});
+				var login = $('tab-form-login').style.display;
+				var register = $('tab-form-register').style.display;
+				if(login == "none" && register == "none")
+				{
+					$('tab-form-login').style.display = "block";
+					$('tab_register').removeClassName('active');
+					$('tab_login').addClassName('active');
+				}
+				if(login == "block" && register == "none")
+				{
+					$('tab_register').removeClassName('active');
+					$('tab_login').addClassName('active');
+				}
+			});
+			$('ma2_popup_row1').removeClassName('table_window');
+			$('ma2_popup_row1').addClassName('ma2_popup_title');
+			$('ma2_popup_close').addClassName('magento_close');
+			$('ma2_popup_close').addClassName('ma2_popup_close');
+		}
+	}
+// ]]>
+</script>

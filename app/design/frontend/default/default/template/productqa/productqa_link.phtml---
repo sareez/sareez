@@ -1,0 +1,2 @@
+<?php $text = Mage::getStoreConfig('catalog/productqa/link_text'); ?>
+<a onclick="popquetion();" href="javascript:;"><?php echo $text;?></a>

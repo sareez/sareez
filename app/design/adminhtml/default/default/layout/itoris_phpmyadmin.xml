@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+	<itoris_phpmyadmin_admin_index_index>
+		<reference name="head">
+			<action method="setTitle">
+				<params>phpMyAdmin / Itoris Extensions / Magento Admin</params>
+			</action>
+			<action method="addJs">
+				<file>itoris/phpmyadmin/admin/phpmyadmin.js</file>
+			</action>
+		</reference>
+		<reference name="content">
+			<block type="itoris_phpmyadmin/admin_window" name="phpmyadmin_window" />
+		</reference>
+		<reference name="menu">
+			<action method="setActive">
+				<params>system/itoris_extensions/phpmyadmin</params>
+			</action>
+		</reference>
+	</itoris_phpmyadmin_admin_index_index>
+</layout>

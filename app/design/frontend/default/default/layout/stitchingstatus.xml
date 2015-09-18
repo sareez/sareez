@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <stitchingstatus_index_index>
+        <reference name="content">
+            <block type="stitchingstatus/stitchingstatus" name="stitchingstatus" template="stitchingstatus/stitchingstatus.phtml" />
+        </reference>
+    </stitchingstatus_index_index>
+</layout> 

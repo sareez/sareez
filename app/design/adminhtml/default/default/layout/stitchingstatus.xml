@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <stitchingstatus_adminhtml_stitchingstatus_index>
+        <reference name="content">
+            <block type="stitchingstatus/adminhtml_stitchingstatus" name="stitchingstatus" />
+        </reference>
+    </stitchingstatus_adminhtml_stitchingstatus_index>
+</layout>

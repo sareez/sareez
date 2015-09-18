@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <allocationstatus_adminhtml_allocationstatus_index>
+        <reference name="content">
+            <block type="allocationstatus/adminhtml_allocationstatus" name="allocationstatus" />
+        </reference>
+    </allocationstatus_adminhtml_allocationstatus_index>
+</layout>

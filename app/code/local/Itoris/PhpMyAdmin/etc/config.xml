@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<config>
+	<modules>
+		<Itoris_PhpMyAdmin>
+			<version>1.0.1</version>
+		</Itoris_PhpMyAdmin>
+	</modules>
+
+	<admin>
+		<routers>
+			<itoris_phpmyadmin>
+				<use>admin</use>
+				<args>
+					<module>Itoris_PhpMyAdmin</module>
+					<frontName>itoris_phpmyadmin</frontName>
+				</args>
+			</itoris_phpmyadmin>
+		</routers>
+	</admin>
+
+	<adminhtml>
+		<layout>
+			<updates>
+				<itoris_phpmyadmin>
+					<file>itoris_phpmyadmin.xml</file>
+				</itoris_phpmyadmin>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Itoris_PhpMyAdmin>
+					<files>
+						<default>Itoris_PhpMyAdmin.csv</default>
+					</files>
+				</Itoris_PhpMyAdmin>
+			</modules>
+		</translate>
+	</adminhtml>
+
+	<global>
+		<blocks>
+			<itoris_phpmyadmin>
+				<class>Itoris_PhpMyAdmin_Block</class>
+			</itoris_phpmyadmin>
+		</blocks>
+		<models>
+			<itoris_phpmyadmin>
+				<class>Itoris_PhpMyAdmin_Model</class>
+			</itoris_phpmyadmin>
+		</models>
+		<helpers>
+			<itoris_phpmyadmin>
+				<class>Itoris_PhpMyAdmin_Helper</class>
+			</itoris_phpmyadmin>
+		</helpers>
+	</global>
+</config>

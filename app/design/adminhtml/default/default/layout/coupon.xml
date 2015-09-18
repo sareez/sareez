@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <coupon_adminhtml_coupon_index>
+        <reference name="content">
+            <block type="coupon/adminhtml_coupon" name="coupon" />
+			
+			<block type="coupon/adminhtml_coupons" name="coupon2" template="coupon/adminhtml_coupon.phtml" />
+		<!--	template="coupon/adminhtml_coupon.phtml" -->
+			
+        </reference>
+    </coupon_adminhtml_coupon_index>
+</layout>

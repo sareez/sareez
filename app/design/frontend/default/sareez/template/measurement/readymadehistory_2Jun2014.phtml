@@ -1,0 +1,179 @@
+<script type="text/javascript" src="<?php echo $this->getSkinUrl() ?>highslide/wz_tooltip.js"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl() ?>highslide/tip_balloon.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl() ?>highslide/highslide_area1.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl() ?>highslide/highslide.css" />
+<script type="text/javascript" src="<?php echo $this->getSkinUrl() ?>highslide/highslide-with-html.js"></script>
+<script>
+    hs.graphicsDir = '<?php echo $this->getSkinUrl() ?>highslide/graphics/';
+    hs.outlineType = 'rounded-white';
+    hs.showCredits = false;
+    hs.wrapperClassName = 'draggable-header';
+    hs.allowWidthReduction = true;
+    hs.allowHeightReduction = true;
+</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl() ?>highslide/highslide-fun.js"></script>
+<style>
+    .highslide-maincontent {
+        display: none;
+    }
+</style> 
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl() . 'css/popup.css' ?>">
+<?php
+if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+    $customerId = Mage::getModel('customer/session')->getCustomer()->getId();
+}
+
+
+$measurement_id = $this->getRequest()->getParam('m_id');
+/* $mforusermodel = Mage::getModel('measurement/measurementforuser')->getCollection()
+  ->AddFieldToFilter('user_id' , $customerId)
+  ->AddFieldToFilter('measurement_id' , $measurement_id )
+  ->getData();
+ */
+$mformeasurmentmodel = Mage::getModel('measurement/measurementforreadymade')->getCollection()
+        ->AddFieldToFilter('readymade_id', $measurement_id)
+        ->getData();
+?>
+<?php
+if (count($mformeasurmentmodel) > 0) {
+    $measurement_type = $mformeasurmentmodel[0]['readymade_type'];
+
+    if ($measurement_type == 'Blouse-Petticoat') {
+        ?>
+        <div class="page-title">
+            <h3>Blouse ReadyMade Size</h3>
+        </div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td height="30" align="left" valign="middle" width="175"> ReadyMade Size  </td>
+                <td height="30" align="left" valign="middle" width="20">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['blouse_rdmd_reasymade_size'] ?> Inches &nbsp;	
+
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle">Sleeves lenght </td>
+                <td height="30" align="left" valign="middle">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" colspan="1">
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['blouse_rdmd_sleeves_length'] ?> Ft &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle">Blouse Readymade Lengths</td>
+                <td height="30" align="left" valign="middle">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['blouse_rdmd_length'] ?> Inches &nbsp;	
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle">Petticoat Readymade Lengths</td>
+                <td height="30" align="left" valign="middle">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['petticoat_rdmd_length'] ?> Inches &nbsp;	
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle"> Instructions </td>
+                <td height="30" align="left" valign="middle">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >
+                    <?php echo $mformeasurmentmodel[0]['instructions'] ?>
+                </td>
+            </tr>
+        </table>
+
+    <?php } elseif ($measurement_type == 'Lehnga-Choli') { ?>
+        <div class="page-title">
+            <h3>Lahenga ReadyMade Size</h3>
+        </div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td height="30" align="left" valign="middle" width="175"><strong>Ready Made Blouse (Top)</strong></td>
+                <td height="30" align="left" valign="middle" width="20">&nbsp;</td>
+                <td height="30" align="left" valign="middle"></td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle"> ReadyMade Size</td>
+                <td height="30" align="left" valign="middle">Top</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['lehenga_rdmd_readymade_size'] ?> Inches &nbsp;	
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle">Height </td>
+                <td height="30" align="left" valign="middle">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" colspan="1">
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['lehenga_rdmd_height'] ?> Ft &nbsp;
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['lehenga_rdmd_height_2'] ?> Inches &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle">Sleeve Lengths</td>
+                <td height="30" align="left" valign="middle">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['lehenga_rdmd_sleeves_length'] ?> Inches &nbsp;	
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle"><strong>Petticoat (Bottom Skirt)</strong></td>
+                <td height="30" align="left" valign="middle">&nbsp;</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >&nbsp;</td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle"> Instructions </td>
+                <td height="30" align="left" valign="middle">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >
+                    <?php echo $mformeasurmentmodel[0]['instructions'] ?>
+                </td>
+            </tr>
+        </table> 
+    <?php } else { ?>
+        <div class="page-title">
+            <h3>ReadyMade Size</h3>
+        </div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td height="30" align="left" valign="middle" width="175"><strong>Ready Made Blouse (Top)</strong></td>
+                <td height="30" align="left" valign="middle" width="20">&nbsp;</td>
+                <td height="30" align="left" valign="middle"></td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle"> ReadyMade Size  </td>
+                <td height="30" align="left" valign="middle">: </td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['suit_rdmd_readymade_size'] ?> Inches &nbsp;	
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle">Height </td>
+                <td height="30" align="left" valign="middle">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" colspan="1">
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['suit_rdmd_height'] ?> Ft &nbsp;
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['suit_rdmd_height_2'] ?> Inches &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle">Sleeve Lengths</td>
+                <td height="30" align="left" valign="middle">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >
+                    &nbsp;<?php echo $mformeasurmentmodel[0]['suit_rdmd_sleeves_length'] ?> Inches &nbsp;	
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="middle"> Instructions </td>
+                <td height="30" align="left" valign="middle">:</td>
+                <td height="30" align="left" valign="middle" class="form_small_ass" >
+                    <?php echo $mformeasurmentmodel[0]['instructions'] ?>
+                </td>
+            </tr>
+        </table>
+    <?php }
+} else { ?>
+    <table>
+
+        <tr>
+            <td>No record found.</td>
+        </tr>
+
+    </table>
+<?php } ?>

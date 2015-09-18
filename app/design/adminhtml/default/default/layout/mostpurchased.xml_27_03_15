@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <mostpurchased_adminhtml_mostpurchased_index>
+        <reference name="content">
+            <block type="mostpurchased/adminhtml_mostpurchased" name="mostpurchased" />
+        </reference>
+    </mostpurchased_adminhtml_mostpurchased_index>
+</layout>

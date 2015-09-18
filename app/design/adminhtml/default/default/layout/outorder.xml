@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <outorder_adminhtml_outorder_index>
+        <reference name="content">
+            <!--<block type="outorder/adminhtml_outorder" name="outorder" />-->
+			 <block type="outorder/adminhtml_outorder" name="outorder" template="outorder/adminhtml_outorder.phtml" />
+        </reference>
+    </outorder_adminhtml_outorder_index>
+</layout>

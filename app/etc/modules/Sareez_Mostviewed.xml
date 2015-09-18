@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sareez_Mostviewed>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Sareez_Mostviewed>
+    </modules>
+</config> 

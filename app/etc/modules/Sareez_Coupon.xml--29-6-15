@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sareez_Coupon>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Sareez_Coupon>
+    </modules>
+</config> 

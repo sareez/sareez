@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <ordercsv_adminhtml_ordercsv_index>
+        <reference name="content">
+           <!-- <block type="ordercsv/adminhtml_ordercsv" name="ordercsv" /> -->
+           <block type="ordercsv/adminhtml_ordercsv" name="ordercsv2" template="ordercsv/adminhtml_ordercsv.phtml" />
+           
+            
+        </reference>
+    </ordercsv_adminhtml_ordercsv_index>
+</layout>

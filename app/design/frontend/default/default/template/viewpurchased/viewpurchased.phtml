@@ -1,0 +1,354 @@
+<h4><?php echo $this->__('Module List') ?></h4>
+            <?php
+                
+                /*
+                    This shows how to load specific fields from a record in the database.
+                    1) Note the load(15), this corresponds to saying "select * from table where table_id = 15"
+                    2) You can then just use the get(fieldname) to pull specific data from the table.
+                    3) If you have a field named news_id, then it becomes getNewsId, etc.
+                */
+                /*
+                $news = Mage::getModel('viewpurchased/viewpurchased')->load(15);
+                echo $news->getNewsId();
+                echo $news->getTitle();
+                echo $news->getContent();
+                echo $news->getStatus();
+                */
+                
+                /*
+                    This shows an alternate way of loading datas from a record using the database the "Magento Way" (using blocks and controller).
+ 					Uncomment blocks in /app/code/local/Namespace/Module/controllers/IndexController.php if you want to use it.
+
+               */
+                /*
+                $object = $this->getViewPurchased();
+                echo 'id: '.$object['test_id'].'<br/>';
+				echo 'title: '.$object['title'].'<br/>';
+				echo 'content: '.$object['content'].'<br/>';
+				echo 'status: '.$object['status'].'<br/>';
+                */            
+            
+            
+                /*
+                    This shows how to load multiple rows in a collection and save a change to them.
+                    1) The setPageSize function will load only 5 records per page and you can set the current Page with the setCurPage function.
+                    2) The $collection->walk('save') allows you to save everything in the collection after all changes have been made.
+                */
+                /*
+                $i = 0;
+                
+                $collection = Mage::getModel('viewpurchased/viewpurchased')->getCollection();
+                $collection->setPageSize(5);
+                $collection->setCurPage(2);
+                $size = $collection->getSize();
+                $cnt = count($collection);
+                foreach ($collection as $item) {
+                    $i = $i+1;
+                    $item->setTitle($i);
+                    echo $item->getTitle();
+                }
+
+                $collection->walk('save');
+                */
+                
+                /*
+                    This shows how to load a single record and save a change.
+                    1) Note the setTitle, this corresponds to the table field name, title, and then you pass it the text to change.
+                    2) Call the save() function only on a single record.
+                */
+                /*
+                $object = Mage::getModel('viewpurchased/viewpurchased')->load(1);
+                $object->setTitle('This is a changed title');
+                $object->save();
+				*/
+				$object = Mage::getModel('viewpurchased/viewpurchased')->load(1);
+$collection = Mage::getModel('viewpurchased/viewpurchased')->getCollection();
+            ?> 
+            
+            
+            
+            
+            	<div class="bottom-slider">
+    <div class="bottom-slider-top">
+        <div class="bottom-slider-title">
+            <p><span class="bottom-slider-most-viewed" style="color: rgb(231, 73, 72); border-bottom: 2px solid rgb(231, 73, 72);">MOST VIEWED</span><span class="bottom-slider-most-purchased" style="color: rgb(0, 0, 0); border-bottom: 2px solid rgb(255, 255, 255);">MOST PURCHASED</span></p>
+        </div>
+        <div align="right" class="bottom-slider-filter">
+            <p><span class="bottom-slider-7days" style="color: rgb(231, 73, 72);">Last 7 Days</span><span class="bottom-slider-14days" style="color: rgb(0, 0, 0);">Last 14 Days</span><span class="bottom-slider-30days" style="color: rgb(0, 0, 0);">Last 30 Days</span></p>
+        </div>
+    </div>
+        
+    <div class="bottom-sliding-images">
+     <!--   <style >
+	.mvp_1{ margin-left: 70.3421px; border:1px solid red; }
+	.mvp_2{ margin-left: 766px; border:1px solid blue; }
+	.mvp_3{ margin-left: -695.658px; border:1px solid green; }
+	</style>-->
+        <div class="most-viewed-7days" style="display: block;">
+
+
+<!-- 7 Days -->
+	<?php   
+	$products_most_viewed7 = $this->getMostViewedSeven();    
+	$mvp = 1;
+    foreach($products_most_viewed7 as $mostViewed){
+    ?>
+    
+	<?php if($mvp==1){ ?>
+    <div class="bottom-slider-01" style="margin-left: 70.3421px; ">
+    <?php } ?>
+    
+    <?php if($mvp==5){ ?>
+    <div class="bottom-slider-02" style="margin-left: 766px; ">
+    <?php } ?>
+    
+    <?php if($mvp==9){ ?>
+    <div class="bottom-slider-03" style="margin-left: -695.658px; ">
+    <?php } ?>
+    
+    <div class="bottom-slide-image img123">
+    <a href="<?php echo $mostViewed->getProductUrl(); ?>">
+    <img src="<?php echo $this->helper('catalog/image')->init($mostViewed, 'small_image')->resize(195, 264); ?>" width="195">
+    </a>
+    
+        <div>
+            <p class="bottom-slide-price">$ <?php echo number_format($mostViewed->getPrice(), 2, '.', ''); ?></p><a href="<?php echo $mostViewed->getProductUrl(); ?>">
+            <p class="bottom-slide-shopnow">SHOP NOW </p></a>
+        </div>
+    </div>
+    
+     <?php if($mvp==4 || $mvp==8 || $mvp==12){ ?></div><?php } ?>
+    
+    <?php
+	$mvp++;
+    }
+    ?>
+
+            </div>            
+      
+     
+          <div class="most-viewed-14days" style="display: none;">
+          
+	<?php    
+		$products_most_viewed14 = $this->getMostViewedFourteen();   
+	$mvp14 = 1;
+    foreach($products_most_viewed14 as $mostViewed14){
+    ?>
+    
+    	<?php if($mvp14==1){ ?>
+    <div class="bottom-slider-01" style="margin-left: 70.3421px;">
+    <?php } ?>
+    
+    <?php if($mvp14==5){ ?>
+    <div class="bottom-slider-02" style="margin-left: 766px;">
+    <?php } ?>
+    
+    <?php if($mvp14==9){ ?>
+    <div class="bottom-slider-03" style="margin-left: -695.658px;">
+    <?php } ?>
+    
+    <div class="bottom-slide-image img123">
+    <a href="<?php echo $mostViewed14->getProductUrl(); ?>">
+    <img src="<?php echo $this->helper('catalog/image')->init($mostViewed14, 'small_image')->resize(190, 264); ?>" width="190">
+    </a>
+    
+        <div>
+            <p class="bottom-slide-price">$ <?php echo number_format($mostViewed14->getPrice(), 2, '.', ''); ?></p><a href="<?php echo $mostViewed14->getProductUrl(); ?>">
+            <p class="bottom-slide-shopnow">SHOP NOW </p></a>
+        </div>
+    </div>
+    
+    <?php if($mvp14==4 || $mvp14==8 || $mvp14==12){ ?></div><?php } ?>
+    
+        <?php
+	$mvp14++;
+    }
+    ?>
+          
+          
+
+                                    
+		</div>   
+           
+        <div class="most-viewed-30days" style="display: none;">
+        
+        
+	<?php      
+			$products_most_viewed30 = $this->getMostViewedThirty();   
+	$mvp = 1;
+    foreach($products_most_viewed30 as $mostViewed){
+    ?>
+    
+	<?php if($mvp==1){ ?>
+    <div class="bottom-slider-01" style="margin-left: 70.3421px;">
+    <?php } ?>
+    
+    <?php if($mvp==5){ ?>
+    <div class="bottom-slider-02" style="margin-left: 766px;">
+    <?php } ?>
+    
+    <?php if($mvp==9){ ?>
+    <div class="bottom-slider-03" style="margin-left: -695.658px;">
+    <?php } ?>
+    
+    <div class="bottom-slide-image img123">
+    <a href="<?php echo $mostViewed->getProductUrl(); ?>">
+    <img src="<?php echo $this->helper('catalog/image')->init($mostViewed, 'small_image')->resize(190, 264); ?>" width="190">
+    </a>
+    
+        <div>
+            <p class="bottom-slide-price">$ <?php echo number_format($mostViewed->getPrice(), 2, '.', ''); ?></p><a href="<?php echo $mostViewed->getProductUrl(); ?>">
+            <p class="bottom-slide-shopnow">SHOP NOW </p></a>
+        </div>
+    </div>
+    
+    <?php if($mvp==4 || $mvp==8 || $mvp==12){ ?></div><?php } ?>
+    
+	<?php
+	$mvp++;
+    }
+    ?>
+        
+                                  
+		</div>       
+        
+        
+        
+      
+      
+        <div class="most-purchased-7days" style="display: none;">
+	<?php  
+				$products_bs7 = $this->getMostPurchasedSeven();  
+	$mpp = 1;           
+    foreach($products_bs7 as $product_bs7){
+	?>
+    
+	<?php if($mpp==1){ ?>
+    <div class="bottom-slider-01" style="margin-left: 70.3421px;">
+    <?php } ?>
+    
+    <?php if($mpp==5){ ?>
+    <div class="bottom-slider-02" style="margin-left: 766px;">
+    <?php } ?>
+    
+    <?php if($mpp==9){ ?>
+    <div class="bottom-slider-03" style="margin-left: -695.658px;">
+    <?php } ?>
+		
+    
+    
+    <div class="bottom-slide-image img123">
+    <a href="<?php echo $product_bs7->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($product_bs7, 'small_image')->resize(190, 264); ?>" width="190"></a>
+    <div>
+    <p class="bottom-slide-price">$ <?php echo number_format($product_bs7->getPrice(), 2, '.', ''); ?></p><a href="<?php echo $product_bs7->getProductUrl(); ?>"><p class="bottom-slide-shopnow">SHOP NOW</p></a>
+    </div>
+    </div>
+    
+	<?php if($mpp==4 || $mpp==8 || $mpp==12){ ?></div><?php } ?>
+    
+	<?php
+	$mpp++;
+    }
+    ?>
+               
+               
+
+                                    
+                                    
+	</div>
+                                    
+                                    
+                                    
+                                         
+        <div class="most-purchased-14days" style="display: none;">
+        	<?php  
+							$products_bs14 = $this->getMostPurchasedFourteen();  
+	$mpp = 1;           
+    foreach($products_bs14 as $product_bs14){
+	?>
+    
+	<?php if($mpp==1){ ?>
+    <div class="bottom-slider-01" style="margin-left: 70.3421px;">
+    <?php } ?>
+    
+    <?php if($mpp==5){ ?>
+    <div class="bottom-slider-02" style="margin-left: 766px;">
+    <?php } ?>
+    
+    <?php if($mpp==9){ ?>
+    <div class="bottom-slider-03" style="margin-left: -695.658px;">
+    <?php } ?>
+		
+    
+    
+    <div class="bottom-slide-image img123">
+    <a href="<?php echo $product_bs14->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($product_bs14, 'small_image')->resize(190, 264); ?>" width="190"></a>
+    <div>
+    <p class="bottom-slide-price">$ <?php echo number_format($product_bs14->getPrice(), 2, '.', ''); ?></p><a href="<?php echo $product_bs14->getProductUrl(); ?>"><p class="bottom-slide-shopnow">SHOP NOW</p></a>
+    </div>
+    </div>
+    
+	<?php if($mpp==4 || $mpp==8 || $mpp==12){ ?></div><?php } ?>
+    
+	<?php
+	$mpp++;
+    }
+    ?>
+      
+        </div>  
+                                    
+                                    
+                                    
+                                         
+        <div class="most-purchased-30days" style="display: none;">
+        
+	<?php  
+								$products_bs30 = $this->getMostPurchasedThirty(); 
+	$mpp = 1;           
+    foreach($products_bs30 as $product_bs30){
+	?>
+    
+	<?php if($mpp==1){ ?>
+    <div class="bottom-slider-01" style="margin-left: 70.3421px;">
+    <?php } ?>
+    
+    <?php if($mpp==5){ ?>
+    <div class="bottom-slider-02" style="margin-left: 766px;">
+    <?php } ?>
+    
+    <?php if($mpp==9){ ?>
+    <div class="bottom-slider-03" style="margin-left: -695.658px;">
+    <?php } ?>
+		
+    
+    
+    <div class="bottom-slide-image img123">
+    <a href="<?php echo $product_bs30->getProductUrl(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($product_bs30, 'small_image')->resize(195, 264); ?>" width="195"></a>
+    <div>
+    <p class="bottom-slide-price">$ <?php echo number_format($product_bs30->getPrice(), 2, '.', ''); ?></p><a href="<?php echo $product_bs30->getProductUrl(); ?>"><p class="bottom-slide-shopnow">SHOP NOW</p></a>
+    </div>
+    </div>
+    
+	<?php if($mpp==4 || $mpp==8 || $mpp==12){ ?></div><?php } ?>
+    
+	<?php
+	$mpp++;
+    }
+    ?>
+        
+          
+        </div>       
+        
+       
+        
+        
+        <div class="bottom-slider-left-button" style="display: none;">&lt;</div>
+        <div class="bottom-slider-right-button" style="display: none;">&gt;</div>
+    </div>
+	
+	<!--  most-purchase -->
+	
+	
+	
+	
+ </div>

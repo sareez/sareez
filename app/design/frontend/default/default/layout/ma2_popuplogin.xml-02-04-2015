@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+          <action method="addItem"><type>js_css</type><css>prototype/windows/themes/default.css</css></action>
+          <action method="addItem"><type>skin_css</type><css>css/lib/prototype/windows/themes/magento.css</css></action>
+          <action method="addCss"><css>css/ma2_popuplogin/ma2popuplogin.css</css></action>
+          <action method="addJs"><script>prototype/window.js</script></action>
+          <action method="addJs"><script>scriptaculous/scriptaculous.js</script></action>
+        </reference>
+        <reference name="before_body_end">
+          <block type="PopupLogin/popuplogin" name="popup_opendialog_login" as="popup_opendialog_login" after="top.links" template="ma2_popuplogin/popuplogin.phtml"/>
+        </reference>
+    </default>
+    
+    <!-- 
+    <customer_logged_in>
+        <reference name="top.links">
+            <action method="removeLinkByUrl"><url helper="customer/getAccountUrl"/></action>
+            <action method="addLink" translate="label title" module="customer"><label>Log Out</label><url helper="customer/getLogoutUrl"/><title>Log Out</title><prepare/><urlParams/><position>100</position></action>
+        </reference>
+    </customer_logged_in> -->
+    
+    <customer_logged_out>
+        <reference name="top.links">
+            <action method="removeLinkByUrl"><url helper="customer/getLoginUrl"/></action>
+            <action method="addLink" translate="label title" module="customer">
+              <label>Login / Register</label>
+              <url><![CDATA[javascript:openMyPopup();]]></url>
+              <title>Ma2 popup login register</title>
+              <prepare/><urlParams/>
+              <position>100</position>
+            </action>
+        </reference>
+    </customer_logged_out>
+</layout>

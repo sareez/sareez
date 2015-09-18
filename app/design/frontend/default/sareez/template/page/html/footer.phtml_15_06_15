@@ -1,0 +1,168 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="footer">
+<div class="new-footer footer-container">
+    
+     
+	 <div class="footer_col edit_copy1">  
+	   <div class="footer_sareez">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_sareez')->toHtml();?>
+ </div>
+ </div>
+ 
+ <div class="mobile_footer_sareez">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('mobile_footer_sareez')->toHtml();?>
+ </div>
+ 
+<!--newsletter stats-->
+<div class="footer_col edit_copy2"> 
+<div class="new-footer-col new-footer-col-border ">
+
+<?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('newsletter/subscribe.phtml')->toHtml(); ?>
+
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_newslatter')->toHtml();?>
+</div>
+</div>
+
+<!--newsletter end-->
+ 	<!--<div class="footer_col edit_copy3"> 
+          <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_paymentmethod')->toHtml();?>
+	  </div>-->
+      <div class="footer_col edit_copy3"> 
+          <div class="new-footer-col new-footer-col-border">
+<p class="new-footer-title">PAYMENT OPTIONS</p>
+<img alt="paypal logo" src="<?php echo Mage::getBaseUrl(); ?>skin/frontend/default/sareez/images/paypal_logo.png" class="paypal-logo"> <br> <img alt="visa logo" src="<?php echo Mage::getBaseUrl(); ?>skin/frontend/default/sareez/images/visa_logo.png" class="visa-logo"> <br> <img alt="master card logo" src="<?php echo Mage::getBaseUrl(); ?>skin/frontend/default/sareez/images/mastercard_logo.png" class="master-card-logo"> <br> <img alt="diners international logo" src="<?php echo Mage::getBaseUrl(); ?>skin/frontend/default/sareez/images/diners_international.png" class="diners-international-logo"> <br> <img alt="american express logo" src="<?php echo Mage::getBaseUrl(); ?>skin/frontend/default/sareez/images/american_express_logo.png" class="american-express-logo">
+<p><em class="fa fa-bank fa-2x"></em> Bank Transfer</p>
+</div>	  </div>
+	 
+       <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('mobile_payment_options')->toHtml();?>
+	  
+	  <div class="footer_col edit_copy4">  	  
+           <div class="new-footer-col new-footer-col-border">
+<p class="new-footer-title">SHIPPING WITH</p>
+<img alt="fedex logo" src="<?php echo Mage::getBaseUrl(); ?>skin/frontend/default/sareez/images/fedex_logo.png" class="fedex-logo"> <br> <img alt="ups logo" src="<?php echo Mage::getBaseUrl(); ?>skin/frontend/default/sareez/images/ups_logo.png" class="ups-logo"> <br> <img alt="dhl logo" src="<?php echo Mage::getBaseUrl(); ?>skin/frontend/default/sareez/images/dhl_logo.png" class="dhl-logo"> <br> <img alt="tnt logo" src="<?php echo Mage::getBaseUrl(); ?>skin/frontend/default/sareez/images/tnt_logo.png" class="tnt-logo"></div>	  </div>
+	  
+    <!--  <div class="footer_col edit_copy4">  	  
+           <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_shipping')->toHtml();?>
+	  </div>	-->   
+      
+      <div class="footer_col edit_copy5"> 	  
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_contact_withus')->toHtml();?>
+	  </div>		
+    
+	 <div class="mobile_connect"> 	  
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('mobile_connect')->toHtml();?>
+	  </div>
+    	
+</div>
+<div class="clear"></div>
+<div class="copy_right">	
+        <?php echo $this->getCopyright() ?>
+     </div>	
+
+</div>
+<a href="#0" class="cd-top">Top</a>
+<script type="text/javascript">
+function showdiv(id)
+{
+	document.getElementById(id).style=" display:block;"
+	}
+function divclose(id){
+	document.getElementById(id).style=" display:none;"
+	}
+	
+
+	
+</script>
+
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('jquery.fancybox.css');?>" media="screen" />
+
+<script>
+jQuery(document).ready(function($){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+		//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+		offset_opacity = 1200,
+		//duration of the top scrolling animation (in ms)
+		scroll_top_duration = 700,
+		//grab the "back to top" link
+		$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) { 
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+
+});
+</script>
+
+<!-- LaDesk Live Chat Service for websites -->
+<!--<div id='laPlaceholder'></div>
+<script type="text/javascript">
+(function(d,t) {
+var script = d.createElement(t); script.id = 'la_x2s6df8d'; script.async = true;
+script.src = '//support.sareez.com/scripts/track.js';
+var image = d.createElement('img'); script.async = true;
+image.src = '//support.sareez.com/scripts/pix.gif';
+script.onload = script.onreadystatechange = function() {
+var rs = this.readyState; if (rs && (rs != 'complete') && (rs != 'loaded')) return;
+LiveAgentTracker.createButton('223728ad', this);
+};
+var placeholder = document.getElementById('laPlaceholder');
+placeholder.parentNode.insertBefore(script, placeholder);
+placeholder.parentNode.insertBefore(image, placeholder);
+placeholder.parentNode.removeChild(placeholder);
+})(document, 'script');
+</script>-->
+
+
+<?php if($this->getRequest()->getModuleName()=='catalog' && 
+$this->getRequest()->getControllerName()=='product'){
+    Mage::registry('current_product'); ?>
+    
+<?php
+	//echo "chinmay1232";
+} else { ?>
+	<script src="<?php echo $this->getSkinUrl('js/jquery.min1.js');?>"></script>
+<script src="<?php echo $this->getSkinUrl('js/main.js');?>"></script>
+	
+<?php }
+?>
+
+

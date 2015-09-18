@@ -1,0 +1,121 @@
+<?php 
+
+
+// print_r($this->orderProcess());
+
+
+require_once("app/Mage.php");
+$app = Mage::app('');
+
+$salesModel=Mage::getModel("sales/order");
+$salesCollection = $salesModel->getCollection();
+foreach($salesCollection as $order)
+{
+    
+    $orderId= $order->getIncrementId();
+    echo $orderId;
+    $orderIncrementId = $orderId;
+    $order = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId);
+    $items = $order->getAllVisibleItems();
+   
+  
+    
+    
+        foreach($items as $item):
+              ?>
+<table width="100%" border="0" cellpadding="3" cellspacing="3">
+
+  <tr>
+      <td><b>Item Id</b></td>
+    <td><b>Product Id</b></td>
+    <td><b>Name</b></td>
+    <td><b>SKU</b></td>
+    <td><b>Quantity</b></td>
+    <td><b>Stock</b></td>
+    <td><b>Option Product</b></td>
+    <td><b>Option Product Price</b></td>
+
+  </tr>
+  <tr>
+      <td><?php echo $item->getItemId(); ?><?php //echo $item->getCatalogmaster_id();  ?>
+  <?php   
+  
+$product = Mage::getModel('catalog/product'); 
+$productCollection = $product->getCollection()
+->addAttributeToSelect('*');
+
+
+foreach ( $productCollection as $_product ) {
+    echo $_product->getCatalogmaster_id().'<br/>';        
+}
+
+?>
+
+      
+      
+      </td>
+    <td><?php echo $item->getProductId(); ?></td>
+       <td><?php echo $item->getName(); ?></td>
+    <td><?php echo $item->getSku(); ?></td>
+    
+  
+    <td><?php echo $item->getQtyOrdered(); ?></td>
+      <td><?php  
+      $product = Mage::getModel('catalog/product')->load($item->getProductId());
+      echo $qty = $product->getStockItem()->getQty(); ?></td>
+      
+      <td><?php
+    $product = Mage::getModel("catalog/product")->load($item->getId()); //product id
+    foreach ($product->getOptions() as $_option) {
+        $values = $_option->getValues();
+        foreach ($values as $v) {
+            print_r($v->getTitle());
+            echo " | ";
+            echo $v->price; 
+            echo "<br />";
+        }
+    }
+?></td>
+      
+      <td></td>
+      
+  </tr>
+</table>
+<?php
+            
+ 
+        endforeach;
+    
+    
+}
+?>
+
+
+<!--
+<form action="" method="get" enctype="multipart/form-data">
+<table width="100%" border="0" cellpadding="3" cellspacing="3">
+  <tr>
+    <td width="14%">&nbsp;</td>
+    <td width="2%">&nbsp;</td>
+    <td width="84%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Browse</td>
+    <td>:</td>
+    <td><input name="" type="text" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="Order Process" />&nbsp;&nbsp;
+      <input type="submit" name="button2" id="button2" value="Order Request" /></td>
+  </tr>
+</table>
+
+
+</form>
+-->
+
+
+
+

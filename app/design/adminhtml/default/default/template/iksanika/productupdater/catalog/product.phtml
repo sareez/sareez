@@ -1,0 +1,128 @@
+<?php
+
+/**
+ * Iksanika llc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.iksanika.com/products/IKS-LICENSE.txt
+ *
+ * @category   Iksanika
+ * @package    Iksanika_Productupdater
+ * @copyright  Copyright (c) 2013 Iksanika llc. (http://www.iksanika.com)
+ * @license    http://www.iksanika.com/products/IKS-LICENSE.txt
+ */
+
+?>
+<?php
+$url_correncyconvert = 'catalogmaster/adminhtml_catalogmaster/getcatalogdropdown/';
+$url_keycorrencyconvert = $this->getUrl($url_correncyconvert);?>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+        function getcatalog(id) {
+			jQuery('#productGrid_filter_manufacturers_id').val(id);
+			
+            new Ajax.Request( '<?php echo $url_keycorrencyconvert ?>' ,
+                             {
+                                method:'post',  parameters: {id :id },
+        onSuccess: function(transport) {
+        var response = transport.responseText;
+        jQuery('#catalogmasters_id').html(response);  },  onFailure: function() {
+        alert('Something went wrong...');
+        }});
+        }
+        function setcatalogmaster_id(id)
+        {
+           
+           jQuery('#productGrid_filter_catalogmaster_id').val(id);
+          
+        }
+         function opengriddiv()
+        {
+           
+           jQuery('#productGrid').show();
+          
+        }
+        
+		function resetfilter()
+		{
+		jQuery('#productGrid_filter_manufacturers_id').val('');	
+		jQuery('#productGrid_filter_catalogmaster_id').val('');
+		
+		
+		jQuery("#reset").on("click", function () {
+        jQuery('#my_select').prop('selectedIndex','');
+        });
+		
+		
+		productGridJsObjectIKSProductupdater.doFilter()
+		
+		
+		
+		
+
+
+
+
+		
+		
+		
+		}
+</script>
+    <?php
+    $manufacturercollection = Mage::getModel('manufacturers/manufacturers')->getCollection()
+            ->addFieldToSelect('manufacturers_id')
+            ->addFieldToSelect('manufacturers_name')								
+           // ->addFieldToFilter('status', 1)
+		    ->setOrder('manufacturers_name','ASC')
+            ->getData();			
+            
+    $manufacturer_array = array();
+    $count =1;
+    ?>
+         
+	
+
+    <div class="content-header">
+        <table cellspacing="0">
+            <tr>
+                <td style="width:30%;"><h3 class="icon-head head-products"><?php echo $this->_headerText ?></h3></td>
+                <td class="a-left">
+            Manufacturer Name :        
+           <select name="manufacturers_id" onchange="getcatalog(this.value)" id="my_select">
+            <option value=''> Please Select </option>
+         <?php
+	  	foreach($manufacturercollection as $manufacturer)
+		{ ?>               
+		<option value="<?php echo $manufacturer['manufacturers_id']; ?>">
+		<?php echo $manufacturer['manufacturers_name']; ?>
+                </option> 
+		<?php
+		}
+                ?>
+	  </select>
+           &nbsp;
+          
+             <span id="catalogmasters_id"> </span>
+            
+             <button style="" onclick="productGridJsObjectIKSProductupdater.doFilter();" class="scalable task" type="button" title="Search" ><span><span><span>Search</span></span></span></button>
+             
+             <button onclick="resetfilter();" class="scalable task" type="button" title="Search" id="reset" ><span><span><span>Reset</span></span></span></button>
+             
+                </td>
+                <td class="a-right">
+                    <?php echo $this->getButtonsHtml() ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <?php echo $this->getStoreSwitcherHtml() ?>
+
+    <div>
+        <?php echo $this->getGridHtml() ?>
+    </div>

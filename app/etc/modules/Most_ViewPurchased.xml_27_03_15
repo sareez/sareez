@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Most_ViewPurchased>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Most_ViewPurchased>
+    </modules>
+</config> 

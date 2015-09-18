@@ -1,0 +1,221 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * One page checkout payment methods
+ *
+ * @var $this Mage_Checkout_Block_Onepage_Payment_Methods
+ */
+?>
+
+<?php
+    $methods = $this->getMethods();
+    $oneMethod = count($methods) <= 1;
+?>
+<?php if (empty($methods)): ?>
+    <dt>
+        <?php echo $this->__('No Payment Methods') ?>
+    </dt>
+<?php else:
+    foreach ($methods as $_method):
+       $_code = $_method->getCode();
+	  
+?>
+    <dt>
+    
+    
+    
+    <?php if($_code=="paypal_standard"){ ?>
+    
+    <?php if(!$oneMethod): ?>
+        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->escapeHtml($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
+    <?php else: ?>
+        <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" /></span>
+        <?php $oneMethod = $_code; ?>
+    <?php endif; ?>
+       <?php /*?> <label for="p_method_<?php echo $_code ?>"><?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label><?php */?>
+        
+<label for="p_method_<?php echo $_code ?>"><td align="left" width="96%"><img class="paypal_icon" src="<?php echo $this->getSkinUrl('images/paypal.png'); ?>" align="left">
+<div><span class="mark_payment">?
+ <div id="h_paypal">PayPal accepts all major credit and debit  cards including VISA, MasterCard, American Express,
+ Discover, Maestro other than PayPal Balance.<br>On PayPal page please click on Dont have a PayPal account
+ link to pay using your debit or credit card.</div></span></div></td>
+</label>
+
+    </dt>
+    <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+    <dd>
+        <?php echo $html; ?>
+    </dd>
+    
+    <?php endif; ?>
+    
+    
+    <?php }elseif($_code=="tco"){ ?>
+    
+    
+      <?php if(!$oneMethod): ?>
+        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->escapeHtml($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
+    <?php else: ?>
+        <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" /></span>
+        <?php $oneMethod = $_code; ?>
+    <?php endif; ?>
+       <?php /*?> <label for="p_method_<?php echo $_code ?>"><?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label><?php */?>
+        
+<label for="p_method_<?php echo $_code ?>">
+<td width="96%" align="left"><img class="check_iconpay" align="left" src="<?php echo $this->getSkinUrl('images/2Checkout.png'); ?>">
+<div><span class="mark_payment">?
+ <div id="pop_chout">2Checkout accepts all major credit cards including VISA, MasterCard, 
+ Discover, JCB, American Express, Diners Club.</br>2Checkout.com is an authorized 
+ reseller of Sareez.com</div></span></div></td>
+</label>
+
+    </dt>
+    <?php //if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+    <dd>
+    <ul style="display: none;" id="payment_form_tco" class="form-list">
+    <li class="form-alt">You will be redirected to the 2 checkout website when you place an order.</li>
+    </ul>
+        <?php //echo $html; ?>
+    </dd>
+    
+    <?php //endif; ?>
+    
+    
+    
+    <?php } elseif($_code=="ccavenuepay") { ?>
+    
+    
+     <?php if(!$oneMethod): ?>
+        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->escapeHtml($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
+        
+    <?php else: ?>
+        <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" /></span>
+        <?php $oneMethod = $_code; ?>
+    <?php endif; ?>
+        <?php /*?><label for="p_method_<?php echo $_code ?>"><?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label><?php */?>
+        
+    <label for="p_method_<?php echo $_code ?>">    
+        <td width="96%" align="left"><img class="cc_payment" align="left" src="<?php echo $this->getSkinUrl('images/cc.png'); ?>">
+		<div><span class="mark_payment">?
+		<div id="ave_cc">CC Avenue accepts all major credit and debit cards including American Express, Diners Club, JCB,
+		MasterCard, VISA and Net Banking.</div></span></div></td>
+        </label>
+        
+    </dt>
+    <?php //if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+    <dd>
+    <ul id="payment_form_<?php echo $_code ?>" style="display:none">
+        <li>
+            <?php 
+			echo $this->__('You will be redirected to CCavenuepay website when you place an order.') ?>
+        </li>		
+    </ul>
+        <?php //echo $html; ?>
+    </dd>
+    
+    <?php //endif; ?>
+    
+    
+    
+    <?php } elseif($_code=="banktransfer") { ?>
+    
+    
+    <?php if(!$oneMethod): ?>
+        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->escapeHtml($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
+    <?php else: ?>
+        <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" /></span>
+        <?php $oneMethod = $_code; ?>
+    <?php endif; ?>
+        <!--<label for="p_method_<?php echo $_code ?>"><?php //echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php //echo $this->getMethodLabelAfterHtml($_method) ?></label> -->
+    <label for="p_method_<?php echo $_code ?>">    
+        <td width="96%" align="left"><img class="bank_payment" align="left" src="<?php echo $this->getSkinUrl('images/bank_logo.png'); ?>">
+		<div><span class="mark_payment">?
+		<div id="pop_bankpay">Bank Transfer Payment (Will take 2-3 days extra time to ship)</div>
+		</span></div></td>
+        </label>
+	</dt>
+    <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+    <dd>
+        <?php echo $html; ?>
+    </dd>
+    
+    <?php endif; ?>
+    
+
+    
+    <?php }else { ?>
+    
+    
+     <?php if(!$oneMethod): ?>
+        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->escapeHtml($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
+    <?php else: ?>
+        <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" /></span>
+        <?php $oneMethod = $_code; ?>
+    <?php endif; ?>
+        <label for="p_method_<?php echo $_code ?>"><?php echo $this->escapeHtml($this->getMethodTitle($_method)) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
+    </dt>
+    <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+    <dd>
+        <?php echo $html; ?>
+    </dd>
+    
+    <?php endif; ?>
+    
+    
+    <?php } ?>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<?php endforeach;
+    endif;
+?>
+<?php echo $this->getChildChildHtml('additional'); ?>
+<script type="text/javascript">
+    //<![CDATA[
+    <?php echo $this->getChildChildHtml('scripts'); ?>
+    payment.init();
+    <?php if (is_string($oneMethod)): ?>
+    payment.switchMethod('<?php echo $oneMethod ?>');
+        <?php endif; ?>
+    //]]>
+</script>

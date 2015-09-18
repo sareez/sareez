@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Int_Dailydeals>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Int_Dailydeals>
+    </modules>
+</config> 

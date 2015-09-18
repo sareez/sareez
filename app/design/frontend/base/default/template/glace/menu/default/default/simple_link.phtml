@@ -1,0 +1,6 @@
+<?php $_item = $this->getItem() ?>
+<?php if ($_item instanceof Mage_Core_Block_Abstract):?>
+    <?php echo $_item->toHtml() ?>
+<?php else: ?>
+    <li<?php if($this->getIsFirst() || $this->getIsLast()): ?> class="<?php if($this->getIsFirst()): ?>first<?php endif; ?><?php if($this->getIsLast()): ?> last<?php endif; ?>"<?php endif; ?> <?php echo $_item->getLiParams() ?>><?php echo $_item->getBeforeText() ?><a href="<?php echo $_item->getUrl() ?>" title="<?php echo $_item->getTitle() ?>" <?php echo $_item->getAParams() ?>><?php echo $_item->getLabel() ?></a><?php echo $_item->getAfterText() ?></li>
+<?php endif?>

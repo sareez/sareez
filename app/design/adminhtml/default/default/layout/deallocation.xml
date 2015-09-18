@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <deallocation_adminhtml_deallocation_index>
+        <reference name="content">
+          <!--  <block type="deallocation/adminhtml_deallocation" name="deallocation" />-->
+		  <block type="deallocation/adminhtml_deallocation" name="deallocation" template="deallocation/adminhtml_deallocation.phtml" />
+        </reference>
+    </deallocation_adminhtml_deallocation_index>
+</layout>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ma2_PopupLogin>
+            <version>1.0.0</version>
+        </Ma2_PopupLogin>
+    </modules>
+    
+    <frontend>
+        <routers>
+            <Ma2_PopupLogin>
+                <use>standard</use>
+                <args>
+                    <module>Ma2_PopupLogin</module>
+                    <frontName>PopupLogin</frontName>
+                </args>
+            </Ma2_PopupLogin>
+        </routers>
+        <layout>
+            <updates>
+                <PopupLogin>
+                     <file>ma2_popuplogin.xml</file>
+                </PopupLogin>
+            </updates>
+        </layout>
+    </frontend>
+    
+    <admin>
+    </admin>
+    
+    <global>
+        <helpers>
+            <PopupLogin>
+                <class>Ma2_PopupLogin_Helper</class>
+            </PopupLogin>
+        </helpers>
+        <blocks>
+             <PopupLogin>
+                <class>Ma2_PopupLogin_Block</class>
+             </PopupLogin>
+        </blocks>
+        <models>
+        </models>
+        <resources>
+            <PopupLogin_setup>
+                <setup>
+                    <module>Ma2_PopupLogin</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </PopupLogin_setup>
+            <PopupLogin_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </PopupLogin_write>
+            <PopupLogin_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </PopupLogin_read>
+        </resources>
+    </global>
+</config>

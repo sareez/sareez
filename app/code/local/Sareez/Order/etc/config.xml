@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Sareez_Order>
+      <version>0.0.9</version>
+    </Sareez_Order>
+  </modules>
+  <global>
+    <helpers>
+      <order>
+        <class>Sareez_Order_Helper</class>
+      </order>
+    </helpers>
+	<models>
+	  <order>
+		<class>Sareez_Order_Model</class>
+		<resourceModel>order_mysql4</resourceModel>
+	  </order>
+	</models>
+	<resources>
+	  <salesattribute1428144117_setup>
+		<setup>
+		  <module>Sareez_Order</module>
+		  <class>Mage_Sales_Model_Mysql4_Setup</class>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </salesattribute1428144117_setup>
+	  <salesattribute1428144117_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </salesattribute1428144117_write>
+	  <salesattribute1428144117_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </salesattribute1428144117_read>
+	</resources>
+    <events>
+	<checkout_type_onepage_save_order_after> <!-- identifier of the event we want to catch -->
+        <observers>
+          <checkout_type_onepage_save_order_after_discount_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>order/newordertotalobserver</class> <!-- observers class alias -->
+            <method>saveDiscountTotal</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </checkout_type_onepage_save_order_after_discount_handler>
+	    </observers>
+      </checkout_type_onepage_save_order_after>		
+	<checkout_type_multishipping_create_orders_single> <!-- identifier of the event we want to catch -->
+        <observers>		
+          <checkout_type_multishipping_create_orders_single_discount_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>order/newordertotalobserver</class> <!-- observers class alias -->
+            <method>saveDiscountTotalForMultishipping</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </checkout_type_multishipping_create_orders_single_discount_handler>		
+        </observers>
+      </checkout_type_multishipping_create_orders_single>
+    </events>	
+	 <sales>
+		<quote>
+			<totals>				
+	            <discount_total>
+					<class>order/quote_address_total_discount</class>
+					<after>subtotal,freeshipping,tax_subtotal,shipping</after>
+					<before>grand_total</before>
+				</discount_total> 
+			</totals>
+		</quote>
+            <order_invoice>
+                <totals>				
+	            <discount_total>
+					<class>order/order_invoice_total_discount</class>
+					<after>subtotal,freeshipping,tax_subtotal,shipping</after>
+					<before>grand_total</before>
+				</discount_total> 
+                </totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>				
+	            <discount_total>
+					<class>order/order_creditmemo_total_discount</class>
+					<after>subtotal,freeshipping,tax_subtotal,shipping</after>
+					<before>grand_total</before>
+				</discount_total> 
+                </totals>
+            </order_creditmemo>
+	</sales>
+  </global>
+</config> 

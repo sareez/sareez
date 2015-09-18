@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <easymaintanance translate="label" module="easymaintanance">
+            <label>Easy Site Maintenance</label>
+            <tab>advanced</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>998</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>Maintenance Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Site Maintenance</label>
+                            <comment>enable or disable Site Maintenance</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <allowforadmin translate="label">
+                            <label>Allow Frontend for Admin</label>
+                            <comment>Frontend is allow for logged admin user</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowforadmin>
+                        <allowedIPs translate="label">
+                            <label>Allowed IPs</label>
+                            <comment>IPs that can access Site</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowedIPs>
+                        <logFileName translate="label">
+                            <label>Log file</label>
+                            <comment>Create log file to know who access while site is under maintenance mode.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </logFileName>
+                        <maintenanceHtml translate="label">
+                            <label>Maintenance Page HTML</label>
+                            <comment>Show this HTML content when site is under maintanance</comment>
+                             <frontend_type>editor</frontend_type>
+                            <frontend_model>easymaintanance/adminhtml_system_config_editor</frontend_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </maintenanceHtml>
+                    </fields>
+                </general>
+                <timer translate="label">
+                    <label>Timer Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <timer_enabled translate="label">
+                            <label>Timer?</label>
+                            <comment>enable or disable Timer</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </timer_enabled> 
+                        <timer_text translate="label">
+                            <label>Timer text</label>
+                            <comment>Add text for timer</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </timer_text>
+                        <timer_date translate="label">
+                            <label>Date</label>
+                            <comment>Add Date for set timer</comment>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>easymaintanance/adminhtml_system_config_date</frontend_model> 
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </timer_date>
+                         <timer_hour translate="label">
+                            <label>Hour</label>
+                            <comment>Add Hour in 24-hour format when you want to finish timer</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </timer_hour>
+                         <timer_min translate="label">
+                            <label>Minute</label>
+                            <comment>Add Minute when you want to finish timer</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </timer_min>
+                         <timer_alert translate="label">
+                            <label>Alert Minutes</label>
+                            <comment>Add Minute to notify when timer comes to end</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </timer_alert>
+                           <timer_email translate="label">
+                            <label>Recipient Email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </timer_email>
+                        <timer_email_template translate="label">
+                            <label>Email Template</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </timer_email_template>
+                    </fields>
+                </timer>
+                <contactus translate="label">
+                    <label>Contact Us Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <from_mail translate="label">
+                            <label>Recipient Email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </from_mail>
+                    </fields>
+                </contactus>
+            </groups>
+        </easymaintanance>
+    </sections>
+</config>

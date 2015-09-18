@@ -1,0 +1,422 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php if($item = $this->getItems()->getSize()): ?>
+
+<?php //echo $item ; ?>
+<div class="block block-related">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Related Products') ?></span></strong>
+    </div>
+    <div class="block-content">
+        <p class="block-subtitle"><?php echo $this->__('Check items to add to the cart or') ?>&nbsp;<a href="#" onclick="selectAllRelated(this); return false;"><?php echo $this->__('select all') ?></a></p>
+        <ol class="mini-products-list" id="block-related">
+        <?php foreach($this->getItems() as $_item): ?>
+            <li class="item">
+                <?php if(!$_item->isComposite() && $_item->isSaleable()): ?>
+                    <?php if (!$_item->getRequiredOptions()): ?>
+                        <input type="checkbox" class="checkbox related-checkbox" id="related-checkbox<?php echo $_item->getId() ?>" name="related_products[]" value="<?php echo $_item->getId() ?>" />
+                    <?php endif; ?>
+                <?php endif; ?>
+                <div class="product">
+                    <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(50) ?>" width="50" height="50" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></a>
+                    <div class="product-details">
+                        <p class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->escapeHtml($_item->getName()) ?></a></p>
+                        <?php echo $this->getPriceHtml($_item, true, '-related') ?>
+                        <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                            <a href="<?php echo $this->getAddToWishlistUrl($_item) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </li>
+        <?php endforeach ?>
+        </ol>
+        <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+    $$('.related-checkbox').each(function(elem){
+        Event.observe(elem, 'click', addRelatedToProduct)
+    });
+
+    var relatedProductsCheckFlag = false;
+    function selectAllRelated(txt){
+        if (relatedProductsCheckFlag == false) {
+            $$('.related-checkbox').each(function(elem){
+                elem.checked = true;
+            });
+            relatedProductsCheckFlag = true;
+            txt.innerHTML="<?php echo $this->__('unselect all') ?>";
+        } else {
+            $$('.related-checkbox').each(function(elem){
+                elem.checked = false;
+            });
+            relatedProductsCheckFlag = false;
+            txt.innerHTML="<?php echo $this->__('select all') ?>";
+        }
+        addRelatedToProduct();
+    }
+
+    function addRelatedToProduct(){
+        var checkboxes = $$('.related-checkbox');
+        var values = [];
+        for(var i=0;i<checkboxes.length;i++){
+            if(checkboxes[i].checked) values.push(checkboxes[i].value);
+        }
+        if($('related-products-field')){
+            $('related-products-field').value = values.join(',');
+        }
+    }
+    //]]>
+    </script>
+</div>
+<?php endif ?>
+<?php if($item == '4')
+{
+ ?>
+
+<table width="100%" cellspacing="0" cellpadding="0" class="stripe">
+						<tbody><tr>
+							<td width="10"></td>
+							<td width="148" height="255">
+								<table width="100%" cellspacing="0" cellpadding="0">
+									<tbody><tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_head">SHOP WITH CONFIDENCE</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_txt">SHOPPING ON SAREEZ.COM IS SAFE AND SECURITY GUARANTEED!</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr>
+										<td align="left">
+											<!--<img src="images_2/site_seal.png"  />-->
+											<!--
+											SiteSeal Html Builder Code:
+											Shows the logo at URL https://seal.networksolutions.com/images/basicsqgreen.gif
+											Logo type is  ("NETSB")
+											//-->
+											<script type="text/javascript" language="JavaScript"> SiteSeal("https://seal.networksolutions.com/images/basicsqgreen.gif", "NETSB", "none");</script><a onclick="window.open(&quot;http://seals.networksolutions.com/siteseal_seek/siteseal?v_shortname=NETSB&amp;v_querytype=W&amp;v_search=www.sareez.com&amp;x=5&amp;y=5&quot;,&quot;NETSB&quot;,&quot;width=450,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no&quot;);return false;" href="#"><img oncontextmenu="alert('This SiteSeal is protected');return false;" style="border:none;" src="https://seal.networksolutions.com/images/basicsqgreen.gif"></a>											
+										</td>
+									</tr>	
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_txt">ALL INFORMATION IS ENCRYPTED AND TRANSMITTED WITHOUT ANY RISK USING A SECURE SOCKET LAYER(SSL) PROTOCOL.</td></tr>	
+									<tr><td valign="top" height="5">&nbsp;</td></tr>									
+								</tbody></table>
+							</td>
+							<td width="10"></td>
+						</tr>
+					</tbody></table>
+<?php }
+else if($item == '3' ||$item == '2'){
+ ?>
+ 
+ <table width="100%" cellspacing="0" cellpadding="0" class="stripe">
+						<tbody><tr>
+							<td width="10"></td>
+							<td width="148" height="255">
+								<table width="100%" cellspacing="0" cellpadding="0">
+									<tbody><tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_head">SHOP WITH CONFIDENCE</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_txt">SHOPPING ON SAREEZ.COM IS SAFE AND SECURITY GUARANTEED!</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr>
+										<td align="left">
+											<!--<img src="images_2/site_seal.png"  />-->
+											<!--
+											SiteSeal Html Builder Code:
+											Shows the logo at URL https://seal.networksolutions.com/images/basicsqgreen.gif
+											Logo type is  ("NETSB")
+											//-->
+											<script type="text/javascript" language="JavaScript"> SiteSeal("https://seal.networksolutions.com/images/basicsqgreen.gif", "NETSB", "none");</script><a onclick="window.open(&quot;http://seals.networksolutions.com/siteseal_seek/siteseal?v_shortname=NETSB&amp;v_querytype=W&amp;v_search=www.sareez.com&amp;x=5&amp;y=5&quot;,&quot;NETSB&quot;,&quot;width=450,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no&quot;);return false;" href="#"><img oncontextmenu="alert('This SiteSeal is protected');return false;" style="border:none;" src="https://seal.networksolutions.com/images/basicsqgreen.gif"></a>											
+										</td>
+									</tr>	
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_txt">ALL INFORMATION IS ENCRYPTED AND TRANSMITTED WITHOUT ANY RISK USING A SECURE SOCKET LAYER(SSL) PROTOCOL.</td></tr>	
+									<tr><td valign="top" height="5">&nbsp;</td></tr>									
+								</tbody></table>
+							</td>
+							<td width="10"></td>
+						</tr>
+					</tbody></table>
+                    
+                    <table width="100%" cellspacing="0" cellpadding="0" class="stripe">
+						<tbody><tr>
+							<td width="10"></td>
+							<td width="148" height="113">
+								<table width="100%" cellspacing="0" cellpadding="0">
+									<tbody><tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_head">EASY RETURN POLICY</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_txt">IF YOU DON'T LIKE THE ITEM YOU CAN EASILY RETURN IT.</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr>
+										<td class="rg_panel_fnt_txt">
+											<a rel="nofollow" title="Shipping &amp; Returns" onclick="return hs.htmlExpand(this, { headingText: 'Shipping &amp; Returns' })" href="javascript:void(0);">
+												FIND OUT HOW
+											</a>
+											<div class="highslide-maincontent">
+													<div class="area2"> 
+														<table cellspacing="0" cellpadding="0" border="0" class="popup1">
+															<tbody>
+																<tr>
+																	<td valign="top" align="left"><h1><span class="SareesType"><font color="#000000">Return, Replacement and Refund</font></span></h1><br>
+      
+      <p style="font-family:Arial,Helvetica,sans-serif; font-size:12px; text-align:justify;line-height:20px;
+								color:#333333"> Sareez.com has been manufacturing women\92s outfits in India since 1995 and unlike the much 
+        hyped saree traders we do not just wash our hands, selling off our stocks. Instead we do stand 
+        by our customer\92s side ensuring that our clients feel happy each and every time they buy products 
+        from us. With our apt sales service, we want to ensure that our clients are assured of the exact 
+        chosen price and the items delivered are in perfect condition. </p>
+      <br>
+      
+      <p style="font-family:Arial,Helvetica,sans-serif; font-size:12px; text-align:justify;line-height:20px;
+								text-indent:0px; color:#333333">
+		<b>How this Replacement policy terms work</b><br>
+        With our motto \91complete shopping satisfaction\92, we are dedicated to deliver you the  
+        quality products and services. However, it is rarely found that due to some unexpected 
+        situation, you are not satisfied with the product, then the following Replacement and 
+        Refund Policy Terms apply for a mutually consented resolution. <br>
+        <br>
+        <b>How this Replacement policy terms work</b> <br>
+        If you receive an item in damaged condition or somehow if the item you received was not 
+        the item you ordered, then please do contact us as soon as you receive the item in question. 
+        We promise that we will offer you the best possible solution. <br>
+        <br>
+        It is advised not to return the item without informing us. It is very vital that you 
+        do not send back the item until you have verified with us. In such a situation, no credit 
+        or replacement shall be given. <br>
+        <br>
+        If we are unable to deliver the original ordered item due to unavoidable reasons, then 
+        according to our terms we will request you to select an alternate item and express ship 
+        the same to you with no extra shipping cost. Well, if no alternate selection is desired 
+        by a customer, then the company will refund you in full with no deduction whatsoever. <br>
+        <br>
+        Any shipping costs of sending back to India above what customer paid for shipping 
+        charges while receiving them from India are the responsibility of the customer. <br>
+        <br>
+        <b>Helpful Guidelines on Return</b> <br>
+        Always report your problems associated with the item, order, packaging etc right on time. 
+        You must be as specific as possible at the time of filing your complain. <br>
+        <br>
+        Always try to return your item using registered airmail or courier service to provide 
+        proof of delivery. If something happens in the transit and if the item is not delivered
+        to us, it is impossible to help you. So make sure to rely upon reliable courier agency. <br>
+        <br>
+        Please return the item within 7 working days of confirmation. 
+        Try to keep that item in original packing and condition. <br>
+        <br>
+        We will examine the garments, returned by you and we will try to figure out what went
+        wrong and take immediate steps to prevent such problems from re-occurring. <br>
+        <br>
+        As we believe in safe delivery, likewise sending back the item to us carefully is 
+        your responsibility as well. For any further shipping related queries mail us at <a href="mailto:shipping@sareez.com"><font color="maroon">shipping@sareez.com</font></a>. <br>
+        <br>
+        <b>Color and Description Disclaimer</b> <br>
+        A customer must fix an order keeping in mind some minor variation in color, 
+        as seen on a computer screen against the actual color of the outfit received. 
+        It seems bit tough for us to replicate the same color as seen on a monitor. Although extra
+        attention is given to accurately reproduce colors, still there
+        may be minor variations 
+        in color of the actual product due to the nature of fabric dyes. A variation in shade is 
+        considered as a normal practice as these garments have a tendency to reflect different 
+        shades of color under different lights. <br>
+        <br>
+        The customers who are preferring items with beaded embroidery and sequins must 
+        be aware of the fact that these shiny embellishments have a tendency to come off. 
+        Remember even with the best of handling and care, this problem cannot be avoided altogether. 
+        So, before ordering such item please keeps these things in mind. We are at your service
+        and it is our Endeavour to provide you best sarees,salwar kameej,lehengas, which are in 
+        fashion. It is a privilege for having you as our customer! <br>
+        <br>
+        <b>For any queries feel free to <a href="http://www.sareez.com/contact_us.php"> <font color="maroon">Contact Us</font></a></b> </p></td>
+																</tr>
+															</tbody>
+														</table>							  
+												  </div>
+												</div>											
+										</td>
+									</tr>	
+									<tr><td valign="top" height="5">&nbsp;</td></tr>									
+								</tbody></table>
+							</td>
+							<td width="10"></td>
+						</tr>
+					</tbody></table>
+<?php } 
+else if($item == '0' ||$item == '1'){
+ ?>
+ 
+ <table width="100%" cellspacing="0" cellpadding="0" class="stripe">
+						<tbody><tr>
+							<td width="10"></td>
+							<td width="148" height="255">
+								<table width="100%" cellspacing="0" cellpadding="0">
+									<tbody><tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_head">SHOP WITH CONFIDENCE</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_txt">SHOPPING ON SAREEZ.COM IS SAFE AND SECURITY GUARANTEED!</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr>
+										<td align="left">
+											<!--<img src="images_2/site_seal.png"  />-->
+											<!--
+											SiteSeal Html Builder Code:
+											Shows the logo at URL https://seal.networksolutions.com/images/basicsqgreen.gif
+											Logo type is  ("NETSB")
+											//-->
+											<script type="text/javascript" language="JavaScript"> SiteSeal("https://seal.networksolutions.com/images/basicsqgreen.gif", "NETSB", "none");</script><a onclick="window.open(&quot;http://seals.networksolutions.com/siteseal_seek/siteseal?v_shortname=NETSB&amp;v_querytype=W&amp;v_search=www.sareez.com&amp;x=5&amp;y=5&quot;,&quot;NETSB&quot;,&quot;width=450,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no&quot;);return false;" href="#"><img oncontextmenu="alert('This SiteSeal is protected');return false;" style="border:none;" src="https://seal.networksolutions.com/images/basicsqgreen.gif"></a>											
+										</td>
+									</tr>	
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_txt">ALL INFORMATION IS ENCRYPTED AND TRANSMITTED WITHOUT ANY RISK USING A SECURE SOCKET LAYER(SSL) PROTOCOL.</td></tr>	
+									<tr><td valign="top" height="5">&nbsp;</td></tr>									
+								</tbody></table>
+							</td>
+							<td width="10"></td>
+						</tr>
+					</tbody></table>
+                    
+                    <table width="100%" cellspacing="0" cellpadding="0" class="stripe">
+						<tbody><tr>
+							<td width="10"></td>
+							<td width="148" height="113">
+								<table width="100%" cellspacing="0" cellpadding="0">
+									<tbody><tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_head">EASY RETURN POLICY</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_txt">IF YOU DON'T LIKE THE ITEM YOU CAN EASILY RETURN IT.</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr>
+										<td class="rg_panel_fnt_txt">
+											<a rel="nofollow" title="Shipping &amp; Returns" onclick="return hs.htmlExpand(this, { headingText: 'Shipping &amp; Returns' })" href="javascript:void(0);">
+												FIND OUT HOW
+											</a>
+											<div class="highslide-maincontent">
+													<div class="area2"> 
+														<table cellspacing="0" cellpadding="0" border="0" class="popup1">
+															<tbody>
+																<tr>
+																	<td valign="top" align="left"><h1><span class="SareesType"><font color="#000000">Return, Replacement and Refund</font></span></h1><br>
+      
+      <p style="font-family:Arial,Helvetica,sans-serif; font-size:12px; text-align:justify;line-height:20px;
+								color:#333333"> Sareez.com has been manufacturing women\92s outfits in India since 1995 and unlike the much 
+        hyped saree traders we do not just wash our hands, selling off our stocks. Instead we do stand 
+        by our customer\92s side ensuring that our clients feel happy each and every time they buy products 
+        from us. With our apt sales service, we want to ensure that our clients are assured of the exact 
+        chosen price and the items delivered are in perfect condition. </p>
+      <br>
+      
+      <p style="font-family:Arial,Helvetica,sans-serif; font-size:12px; text-align:justify;line-height:20px;
+								text-indent:0px; color:#333333">
+		<b>How this Replacement policy terms work</b><br>
+        With our motto \91complete shopping satisfaction\92, we are dedicated to deliver you the  
+        quality products and services. However, it is rarely found that due to some unexpected 
+        situation, you are not satisfied with the product, then the following Replacement and 
+        Refund Policy Terms apply for a mutually consented resolution. <br>
+        <br>
+        <b>How this Replacement policy terms work</b> <br>
+        If you receive an item in damaged condition or somehow if the item you received was not 
+        the item you ordered, then please do contact us as soon as you receive the item in question. 
+        We promise that we will offer you the best possible solution. <br>
+        <br>
+        It is advised not to return the item without informing us. It is very vital that you 
+        do not send back the item until you have verified with us. In such a situation, no credit 
+        or replacement shall be given. <br>
+        <br>
+        If we are unable to deliver the original ordered item due to unavoidable reasons, then 
+        according to our terms we will request you to select an alternate item and express ship 
+        the same to you with no extra shipping cost. Well, if no alternate selection is desired 
+        by a customer, then the company will refund you in full with no deduction whatsoever. <br>
+        <br>
+        Any shipping costs of sending back to India above what customer paid for shipping 
+        charges while receiving them from India are the responsibility of the customer. <br>
+        <br>
+        <b>Helpful Guidelines on Return</b> <br>
+        Always report your problems associated with the item, order, packaging etc right on time. 
+        You must be as specific as possible at the time of filing your complain. <br>
+        <br>
+        Always try to return your item using registered airmail or courier service to provide 
+        proof of delivery. If something happens in the transit and if the item is not delivered
+        to us, it is impossible to help you. So make sure to rely upon reliable courier agency. <br>
+        <br>
+        Please return the item within 7 working days of confirmation. 
+        Try to keep that item in original packing and condition. <br>
+        <br>
+        We will examine the garments, returned by you and we will try to figure out what went
+        wrong and take immediate steps to prevent such problems from re-occurring. <br>
+        <br>
+        As we believe in safe delivery, likewise sending back the item to us carefully is 
+        your responsibility as well. For any further shipping related queries mail us at <a href="mailto:shipping@sareez.com"><font color="maroon">shipping@sareez.com</font></a>. <br>
+        <br>
+        <b>Color and Description Disclaimer</b> <br>
+        A customer must fix an order keeping in mind some minor variation in color, 
+        as seen on a computer screen against the actual color of the outfit received. 
+        It seems bit tough for us to replicate the same color as seen on a monitor. Although extra
+        attention is given to accurately reproduce colors, still there
+        may be minor variations 
+        in color of the actual product due to the nature of fabric dyes. A variation in shade is 
+        considered as a normal practice as these garments have a tendency to reflect different 
+        shades of color under different lights. <br>
+        <br>
+        The customers who are preferring items with beaded embroidery and sequins must 
+        be aware of the fact that these shiny embellishments have a tendency to come off. 
+        Remember even with the best of handling and care, this problem cannot be avoided altogether. 
+        So, before ordering such item please keeps these things in mind. We are at your service
+        and it is our Endeavour to provide you best sarees,salwar kameej,lehengas, which are in 
+        fashion. It is a privilege for having you as our customer! <br>
+        <br>
+        <b>For any queries feel free to <a href="http://www.sareez.com/contact_us.php"> <font color="maroon">Contact Us</font></a></b> </p></td>
+																</tr>
+															</tbody>
+														</table>							  
+												  </div>
+												</div>											
+										</td>
+									</tr>	
+									<tr><td valign="top" height="5">&nbsp;</td></tr>									
+								</tbody></table>
+							</td>
+							<td width="10"></td>
+						</tr>
+					</tbody></table>
+                    
+                    <table width="100%" cellspacing="0" cellpadding="0" class="stripe">
+						<tbody><tr>
+							<td width="10"></td>
+							<td width="148" height="120">
+								<table width="100%" cellspacing="0" cellpadding="0">
+									<tbody><tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_head">INTERNATIONAL SHIPPING</td></tr>
+									<tr><td valign="top" height="5">&nbsp;</td></tr>
+									<tr><td class="rg_panel_fnt_txt">
+										WORLDWIDE SHIPPING WITH FEDEX, UPS AND TNT SO THAT YOU DO NOT NEED TO WORRY ABOUT YOUR PRODUCT.</td></tr>
+					
+									<tr><td valign="top" height="5">&nbsp;</td></tr>									
+								</tbody></table>
+							</td>
+							<td width="10"></td>
+						</tr>
+					</tbody></table>
+<?php } ?>

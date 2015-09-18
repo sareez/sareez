@@ -1,0 +1,42 @@
+<?php
+
+$installer = $this;
+
+$installer->startSetup();
+
+$installer->run("
+-- DROP TABLE IF EXISTS {$this->getTable('catalogmaster')};
+CREATE TABLE  `int_catalogmaster`(
+  `catalogmaster_id` int(11) unsigned NOT NULL auto_increment,
+  `manufacturer_id` int(6) NOT NULL default '0',
+  `user_id` int(6) NOT NULL default '0',
+  `catalog_name` varchar(255) NOT NULL default '',
+  `no_of_products` int(6) NOT NULL default '0',
+   `description` text NOT NULL default '',
+  `product_type_id` int(6) NOT NULL default '0',
+  `fabric` int(6) NOT NULL default '0',
+   `price` int(6) NOT NULL default '0',
+  `cutt_offtime` varchar(255) NOT NULL default '',  
+  `created_time` datetime NULL,
+  `update_time` datetime NULL,
+  `status` smallint(6) NOT NULL default '0',
+  PRIMARY KEY (`catalogmaster_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ");	
+	
+$installer->run("
+-- DROP TABLE IF EXISTS {$this->getTable('producttype')};
+CREATE TABLE `int_producttype`  (
+  `producttype_id` int(11) unsigned NOT NULL auto_increment,
+  `user_id` int(6) NOT NULL default '0',
+  `product_type` varchar(255) NOT NULL default '',
+  `product_abbreviation` varchar(255) NOT NULL default '',  
+  `product_description` text NOT NULL default '',
+  `created_time` datetime NULL,
+  `update_time` datetime NULL,
+  `status` smallint(6) NOT NULL default '0',
+  PRIMARY KEY (`producttype_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ");	
+
+$installer->endSetup(); 

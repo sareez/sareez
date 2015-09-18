@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <LatestTrendingDesigns_LatestTrendingDesigns>
+            <active>true</active>
+            <codePool>local</codePool>
+        </LatestTrendingDesigns_LatestTrendingDesigns>
+    </modules>
+</config> 

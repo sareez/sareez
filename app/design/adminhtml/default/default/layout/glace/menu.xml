@@ -1,0 +1,76 @@
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+        	<action method="addItem"><type>skin_js</type><name>glace/menu/font/js/google_font.js</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>glace/menu/font/font_awesome/css/font-awesome.min.css</name><params/></action>
+        	<action method="addCss"><name>glace/menu/font/css/styles.css</name></action>
+        	
+            <action method="addCss">
+                <name>glace/menu/css/menu.css</name>
+            </action>
+            <action method="addJs"><script>jscolor/jscolor.js</script></action>
+        </reference>
+    </default>
+
+    <menu_adminhtml_menu_index>
+        <update handle="editor"/>
+
+        <reference name="left">
+            <block name="menu.tree" type="menu/adminhtml_menu_tree" template="glace/menu/tree.phtml" />
+        </reference>
+
+        <reference name="content">
+            <block name="menu.edit"  type="menu/adminhtml_menu_edit" template="glace/menu/edit.phtml" />
+            <block type="core/template" name="logo" template="glace/menu/logo.phtml" before="-"/>
+        </reference>
+
+        <reference name="js">
+            <block type="core/template" template="catalog/wysiwyg/js.phtml" name="catalog.wysiwyg.js" />
+        </reference>
+    </menu_adminhtml_menu_index>
+
+    <menu_adminhtml_menu_couple>
+        <update handle="editor"/>
+
+        <reference name="content">
+            <block name="menu.edit"  type="menu/adminhtml_menu_tree" template="glace/menu/couple_tree.phtml" />
+        </reference>
+
+        <reference name="js">
+            <block type="core/template" template="catalog/wysiwyg/js.phtml" name="catalog.wysiwyg.js" />
+        </reference>
+    </menu_adminhtml_menu_couple>
+
+    <menu_adminhtml_menu_edit>
+        <update handle="editor"/>
+
+        <reference name="left">
+            <block name="menu.tree" type="menu/adminhtml_menu_tree" template="glace/menu/tree.phtml" />
+        </reference>
+
+        <reference name="content">
+            <block name="menu.edit"  type="menu/adminhtml_menu_edit" template="glace/menu/edit.phtml" />
+        </reference>
+
+        <reference name="js">
+            <block type="core/template" template="catalog/wysiwyg/js.phtml" name="catalog.wysiwyg.js" />
+        </reference>
+    </menu_adminhtml_menu_edit>
+
+    <menu_adminhtml_item_edit>
+        <update handle="editor"/>
+
+        <reference name="left">
+            <block name="menu.tree" type="menu/adminhtml_menu_tree" template="glace/menu/tree.phtml" />
+        </reference>
+
+        <reference name="content">
+            <block name="item.edit"  type="menu/adminhtml_item_edit" template="glace/menu/item/edit.phtml" />
+        </reference>
+
+        <reference name="js">
+            <block type="core/template" template="catalog/wysiwyg/js.phtml" name="catalog.wysiwyg.js" />
+        </reference>
+    </menu_adminhtml_item_edit>
+
+</layout>

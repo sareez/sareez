@@ -1,0 +1,224 @@
+<?php
+
+class Sn_Sorder_Block_Adminhtml_Sorder_Grid extends Mage_Adminhtml_Block_Widget_Grid
+{
+  public function __construct()
+  {
+      parent::__construct();
+      $this->setId('sorderGrid');
+      $this->setDefaultSort('id');
+      $this->setDefaultDir('DESC');
+      $this->setSaveParametersInSession(true);
+  }
+  
+   protected function prepareDefaults()
+    {
+        $this->setDefaultLimit( Mage::getStoreConfig( 'salesorderitemgrid/defaults/limit' ) );
+        $this->setDefaultPage( Mage::getStoreConfig( 'salesorderitemgrid/defaults/page' ) );
+    }
+
+  protected function _prepareCollection()
+  {
+	  
+	
+      $collection = Mage::getModel('sorder/sorder')->getCollection();
+	  
+	 $collection->join(array('og' =>'sales/order_grid'), 'main_table.order_id = og.entity_id', array('billing_name', 'status', 'og_created_at' =>'og.created_at') );
+	  
+
+	  
+	  //$collection->join(array('og' =>'sales/order_grid'), 'main_table.order_id = og.entity_id', array('billing_name', 'status', 'og_created_at' =>'og.created_at') );
+		
+       // $collection->join(array('si' => 'cataloginventory/stock_item'), 'main_table.product_id = si.product_id', array('si_qty' => 'si.qty'));
+		
+		    /* $collection->join(array('a' => 'sales/order_address'), 'og.entity_id = a.parent_id AND a.address_type != \'billing\'', array(
+                'city'       => 'city',
+                'country_id' => 'country_id'
+            ));*/
+		
+
+		   $collection->join(array('sj' => 'catalogmaster/catalogmaster'), 'main_table.catalogmaster_id = sj.catalog_id', array('sj.catalog_name'));	
+		   
+		     $collection->join(array('sm' => 'manufacturers/manufacturers'), 'main_table.manufacturers_id = sm.manufacturers_id', array('sm.manufacturers_name'));	
+			 
+			 $collection->join(array('sp' => 'tailormaster/tailormaster'), 'main_table.tailormaster_id = sp.tailormaster_id', array('sp.tailorname'));
+			 
+			
+			
+      $this->setCollection($collection);
+      return parent::_prepareCollection();
+  }
+
+  protected function _prepareColumns()
+  {
+      $this->addColumn('id', array(
+          'header'    => Mage::helper('sorder')->__('SL NO'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'id',
+      ));
+	  
+	   $this->addColumn('created_at', array(
+                'header' => Mage::helper('sales')->__('DATE'),
+                'sortable' => true,
+                'width' => '60',
+                'index' => 'og_created_at',
+                'filter_index' => 'created_at',
+                'type'  => 'datetime'
+        ));
+	  
+	    $this->addColumn('order_id', array(
+          'header'    => Mage::helper('sorder')->__('Order ID'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'order_id',
+      ));
+	   if (Mage::getStoreConfig('salesorderitemgrid/columns/showbillingname')) {
+            $this->addColumn('billing_name', array(
+                    'header' => Mage::helper('sales')->__('Customer Name'),
+                    'sortable' => true,
+                    'index' => 'billing_name'
+            ));
+        }
+		
+		$this->addColumn('sku', array(
+          'header'    => Mage::helper('sorder')->__('Sku Code'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'sku',
+      ));
+	  
+	  $this->addColumn('product_status', array(
+          'header'    => Mage::helper('sorder')->__('Product Status'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'product_status',
+      ));
+		 
+		  $this->addColumn('exprees_shipping_available', array(
+          'header'    => Mage::helper('sorder')->__('Delivary Time'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'exprees_shipping_available',		  
+      ));
+	    $this->addColumn('product_comment', array(
+          'header'    => Mage::helper('sorder')->__('Product Comment'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'product_comment',
+		  
+      ));
+		
+	
+	$this->addColumn('manufacturers_name',
+        array(
+            'header'   => Mage::helper('sorder')->__('Manufacturer Name'),
+            'index'    => 'manufacturers_name',
+            'type'  => 'text',
+			//'renderer' => 'Sn_Sorder_Block_Adminhtml_Sorder_Grid_Renderer_Manufacturers'
+
+));
+	
+		$this->addColumn('catalog_name',
+        array(
+            'header'   => Mage::helper('sorder')->__('Catalog Name'),
+            'index'    => 'catalog_name',
+            'type'  => 'text',
+			//'renderer' => 'Sn_Sorder_Block_Adminhtml_Sorder_Grid_Renderer_Catalogmaster'
+));
+
+	$this->addColumn('manufacturer_design',
+        array(
+            'header'   => Mage::helper('sorder')->__('Manufacturer Design Number'),
+            'index'    => 'manufacturer_design',
+            'type'  => 'text',
+			'width'     => '60px',
+			//'renderer' => 'Sn_Sorder_Block_Adminhtml_Sorder_Grid_Renderer_Manufacturers'
+
+));
+
+
+	$this->addColumn('product_stitching_type', array(
+          'header'    => Mage::helper('sorder')->__('Stitching Type'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'product_stitching_type',
+		
+      ));
+	    $this->addColumn('stitchingstatus_id', array(
+          'header'    => Mage::helper('sorder')->__('Stitching Status'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'stitchingstatus_id',
+      ));
+	  
+	
+	  $this->addColumn('unique_stitching_id', array(
+          'header'    => Mage::helper('sorder')->__('Stitching Id'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'unique_stitching_id',
+      ));
+
+
+
+
+	  $this->addColumn('tailorname', array(
+          'header'    => Mage::helper('sorder')->__('Master Name'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'tailorname',
+		  //'renderer' => 'Sn_Sorder_Block_Adminhtml_Sorder_Grid_Renderer_Tailormaster'
+      ));
+	  
+	    $this->addColumn('sending_date', array(
+          'header'    => Mage::helper('sorder')->__('St. Sending Date'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'sending_date',
+		  'type'  => 'datetime'
+      ));
+	  
+	    $this->addColumn('reciving_date', array(
+          'header'    => Mage::helper('sorder')->__('St. Receving Date'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'reciving_date',
+		  'type'  => 'text'
+      ));
+	  $this->addColumn('comment', array(
+          'header'    => Mage::helper('sorder')->__('Stitching Comment'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'comment',
+      ));
+	  
+	    $this->addColumn('currier', array(
+          'header'    => Mage::helper('sorder')->__('Currier'),
+          'align'     =>'right',
+          'width'     => '50px',
+          'index'     => 'currier',
+      ));
+	  
+	  
+            $this->addColumn('status', array(
+                    'header' => Mage::helper('sales')->__('Order Status'),
+                    'index' => 'status',
+					'filter' => false,
+					'sortable' => false,
+
+            ));
+			
+
+	  
+	
+		
+		$this->addExportType('*/*/exportCsv', Mage::helper('sorder')->__('CSV'));
+		$this->addExportType('*/*/exportXml', Mage::helper('sorder')->__('XML'));
+	  
+      return parent::_prepareColumns();
+  }
+
+   
+
+}

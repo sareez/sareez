@@ -1,0 +1,914 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+
+
+<!--COUPON CODE >>-->
+
+<?php 
+require_once("app/Mage.php");
+$app = Mage::app('');
+
+	 if($_REQUEST['coupon']!=""){
+			 
+			 
+			 $write = Mage::getSingleton('core/resource')->getConnection('core_write');
+
+ echo $query = "SELECT 
+
+			generatedcoupon.coupon_id, 
+			generatedcoupon.coupon_code, 
+			generatedcoupon.status as couponStatus, 
+			
+			coupon.status as ruleStatus,
+			coupon.no_of_prd, 
+			coupon.action,
+			coupon.discount_amount,
+			coupon.min_amnt,
+			coupon.multiple_coupon,
+			coupon.product_category,
+			coupon.user,
+			coupon.product_level,
+			coupon.discount_level,
+			coupon.special_price
+
+
+FROM generatedcoupon inner join coupon on generatedcoupon.coupon_id = coupon.coupon_id and generatedcoupon.coupon_code ='".$_REQUEST['coupon']."'"; 
+
+$readresult=$write->query($query);
+			 
+	while ($row = $readresult->fetch()) 
+	{
+		$status 			= $row['ruleStatus'];
+		
+
+
+	}	
+	//echo $status; exit;
+			if($status == "2"){
+			
+			//$this->_redirect(Mage::getBaseUrl().'checkout/cart/?notHere=notHere');
+			//header('Location:'.Mage::getBaseUrl().'checkout/cart/?notHere=notHere');
+		 ?>
+         <script>
+		  window.location="<?php echo Mage::getBaseUrl(); ?>checkout/cart/?notHere=notHere";
+		 </script>
+		 <?php
+		 exit;
+			} 
+			 
+			 
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	 
+			 
+		 $write = Mage::getSingleton('core/resource')->getConnection('core_write');
+		$couponQuery = "select count(coupon_code) from generatedcoupon where coupon_code = '".$_REQUEST['coupon']."'";
+		 //count(coupon_code);
+		// $couponCode = mysql_num_rows(mysql_query("select count(coupon_code) from generatedcoupon where coupon_code = '".$_REQUEST['coupon']."'"));
+		 
+		 $couponCode=$write->query($couponQuery);
+		 while ($row = $couponCode->fetch()) 
+		{
+		 $rowCount = $row['count(coupon_code)'];
+		}
+		 
+		 //echo $rowCount;
+		 if($rowCount == "0")
+		 {
+	      // header('Location: '.Mage::getBaseUrl().'cart/?notHere=notHere');
+		  // $this->_redirect('cart/?notHere=notHere');
+		  if($_REQUEST['notHere']!="notHere"){
+		 ?>
+         <script>
+		  window.location="<?php echo Mage::getBaseUrl(); ?>checkout/cart/?notHere=notHere";
+		 </script>
+		 <?php
+		  }
+		 }
+		 }
+
+$sessionCustomer = Mage::getSingleton("customer/session");
+$items = Mage::getSingleton('checkout/session')->getQuote()->getAllItems();
+$totalQuantity = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+$userId = Mage::getSingleton('customer/session')->getId();
+
+
+//////////////// COUPON FETCH >> 
+
+$couponPiece = explode(",", $_REQUEST['coupon']);
+
+if($couponPiece[0]!=""){
+$couponInput = $couponPiece[0];
+Mage::getSingleton('core/session')->setCouponMessage($couponInput);
+$coupon = Mage::getSingleton('core/session')->getCouponMessage();
+$coupon;
+}
+
+$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+
+ $query = "SELECT 
+
+			generatedcoupon.coupon_id, 
+			generatedcoupon.coupon_code, 
+			generatedcoupon.status as couponStatus, 
+			
+			coupon.status as ruleStatus,
+			coupon.no_of_prd, 
+			coupon.action,
+			coupon.discount_amount,
+			coupon.min_amnt,
+			coupon.multiple_coupon,
+			coupon.product_category,
+			coupon.user,
+			coupon.product_level,
+			coupon.discount_level,
+			coupon.special_price
+
+
+FROM generatedcoupon inner join coupon on generatedcoupon.coupon_id = coupon.coupon_id and generatedcoupon.coupon_code ='".$coupon."'"; 
+
+$readresult=$write->query($query);
+
+
+
+	$multyCup = array_unique(explode(",", $_REQUEST['coupon']));
+	count($multyCup);
+
+
+	while ($row = $readresult->fetch()) 
+	{
+		$coupon_id 			= $row['coupon_id'];
+		$coupon_code 		= $row['coupon_code'];
+		$couponStatus 		= $row['couponStatus'];	
+		$ruleStatus 		= $row['ruleStatus'];
+		$no_of_prd 			= $row['no_of_prd'];
+		$action 			= $row['action'];
+		$discount_amount 	= $row['discount_amount'];
+	    $min_amnt 			= $row['min_amnt'];
+		$multiple_coupon 	= $row['multiple_coupon'];
+		$product_category 	= $row['product_category'];
+		$user 				= $row['user'];
+		$product_level      = $row['product_level'];
+		$discount_level     = $row['discount_level'];
+		$special_price      = $row['special_price'];
+		
+		
+	}
+	
+	
+//////////////////////// 	Second Coupon
+$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+
+ $query = "SELECT 
+
+			generatedcoupon.coupon_id, 
+			generatedcoupon.coupon_code, 
+			generatedcoupon.status as couponStatus, 
+			
+			coupon.status as ruleStatus,
+			coupon.no_of_prd, 
+			coupon.action,
+			coupon.discount_amount,
+			coupon.min_amnt,
+			coupon.multiple_coupon,
+			coupon.product_category,
+			coupon.user,
+			coupon.product_level,
+			coupon.discount_level,
+			coupon.special_price
+
+
+FROM generatedcoupon inner join coupon on generatedcoupon.coupon_id = coupon.coupon_id and generatedcoupon.coupon_code ='".$couponPiece[1]."'"; // exit;
+
+$readresult=$write->query($query);	
+	while ($row2 = $readresult->fetch()) 
+	{
+		$coupon_id2 		= $row2['coupon_id'];
+		$coupon_code2 		= $row2['coupon_code'];
+		$couponStatus2 		= $row2['couponStatus'];	
+		$ruleStatus2 		= $row2['ruleStatus'];
+		$no_of_prd2 		= $row2['no_of_prd'];
+		$action2 			= $row2['action'];
+		$discount_amount2 	= $row2['discount_amount'];
+		$min_amnt2 			= $row2['min_amnt'];
+		$multiple_coupon2 	= $row2['multiple_coupon'];
+		$product_category2 	= $row2['product_category'];
+		$user2 				= $row2['user'];
+		$product_level      = $row['product_level'];
+		$discount_level     = $row['discount_level'];
+		$special_price      = $row['special_price'];
+	}
+
+//////////////////////// 	Third Coupon
+$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+
+ $query = "SELECT 
+
+			generatedcoupon.coupon_id, 
+			generatedcoupon.coupon_code, 
+			generatedcoupon.status as couponStatus, 
+			
+			coupon.status as ruleStatus,
+			coupon.no_of_prd, 
+			coupon.action,
+			coupon.discount_amount,
+			coupon.min_amnt,
+			coupon.multiple_coupon,
+			coupon.product_category,
+			coupon.user,
+			coupon.product_level,
+			coupon.discount_level,
+			coupon.special_price
+
+
+FROM generatedcoupon inner join coupon on generatedcoupon.coupon_id = coupon.coupon_id and generatedcoupon.coupon_code ='".$couponPiece[2]."'"; // exit;
+
+$readresult=$write->query($query);	
+	while ($row3 = $readresult->fetch()) 
+	{
+		$coupon_id3 		= $row3['coupon_id'];
+		$coupon_code3 		= $row3['coupon_code'];
+		$couponStatus3 		= $row3['couponStatus'];	
+		$ruleStatus3 		= $row3['ruleStatus'];
+		$no_of_prd3 		= $row3['no_of_prd'];
+		$action3 			= $row3['action'];
+		$discount_amount3 	= $row3['discount_amount'];
+		$min_amnt3 			= $row3['min_amnt'];
+		$multiple_coupon3 	= $row3['multiple_coupon'];
+		$product_category3 	= $row3['product_category'];
+		$user3 				= $row3['user'];
+		$product_level      = $row['product_level'];
+		$discount_level     = $row['discount_level'];
+		$special_price      = $row['special_price'];
+	}
+	
+	//////////////////////// 	Fourth Coupon
+$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+
+ $query = "SELECT 
+
+			generatedcoupon.coupon_id, 
+			generatedcoupon.coupon_code, 
+			generatedcoupon.status as couponStatus, 
+			
+			coupon.status as ruleStatus,
+			coupon.no_of_prd, 
+			coupon.action,
+			coupon.discount_amount,
+			coupon.min_amnt,
+			coupon.multiple_coupon,
+			coupon.product_category,
+			coupon.user,
+			coupon.product_level,
+			coupon.discount_level,
+			coupon.special_price
+
+
+FROM generatedcoupon inner join coupon on generatedcoupon.coupon_id = coupon.coupon_id and generatedcoupon.coupon_code ='".$couponPiece[3]."'"; // exit;
+
+$readresult=$write->query($query);	
+	while ($row4 = $readresult->fetch()) 
+	{
+		$coupon_id4			= $row4['coupon_id'];
+		$coupon_code4 		= $row4['coupon_code'];
+		$couponStatus4 		= $row4['couponStatus'];	
+		$ruleStatus4 		= $row4['ruleStatus'];
+		$no_of_prd4 		= $row4['no_of_prd'];
+		$action4 			= $row4['action'];
+		$discount_amount4 	= $row4['discount_amount'];
+		$min_amnt4 			= $row4['min_amnt'];
+		$multiple_coupon4 	= $row4['multiple_coupon'];
+		$product_category4 	= $row4['product_category'];
+		$user4 				= $row4['user'];
+		$product_level      = $row['product_level'];
+		$discount_level     = $row['discount_level'];
+		$special_price      = $row['special_price'];
+	}
+
+ 
+ 
+ 	$categoryCheck = explode(",", $product_category);
+	$categoryCount = count($categoryCheck);
+	
+foreach($items as $item) {
+	
+/*	
+echo 'ID: '.$item->getProductId().'<br />';
+echo 'Name: '.$item->getName().'<br />';
+echo 'Sku: '.$item->getSku().'<br />';
+echo 'Quantity: '.$item->getQty().'<br />';
+echo 'Price: '.$item->getPrice().'<br />';
+*/
+
+	$productId = $item->getProductId();
+	$_product = Mage::getModel('catalog/product')->load($productId);
+	$_product->getPrice($_product, true);
+
+
+
+$categoryIds = $item->getProduct()->getCategoryIds(); // returns category ids from product
+
+
+
+		for($c=0; $c<=$categoryCount; $c++) // 
+		{
+
+		 $rightCategory = $categoryCheck[$c]; 
+		 
+			 if(in_array($rightCategory, $categoryIds))
+			 {
+				/* 
+				$price = $_product->getPrice();
+				$formatted = Mage::helper('core')->currency($price, true);
+				$orginal_amount += $formatted * $item->getQty();
+				 */
+				
+				 
+				  $_basePrice = Mage::helper('core')->currency($_product->getPrice(),false,false);
+				   $_discountPrice = Mage::helper('core')->currency($_product->getFinalPrice(),false,false);
+				  
+				  // if($_formattedActualPrice != $_formattedActualPrice){ }
+				  
+				 if($special_price == '2'){
+					 $_formattedActualPrice = Mage::helper('core')->currency($_product->getFinalPrice(),false,false);
+					 } else {
+					  $_formattedActualPrice = Mage::helper('core')->currency($_product->getPrice(),false,false);
+					 }
+					 
+					 
+					 
+				 
+				  
+				
+				 	if($special_price == '1'){
+					if($_basePrice == $_discountPrice){ 
+				 	$orginal_amount += $_formattedActualPrice * $item->getQty();
+				 	$apply_only_qnt += $item->getQty();
+				 	}
+				 }
+				 
+				 // if($_formattedActualPrice == $_formattedActualPrice){ 
+				 	if($special_price == '2'){
+				 	$orginal_amount += $_formattedActualPrice * $item->getQty();
+				 	$apply_only_qnt += $item->getQty();
+				 	}
+				 //}
+				 
+				 
+			  // $orginal_amount += $_product->getPrice($_product, true) * $item->getQty();
+			  
+			  
+
+			  
+			  break 1;
+			  exit();
+			 }
+
+		}
+
+
+}
+
+	
+	
+	
+	$userCheck = explode(",", $user);
+	
+	$userCount = count($userCheck);
+	
+		for($u=0; $u<=$userCount; $u++)
+		{
+			 if($userCheck[$u] == $userId)
+			 { 
+			  $rightUser = $userCheck[$u]; 
+			 }
+		}
+	 
+	
+/*	}else{
+	 $rightUser = "0";	
+	}*/
+	// echo 'aaa'.$userId;
+	// echo 'bbb'.$rightUser;
+	
+	// Mage::getSingleton('core/session')->getCouponMessage();
+	
+
+////////////////////////////////////////////
+$productLevel = explode("|", $product_level);
+$discountLevel = explode("|", $discount_level);
+// echo count($productLevel);
+
+ $product_level;
+ $prroductLevelCount = count($productLevel);
+ $discountLevel[0]."|".$discountLevel[1]."|".$discountLevel[2];
+// echo $prroductLevelCount;
+$total_product_qnt = ceil($apply_only_qnt);
+//////////////// << COUPON FETCH /////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	if($coupon)
+	{
+		
+		if(ceil($totalQuantity) >= $no_of_prd) 	// Number Of Quantity
+		{ 
+		
+			if($orginal_amount >= $min_amnt) 	// Minimum Amount 
+			{ 
+		
+				if($sessionCustomer->isLoggedIn()) 
+				{
+			
+  					if($rightUser == $userId || $user == "") 	// User Id 
+					{ 
+			
+						if($action=="1")	// Percentage or Fixed Price
+						{
+							
+
+							
+						if($product_level != ""){
+							
+							if($total_product_qnt == "1"){
+									$orginal_amount; // 'Total Orginal Amount : '
+									$one_percent = $orginal_amount/100; // One Percent
+									$amt = $one_percent * $discountLevel[0];
+									$discountAmount = $amt;
+									$discountInput = $discountAmount;
+							} else if($total_product_qnt == "2"){
+								$orginal_amount; // 'Total Orginal Amount : '
+									$one_percent = $orginal_amount/100; // One Percent
+									$amt = $one_percent * $discountLevel[1];
+									$discountAmount = $amt;
+									$discountInput = $discountAmount;
+							} else if($total_product_qnt >= "3"){	
+									$orginal_amount; // 'Total Orginal Amount : '
+									$one_percent = $orginal_amount/100; // One Percent
+									$amt = $one_percent * $discountLevel[2];
+									$discountAmount = $amt;
+									$discountInput = $discountAmount;
+							}
+								
+							
+								
+						 } else if($product_level == ""){
+							
+							
+							$orginal_amount; // 'Total Orginal Amount : '
+							$one_percent = $orginal_amount/100; // One Percent
+							$amt = $one_percent * $discount_amount;
+							$discountAmount = $amt;
+							// $discountInput = -$discountAmount;
+							
+							$after1st_discount = $orginal_amount - $discountAmount;
+							$one_percent2 = $after1st_discount/100; // One Percent
+							$amt2 = $one_percent2 * $discount_amount2;
+							$discountAmount2 = $amt2+$amt;
+							// $discountInput = -$discountAmount2;
+							
+							$after2nd_discount = $orginal_amount - $discountAmount2;
+							$one_percent3 = $after2nd_discount/100; // One Percent
+							$amt3 = $one_percent3 * $discount_amount3;
+							$discountAmount3 = $amt3+$amt2+$amt;
+							// $discountInput = -$discountAmount3;
+							
+							$after3nd_discount = $orginal_amount - $discountAmount3;
+							$one_percent4 = $after3nd_discount/100; // One Percent
+							$amt4 = $one_percent4 * $discount_amount4;
+							$discountAmount4 = $amt4+$amt3+$amt2+$amt;
+							// $discountInput = $discountAmount4;
+							
+							
+							if(count($multyCup)==1)
+							{
+							 $discountInput = $discountAmount;
+							} else if(count($multyCup)==2){
+							 $discountInput = $discountAmount2;
+							} else if(count($multyCup)==3){
+							 $discountInput = $discountAmount3;
+							} else if(count($multyCup)==4){
+							 $discountInput = $discountAmount4;
+							}
+
+						}
+							
+							
+							
+							Mage::getSingleton('core/session')->setDiscountMessage(-$discountInput);
+							$discount = Mage::getSingleton('core/session')->getDiscountMessage();
+							
+						} else if($action=="2"){
+			
+							
+							
+						  if(count($multyCup)==1)
+							{
+							 $discountAmount = $discount_amount;
+							 $discountInput = $discountAmount;
+							} else if(count($multyCup)==2){
+							 $discountAmount2 = $discount_amount2+$discount_amount;
+							 $discountInput = $discountAmount2;
+							} else if(count($multyCup)==3){
+							 $discountAmount3 = $discount_amount3+$discount_amount2+$discount_amount;
+							 $discountInput = $discountAmount3;
+							} else if(count($multyCup)==4){
+							 $discountAmount4 = $discount_amount4+$discount_amount3+$discount_amount2+$discount_amount;
+							 $discountInput = $discountAmount4;
+							}
+							
+						// }
+							
+							Mage::getSingleton('core/session')->setDiscountMessage(-$discountInput);
+							$discount = Mage::getSingleton('core/session')->getDiscountMessage();
+							
+						}
+					}
+				
+				} else {
+						
+					  if($userCheck[0] == "0" || $userCheck[0] == "") 	// User Id 
+					  { 
+					
+   						if($action=="1")	// Percentage or Fixed Price
+						{
+							
+						
+							
+							if($product_level != ""){
+							
+							if($total_product_qnt == "1"){
+								// if($productLevel[0]=="1"){
+									$orginal_amount; // 'Total Orginal Amount : '
+									$one_percent = $orginal_amount/100; // One Percent
+									$amt = $one_percent * $discountLevel[0];
+									$discountAmount = $amt;
+									$discountInput = $discountAmount;
+								//}
+							} else if($total_product_qnt == "2"){
+								$orginal_amount; // 'Total Orginal Amount : '
+									$one_percent = $orginal_amount/100; // One Percent
+									$amt = $one_percent * $discountLevel[1];
+									$discountAmount = $amt;
+									$discountInput = $discountAmount;
+							} else if($total_product_qnt >= "3"){	
+									$orginal_amount; // 'Total Orginal Amount : '
+									$one_percent = $orginal_amount/100; // One Percent
+									$amt = $one_percent * $discountLevel[2];
+									$discountAmount = $amt;
+									$discountInput = $discountAmount;
+							}
+								
+						 } else if($product_level == ""){	
+							
+					
+							
+							$orginal_amount; // 'Total Orginal Amount : '
+							$one_percent = $orginal_amount/100; // One Percent
+							$amt = $one_percent * $discount_amount;
+							$discountAmount = $amt;
+							// $discountInput = -$discountAmount;
+							
+							$after1st_discount = $orginal_amount - $discountAmount;
+							$one_percent2 = $after1st_discount/100; // One Percent
+							$amt2 = $one_percent2 * $discount_amount2;
+							$discountAmount2 = $amt2+$amt;
+							// $discountInput = -$discountAmount2;
+							
+							$after2nd_discount = $orginal_amount - $discountAmount2;
+							$one_percent3 = $after2nd_discount/100; // One Percent
+							$amt3 = $one_percent3 * $discount_amount3;
+							$discountAmount3 = $amt3+$amt2+$amt;
+							// $discountInput = -$discountAmount3;
+							
+							$after3nd_discount = $orginal_amount - $discountAmount3;
+							$one_percent4 = $after3nd_discount/100; // One Percent
+							$amt4 = $one_percent4 * $discount_amount4;
+							$discountAmount4 = $amt4+$amt3+$amt2+$amt;
+							// $discountInput = $discountAmount4;
+							
+
+							
+							
+							if(count($multyCup)==1)
+							{
+							 $discountInput = $discountAmount;
+							} else if(count($multyCup)==2){
+							 $discountInput = $discountAmount2;
+							} else if(count($multyCup)==3){
+							 $discountInput = $discountAmount3;
+							} else if(count($multyCup)==4){
+							 $discountInput = $discountAmount4;
+							}
+
+							
+						 }
+							
+							Mage::getSingleton('core/session')->setDiscountMessage(-$discountInput);
+							$discount = Mage::getSingleton('core/session')->getDiscountMessage();
+							
+						} else if($action=="2"){
+							
+
+							if(count($multyCup)==1)
+							{
+							 $discountAmount = $discount_amount;
+							 $discountInput = $discountAmount;
+							} else if(count($multyCup)==2){
+							 $discountAmount2 = $discount_amount2+$discount_amount;
+							 $discountInput = $discountAmount2;
+							} else if(count($multyCup)==3){
+							 $discountAmount3 = $discount_amount3+$discount_amount2+$discount_amount;
+							 $discountInput = $discountAmount3;
+							} else if(count($multyCup)==4){
+							 $discountAmount4 = $discount_amount4+$discount_amount3+$discount_amount2+$discount_amount;
+							 $discountInput = $discountAmount4;
+							}
+							
+							
+							
+							
+							Mage::getSingleton('core/session')->setDiscountMessage(-$discountInput);
+							$discount = Mage::getSingleton('core/session')->getDiscountMessage();
+							
+						}
+					  }
+				 }	
+				 
+				 
+				 
+				 
+				 
+		
+			}
+			
+	    }
+		
+	} 
+        session_start();
+echo $discountCoupon = Mage::getSingleton('core/session')->getDiscountMessage();
+$_SESSION['discountCoupon'] = $discountCoupon;
+?>
+<!--COUPON CODE <<-->
+
+
+
+
+
+
+<?php ///////// For Cart Page
+if($_REQUEST['coupon']=='destroy')
+	{
+	  Mage::getSingleton('core/session')->unsDiscountMessage();
+      Mage::getSingleton('core/session')->unsCouponMessage();
+	  
+	  ?>
+      <script>
+	 // window.location="<?php //echo Mage::getBaseUrl(); ?>checkout/cart/";
+	  </script>
+      <?php 
+	}
+	
+	 $cartUpdate  = Mage::getSingleton('core/session')->getCartupdateMessage();
+	 $oldQuantity = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+	
+			  $cart_qty = (int) Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+
+if($cart_qty) {
+	
+	if($cartUpdate != $oldQuantity)
+	{
+	  Mage::getSingleton('core/session')->unsDiscountMessage();
+      Mage::getSingleton('core/session')->unsCouponMessage();
+	  Mage::getSingleton('core/session')->unsCartupdateMessage();
+	  $cartUpdate = Mage::getSingleton('core/session')->getCartupdateMessage();
+	  $cart_qty = (int) Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+
+if($cart_qty) {
+     	  ?>
+      <script>
+	 // window.location="<?php //echo Mage::getBaseUrl(); ?>checkout/cart/";
+	  </script>
+      <?php
+} 
+
+
+	}
+	
+}
+?>
+<!-- Fb code -->
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=765332456899280&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Google  Analytics code -->
+<!--<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-8060359-1', 'auto');
+  ga('send', 'pageview');
+</script>-->
+
+
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=306487626192434&amp;ev=PixelInitialized" /></noscript>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<div class="top-bar">
+    <div class="top-bar-wrapper">
+       
+                 
+        
+            <div class="fb-like" data-href="http://www.facebook.com/Sareez" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+            
+                   
+           <div class="google_plus"><g:follow href="https://plus.google.com/103798879633863827560" rel="author" height= "20" annotation="bubble"></g:follow></div>
+
+            
+            
+    <div class="tsetss">
+    	Price Match Guarantee 
+    	<span class="offer-ques">[?] </span>
+        <div id="testcoupn">
+        	Found lower prices somewhere else? Show us the link & we will match the price.
+        </div>
+    </div>
+    
+    
+    <div class="samedayshipping1">
+    Same Day Shipping 
+    <span class="samedayshipping-ques">[?] </span>
+    <div id="testcoupn1"> Now get your items faster with Same Day Shipping.
+    </div>
+    </div>
+    
+	
+	
+	<div class="login_register">
+
+			 <?php echo $this->getChildHtml('topLinks') ?>
+        </div>
+       
+       <?php  
+		 $cartUrl = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		 if($cartUrl == Mage::getBaseUrl()."checkout/cart/" || $_REQUEST['coupon']!=""){ 
+		 
+		 } else if($cartUrl != Mage::getBaseUrl()."checkout/cart/"){ 
+		 ?>
+         
+		 <div class="custom_currency"><?php echo $this->getChildHtml('currency') ?></div>
+         <?php } ?>
+	   
+        
+
+
+        
+    </div>
+</div>
+
+
+
+
+
+
+ <!-- start desktop header part---------->
+    <div class="header" id="header">
+        <?php if ($this->getIsHomePage()):?>
+        <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+        <?php else:?>
+        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+        <?php endif?>
+        <div class="quick-access">
+            <?php echo $this->getChildHtml('topSearch') ?>
+            
+               <div class="hader-wishlist">
+            <div class="sareez-header-wishlist-icon">
+
+<?php
+Mage::getSingleton('core/session');
+
+$session =Mage::getSingleton("customer/session");
+if($session->isLoggedIn()){
+ $customer = Mage::getSingleton('customer/session')->getCustomer();
+
+     $wishlist = Mage::getModel('wishlist/wishlist')->loadByCustomer($customer, true);
+     $wishListItemCollection = $wishlist->getItemCollection();
+	 if(count($wishListItemCollection)==''){
+	 echo '<div class="wishlist_Count">'.count($wishListItemCollection).' item'.'</div>';
+	 } else if(count($wishListItemCollection)==1){
+	 echo '<div class="wishlist_Count">'.count($wishListItemCollection).' item'.'</div>';
+	 } else {
+	 echo '<div class="wishlist_Count">'.count($wishListItemCollection).' items'.'</div>';
+	 }
+	 
+
+}
+?> 
+
+
+                <img alt="wishlist icon" class="img_wishlist" src="<?php echo $this->getSkinUrl('images/sareez_header_wishlist_icon3.png');?>">
+				<img alt="wishlist icon" class="wishlist_img" src="<?php echo $this->getSkinUrl('images/sareez_header_wishlist_icon4.png');?>">
+            </div>
+            <div class="sareez-header-wishlist-items">
+               <a href="<?php echo $this->getUrl('wishlist') ?>">Wishlist</a><br>
+               
+            </div>
+            
+         
+            
+        </div>
+        <ul class="links_new">
+        <li style="position: relative;"><a class="top-link-cart" title="My Cart" href="<?php echo Mage::getBaseUrl(); ?>checkout/cart/"><div style="" id="ajax_mini_cart_icon"></div><span class="minicart-cart-link-content">My Cart</span></a><div style="margin-left: -115.5px; height: 0px; overflow: hidden; display: none;" id="ajax_mini_cart">
+	<div style="display: none;" id="ajax_mini_cart_loading_mask"></div>
+	<div style="" class="ajax-mini-cart-message">No items in your shopping cart</div>
+	<div style="display: none;" class="ajax-mini-cart-content-box">
+		<div class="ajax-mini-cart-products" style="height: auto;">
+											</div>
+		<div class="ajax-mini-cart-total">
+			Total: <span class="grand-total">$0.00</span>
+		</div>
+		<div class="ajax-mini-cart-buttons">
+			<div style="display: none;" class="ajax-mini-cart-button-loader"></div>
+			<button class="button remove-all-button" type="button">
+				<span><span>Remove All</span></span>
+			</button>
+			<button onclick="setLocation('<?php echo Mage::getBaseUrl(); ?>checkout/cart/');" class="button" type="button">
+				<span><span>View cart</span></span>
+			</button>
+			<button onclick="setLocation('<?php echo Mage::getBaseUrl(); ?>checkout/onepage/');" class="button" type="button">
+				<span><span>Checkout</span></span>
+			</button>
+		</div>
+	</div>
+	<div class="ajax_mini_cart_shadow ajax_mini_cart_shadow_right_top"></div>
+	<div class="ajax_mini_cart_shadow ajax_mini_cart_shadow_right"></div>
+	<div class="ajax_mini_cart_shadow ajax_mini_cart_shadow_bottom_left"></div>
+	<div class="ajax_mini_cart_shadow ajax_mini_cart_shadow_bottom"></div>
+	<div class="ajax_mini_cart_shadow ajax_mini_cart_shadow_bottom_right"></div>
+</div></li>
+	</ul>	 
+        
+         <?php //echo $this->getChildHtml('topLinks') ?>
+        
+           <?php echo $this->getChildHtml('minicart_head');?> 
+
+        </div>
+        <?php echo $this->getChildHtml('topContainer'); ?>
+    </div>
+	
+	<!-- end desktop header part---------->
+	
+    
+	
+	
+	
+<?php echo $this->getChildHtml('topMenu') ?>
+
+
+

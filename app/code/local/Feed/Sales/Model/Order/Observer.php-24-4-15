@@ -1,0 +1,74 @@
+<?php
+class Feed_Sales_Model_Order_Observer
+{
+    public function __contruct()
+    {
+
+    }
+
+    /**
+     * Exports new orders to an xml file
+     * @param Varien_Event_Observer $observer
+     * @return Feed_Sales_Model_Order_Observer
+     */
+    public function export_new_order($observer)
+    {
+        Mage::log("reached export_new_order");
+        try
+        {
+$event = $observer->getEvent();
+$order = $event->getOrder();
+//mage::log($order->getId());
+//$ordersId=$this->getOrderId();	
+$ordersId = $order->getId();	
+			
+$conn = mysql_connect("localhost","root","rootwdp") or die("ERROR::Not connected to SERVER"); 
+$db = mysql_select_db("sareees_db",$conn) or die("ERROR::Not connected to DATABASE");		 
+			
+			
+//$sqlcmnt1="INSERT INTO `testing` SET `order_id`='".$ordersId."'";
+//mysql_query($sqlcmnt1) or die("ERROR41::".mysql_error());
+
+//$sqlcmnt="INSERT INTO `sales_flat_order_item_stitching` SET `order_id`='".$ordersId."'";
+//echo $sqlcmnt; die;
+//mysql_query($sqlcmnt) or die("ERROR41::".mysql_error());
+
+
+$order = Mage::getModel("sales/order")->load($ordersId); //load order by order id 
+$ordered_items = $order->getAllItems(); 
+
+foreach($ordered_items as $item){     //item detail     
+$item_id = $item->getItemId(); //item id     
+$product_id = $item->getProductId(); //product id     
+$sku = $item->getSku();     
+$qty = $item->getQtyOrdered(); //ordered qty of item 
+
+$model = Mage::getModel('catalog/product'); //getting product model
+ 
+$_product = $model->load($product_id); //getting product object for particular product id
+$exprees_shipping_available = $_product->getAttributeText('exprees_shipping_available');
+$manufacturers_id = $_product->getManufacturersId();
+$catalogmaster_id = $_product->getCatalogmasterId();
+$manufacturer_design = $_product->getManufacturer_design();
+
+
+
+for($x=0; $x<$qty; $x++){
+$unique_stitching_id = $product_id."-".$ordersId."-".$item_id."-".$x;
+$sql="INSERT INTO `sales_flat_order_item_stitching` SET `stitchingstatus_id`='0',`tailormaster_id`='0',`comment`='',`qty`='1',`item_id`='".$item_id."',`product_id`='".$product_id."',`sku`='".$sku."',`order_id`='".$ordersId."',`exprees_shipping_available`='".$exprees_shipping_available."',`manufacturers_id`='".$manufacturers_id."',`catalogmaster_id`='".$catalogmaster_id."',`manufacturer_design`='".$manufacturer_design."',`unique_stitching_id`='".$unique_stitching_id."'";
+
+mysql_query($sql) or die("ERROR4::".mysql_error());
+}
+
+}
+
+			
+        }
+        catch (Exception $e)
+        {
+            Mage::log("order export failed.\n"); 
+        }
+        return $this;
+    }
+}
+?>  

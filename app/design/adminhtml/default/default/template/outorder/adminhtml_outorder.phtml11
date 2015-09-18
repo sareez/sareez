@@ -1,0 +1,333 @@
+<?php 
+require_once("app/Mage.php");
+$app = Mage::app('');
+
+$display="none";
+//$where=" WHERE 1 AND stock_available<=0";
+$where =" WHERE 1 ";
+if(isset($_REQUEST['flag']) && $_REQUEST['flag']==2){
+	$sku_code=$_REQUEST['product_sku'];
+	$where.=" AND `sku` = '$sku_code'";
+	$display="block";
+}
+
+include '../db/connection.php';
+$write = Mage::getSingleton('core/resource')->getConnection('core_read');
+$sql="SELECT * FROM `sales_flat_order_item_stitching` $where";
+//echo $sql."KKK";
+$readresult=$write->query($sql);
+?>
+
+<table width="100%" border="1" cellpadding="3" cellspacing="3" style="display:<?php echo $display;?>;">
+
+  <tr>
+        <td><b>SKU Code</b></td>
+        <td><b>Man Model</b></td>
+        <td><b>Name</b></td>
+        <td><b>Price</b></td>
+        <td><b>Manufacture Price</b></td>
+        <td><b>Order Id</b></td>
+        <td><b>Color</b></td>
+        <td><b>Stock</b></td>
+        <td><b>Qty</b></td>
+        <td><b>Image</b></td>
+  </tr>
+
+
+<?php
+if(count($readresult)> 0){
+$qty='';
+$order='';	
+while ($row = $readresult->fetch() ) {
+	$productId = $row['sku'];
+	$manufacturer = $row['manufacturer_design'];
+	//$product_name = $row['product_name'];
+	$order = $order.$row['order_id'].'<br>';
+	$qty = $qty.$row['qty'].'<br>';
+}
+
+$order_id = ltrim($order,",");
+$fffqty1=ltrim($qty,",");
+$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$productId);
+$stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product);
+// print_r($stock->getQty());
+ 
+ 
+if($stock->getQty()<=0){
+?>
+<tr>
+    <td><?php echo $productId; ?></td>
+    <td><?php echo $manufacturer; ?></td>
+    <td><?php echo $product->getName(); ?></td>
+    <td><?php echo $product->getPrice(); ?></td>
+    <td>&nbsp;</td>
+    <td><?php echo $order_id; ?></td>
+    <td><?php echo $product->getAttributeText('color'); ?></td>
+    <td><?php  $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product); echo $stock->getQty(); 
+	//print_r($stock->getData())
+	
+	?></td>
+    
+     <td><?php echo $fffqty1; ?></td>
+    
+    <td><img border="0" width="100" src=<?php echo Mage::getModel('catalog/product_media_config')->getMediaUrl( $product->getSmallImage() );?>></td>
+<tr>
+ <?php
+  }
+ 	
+} else {
+?>
+  <tr>
+        <td colspan="10" align="center"><span style="color:red;">No Record(s) Found!!</span></td>
+  </tr>
+<?php }?>
+
+</table>
+ 
+
+
+<form name="form2" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+<input type="hidden" name="product_sku" id="product_sku" value="<?php echo $_REQUEST['product_sku'];?>"/>
+<table width="100%" border="0" cellspacing="3" cellpadding="3">
+  <tr>
+    <td width="33%">&nbsp;</td>
+    <td width="2%">&nbsp;</td>
+    <td width="65%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right"><b><?php echo $this->__('Product Sku :') ?></b></td>
+    <td>&nbsp;</td>
+    <td><input type="text" name="product_sku" id="product_sku" value=""/></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+      <input type="submit" name="button" id="button" value="Submit">&nbsp;&nbsp;
+      <!--<input type="submit" name="button2" id="button2" value="Order Process">--></td>
+  <input type="hidden" name="current_url" value="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" >
+  <input type="hidden" name="flag" value="2" />
+  
+  </tr>
+</table>
+</form>
+
+<?php 
+$conn = mysql_connect("localhost","root","") or die("ERROR::Not connected to SERVER"); 
+$db = mysql_select_db("sarees_bkpdb_09_05",$conn) or die("ERROR::Not connected to DATABASE");
+
+if(isset($_REQUEST['flag']) && $_REQUEST['flag']==9){
+//echo "<pre>"; print_r($_REQUEST);	
+
+$product_sku = $_REQUEST['product_sku'];
+$stock_enter_text = $_REQUEST['stock_enter_text'];
+$quantity = ($_REQUEST['quantity']+$stock_enter_text);
+
+for($i=1; $i<$_REQUEST['tot_cel']; $i++)
+{
+	
+     $chk_val="chk".$i;
+     $updateqty="updateqty".$i;
+	 if(isset($_REQUEST[$chk_val]))
+		{
+			
+			$allinfo = $_REQUEST[$chk_val]; // It contains ID,SKU,ORDER ID,REQUIR QUantity
+			$data = explode("||",$allinfo);
+			$id = $data[0];
+			$sku_code = $data[1];
+			$order_id = $data[2];
+			$req_qty = $data[3];
+			
+			$qty = $_REQUEST[$updateqty];
+			
+			 
+			// echo "11";
+		// ===============start Update ordercsv Tables=====================
+		  // $sql9="UPDATE `ordercsv` SET `a_quantity`='$qty',`stock_available`='$quantity',`allocation_date`='".date("Y-m-d")."' WHERE `ordercsv_id`=$id";
+		   //echo $sql9; die;
+		   //mysql_query($sql9) or die("ERROR6::".mysql_error());
+		// ===============End Update ordercsv Tables=====================   
+		   
+		// ===============start Update sales_flat_order_item_stitching Tables=====================
+		
+		//for($x=1; $x<=$qty; $x++){
+			//echo "22";
+			
+			//$sql10="UPDATE `sales_flat_order_item_stitching` SET `allocationstatus_id`='2',`allocation_date`='".date("Y-m-d")."' WHERE `id`='".$id."'";
+		   //echo $sql10; die;
+		   //mysql_query($sql10) or die("ERROR10::".mysql_error());
+		//}
+		// here 2 means "Complete"
+		
+		// ===============end Update sales_flat_order_item_stitching Tables=======================  
+		   
+		   
+		   
+		   
+		}
+}
+//echo $ids = $_REQUEST['id'];
+
+foreach($_REQUEST['id'] as $selected) {
+//echo "<p>".$selected ."</p>";
+
+$sql10="UPDATE `sales_flat_order_item_stitching` SET `allocationstatus_id`='2',`allocation_date`='".date("Y-m-d")."' WHERE `id`='".$selected."'";
+		   //echo $sql10; die;
+		   mysql_query($sql10) or die("ERROR10::".mysql_error());
+}
+
+
+
+		   
+
+ $stock_quantity = ($_REQUEST['quantity']+$stock_enter_text);
+$product_id = Mage::getModel("catalog/product")->getIdBySku( $product_sku ); 
+//echo "<pre>"; print_r($product_id);	die;
+$stockItem =Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_id);
+$stockItem->setData('qty', (integer)$stock_quantity);
+$stockItem->save();
+	
+//echo $quantity."KKK";
+/*$product = Mage::getModel('catalog/product')->load($product_sku, 'sku'); 
+  $stockItem = $product->getStockItem();
+  $stockItem->setData('qty', $quantity);
+  $stockItem->save();*/
+
+}
+
+?>
+
+<form name="form3" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+<input type="hidden" name="product_sku" id="product_sku" value="<?php echo $_REQUEST['product_sku'];?>" />
+<?php
+$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$productId);
+$stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product); 
+?>
+<input type="hidden" name="quantity" value="<?php echo $stock->getQty(); ?>" />
+<input type="hidden" name="id" value="<?php echo $stock->getId(); ?>" />
+
+<table width="100%" border="1" cellpadding="3" cellspacing="3" style="display:<?php echo $display;?>;">
+  <tr>
+        <td><b>SKU Code</b></td>
+        <td><b>Man Model</b></td>
+        <td><b>Name</b></td>
+        <td><b>Price</b></td>
+        <td><b>Order Id</b></td>
+        <td><b>Color</b></td>
+        <td><b>Stock</b></td>
+        <td><b>R/Qty</b></td>
+       
+        <td><b>&nbsp;</b></td>
+  </tr>
+
+<?php
+$sku_code=$_REQUEST['product_sku'];
+//$where1=" WHERE 1 AND `stock_available` <=0";
+$where1=" WHERE 1 ";
+$where1.=" AND `sku` = '$sku_code'";
+$sql1="SELECT * FROM `sales_flat_order_item_stitching` $where1";
+$readresult=$write->query($sql);
+
+$x=1;
+if(count($readresult)>0){
+while ($row = $readresult->fetch() ) {
+$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$productId);
+ $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product); 
+ 
+if($stock->getQty()<=0 && $row['allocationstatus_id']!=2){
+?>
+<tr>
+    <td><?php echo $row['sku']; ?></td>
+    <td><?php echo $row['manufacturer_design']; ?></td>
+    <td><?php echo $product->getName(); ?></td>
+    <td><?php echo $product->getPrice(); ?></td>
+    <td><?php echo $row['order_id'];?></td>
+    <td><?php echo $product->getAttributeText('color'); ?></td>
+    <td><?php echo $stock->getQty(); 
+	//print_r($stock->getData())	
+	?>
+    </td>
+    <td>1<?php //echo $row['r_quantity']; ?></td>    
+   
+    <td>
+    
+    <input type="checkbox" name="id[]" id="id" value="<?php echo $row['id'];?>" />
+    </td>
+<tr>
+ <?php
+  }
+  $x++;
+} }else {
+?>
+  <tr>
+        <td align="center" colspan="10"><span style="color:red;">No Record(s) Found!!</span></td>
+  </tr>
+
+<?php } ?>
+</table>
+
+
+<table width="100%" border="0" cellspacing="3" cellpadding="3">
+
+ <div id="stock_enter_text"></div>
+ <div id="demo"></div>
+  <tr>
+    <td width="33%">&nbsp;</td>
+    <td width="2%">&nbsp;</td>
+    <td width="65%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right"><b><?php echo $this->__('Enter Stock Quantity:') ?></b></td>
+    <td>&nbsp;</td>
+    <td><input type="text" name="stock_enter_text" id="stock_enter_text" value=""/></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+        <input type="submit" name="button2" id="button2" value="Submit" onClick='return submitRegestrationForm()'>&nbsp;&nbsp;
+        <input type="hidden" name="tot_cel" value=<?php echo $x; ?> >
+        <!--<input type="submit" name="button2" id="button2" value="Order Process">--></td>
+        <input type="hidden" name="current_url" value="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" >
+        <input type="hidden" name="flag" value="9" />
+  </tr>
+</table>
+
+</form>
+ 	<script language="javascript" type="text/javascript">
+  function submitRegestrationForm() {
+	  alert('chinmay');
+	  var vals = jQuery('input:checkbox[name="id[]"]:checked').map(function () {
+    return this.value;
+}).get();
+//document.getElementById("demo").innerHTML = vals.length;
+//alert(document.getElementById("demo").innerHTML);
+if(vals.length>document.forms["form3"]["stock_enter_text"].value){
+	
+	document.getElementById("demo").innerHTML = "Please Enter Stock Quantity value selected checkbox or more ";
+	return false;	
+} else {
+	document.getElementById("demo").innerHTML = "";
+}
+  
+
+		 var c = document.forms["form3"]["stock_enter_text"].value;	
+	
+if (c == null || c == "") {		
+		document.getElementById("stock_enter_text").innerHTML = "Please Enter Stock Quantity";
+		return false;
+	} 	
+else if(isNaN(c)){
+document.getElementById("stock_enter_text").innerHTML = "Please Enter valid number";
+		return false;
+
+}else{
+document.getElementById("stock_enter_text").innerHTML = "";
+return true;
+}
+		
+		
+  }
+  </script>
+		
+		

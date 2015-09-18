@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="before_body_end">
+			<block type="itoris_ajaxminicart/cart" name="ajax.mini.cart" template="itoris/ajaxminicart/cart.phtml"/>
+		</reference>
+	</default>
+</layout>

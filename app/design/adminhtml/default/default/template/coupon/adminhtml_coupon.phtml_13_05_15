@@ -1,0 +1,18 @@
+<div class="grid">
+<table class="data" width="100%" border="1" cellspacing="0" cellpadding="10">
+  <tr class="even">
+    <td class="a-center on-mouse"><strong>ID</strong></td>
+    <td class="on-mouse"><strong>Coupon code</strong></td>
+    <td class="a-center on-mouse"><strong>Used</strong></td>
+    <td class="a-center on-mouse"><strong>Status</strong></td>
+  </tr>
+  <?php $i=1; foreach($this->coupon_code() as $result){ ?>
+  <tr class="pointer">
+    <td class="a-center on-mouse"><?php echo $i; ?></td>
+    <td class="on-mouse"><?php echo $result['coupon_code']; ?></td>
+    <td class="a-center on-mouse">No</td>
+    <td class="a-center on-mouse">Yes</td>
+  </tr>
+  <?php $i++; } ?>
+</table>
+</div>

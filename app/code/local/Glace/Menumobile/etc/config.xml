@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category	Glace
+ * @package		Glace_Menumobile
+ * @author		Glace
+ * @copyright	Copyright 2012 - 2014 Glace
+ */
+-->
+<config>
+    <modules>
+        <Glace_Menumobile>
+            <version>1.1.1</version>
+        </Glace_Menumobile>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <menumobile module="menumobile">
+                    <file>glace/menumobile.xml</file>
+                </menumobile>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <blocks>
+            <menumobile>
+                <class>Glace_Menumobile_Block</class>
+            </menumobile>
+        </blocks>
+        <helpers>
+            <menumobile>
+                <class>Glace_Menumobile_Helper</class>
+            </menumobile>
+        </helpers>
+        <models>
+            <menumobile>
+                <class>Glace_Menumobile_Model</class>
+				<!--<resourceModel>menumobile_mysql4</resourceModel>-->
+            </menumobile>
+			<!--<menumobile_mysql4>
+				<class>Glace_Menumobile_Model_Mysql4</class>
+			</menumobile_mysql4>-->
+        </models>
+		<resources>
+			<menumobile_setup>
+				<setup>
+					<module>Glace_Menumobile</module>
+					<!--<class>Glace_Menumobile_Model_Resource_Mysql4_Setup</class>-->
+					<class>Glace_Menumobile_Model_Resource_Eav_Mysql4_Setup</class>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</menumobile_setup>
+			<menumobile_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</menumobile_write>
+			<menumobile_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</menumobile_read>
+		</resources>
+    </global>
+    <default>
+        <menumobile>
+			<general>
+				<enable>1</enable>
+				<mode>-1</mode>
+				<categories>1</categories>
+			</general>
+			<mainmenu>
+				<home>1</home>
+				<home_img>0</home_img>
+				<home_link_icon>0</home_link_icon>
+				<spill>1</spill>
+				<custom_block_floating>1</custom_block_floating>
+			</mainmenu>
+			<mobilemenu>
+				<threshold>960</threshold>
+				<collapsed>1</collapsed>
+				<show_blocks>0</show_blocks>
+				<hide_blocks_below>1</hide_blocks_below>
+			</mobilemenu>
+            <sidemenu>
+				<enable_category_left>0</enable_category_left>
+				<enable_category_right>0</enable_category_right>
+				<enable_home_left>0</enable_home_left>
+				<enable_home_right>0</enable_home_right>
+				<enable_cms_left>0</enable_cms_left>
+				<enable_cms_right>0</enable_cms_right>
+				<enable_product_left>0</enable_product_left>
+				<enable_product_right>0</enable_product_right>
+				<block_name>Categories</block_name>
+				<parent>current</parent>
+				<depth>2</depth>
+				<fallback>1</fallback>
+				<block_name_fallback></block_name_fallback>
+				<num_of_products>0</num_of_products>
+				<hide_on_mobile>1</hide_on_mobile>
+				<hide_laynav_categories>1</hide_laynav_categories>
+            </sidemenu>
+			<category_labels>
+				<label1>New</label1>
+				<label2>Hot!</label2>
+			</category_labels>
+        </menumobile>
+    </default>
+</config>
+
+
+
+
+
+

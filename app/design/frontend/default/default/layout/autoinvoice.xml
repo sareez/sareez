@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <autoinvoice_index_index>
+        <reference name="content">
+            <block type="autoinvoice/autoinvoice" name="autoinvoice" template="autoinvoice/autoinvoice.phtml" />
+        </reference>
+    </autoinvoice_index_index>
+</layout> 

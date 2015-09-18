@@ -1,0 +1,149 @@
+<script>
+function validateForm() {
+    var x = document.forms["myForm"]["name"].value;
+    if (x == null || x == "") {
+        alert("Name must be filled out");
+        return false;
+    }
+	
+ var email1 = document.forms["myForm"]["email"].value;
+
+            var regex = /^([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)@([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)[\\.]([a-zA-Z]{2,9})$/;
+
+            if(!regex.test(email1)|| x == null || x == ""){
+                alert("Enter a valid email");
+                return false;
+             }
+			 
+	var p = document.forms["myForm"]["order"].value;
+    if (p == null || p == "") {
+        alert("Order No must be filled out");
+        return false;
+    }
+	
+	var m = document.forms["myForm"]["testimonial"].value;
+    if (m == null || m == "") {
+        alert("Testimonial must be filled out");
+        return false;
+    }
+}
+</script>
+<?php if(Mage::getStoreConfig('testimonial/testimonial_options/allow_customers_write_testimonial') == 1):?>
+<div class="testimonial-submit">
+	<div class="page-title">
+		<h1><?php echo $this->__('Submit Your Testimonial'); ?></h1>
+	</div>
+	<form action="<?php echo $this->getUrl('*/*/post'); ?>" method="post" id="testimonial-form" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()">
+		<ul class="form-list">
+		<?php if ($this->isCustomerLoggedIn()):?>
+			<li  class="name">
+				<label for="name" class="required">
+					<?php echo $this->__('Your Name');?>
+					<em>*</em>
+				</label>
+				<div class="input-box">
+					<input name="name" id="name" class="input-text required-entry-edits" type="text" value="<?php echo $this->getCustomer()->getName();?>"  />
+				</div>
+			</li>
+		<?php else: ?>
+			<li  class="name">
+				<label for="name" class="required">
+					<?php echo $this->__('Your Name');?>
+					<em>*</em>
+				</label>
+				<div class="input-box">
+					<input name="name" id="name" class="input-text required-entry-edits" type="text"  />
+				</div>
+			</li>
+		<?php endif?>
+		<?php if ($this->isCustomerLoggedIn()):?>
+			<li class="email">
+				<label for="email" class="required">
+					<?php echo $this->__('Your Email'); ?>
+					<em>*</em>
+				</label>
+				<div class="input-box">
+					<input name="email" id="email" class="input-text required-entry-edits validate-email" type="text" value="<?php echo $this->getCustomer()->getEmail(); ?>">
+				</div>
+			</li>
+		<?php else: ?>
+			<li class="email">
+				<label for="email" class="required">
+					<?php echo $this->__('Your Email'); ?>
+					<em>*</em>
+				</label>
+				<div class="input-box">
+					<input name="email" id="email" class="input-text required-entry-edits validate-email" type="text">
+				</div>
+			</li>
+		<?php endif ?>
+		
+		<li class="order_no">
+				<label for="order" class="required">
+					<?php echo $this->__('Order no:'); ?>
+                    <em>*</em>
+				</label>
+				<div class="input-box">
+					<input name="order" id="order" type="text" class="input-text">
+				</div>
+			</li>
+		
+		<!--	<li class="website">
+				<label for="website">
+					<?php //echo $this->__('Your Website'); ?>
+				</label>
+				<div class="input-box">
+					<input name="website" id="website" type="text" class="input-text">
+				</div>
+			</li>
+			<li class="company">
+				<label for="company">
+					<?php //echo $this->__('Your Company');?>
+				</label>
+				<div class="input-box">
+					<input name="company" id="company" type="text" class="input-text">
+				</div>
+			</li>
+			<li class="address">
+				<label for="address">
+					<?php //echo $this->__('Your Address'); ?>
+				</label>
+				<div class="input-box">
+					<input name="address" id="address" type="text" class="input-text">
+				</div>
+			</li> -->
+			<li class="avatar">
+                <label for="avatar">
+                    <?php echo $this->__('upload your photo'); ?>
+                </label>
+                <div class="input-box">
+                    <input name="avatar" id="avatar" type="file"/>
+                </div>
+            </li>
+			<li class="required-std">
+				<label for="testimonial" class="required">
+					<?php echo $this->__('Your Testimonial'); ?>
+					<em>*</em>
+				</label>
+				<div class="std-input-box">
+					<textarea name="testimonial" id="testimonial" type="text" class="required-entry-dtios"></textarea>
+				</div>
+			</li>
+
+		</ul>
+		<?php if(Mage::getStoreConfig('testimonial/testimonial_options/testimonial_captcha_enabled', Mage::app()->getStore())==true):?>
+		<?php //echo $this->getChildHtml('captcha'); ?>
+		<?php endif ?>
+		<div class="buttons_set">
+			<p class="required req_backs"><?php echo $this->__('* Required Fields'); ?></p>
+			<button type="submit" title="<?php echo $this->__('Submit'); ?>" class="button b_buttonsf"><span><span><?php echo $this->__('Submit Testimonial'); ?></span></span></button>
+			<p class="back-link links_backs"><a href="<?php echo $this->getBack(); ?>">Back</a></p>
+		</div>
+	</form>
+	<script type="text/javascript">
+	//<![CDATA[
+			var dataForm = new VarienForm('testimonial-form', true);
+	//]]>
+	</script>
+</div>
+<?php endif ?>

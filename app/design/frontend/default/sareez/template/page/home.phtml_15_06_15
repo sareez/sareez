@@ -1,0 +1,199 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+<div class="container">
+
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <div class="page">
+        <?php echo $this->getChildHtml('header') ?>
+        <div class="main-container col1-layout">
+            <div class="main">
+                <?php echo $this->getChildHtml('breadcrumbs') ?>
+                <div class="col-main">
+                    <?php echo $this->getChildHtml('global_messages') ?>
+
+         <div class="top_banner"> 
+         <div class="banner_side">       
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('banner')->toHtml();?>
+        </div>
+        
+
+        
+        
+        <div class="side_gallery"><img alt="banner" src="<?php echo $this->getSkinUrl('campaignimages/free-shipping_200315.jpg');?>"></div>      
+        </div>
+        
+ 
+              
+		<!--Latest Trending Designs-->
+        <div class="row">
+        <div class="col-md-3 side_menu"> 
+		<div class="banner_sidebar">
+		    <div class="home_side_banner01"><a href="<?php echo Mage::getBaseUrl();?>sarees.html"><img src="<?php echo $this->getSkinUrl('campaignimages/sareees_rotating_slider_01.png'); ?>" alt="category_offer_01"/></a></div>
+			<div class="home_side_banner02"><a href="<?php echo Mage::getBaseUrl();?>anarkali-salwar.html?___store=default"><img src="<?php echo $this->getSkinUrl('campaignimages/sareees_rotating_slider_03.png'); ?>" alt="category_offer_01"/></a></div>       
+		</div>
+		</div>
+        
+		<div class="col-md-9 side_slider_product">
+	   
+    <div class="row">
+    
+    <div class="col-md-7">	
+
+<?php print $this->getLayout()->createBlock("designs/designs")->setTemplate("designs/designs.phtml")->toHtml(); ?>         
+
+<!--Customer Testimonials-->   
+   <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('testimonial')->toHtml();?>              
+   
+ </div>                   
+ <!-- Shop Now >> -->
+                 <div class="col-md-5">
+                    <div class="right-col-slider">
+                        <div class="right-col-slide-01" style="display: block;">
+                            <a href="<?php echo $this->getUrl();?>lawn-salwar.html"><img alt="right col slider 01" src="<?php echo $this->getSkinUrl('campaignimages/lawn_salwar_kameez_right_col_170315.jpg');?>"></a>
+                            
+                        </div>
+                        <div class="right-col-slide-02" style="display: none;">
+                           <a href="<?php echo $this->getUrl();?>anarkali-salwar.html"><img alt="right col slider 01" src="<?php echo $this->getSkinUrl('campaignimages/anarkali_right_col_2_170315.jpg');?>"></a>
+                           
+                        </div>
+                        <div class="slider-pointer">
+                            <div class="slider-pointer-01" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);"></div>
+                            <div class="slider-pointer-02" style="background: none repeat scroll 0% 0% transparent;"></div>
+                        </div>
+                    
+                    </div> 
+					<div class="shop_image"><img alt="banner" src="<?php echo $this->getSkinUrl('campaignimages/wedding_attire_right_col_170315.jpg');?>"></div>
+                  </div>					
+           
+        </div>
+                    
+     <!--  top seller -->
+  
+ 
+ <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('recent_visited')->toHtml();?>    	 
+                    
+    <!--  MOST VIEWED | MOST PURCHASED -->
+ 
+<?php print $this->getLayout()->createBlock("viewed/viewed")->setTemplate("viewed/viewed.phtml")->toHtml(); ?> 
+              
+                 
+             
+
+
+<div id="bottom-banner">
+    <div class="banner-left">
+        <div class="bottom-banner-title bottom-banner-title-left">PRINCESS COLLECTION</div>
+        <a href="<?php echo $this->getUrl();?>kids-lehenga-choli.html"><img alt="PRINCESS COLLECTION" src="<?php echo $this->getSkinUrl('campaignimages/bottom_banner_left_02_170315.jpg');?>"></a>
+        
+    </div>
+    <div class="banner-right">
+        <div class="bottom-banner-title bottom-banner-title-right">WEDDING SHERWANI</div>
+        <a href="<?php echo $this->getUrl();?>sherwani-19692.html"><img alt="SHERWANI COLLECTION" src="<?php echo $this->getSkinUrl('campaignimages/bottom_banner_right_02_170315.jpg');?>"></a>
+        
+    </div>
+</div>		
+
+<!--  candid slider-->
+           <div class="home_loveslider">
+             <div class="ethnic_lovers">
+			 <h2>Ethnic Lovers</h2>
+             <h3>Time for you to get social<span>#lovesareez</span></h3>
+            </div>
+            <div class="home_loveslider_para"><h4>Let the world see the beautiful you in your favorite ethnic collections, and Post your pics! Tag @Sareez #lovesareez in Instagram and Facebook for a chance to be featured!</h4></div>
+
+                   <!-- BEGIN: Candid Widget -->
+                   <div class="love_slider_img">
+				   <script src="//api.getcandid.com/scripts/widget.js"></script>
+                       <script type="text/javascript">
+                           candid.init({
+                               id: 'd371ecb0-6e87-43ac-86ff-bf21b1e36b22',
+                               width: 176,
+                               margin: 0,
+                               slideshow: true,
+                               slideshowSpeed: 5000,
+                               animationLoop: true,
+                               animationSpeed: 1000
+                           });
+                       </script>
+                   </div>
+                   <!-- END: Candid Widget -->
+                   <div class="view_full_gallery"><a href="<?php echo $this->getUrl();?>lovesareez">VIEW THE FULL GALLERY</a></div>
+               
+			   </div>
+               <!--  end of candid slider-->
+
+
+<div class="experience_true">
+<h1>Experience True Indian Ethnicity with Sareez</h1>
+
+<p>Sareez comes up as one of the largest online stores offering a range of Indian ethnic wears like sarees, salwar kameezes, lehengas, sherwanis and more. As a trusted provider of traditional as well as fashionable Indian ethnic attires all over the world, we have been designing, manufacturing and delivering excellent attires since decades.</p>
+
+<p>The variety of the items that we bring forth for you will simply make you spoilt for a choice. We have a sheer range of sarees in varying materials, like silk, crepe, georgette, net, brasso, tissue and many more. The prints, patterns, designs and art works are worth appreciation since these are the handiwork of the most talented Indian craftsmen. Equally remarkable is our collection of the other types of female ethnic wears. Our collection is wide enough to allow every woman of every body type get her choicest attire. We have sub categorized the items based on occasion, work, fabric, color and price to enable you to carry out a quick and effective search.</p>
+
+<p>Sareez attempts at helping women define elegance and beauty. As such, we offer services like stitching of the blouses and petticoats based on the specific measurements provided to us by the respective customers. What’s more, shipping of the items is facilitated by us. So, no matter where you are located across the world, we are right here to let you experience Indian ethnicity in the truest sense of the term.</p>
+ </div>
+
+
+</div> <!-- end col-md-9 -->
+</div> <!-- end row -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<!-- yotpo javascript library added on 120215 by Asgar-->
+<!--<script type="text/javascript">
+(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/unnusoQavcxaMsYqujTnd4BmSzwKMcAwtBbEOvPy/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script>-->
+<!--end : yotpo javascript library added on 120215 by Asgar-->
+
+<script src="<?php echo $this->getSkinUrl('js/landingpage_slider.js', array('_secure'=>true)); ?>"></script>
+
+                </div>
+            </div>
+        </div>
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+    </div>
+</div>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

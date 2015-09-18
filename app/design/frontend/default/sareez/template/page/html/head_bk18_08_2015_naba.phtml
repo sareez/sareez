@@ -1,0 +1,323 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<META http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-store"> 
+<meta http-equiv="expires" content="-1"/>
+
+ 
+<!--<meta http-equiv="refresh" content="5; url=http://www.sareez.com/">     
+	<meta charset="utf-8">
+--> 
+    
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
+<?php  $cssurl =  str_replace('index.php/','',$this->getUrl());?>
+<!--<link rel="stylesheet" type="text/css" href="<?php //echo $cssurl.'skin/frontend/base/default/responsiveslider/css/generic-nav.css'; ?>" media="all">
+<link rel="stylesheet" type="text/css" href="<?php //echo $cssurl.'skin/frontend/base/default/responsiveslider/css/grid12.css'; ?>" media="all">-->
+
+
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+
+<?php if(Mage::registry('current_product')) { ?>
+<!--<script type="text/javascript" src="<?php echo $this->getSkinUrl('jquery-1.10.1.min.js');?>"></script>-->
+<?php } ?>
+
+
+
+
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('jquery.mousewheel-3.0.6.pack.js');?>"></script>
+<!--<link rel="stylesheet" type="text/css" href="<?php // echo $this->getSkinUrl('jquery.fancybox.css');?>" media="screen" />-->
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cssmin.js');?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/highslide-with-html.js"></script>
+<script>
+hs.graphicsDir = '<?php echo $this->getSkinUrl()?>highslide/graphics/';
+hs.outlineType = 'rounded-white';
+hs.showCredits = false;
+hs.wrapperClassName = 'draggable-header';
+hs.allowWidthReduction=true;
+hs.allowHeightReduction=true;
+</script>
+<script>
+function setmeasurementid(id)
+{
+document.getElementById('measurements_id').value = id;
+}
+
+function redirecturl(form)
+{
+	//alert("ffffffff");
+hs.close(form);
+document.location.href ='<?php echo $this->getUrl('measurement/index/customsalwar').'?pid='.$params['pid'].'&oid='.$params['oid'].'&m_id='?>'+document.getElementById('measurements_id').value;
+}
+</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/highslide-fun.js"></script>
+<style>
+.highslide-maincontent {
+    display: none;
+}
+</style> 
+
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+
+<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+ <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+    <!--[if lte IE 9]><script src="js/respond.min.js"></script><![endif]-->
+
+<script>
+var jT = jQuery.noConflict();
+    jT(document).ready(function() {
+        
+		//alert('chinmay');
+		//alert(jT(window).width());
+		if (jT(window).width() > 1000 ) { 
+		jT('.header').scrollToFixed();
+		jT('#header').removeClass('header_mobile').addClass('header');
+		} else { 
+		jT('#header').removeClass('header').addClass('header_mobile');
+		} 
+    });
+</script>
+
+<script>
+var toggle = jQuery.noConflict();
+toggle(document).ready(function(){  
+    toggle('.filter_morebotton').click(function(){		
+        toggle('.block-layered-nav').toggle();
+    });
+		if (toggle(window).width() > 1000 ) { 	
+		} else { 
+		 toggle('#toggling').css( "display", "none" );
+		} 
+    });
+</script> 
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(); ?>js/mirasvit/core/jquery.min.js"></script>
+<script type="text/javascript">jQuery.noConflict(true); </script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery-scrolltofixed.js');?>"></script>
+
+
+<script language="JavaScript" src="<?php echo $this->getSkinUrl('js/siteseal.js'); ?>" type="text/javascript"></script>       
+<script type="text/javascript" language="javascript" src="<?php echo $this->getSkinUrl('js/script.js'); ?>"></script>
+
+<!--Start: Custom Audience Pixel Code added on 06-07-2015 by Naba-->
+
+<?php  //if(Mage::registry('current_product')) { ?>
+
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+// Insert Your Custom Audience Pixel ID below. 
+fbq('init', '306487626192434');
+fbq('track', 'PageView');
+
+<?php
+$product = Mage::registry('current_product');
+if ($product) //sometimes need check for instanse, use instanseof
+{
+	$products_id = $product->getId();
+	$products_model = $product->getSku();
+	$products_name = $product->getName();
+	$products_price = $product->getPrice();
+	
+	if (strpos($products_model,'SA') !== false) { 
+		$product_catalog='Saree';
+		$product_catalog_id='782974751792826';
+	} else if (strpos($products_model,'SL') !== false) {
+		$product_catalog='Salwar';
+		$product_catalog_id='105324959814252';
+	} else if (strpos($products_model,'LL') !== false) {
+		$product_catalog='Lehenga';	
+		$product_catalog_id='741950172585455';
+	} else if (strpos($products_model,'KT') !== false) {
+		$product_catalog='Kurti';		
+		$product_catalog_id='1651517328403711';
+	} else if (strpos($products_model,'SH') !== false) {
+		$product_catalog='Sherwani';
+		$product_catalog_id='874775459251111';
+	} else {
+		$product_catalog='';
+		$product_catalog_id='';
+	}
+
+?>
+<?php //if (strpos($products_model,'SA') !== false || strpos($products_model,'SL') !== false || strpos($products_model,'LL') !== false) { ?>
+fbq('track', 'ViewContent', {
+  content_name: '<?php echo $products_name; ?>',
+  content_category: '<?php echo $product_catalog; ?>',
+  content_ids: ['<?php echo $products_id; ?>'],
+  product_catalog_id: ['<?php echo $product_catalog_id; ?>'],
+  content_type: 'product',
+  value: <?php echo $products_price; ?>,
+  currency: 'USD'
+ });	
+<?php 
+	//} else {} 
+
+}
+
+//}
+?>
+
+<?php 
+$url = Mage::helper('core/url')->getCurrentUrl();
+$base_url=Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+$checkout_url = $base_url."checkout/cart/";
+echo $url."1111";
+echo $checkout_url."2222";
+if($checkout_url==$url){
+$cart = Mage::getModel('checkout/cart')->getQuote();
+$prodID='';
+foreach ($cart->getAllItems() as $item) {
+	$prodID = $prodID."'".$item->getProduct()->getId()."',";
+}
+}
+
+$AllprodID = rtrim($prodID,",");
+
+if($checkout_url==$url){ 
+$grandTotal = Mage::getModel('checkout/cart')->getQuote()->getGrandTotal();
+$currentCurrency = Mage::app()->getStore()->getCurrentCurrencyCode();
+?>
+
+fbq('track', 'AddToCart', {
+  content_name: 'Shopping Cart',
+  content_ids: [<?php echo $AllprodID; ?>],
+  content_type: 'product',
+  value: <?php echo $grandTotal; ?>,
+  currency: '<?php echo $currentCurrency; ?>'
+});
+
+<?php } ?>
+
+<?php
+$urls = Mage::helper('core/url')->getCurrentUrl();
+$success_url = $base_url."checkout/onepage/success/";
+
+echo Mage::getURL('checkout/onepage') ."||||". $this->getUrl('checkout/onepage');
+echo $urls."3333";
+echo $success_url."4444";
+
+if($success_url==$urls){
+	$order = Mage::getSingleton('sales/order'); 
+	$order->loadByIncrementId(Mage::getSingleton('checkout/session')->getLastRealOrderId());
+	$_items = $order->getAllItems();
+	$prodIDs='';
+	foreach($_items as $_item) {
+		$prodIDs = $prodIDs."'".$_item->getProductId()."',";
+	}
+$AllprodIDs = rtrim($prodIDs,",");
+}
+
+if($success_url==$urls){ 
+	$sOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
+	$oOrder = Mage::getModel('sales/order')->load($sOrderId);
+	//$totalOrderValue = $oOrder['base_subtotal_incl_tax'];
+	$totalOrderValue = $oOrder['grand_total'];
+	$currency_code = Mage::app()->getStore()->getCurrentCurrencyCode(); 
+?>
+
+fbq('track', 'Purchase', {
+  content_ids: [<?php echo $AllprodIDs; ?>],
+  content_type: 'product',
+  value: <?php echo $totalOrderValue; ?>,
+  currency: '<?php echo $currency_code; ?>'
+});
+
+<?php } ?>
+
+</script> 
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=306487626192434&ev=PageView&noscript=1"/></noscript>
+
+<!--End: Custom Audience Pixel Code added on 06-07-2015 by Naba-->	
+
+<?php 
+if($success_url==$urls){ 
+?>
+<!-- Facebook Conversion Code for Checkout Confirmation added on 07-07-15 By Naba -->
+
+<script>(function() {
+var _fbq = window._fbq || (window._fbq = []);
+if (!_fbq.loaded) {
+var fbds = document.createElement('script');
+fbds.async = true;
+fbds.src = '//connect.facebook.net/en_US/fbds.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(fbds, s);
+_fbq.loaded = true;
+}
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6012665308155', {'value':'<?php echo $totalOrderValue; ?>','currency':'<?php echo $currency_code; ?>'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6012665308155&amp;cd[value]=<?php echo $totalOrderValue; ?>&amp;cd[currency]=<?php echo $currency_code; ?>&amp;noscript=1" /></noscript>
+
+<!-- end: Facebook Conversion Code for Checkout Confirmation 07-07-15 By Naba-->
+<?php } ?>
+
+<?php
+session_start();
+$currencyModel = Mage::getModel('directory/currency');
+$currencies = $currencyModel->getConfigAllowCurrencies();
+$baseCurrencyCode = Mage::app()->getStore()->getBaseCurrencyCode();
+$defaultCurrencies = $currencyModel->getConfigBaseCurrencies();
+$rates=$currencyModel->getCurrencyRates($defaultCurrencies, $currencies);
+$currentCurrency = Mage::app()->getStore()->getCurrentCurrencyCode();
+//echo "<br />";
+$convertionrate = Mage::helper('directory')->currencyConvert('1', 'USD', $currentCurrency);
+Mage::getSingleton('core/session')->setConvertionrateMessage($convertionrate);
+Mage::getSingleton('core/session')->getConvertionrateMessage();
+
+
+$_SESSION['convertionrate'] = $convertionrate;
+$GLOBALS['convertionrate'] = $convertionrate;
+?>

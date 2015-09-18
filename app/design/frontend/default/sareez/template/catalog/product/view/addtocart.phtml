@@ -1,0 +1,223 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php $adminqty = (int)Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product)->getQty();
+// exit;
+$sss = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+//echo $sss->getIs_qty_decimal();
+ ?>
+<?php if($_product->isSaleable()): ?>
+    <div class="add-to-cart cart_to_add">
+    <div class="opqty">
+        <?php if(!$_product->isGrouped()): ?>
+        <label for="qty"><?php echo $this->__('SELECT QUANTITY :') ?></label>
+        <?php /*?><select class="input-text qty" name="qty" id="qty">
+		<?php $i = 1 ?>
+        <?php do { ?>
+        <option value="<?php echo $i?>"><?php echo $i?><?php $i++ ?></option>
+        <?php } while ($i <= $adminqty) ?></select><?php */?>
+		
+		<?php $category = Mage::getModel('catalog/layer')->getCurrentCategory();?>
+        <?php if($category->getId()!='273'){?>
+        <!-- for default add to cart code--> 
+        
+				<?php if($adminqty <= 0){?>
+                 <select class="input-text qty" name="qty" id="qty">
+                <?php for($qty=1; $qty<=25; $qty++){ ?>
+                <option value="<?php echo $qty; ?>"><?php echo $qty; ?></option>
+                <?php } ?>
+                </select>
+                
+                <?php } else { ?>
+                
+                <select class="input-text qty" name="qty" id="qty">
+                <?php for($qty=1; $qty<=$adminqty; $qty++){ ?>
+                <option value="<?php echo $qty; ?>"><?php echo $qty; ?></option>
+                <?php } ?>
+                </select>
+                
+                <?php } ?>
+        
+        <!-- end :for default add to cart code-->   
+        <?php }else{?>
+        <select name="qty"
+        <?php 
+        //for($i=.5;$i<=20;$i+=.5)
+		 for($i=0;$i<=20;$i++)
+        {                           
+        echo "<option value=".$i.">".$i."</option>";
+        }
+        //$i+=.5;
+        ?>
+        </select>        
+        Meter(s)
+        <?php }?>
+        
+        
+        <?php endif; ?>
+        </div>
+        <button type="button" title="<?php  echo $buttonTitle ?>" class="button btn-cart-edit btn-cart" onclick="removepii(),productAddToCartForm.submit(this),windowclose()"><span><span><?php  echo $buttonTitle ?></span></span></button>
+        
+		
+		
+		
+		
+		
+		
+		
+		<script>
+		function windowclose(){
+			// top.document.getElementById('light').style.display="none";
+			
+			setTimeout(function(){ windowclose_two(); }, 1000);
+			}
+			
+			function windowclose_two()
+			{
+			 //top.document.getElementById('light').style.display="none";
+			 //alert("Your Product has been added to cart successfully!");
+                         //document.getElementById('backshadow').style.display="none";
+                         
+                         // document.getElementById('light').style.display='none';
+                         // document.getElementById('fade').style.display='none'
+			}
+			
+		</script>
+		
+		
+		
+        <script language="javascript">
+		
+function removepii(){
+
+		var KT = jQuery.noConflict();
+			KT(".pii-el-vars").each(function(k, el){
+			//console.log("Test --");
+			var $el = KT(el);
+			if(!$el.is(":visible")){
+				//console.log(k);
+				$el.remove();
+			}
+		
+		});
+
+ }
+</script>
+
+
+<script language="javascript">
+/*
+function PiiOptionPriceFix(){
+    
+    var KL = jQuery.noConflict();
+    
+    KL(".options-list .checkbox").each(function(){
+        
+        var $el        = KL(this);
+        var defChecked = $el.data('defChecked');
+        var isChecked  = $el.attr("checked") ? "checked" : "";
+        
+//        console.log(this.id, defChecked, isChecked, $el.is(":visible"));
+        
+        if(typeof(defChecked) == "undefined") $el.data('defChecked', isChecked);
+        $el.is(":visible") ? $el.prop("checked", defChecked) : $el.prop("checked", "");
+        
+    });
+    
+    opConfig && opConfig.reloadPrice();
+}
+
+
+var KL = jQuery.noConflict();
+KL("body").ready(function(){
+    PiiOptionPriceFix();
+});
+
+KL(window).load(function(){
+   KL("link").load(function(){ 
+       setTimeout(function(){
+          PiiOptionPriceFix();
+       }, 200); 
+   });
+
+   setTimeout(function(){
+       PiiOptionPriceFix();
+   },500);
+}); */
+</script>
+
+        
+        
+        
+        
+        
+        
+        
+   
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<?php echo $this->getChildHtml('', true, true) ?>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+<?php endif; ?>

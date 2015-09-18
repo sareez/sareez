@@ -1,0 +1,127 @@
+<?php
+
+	
+
+	$qvCf = Mage::getStoreConfig('menu');
+
+	$screenWidth  = (int) @$qvCf['tabs']['thresholdmobile']?(int) @$qvCf['tabs']['thresholdmobile']:767;
+
+?>
+
+
+
+<?php
+
+	/* create content css */
+
+	ob_start();
+
+?>
+
+@media (max-width:<?php echo $screenWidth;?>px){
+
+	#header .menu-style01
+
+	{
+
+		display:none !important;
+
+	} 
+
+	#header-nav {
+
+		display:block !important;
+		background: none repeat scroll 0 0 #ededed;
+	} 
+	a.skip-link {
+    	width: 33.33%;
+	}
+	a.skip-nav{
+		display:none !important;
+	}
+	.slideshow-container{
+		display: inline-block !important;
+	}
+}
+
+
+
+@media (min-width:<?php echo $screenWidth+1;?>px){
+
+	.mobnav-trigger-wrapper
+
+	{
+
+		display:none !important;
+
+	} 
+
+	#nav.nav-mobile{
+		display: none !important;
+		overflow: hidden;
+	}
+
+	
+}
+
+
+
+<?php 
+
+	$all=ob_get_clean();
+
+?>
+
+
+
+<?php 
+
+	if (Mage::registry('menumobileCssWrited') == false)
+
+	{
+
+		
+
+$css= <<<CSS
+
+	{$all}
+
+CSS;
+
+		/* write content css to file */
+
+		$io = new Varien_Io_File();
+
+		 
+
+		$path = Mage::getBaseDir('skin').DS.'frontend'.DS.'base'.DS.'default'.DS.'css'.DS.'glace'.DS.'menumobile';
+
+		
+
+		$file = $path . DS .  'mobile.css';
+
+		
+
+		$io->setAllowCreateFolders(true);
+
+		$io->open(array('path' => $path));
+
+		$io->streamOpen($file, 'w+');
+
+		$io->streamLock(true);
+
+		$io->streamWrite($css);
+
+		 
+
+		$io->streamUnlock();
+
+		$io->streamClose();
+
+		
+
+		Mage::register('menumobileCssWrited', 1);
+
+	}
+
+?>

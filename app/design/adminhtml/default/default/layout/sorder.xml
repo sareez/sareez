@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <sorder_adminhtml_sorder_index>
+        <reference name="content">
+            <block type="sorder/adminhtml_sorder" name="sorder" />
+        </reference>
+    </sorder_adminhtml_sorder_index>
+</layout>

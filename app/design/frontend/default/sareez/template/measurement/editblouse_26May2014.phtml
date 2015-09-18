@@ -1,0 +1,114 @@
+<!-- SAREEZ FORM -->
+
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl()?>highslide/highslide_area.css">
+<div class="page-title"><h1>Fill measurement and make a choice</h1></div>
+<table cellspacing="0" cellpadding="0" class="ProdListingMain">
+				<tbody>
+                                    <tr>
+					<td>
+						<table width="100%" cellspacing="0" cellpadding="0">
+
+							<tbody><tr>
+								<!--Make a choice Section-->
+								<td>
+									<table width="100%" cellspacing="0" cellpadding="0">
+											<tbody><tr>
+												<td align="center">
+													<table cellspacing="0" cellpadding="0" class="address_book_heading">
+														<tbody><tr>
+															<td width="544" class="address_book_heading"><strong>Please Select Measurement Option</strong></td>
+															<td width="179" class="accOdrStat">&nbsp;</td>
+														</tr>
+													</tbody></table>
+													
+													
+													<table width="680" border="0" cellspacing="0" cellpadding="0" class="address_book_text">
+														<tbody><tr>
+															<!--Readymade Choice-->
+															<td width="50%">
+																<table width="100%" align="center" cellspacing="0" cellpadding="0">
+																	<tbody><tr>
+																		<td valign="top" align="right" class="form_divider">&nbsp;</td>
+																	</tr>																	
+																	<tr>
+																		<td align="justify" style="padding-left:10px; padding-right:5px">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham</td>
+																	</tr>
+																	
+																  <tr>
+																	<td valign="top" align="right" class="form_divider">&nbsp;</td>
+																  </tr>																	
+																  
+																  <tr>
+																  <?php  $params = $this->getRequest()->getParams() ?>
+																  <?php  if($params['pid'] && $params['oid']){ $readyMadeUrl = $this->getUrl('measurement/index/readymadeblouse').'?pid='.$params['pid'].'&oid='.$params['oid']; } else { $readyMadeUrl = '#';	} ?>
+																  <td align="justify" style="padding-left:10px; padding-right:5px">
+																  	<a style="text-decoration:none;" href="<?php echo $readyMadeUrl ?>">
+																  		<input type="button" value="Select Ready Made Size" name="submit" class="button">
+																  </a></td></tr>
+																  
+																  <tr>
+																	<td valign="top" align="right" class="form_divider">&nbsp;</td>
+																  </tr>																	  
+																		
+																</tbody></table>
+																
+															</td>
+															<!--Readymade Choice-->
+															
+															<!--Custom Choice-->
+															<td width="50%">
+															
+																<table width="100%" align="center" cellspacing="0" cellpadding="0">
+																	<tbody><tr>
+																		<td valign="top" align="right" class="form_divider">&nbsp;</td>
+																	</tr>																
+																	<tr>
+																		<td align="justify" style="padding-left:10px; padding-right:5px">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham</td>
+																	</tr>
+																	
+																	<tr>
+																		<td valign="top" align="right" class="form_divider">&nbsp;</td>
+																	</tr>	
+																	
+																	  <tr><td align="justify" style="padding-left:10px; padding-right:5px"><a style="text-decoration:none" href="<?php echo $this->getUrl('measurement/index/customblouse').'?pid='.$params['pid'].'&oid='.$params['oid'];?>"><input type="button" value="Submit Custom Measurement" name="submit" class="button"></a></td></tr>
+																	  
+																	  <tr>
+																		<td valign="top" align="right" class="form_divider">&nbsp;</td>
+																	  </tr>																
+																	
+																</tbody></table>															
+															
+															</td>
+															<!--Custom Choice End-->
+															
+														</tr>
+													</tbody></table>
+								
+													<table cellspacing="0" cellpadding="0" class="address_book_heading">
+														<tbody><tr>
+															<td width="544" class="address_book_heading"><strong>You can submit this measurement form later.</strong></td>
+															<td width="179" class="accOdrStat">&nbsp;</td>
+														</tr>
+													</tbody></table>
+								
+													
+													<table cellspacing="0" cellpadding="0" class="address_book_text">
+														
+														<tbody><tr>
+														  <td width="582">You can submit this measurment form later from your "My Account" section.</td>
+														  <td width="116" valign="top" height="26" align="right"><a href="http://www.tecidoz.com/account_history_info.php?order_id=535"><input type="button" value="Submit Later" name="submit" class="button"></a> </td>
+													  </tr>
+													</tbody></table>
+													
+
+						  						</td>
+											</tr>
+															
+									</tbody></table>
+								</td>
+								<!--Make a choice End-->								
+							</tr>	
+						</tbody></table>
+					</td>
+				</tr>
+			</tbody></table>

@@ -1,0 +1,11 @@
+<?php
+$_item    = $this->getItem();
+$_instance = $_item->getTypeInstance();
+?>
+<?php if ($_instance->getUrl()): ?>
+    <a href="<?php echo $_instance->getUrl() ?>">
+        <img class="image home_icon" src="<?php echo $_instance->getImageUrl() ?>" style="<?php echo $_instance->getStyle() ?>">
+    </a>
+<?php else: ?>
+    <img class="image" src="<?php echo $_instance->getImageUrl() ?>" style="<?php echo $_instance->getStyle() ?>">
+<?php endif ?>

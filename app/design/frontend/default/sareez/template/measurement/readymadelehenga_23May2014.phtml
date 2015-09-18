@@ -1,0 +1,422 @@
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/wz_tooltip.js"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/tip_balloon.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl()?>highslide/highslide_area1.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl()?>highslide/highslide.css" />
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/highslide-with-html.js"></script>
+<script>
+hs.graphicsDir = '<?php echo $this->getSkinUrl()?>highslide/graphics/';
+hs.outlineType = 'rounded-white';
+hs.showCredits = false;
+hs.wrapperClassName = 'draggable-header';
+hs.allowWidthReduction=true;
+hs.allowHeightReduction=true;
+</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/highslide-fun.js"></script>
+<style>
+.highslide-maincontent {
+display: none;
+}
+</style> 
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl().'css/popup.css'?>">
+<?php
+echo Mage::app()->getLayout()->getMessagesBlock()->getGroupedHtml();
+$pId 		= $this->getRequest()->getParam('pid');
+$order_id	= $this->getRequest()->getParam('oid');
+
+$mforusermodel = Mage::getModel('measurement/measurementforuser')->getCollection()
+->AddFieldToFilter('products_id' , $pId)
+->AddFieldToFilter('order_id' , $order_id)
+->getData();
+
+if(count($mforusermodel) > 0 )
+{
+$readymade_id = $mforusermodel[0]['readymade_id'];
+$mforreadymademodel = Mage::getModel('measurement/measurementforreadymade')->getCollection()
+->AddFieldToFilter('readymade_id' , $readymade_id)
+->getData();
+
+$lehenga_rdmd_readymade_size = $mforreadymademodel[0]['lehenga_rdmd_readymade_size'];
+$lehenga_rdmd_height = $mforreadymademodel[0]['lehenga_rdmd_height'];
+$lehenga_rdmd_height_2 = $mforreadymademodel[0]['lehenga_rdmd_height_2'];
+$lehenga_rdmd_sleeves_length = $mforreadymademodel[0]['lehenga_rdmd_sleeves_length'];
+$instructions = $mforreadymademodel[0]['instructions'];
+
+}
+else
+{
+
+$lehenga_rdmd_readymade_size = '';
+$lehenga_rdmd_height = '';
+$lehenga_rdmd_height_2 = '';
+$lehenga_rdmd_sleeves_length = '';
+$instructions = '';
+
+
+}
+
+$product 	= Mage::getModel('catalog/product')->load($pId);
+if($product->getId()){
+
+}
+?>
+
+<table cellspacing="0" cellpadding="0" class="ProdListingMain">
+<tbody><tr>
+<td class="breadcrumb"><a href="#">Home</a> » <span>Measurement</span> </td>
+</tr>		
+
+<tr>
+<td>
+<table width="100%" cellspacing="0" cellpadding="0">
+
+<tbody><tr>
+<!--Readymade Section -->
+<td id="formreadymade">
+<table width="100%" cellspacing="0" cellpadding="0">
+<form action="<?php echo Mage::getUrl('measurement/index/submitreadymadelehenga/'); ?>" method="post" name="readymade_measure" id="readymade_measure">
+<tbody><tr>
+<td align="center">
+<table cellspacing="0" cellpadding="0" class="address_book_heading">
+<tbody><tr>
+<td width="544" class="address_book_heading"><strong>Select Your Readymade Size</strong></td>
+<td width="179" class="accOdrStat"></td>
+</tr></tbody></table>
+
+
+<table width="680" border="0" cellspacing="0" cellpadding="0" class="address_book_text">
+<tbody><tr>
+<td width="86" valign="middle" align="left" rowspan="4">
+<span class="scartbdr sc-items">
+<strong>
+<a href="<?php echo $this->getUrl().$product->getUrlPath()?>" onmouseover="Tip('&lt;img src=<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(276,415)?> width=276 height=415 border=0 alt=Designer Embroidered Party Lehenga Saree; Lemon Yellow Net Embroidered Party and Festival Lehenga Style Saree title=Designer Embroidered Party Lehenga Saree; Lemon Yellow Net Embroidered Party and Festival Lehenga Style Saree&gt;', BALLOON, true, ABOVE, true, OFFSETX, -17, PADDING, 14)" onmouseout="UnTip()">
+<img width="74" height="112" border="0" alt="" src="<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(74,112)?>">
+</a>									
+</strong>
+</span>
+</td>
+
+<td width="54" valign="top" height="22" align="left">
+<p><strong>Code :</strong></p>						
+</td>
+<td width="560" valign="top" align="left"><p><?php echo $product->getSku()?></p></td>
+</tr>
+
+<tr>
+<td valign="top" height="22" align="left"><p><strong>Name :</strong></p></td>
+<td width="560" valign="top" align="left"><p><?php echo $product->getName()?></p></td>
+</tr>
+
+<tr>
+<td valign="top" height="22" align="left"><p><strong>Price :</strong></p></td>
+<td width="560" valign="top" align="left"><p><?php echo Mage::helper('core')->currency($product->getFinalPrice())?></p></td>
+</tr>
+
+<tr>
+<td valign="top" align="left">&nbsp;</td>
+<td width="560" valign="top" align="left">&nbsp;</td>
+</tr>
+</tbody></table>
+
+<table cellspacing="0" cellpadding="0" class="address_book_heading">
+<tbody><tr>
+<td width="544" class="address_book_heading"><strong>You can submit this measurement form later.</strong></td>
+<td width="179" class="accOdrStat">&nbsp;</td>
+</tr>
+</tbody></table>
+
+
+<table cellspacing="0" cellpadding="0" class="address_book_text">
+
+<tbody><tr>
+<td width="582">You can submit this measurment form later from your "My Account" section.</td>
+<td width="116" valign="top" height="26" align="right"><a href="<?php echo $this->getUrl()?>"><img src="<?php echo $this->getSkinUrl()?>highslide/images/submit_latter.jpg"></a> </td>
+</tr>
+</tbody></table>
+
+
+<table cellspacing="0" cellpadding="0" class="address_book_heading">
+<tbody><tr>
+<td width="544" class="address_book_heading"><strong>Instructions</strong></td>
+<td width="179" class="accOdrStat">&nbsp;</td>
+</tr>
+</tbody></table>
+
+
+
+
+<table width="706" border="0" cellspacing="0" cellpadding="0" class="address_book_text">
+<!--Form Element Section Start Here For Ready Made Sizes-->
+
+<tbody><tr>
+<td width="26" valign="middle" align="center"><img width="5" height="5" src="<?php echo $this->getSkinUrl()?>highslide/images/arrrowBox.jpg"></td>
+<td valign="middle" height="40" align="left">Your specification of sizes and styles are subject to the kind of fabric and limitations. Our expert designers' team might not find all your selections practically lehengaable. In such cases you might be intimated to select some other style compatible with the fabric.                                                     </td>
+</tr>
+<tr>
+<td valign="middle" align="center"><img width="5" height="5" src="<?php echo $this->getSkinUrl()?>highslide/images/arrrowBox.jpg"></td>
+<td valign="middle" height="40" align="left"><span style="text-align:justify;padding-right:10px;" class="carttext">In cases where certain extreme values have been put in the measurement form, we usually try to round them off. But we can attempt exact measurements on special requests.</span></td>
+</tr>
+<tr>
+<td valign="middle" align="center"><img width="5" height="5" src="<?php echo $this->getSkinUrl()?>highslide/images/arrrowBox.jpg"></td>
+<td valign="middle" height="40" align="left"><span style="text-align:justify;padding-right:10px;" class="carttext">In case of any major issue regarding cost or any extra charge estimated by our team of designers, you would be contacted for your choice or opinion.</span></td>
+</tr>
+<tr>
+<td valign="middle" align="center"><img width="5" height="5" src="<?php echo $this->getSkinUrl()?>highslide/images/arrrowBox.jpg"></td>
+<td valign="top" height="40" align="left"><span style="text-align:justify;padding-right:10px;" class="carttext">In case of any discrepancy or confusion regarding the measurement values we will get back to you for clarification. If we are unable to contact you within 7 days or there is no response from your end, then we would have to depend on the experience and judgement of our experts' team. We would not be liable to re-tailor the dress on further requests made by you.</span></td>
+</tr>
+<tr>
+<td valign="middle" align="center"><img width="5" height="5" src="<?php echo $this->getSkinUrl()?>highslide/images/arrrowBox.jpg"></td>
+<td valign="middle" height="40" align="left"><span style="text-align:justify;padding-right:10px;" class="carttext">We also accept specimen clothes that fit you the best. The best-fit specimen can be sent to us so that we could work with confidence and perfection. The said specimen shall be returned to you along with the new garment.</span></td>
+</tr>
+
+<tr>
+<td valign="middle" align="center"><img width="5" height="5" src="<?php echo $this->getSkinUrl()?>highslide/images/arrrowBox.jpg"></td>
+<td valign="middle" height="30" align="left">For any queries or assistance mail us at <a class="email" href="mailto:measurement@sareez.com">measurement@sareez.com</a>.</td>
+</tr>
+<tr>
+<td valign="middle" align="center">&nbsp;</td>
+<td valign="middle" height="30" align="left"><strong>USEFUL CONVERSIONS:</strong></td>
+</tr>
+<tr>
+<td valign="middle" align="center">&nbsp;</td>
+<td valign="top" height="16" align="left"><span style="text-align:justify;padding-right:10px;" class="carttext">1 inch = 2.54 cm. </span></td>
+</tr>
+<tr>
+<td valign="middle" align="center">&nbsp;</td>
+<td valign="top" height="16" align="left"><span style="text-align:justify;padding-right:10px;" class="carttext">10 cm = 3.9 inches    or    100 cm = 1 metre = 39 inches</span></td>
+</tr>														
+
+<tr>
+<td valign="top" align="left" colspan="3">
+<table width="700" border="0" cellspacing="0" cellpadding="0">		
+<tbody><tr>
+<td width="167">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="320">&nbsp;</td>
+<td width="5">&nbsp;</td>
+</tr> 	
+
+<tr>
+<td colspan="5">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="318" valign="middle" align="left" class="form_area_heading"><img src="<?php echo $this->getSkinUrl()?>highslide/images/form_arrow.jpg">&nbsp;&nbsp;<strong>Select Readymade Size For Blouse-Petticoat</strong></td>
+<td valign="middle" align="right" class="form_area_heading1" colspan="4">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+</tr>																
+</tbody></table>
+</td>
+</tr>	
+
+<tr>
+<td valign="top" align="right" class="form_divider">&nbsp;</td>
+<td valign="top" align="center" class="form_divider">&nbsp;</td>
+<td valign="top" align="left" class="form_divider" colspan="2">&nbsp;</td>
+</tr>																
+
+
+<input type="hidden" value="<?php echo $this->getRequest()->getParam('pid') ?>" name="products_id">
+<input type="hidden" value="<?php echo $readymade_id; ?>" name="readymade_id" id="readymade_id">
+<input type="hidden" value="Lehnga-Choli" name="reopt" id="reopt">
+<input type="hidden" value="<?php ?>" name="page" id="page">
+<input type="hidden" value="<?php echo $this->getRequest()->getParam('oid') ?>" name="order_id" id="order_id">
+<input type="hidden" value="Lehnga-Choli" name="readymade_type" id="readymade_type">
+
+
+<tr>
+<td valign="top" height="22" align="right"><strong>Ready Made Blouse (Top)</strong></td>
+<td valign="top" align="center">&nbsp;</td>
+<td valign="top" align="left" class="form_small_ass" colspan="2">&nbsp;</td>
+<td width="188" valign="top" align="center" rowspan="22"></td>
+</tr>
+
+
+
+<tr>
+<td valign="top" align="right" class="form_divider">&nbsp;</td>
+<td valign="top" align="center" class="form_divider">&nbsp;</td>
+<td valign="top" align="left" class="form_divider" colspan="2">&nbsp;</td>
+</tr>
+
+<tr>
+<td valign="top" align="right"> ReadyMade Size : <span class="redText">*</span></td>
+<td valign="top" align="center">Top 	</td>
+<td valign="top" align="left" class="form_small_ass" colspan="2">
+<select style="width: 70px;" id="lehenga_rdmd_readymade_size" name="lehenga_rdmd_readymade_size" class="select_box">
+<option selected="selected" value="">Select</option>
+<?php  for($i=30;$i<=44;$i=$i+(1/2)){ ?>
+<option value="<?php echo $i ?>" <?php if($i == $lehenga_rdmd_readymade_size){ ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+<?php } ?>																   
+</select>&nbsp;in Inches &nbsp;	
+
+<img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Sleeve Length' })" title="" alt="" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/images/help_icon.jpg" id="BRS">
+<div class="highslide-maincontent"><div class="area1"><div class="area1"> 
+<table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+<tbody><tr>
+<td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/images/utsav/Sleeve-Length.jpg"></td>
+<td width="220" valign="top" align="left" class="popup1_left">
+<p class="heading_text"><strong>How to measure "Readymade Size" ?</strong></p>
+<p class="text">Demo Text.</p></td>
+</tr>
+</tbody></table>							  
+</div></div>																	
+
+</div></td>
+</tr>
+
+
+<tr>
+<td valign="top" align="right" class="form_divider">&nbsp;</td>
+<td valign="top" align="center" class="form_divider">&nbsp;</td>
+<td valign="top" align="left" class="form_divider" colspan="2">&nbsp;</td>
+</tr>															
+
+<tr>
+<td valign="top" align="right">Height <span class="redText">*</span></td>
+<td valign="top" align="center">:</td>
+<td valign="top" align="left" class="form_small_ass" colspan="2">
+<select style="width: 70px;" id="lehenga_rdmd_height" name="lehenga_rdmd_height" class="select_box">
+<option selected="selected" value="">Select</option>
+
+<?php  for($i=4;$i<=7;$i++){ ?>
+<option value="<?php echo $i ?>" <?php if($i == $lehenga_rdmd_height){ ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+<?php } ?>
+</select>&nbsp; Ft &nbsp;
+
+<select style="width: 70px;" id="lehenga_rdmd_height_2" name="lehenga_rdmd_height_2" class="select_box">
+<option selected="selected" value="">Select</option>
+
+<?php  for($i=1;$i<=12;$i++){ ?>
+<option value="<?php echo $i ?>" <?php if($i == $lehenga_rdmd_height_2){ ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+<?php } ?>
+</select>&nbsp; Inches &nbsp;
+<img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Sleeve Length' })" title="" alt="" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/images/help_icon.jpg" id="SL">
+<div class="highslide-maincontent"><div class="area1"><div class="area1"> 
+<table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+<tbody><tr>
+<td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/images/utsav/Sleeve-Length.jpg"></td>
+<td width="220" valign="top" align="left" class="popup1_left">
+<p class="heading_text"><strong>How to measure "Sleeve Length" ?</strong></p>
+<p class="text">Starting from the outside edge of shoulder bone upto the desired length.</p></td>
+</tr>
+</tbody></table>							  
+</div></div>															  
+
+</div></td>
+</tr>
+
+<tr>
+<td valign="top" align="right">Sleeve Lengths<span class="redText">*</span></td>
+<td valign="top" align="center">:</td>
+<td valign="top" align="left" class="form_small_ass" colspan="2">
+<select style="width: 70px;" id="lehenga_rdmd_sleeves_length" name="lehenga_rdmd_sleeves_length" class="select_box">
+<option selected="selected" value="">Select</option>
+<option value="Sleeveless">Sleeveless</option>
+<?php  for($i=3;$i<=23;$i=$i+(1/2)){ ?>
+<option value="<?php echo $i ?>" <?php if($i == $lehenga_rdmd_sleeves_length){ ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+<?php } ?>
+</select>&nbsp;in Inches &nbsp;	
+
+<img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Sleeve Length' })" title="" alt="" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/images/help_icon.jpg" id="SL">
+<div class="highslide-maincontent"><div class="area1"><div class="area1"> 
+<table width="580" border="0" cellspacing="0" cellpadding="0" class="popup1">
+<tbody><tr>
+<td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/images/utsav/Sleeve-Length.jpg"></td>
+<td width="220" valign="top" align="left" class="popup1_left">
+<p class="heading_text"><strong>How to measure "Sleeve Length" ?</strong></p>
+<p class="text">Starting from the outside edge of shoulder bone upto the desired length.</p></td>
+</tr>
+</tbody></table>							  
+</div></div>															  
+
+</div></td>
+</tr>
+<tr>
+<td valign="top" align="right" class="form_divider">&nbsp;</td>
+<td valign="top" align="center" class="form_divider">&nbsp;</td>
+<td valign="top" align="left" class="form_divider" colspan="2">&nbsp;</td>
+</tr>															
+
+
+<tr>
+<td valign="top" align="right" class="form_divider">&nbsp;</td>
+<td valign="top" align="center" class="form_divider">&nbsp;</td>
+<td valign="top" align="left" class="form_divider" colspan="2">&nbsp;</td>
+</tr>
+
+	    
+
+
+<tr>
+<td valign="top" height="22" align="right"><strong>Petticoat (Bottom Skirt)</strong></td>
+<td valign="top" align="center">&nbsp;</td>
+<td valign="top" align="left" class="form_small_ass" colspan="2">&nbsp;</td>
+</tr>
+
+<tr>
+<td valign="top" align="right" class="form_divider">&nbsp;</td>
+<td valign="top" align="center" class="form_divider">&nbsp;</td>
+<td valign="top" align="left" class="form_divider" colspan="2">&nbsp;</td>
+</tr>
+
+
+
+<tr>
+<td valign="top" align="right">Instruction (if any)<br>Maximum 500 characters<span class="redText">&nbsp;</span></td>
+<td valign="top" align="center">:</td>
+<td valign="top" align="left" class="form_small_ass" colspan="2">
+<textarea onclick="textCounter(document.readymade_measure.instructions,document.readymade_measure.remLen,500)"
+ onkeydown="textCounter(document.readymade_measure.instructions,document.readymade_measure.remLen,500)"
+
+ onfocus="textCounter(document.readymade_measure.instructions,document.readymade_measure.remLen,500)"
+ rows="3" cols="45" class="carttext" name="instructions" id="instructions"><?php echo $instructions ?></textarea>
+<br>
+<span class="carttext">You have
+<input type="text" style="border-width:0;text-align:center;width:40px" value="500" class="input_area" name="remLen" readonly="">
+characters left.</span>							  
+
+<div class="highslide-maincontent"> 
+<p>
+<img src="<?php echo $this->getSkinUrl()?>highslide/images/sleeve_length.jpg">
+</p>
+<p>
+Starting from the outside edge of shoulder bone and measure upto the desired length.
+</p>
+</div>
+
+</td>
+</tr>
+<tr>
+<td valign="top" align="right" class="form_divider">&nbsp;</td>
+<td valign="top" align="center" class="form_divider">&nbsp;</td>
+<td valign="top" align="left" class="form_divider" colspan="2">&nbsp;</td>
+</tr>																	
+												    
+</tbody></table>
+</td>
+</tr>
+<!--Form Element Section Ends Here For Ready Made Sizes-->										
+
+</tbody></table>
+
+<table cellspacing="0" cellpadding="0" class="address_book_btn">
+<tbody><tr>
+<td class="accOdrNumber" colspan="2"></td>
+ <td width="396" class="accOdrStat">
+				      <input type="submit" name="readymadeSubmit" value="Submit"/>
+				      </td></tr>
+</tbody></table>													
+
+</td>
+</tr>		
+
+</tbody>
+</form>
+</table>
+</td>
+<!--Readymade Section End-->
+
+</tr>	
+</tbody></table>
+</td>
+</tr>
+
+</tbody></table>

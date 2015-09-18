@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Dolphin_Productqa>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Dolphin_Productqa>
+    </modules>
+</config> 

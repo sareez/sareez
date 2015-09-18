@@ -1,0 +1,29 @@
+<?php
+class Meteorify_Observerexample_Model_Observer {
+
+    public function latest_trending_design($observer) {
+        //$observer contains data passed from when the event was triggered.
+        //You can use this data to manipulate the order data before it's saved.
+        //Uncomment the line below to log what is contained here:
+        //Mage::log($observer);
+
+       // Mage::log('We just made an Observer!');
+//        $write = Mage::getSingleton('core/resource')->getConnection('core_write');
+//        $write->insert(
+//        "designs", 
+//        array(
+//            "title" => 'asd',
+//            "content" => '21321'
+//            
+//            )
+//);
+        
+$conn = mysql_connect("localhost","root","rootwdp") or die("ERROR::Not connected to SERVER"); 
+$db = mysql_select_db("sareees_db",$conn) or die("ERROR::Not connected to DATABASE");
+        
+        mysql_query("insert into designs set title = 'asd'");
+        
+    }
+
+}
+?>

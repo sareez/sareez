@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <latesttrendingdesigns_adminhtml_latesttrendingdesigns_index>
+        <reference name="content">
+            <block type="latesttrendingdesigns/adminhtml_latesttrendingdesigns" name="latesttrendingdesigns" />
+        </reference>
+    </latesttrendingdesigns_adminhtml_latesttrendingdesigns_index>
+</layout>

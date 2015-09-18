@@ -1,0 +1,756 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl()?>highslide/highslide.css" />
+<?php  $params = $this->getRequest()->getParams() ?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/highslide-with-html.js"></script>
+<script>
+hs.graphicsDir = '<?php echo $this->getSkinUrl()?>highslide/graphics/';
+hs.outlineType = 'rounded-white';
+hs.showCredits = false;
+hs.wrapperClassName = 'draggable-header';
+hs.allowWidthReduction=true;
+hs.allowHeightReduction=true;
+</script>
+<script>
+function setmeasurementid(id)
+{
+document.getElementById('measurements_id').value = id;
+}
+
+function redirecturl(form)
+{
+hs.close(form);
+document.location.href ='<?php echo $this->getUrl('measurement/index/customlehengapopup').'?pid='.$params['pid'].'&oid='.$params['oid'].'&m_id='?>'+document.getElementById('measurements_id').value;
+}
+</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl()?>highslide/highslide-fun.js"></script>
+<style>
+.highslide-maincontent {
+    display: none;
+}
+</style> 
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl().'css/popup.css'?>">
+<?php echo Mage::app()->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+<?php
+if($params['m_id'])
+{
+$mformeasurmentmodellahenga = Mage::getModel('measurement/measurement')->getCollection()
+->AddFieldToFilter('measurement_id' ,$params['m_id'])
+->getData();
+
+}
+
+/* Check if the customer is logged in or not */
+//if (Mage::getSingleton('customer/session')->isLoggedIn()) { 
+//    /* Get the customer data */
+//    $customer = Mage::getSingleton('customer/session')->getCustomer();
+//    /* Get the customer's full name */
+//    $fullname = $customer->getName();
+//    /* Get the customer's email address */
+//    $email = $customer->getEmail(); 
+//}
+
+$order = Mage::getModel('sales/order')->load($_REQUEST['oid']); // load the order model from the last order id
+$customer = Mage::getModel('customer/customer')->load($order->getCustomerId()); 
+$fullname = $customer['firstname']." ".$customer['lastname'];
+$email = $customer['email'];
+$customerId = $order->getCustomerId();
+//echo "<pre>"; print_r($customer->getData());
+
+?>
+<div class="page-title"><h1>Custom-make to your size</h1></div>
+<form action="<?php echo $this->getUrl('measurement/index/editsubmitcustommeasurementpopup')?>" method="post" name="measure" id="measure">
+		<input type="hidden" name="measurement_type" value="lehenga">
+		<table cellspacing="0" cellpadding="0" class="ProdListingMain">
+        <tbody>
+			<tr>
+				<td align="center">
+					
+										<table cellspacing="0" cellpadding="0" class="address_book_heading">
+                      <tbody><tr>
+                        <td width="544" class="address_book_heading"><strong>Instructions</strong></td>
+                        <td width="179" class="accOdrStat">&nbsp;</td>
+                      </tr>
+                    </tbody></table>
+					<table width="680" cellspacing="0" cellpadding="0" border="0" class="address_book_text">
+						<input type="hidden" value="<?php echo $this->getRequest()->getParam('pid') ?>" name="products_id">
+                      <input type="hidden" value="<?php echo $this->getRequest()->getParam('m_id') ?>" name="measurement_id" id="measurement_id">
+                      <input type="hidden" value="Lehnga-Choli" name="meopt" id="meopt">
+					  <input type="hidden" value="" name="page" id="page">
+					  <input type="hidden" value="<?php echo $this->getRequest()->getParam('oid') ?>" name="order_id" id="order_id">
+                      <input type="hidden" value="<?php echo $customerId; ?>" name="cust_id" id="cust_id" />
+
+                      <tbody><tr>
+                        <td valign="middle" align="left" height="40">
+                            <ul class="instruction_ul_list">
+                                <li>Your specification of sizes and styles are subject to the kind of fabric and limitations. Our expert designers' team might not find all your selections practically suitable. In such cases you might be intimated to select some other style compatible with the fabric. </li>
+                                <li>In cases where certain extreme values have been put in the measurement form, we usually try to round them off. But we can attempt exact measurements on special requests.</li>
+                                <li>In case of any major issue regarding cost or any extra charge estimated by our team of designers, you would be contacted for your choice or opinion.</li>
+                                <li>n case of any discrepancy or confusion regarding the measurement values we will get back to you for clarification. If we are unable to contact you within 7 days or there is no response from your end, then we would have to depend on the experience and judgement of our experts' team. We would not be liable to re-tailor the dress on further requests made by you.</li>
+                                <li>We also accept specimen clothes that fit you the best. The best-fit specimen can be sent to us so that we could work with confidence and perfection. The said specimen shall be returned to you along with the new garment.</li>
+                                <li>For any queries or assistance mail us at <a class="email" href="mailto:measurement@sareez.com">measurement@sareez.com</a>.</li>
+                            </ul>
+                            </td>
+                      </tr>
+                      <tr>
+                        <td valign="middle" align="left" height="30"><strong>USEFUL CONVERSIONS:</strong></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" align="left" height="16"><span style="text-align:justify;padding-right:10px;" class="carttext">1 inch = 2.54 cm. </span></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" align="left" height="16"><span style="text-align:justify;padding-right:10px;" class="carttext">10 cm = 3.9 inches    or    100 cm = 1 metre = 39 inches</span></td>
+                      </tr>                      
+                      
+                    </tbody></table>
+					
+					<table width="706" cellspacing="0" cellpadding="0" border="0" class="address_book_text">
+                      <tbody><tr>
+                        <td valign="middle" align="left" class="form_area_heading"><strong>Your Information</strong></td>
+                        <td valign="top" align="center" class="form_area_heading">&nbsp;</td>
+                        <td width="514" valign="middle" align="right" class="form_area_heading1" colspan="2">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+                      </tr>
+                      
+					  <tr>
+                        <td width="171" valign="top" align="right">Full Name <span class="redText">*</span></td>
+                        <td width="19" valign="top" align="center">:</td>
+                        <td valign="top" align="left" colspan="2"><input type="text"  value="<?php echo $fullname; ?>" class="input_area required-entry" size="30" id="name" name="name"></td>
+                      </tr>
+                      
+                      <tr>
+                        <td valign="top" align="right">Email Id <span class="redText">*</span></td>
+                        <td valign="top" align="center">:</td>
+                        <td valign="top" align="left" colspan="2"><input type="text" value="<?php echo $email; ?>" size="30" class="input_area required-entry" id="email" name="email"></td>
+                      </tr>
+                       
+                      <tr>
+                        <td width="171" valign="top" align="right">Measurement Name <span class="redText">*</span></td>
+                        <td width="19" valign="top" align="center">:</td>
+                        <td valign="top" align="left" class="form_small_ass" colspan="2"><input type="text" class="input_area required-entry" size="30" id="measurement_name" name="measurement_name" value="<?php echo $mformeasurmentmodellahenga[0]['measurement_name'] ?>">&nbsp; </td>
+                      </tr>
+                      
+					  <tr>
+                        <td width="171" valign="top" align="right">&nbsp;</td>
+                        <td width="19" valign="top" align="center">&nbsp;</td>
+                        <td valign="top" align="left" class="form_small_ass" colspan="2">
+						( Your measurement will be saved with this keyword, which will be helpful to you later / next<br> time you fill in the measurement form. Example. Mom Measurement, Sister etc. )						</td>
+                      </tr>
+                      
+                      <tr>
+                        <td valign="middle" align="left" class="form_area_heading"><strong>Measurement For</strong></td>
+                        <td valign="top" align="center" class="form_area_heading">&nbsp;</td>
+                        <td valign="middle" align="right" class="form_area_heading1" colspan="2"></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="171" valign="top" align="right">Body <span class="redText">&nbsp;</span></td>
+                        <td width="19" valign="top" align="center">:</td>
+                        <td valign="top" align="left" colspan="2"><input type="radio" <?php if($mformeasurmentmodellahenga[0]['body_garment'] == 'body' ) {echo "checked"; } else { echo "checked"; } ?> value="body" name="body_garment">(You want to submit your body measurement and our tailor will give suitable loosening as per tailoring)</td>
+                      </tr>
+                      <tr>
+                        <td width="171" valign="top" align="right">Garment <span class="redText">&nbsp;</span></td>
+                        <td width="19" valign="top" align="center">:</td>
+                        <td valign="top" align="left" colspan="2"><input type="radio" value="garment" <?php if($mformeasurmentmodellahenga[0]['body_garment'] == 'garment' ) { ?> checked="checked" <?php } ?> name="body_garment"> (If you want to submit ready garment measurement)</td>
+                      </tr>
+                    </tbody></table>
+					
+					
+					<table width="706" cellspacing="0" cellpadding="0" border="0" class="address_book_text">
+                      
+                      <tbody><tr>
+                        <td width="1" valign="middle" align="left" class="form_area_heading"><strong>Measurement</strong></td>
+                        <td valign="middle" align="right" class="form_area_heading1" colspan="2">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+                      </tr>
+                      <tr>
+                        <td valign="top" align="left" colspan="3"><table width="706" cellspacing="0" cellpadding="0" border="0">
+                          <tbody>		  
+						  <tr>
+                            <td width="171" valign="top" align="right">1. Around Bust <span class="redText">*</span></td>
+                            <td valign="top" align="center" width="19">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							<select onchange="" style="width:70px;" id="around_bust" name="around_bust" class="select_box required-entry">
+								<option value="">Select</option>
+								<?php  for($i=25;$i<=70;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>" <?php if($mformeasurmentmodellahenga[0]['around_bust'] == $i ) { ?> selected="selected" <?php } ?> ><?php echo $i ?></option>
+								<?php } ?>
+                             </select>
+                              &nbsp;in Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Around Bust' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="AB">
+							  
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/around_bust.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Bust" ?</strong></p>
+									  <p class="text">Fullest part of the bust is to be measured by placing the tape well under the arms winding straight across the back and coming back to the front.</p></td>
+									</tr>
+								  </tbody></table>							  
+							  </div></div>
+							  </td>
+                            <td width="188" valign="top" align="center" rowspan="34"><img width="174" height="327" src="<?php echo $this->getSkinUrl()?>highslide/img3/body_img1.jpg"><img width="146" height="371" src="<?php echo $this->getSkinUrl()?>highslide/img3/body_img2.jpg"></td>
+                          </tr>
+					  
+						  <tr>
+                            <td valign="top" align="right">2. Around Above Waist <span class="redText">*</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select onchange="" style="width:70px;" id="around_above_waist" name="around_above_waist" class="select_box required-entry">
+								  <option  value="">Select</option>
+								  <?php  for($i=20;$i<=65;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>" <?php if($mformeasurmentmodellahenga[0]['around_above_waist'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>
+                              &nbsp;in Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Around Above Waist' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="AAW">
+							  <div class="highslide-maincontent"><div class="area1">
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/around_above_waist.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Above Waist" ?</strong></p>
+									  <p class="text"> For this place the tape immediately below the bust.</p></td>
+									</tr>
+								  </tbody></table>							  
+							  </div></div>
+							</td>
+                          </tr>
+						  				
+						  
+						  						  
+						  <tr>
+                            <td valign="top" align="right">3. Shoulder <span class="redText">*</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select onchange="" style="width:70px;" id="shoulder" name="shoulder" class="select_box required-entry">
+								<option  value="">Select</option>
+								<?php  for($i=13;$i<=20;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>" <?php if(isset($mformeasurmentmodellahenga[0]['shoulder']) && $mformeasurmentmodellahenga[0]['shoulder'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>
+                              &nbsp;in Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Shoulder' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="S">
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/shoulder.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Shoulder" ?</strong></p>
+									  <p class="text">This measure has to be taken by placing the tip of the tape one any one shoulder point and stretching it straight from the back to the other shoulder point. Point means the point where you shoulder meets you arm joint.</p></td>
+									</tr>
+								  </tbody></table>							  
+							  </div></div>
+							  </td>
+                          </tr>                          
+						  
+			
+						  						  
+						  						  <tr>
+                            <td valign="top" align="right">4. Sleeve Length <span class="redText">*</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select onchange="" style="width:70px;" id="sleeve_length" name="sleeve_length" class="select_box required-entry">
+								<option  value="">Select</option>
+								<?php  for($i=0;$i<=23;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>"  <?php if(isset($mformeasurmentmodellahenga[0]['sleeve_length']) && $mformeasurmentmodellahenga[0]['sleeve_length'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>
+                              &nbsp;in Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Sleeve Length' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="SL">
+							  <div class="highslide-maincontent"><div class="area1"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/sleeve_length.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Sleeve Length" ?</strong></p>
+									  <p class="text">This is a vertical measurement. The tip of the tape on the arm joint and stretch it straight down to a desired length. Sleeves can be very short, short, medium, just above elbow, quarter length or full length.</p></td>
+									</tr>
+								  </tbody></table>							  
+							  </div></div>
+							  </div></td>
+                          </tr>
+                          <tr>
+                              <td valign="top" align="right"> Sleeve Style <span class="redText">*</span></td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  
+								<input type="text" readonly="readonly" value="<?php echo $mformeasurmentmodellahenga[0]['sleeve_style'] ?>" id="sleeve_style" name="sleeve_style" class="input_area required-entry">
+								<a onclick="return hs.htmlExpand(this, { headingText: 'Set Sleeve Style' })" href="index.htm"> &nbsp;<img style="cursor:pointer; margin-top:3px;" title="Set Sleeve Style" src="<?php echo $this->getSkinUrl()?>highslide/img3/search_style_btn.jpg"></a>
+								  <div class="highslide-maincontent">
+								  
+								  <?php $sleeveStyleCol = Mage::getModel('measurementadmin/measurementstyle')->getCollection()
+																									->addFieldToFilter('style_category', 'Sleeve Style')
+																									->addFieldToFilter('style_for', 'Choli')
+																									->addFieldToFilter('status', 1)
+																									->setOrder('style_name', 'ASC'); ?>	
+									<?php if($sleeveStyleCol->count() > 0){ ?>
+										<div class="area">
+										<?php foreach($sleeveStyleCol as $data){ ?>
+											<div class="popup_area">
+											<img width="107" hspace="5" border="0" height="107" alt="<?php echo $data->getStyleName()?>" src="<?php echo Mage::getBaseUrl('media').$data->getStyleImage()?>">									<br>
+											<div class="setMeasRbox"><input type="radio" value="<?php echo $data->getStyleName()?>" <?php if(isset($mformeasurmentmodellahenga[0]['rdo_sleeve_style']) && $mformeasurmentmodellahenga[0]['rdo_sleeve_style'] == $data->getStyleName() ) { ?> checked="checked" <?php } ?> name="rdo_sleeve_style"></div> <div class="setMeas"><?php echo $data->getStyleName()?></div>	
+											</div>											
+										<?php } ?>					
+								 	 </div>
+									 <p>&nbsp;</p>
+									 <p align="center">
+									 	<img border="0" alt="Set Style" onclick="set_sleeve_style();return hs.close(this)" style="cursor:pointer;" src="<?php echo $this->getSkinUrl()?>highslide/images/set_style.jpg">									
+									 </p>										
+									<?php } ?>	
+								  
+								  </div>							  
+							  </td>
+                            </tr>
+  			    <tr>
+                            <td valign="top" align="right">5. Around Arm Hole <span class="redText">*</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select style="width: 70px;" id="around_arm_hole" name="around_arm_hole" class="select_box required-entry">
+								<option value="">Select</option>
+								<?php  for($i=5;$i<=25;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>" <?php if(isset($mformeasurmentmodellahenga[0]['around_arm_hole']) && $mformeasurmentmodellahenga[0]['around_arm_hole'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>
+                              &nbsp;in Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Around Arm Hole' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="AAH">
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/around_arm_hole.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Arm Hole" ?</strong></p>
+									  <p class="text">For this measurement, keep you arms hanging and relaxed. Place the tip of the tape on the shoulder point as you did for the sleeves. But this time drop it to the back, bring it below the under arm and at the shoulder point to complete the circle.</p></td>
+									</tr>
+								  </tbody></table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  	
+                         
+						  
+						  						  <tr>
+                            <td valign="top" align="right">6. Around Arm <span class="redText">*</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select style="width: 70px;" id="around_arm" name="around_arm" class="select_box required-entry">
+								<option selected="selected" value="">Select</option>
+								<?php  for($i=5;$i<=25;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>" <?php if(isset($mformeasurmentmodellahenga[0]['around_arm']) && $mformeasurmentmodellahenga[0]['around_arm'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>
+                              &nbsp;in Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Around Arm' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="AA">
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/around_arm.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Arm" ?</strong></p>
+									  <p class="text">For this keep your arms relaxed. Place the tape on the middle of your biceps, take it round your relaxed arm and complete the circle.</p></td>
+									</tr>
+								  </tbody></table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+						  				
+						  
+						  						  <tr>
+                            <td valign="top" align="right">7. Front Neck Depth <span class="redText">*</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select style="width: 70px;" id="front_neck_depth" name="front_neck_depth" class="select_box required-entry">
+								<option selected="selected" value="">Select</option>
+								<?php  for($i=1;$i<=8;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>" <?php if(isset($mformeasurmentmodellahenga[0]['front_neck_depth']) && $mformeasurmentmodellahenga[0]['front_neck_depth'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>
+                              &nbsp;in Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Front Neck Depth' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="FND">
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/front_neck_depth.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Front Neck Depth" ?</strong></p>
+									  <p class="text"> For this place the tip of the tape on the any one side of your neck and stretch it diagonally to the centre just above you bust to your desired depth.</p></td>
+									</tr>
+								  </tbody></table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+			
+						  
+						                                <tr>
+                              <td valign="top" align="right"> Front Neck Style <span class="redText">*</span></td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2">
+								<input type="text" readonly="readonly" value="<?php echo $mformeasurmentmodellahenga[0]['front_neck_style'] ?>" id="front_neck_style" name="front_neck_style" class="input_area required-entry">
+								<a onclick="return hs.htmlExpand(this, { headingText: 'Set Front neck style' })" href="index.htm">
+								<img style="cursor:pointer" title="Set Front Neck Style" src="<?php echo $this->getSkinUrl()?>highslide/img3/search_style_btn.jpg">
+								</a>
+								  <div class="highslide-maincontent">
+								  
+								  <?php $frontNeckStyleCol = Mage::getModel('measurementadmin/measurementstyle')->getCollection()
+																									->addFieldToFilter('style_category', 'Front Neck Style')
+																									->addFieldToFilter('style_for', 'Choli')
+																									->addFieldToFilter('status', 1)
+																									->setOrder('style_name', 'ASC'); ?>	
+									<?php if($frontNeckStyleCol->count() > 0){ ?>
+										<div class="area">
+										<?php foreach($frontNeckStyleCol as $data){ ?>
+											<div class="popup_area">
+											<img width="107" hspace="5" border="0" height="107" alt="<?php echo $data->getStyleName()?>" src="<?php echo Mage::getBaseUrl('media').$data->getStyleImage()?>">									<br>
+											<div class="setMeasRbox"><input type="radio" value="<?php echo $data->getStyleName()?>" name="rdo_front_neck_style"></div> <div class="setMeas"><?php echo $data->getStyleName()?></div>	
+											</div>											
+										<?php } ?>					
+								 	 </div>
+									 <p>&nbsp;</p>
+									 <p align="center">
+									 	<img border="0" alt="Set Style" onclick="set_front_neck_style();return hs.close(this)" style="cursor:pointer;" src="<?php echo $this->getSkinUrl()?>highslide/images/set_style.jpg">									
+									 </p>										
+									<?php } ?>	
+								  
+								  </div>
+							  </td>
+                            </tr>
+				
+                            							
+						
+						  	
+						  <tr>
+                            <td valign="top" align="right">8. Back Neck Depth <span class="redText">*</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select style="width: 70px;" id="back_neck_depth" name="back_neck_depth" class="select_box required-entry">
+								<option  value="">Select</option>
+								<?php  for($i=1;$i<=10;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>" <?php if(isset($mformeasurmentmodellahenga[0]['back_neck_depth']) && $mformeasurmentmodellahenga[0]['back_neck_depth'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>
+                              &nbsp;in Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Back Neck Depth' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="BND">
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/Back_neck_depth.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Back Neck Depth" ?</strong></p>
+									  <p class="text"> Similar to the Front Neck Depth. Place the tip of the tape on the side of you neck and stretch it back to a desired point on the spine.</p></td>
+									</tr>
+								  </tbody></table>							  
+							  </div></div>
+							  </td>
+                          </tr>
+                          					  
+						  
+						  				
+                          <tr>
+                              <td valign="top" align="right"> Back Neck Style <span class="redText">*</span></td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2">
+								<input type="text" readonly="readonly" value="<?php echo $mformeasurmentmodellahenga[0]['back_neck_style'] ?>" id="back_neck_style" name="back_neck_style" class="input_area required-entry">
+								<a onclick="return hs.htmlExpand(this, { headingText: 'Set Back neck style' })" href="index.htm">
+								<img style="cursor:pointer" title="Set Back Neck Style" src="<?php echo $this->getSkinUrl()?>highslide/img3/search_style_btn.jpg">
+								</a>
+								  <div class="highslide-maincontent">
+								  <?php $backNeckStyleCol = Mage::getModel('measurementadmin/measurementstyle')->getCollection()
+																									->addFieldToFilter('style_category', 'Back Neck Style')
+																									->addFieldToFilter('style_for', 'Choli')
+																									->addFieldToFilter('status', 1)
+																									->setOrder('style_name', 'ASC'); ?>	
+									<?php if($backNeckStyleCol->count() > 0){ ?>
+										<div class="area">
+										<?php foreach($backNeckStyleCol as $data){ ?>
+											<div class="popup_area">
+											<img width="107" hspace="5" border="0" height="107" alt="<?php echo $data->getStyleName()?>" src="<?php echo Mage::getBaseUrl('media').$data->getStyleImage()?>">									<br>
+											<div class="setMeasRbox"><input type="radio" value="<?php echo $data->getStyleName()?>" name="rdo_back_neck_style"
+											<?php if(isset($mformeasurmentmodellahenga[0]['rdo_back_neck_style']) && $mformeasurmentmodellahenga[0]['rdo_back_neck_style'] == $data->getStyleName() ) { ?> checked="checked" <?php } ?>
+											></div> <div class="setMeas"><?php echo $data->getStyleName()?></div>	
+											</div>											
+										<?php } ?>					
+								 	 </div>
+									 <p>&nbsp;</p>
+									 <p align="center">
+									 	<img border="0" alt="Set Style" onclick="set_back_neck_style();return hs.close(this)" style="cursor:pointer;" src="<?php echo $this->getSkinUrl()?>highslide/images/set_style.jpg">									
+									 </p>										
+									<?php } ?>	
+								  
+								  </div>
+							  </td>
+                            </tr>
+                          		
+				
+						  <tr>
+                            <td valign="top" align="right">11. Lining <span class="redText">&nbsp;</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2"><input type="checkbox" value="1" name="lining" id="lining" <?php if($mformeasurmentmodellahenga[0]['lining']=='1'){ echo "checked"; } ?>>&nbsp;
+							
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Lining' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="L">
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/noImg.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>What is "Lining" ?</strong></p>
+									  <p class="text"> It is a same colored thin cloth partly stitched inside heavily embroidered blouse so that it is comfortable. </p></td>
+									</tr>
+								  </tbody></table>							  
+							  </div></div>
+							</td>
+                          </tr>
+						  				
+						  <tr>
+                            <td valign="top" align="right">12. Around Waist <span class="redText">*</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select onchange="" style="width:70px;" id="around_waist" name="around_waist" class="select_box required-entry">
+								<option value="">Select</option>
+								<?php  for($i=25;$i<=65;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>" <?php if(isset($mformeasurmentmodellahenga[0]['around_arm']) && $mformeasurmentmodel[0]['around_waist'] == $i ) { ?> selected="selected" <?php } ?> ><?php echo $i ?></option>
+								<?php } ?>
+							  </select>
+                              &nbsp;in Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Around Waist' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="AW">
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/Around_Waist.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Waist" ?</strong></p>
+									  <p class="text">This is for the petticoat/lehnga. Place the tape below the navel and just above you hipbone or waist turn it straight round the back and complete the circle.</p></td>
+									</tr>
+								  </tbody></table>	
+							  </div>
+							  </div></td>
+                          </tr>
+                          
+						  <tr>
+                            <td valign="top" align="right">13. Around Hips <span class="redText">*</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select onchange="" style="width:70px;" id="around_hips" name="around_hips" class="select_box required-entry">
+								<option value="">Select</option>
+								<?php  for($i=26;$i<=75;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>"  <?php if(isset($mformeasurmentmodellahenga[0]['around_hips']) && $mformeasurmentmodellahenga[0]['around_hips'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>
+                              &nbsp;in Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Around Hips' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="AH">
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/around_hips.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Around Hips" ?</strong></p>
+									  <p class="text">This is similar to “Around Waist”, but this time place the tape on the upper part of the hip, that is slightly below the hip bone and make a complete circle.</p></td>
+									</tr>
+								  </tbody></table>	
+							  </div>
+							  </div></td>
+                          </tr>
+						  
+                          
+						  <tr>
+                            <td valign="top" align="right">14. Your Height <span class="redText">*</span></td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select name="your_height" id="your_height" class="select_box required-entry">
+								<option value="">Select</option>
+								<?php  for($i=4;$i<=7;$i=$i+(1/10)){ ?>
+									<option value="<?php echo $i ?>"  <?php if(isset($mformeasurmentmodellahenga[0]['your_height']) && $mformeasurmentmodellahenga[0]['your_height'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>
+                              &nbsp;in feet &amp; Inches &nbsp;
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Your Height' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="YH">
+							  <div class="highslide-maincontent"><div class="area1"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/your_height.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure your "Height" ?</strong></p>
+									  <p class="text">Stand with your feet slightly apart, back straight and set against a wall. Place the tip of the tape on the floor at your heel and stretch it to the top of your head.</p></td>
+									</tr>
+								  </tbody></table>	
+							  </div>
+							  </div></td>
+                          </tr>
+			
+                        </tbody></table></td>
+                      </tr>
+                    </tbody></table>
+					<table width="706" cellspacing="0" cellpadding="0" border="0" class="address_book_text">
+                                          					  
+					 					  
+                     					  <tbody><tr>
+                        <td width="175" valign="middle" align="left" class="form_area_heading"><strong>For Lehnga-Choli Only</strong></td>
+                        <td width="531" valign="middle" align="right" class="form_area_heading1" colspan="2">[ <span class="redText">*</span> marked fields are mandatory ]</td>
+                      </tr>
+					                        <tr>
+                        <td valign="top" align="left" colspan="3"><table width="706" cellspacing="0" cellpadding="0" border="0">
+                     		<tbody>
+                                                               							
+					 		
+							
+                                                 <tr>
+                              <td valign="top" align="right" height="22"  width="171"><strong>Top</strong></td>
+                              <td valign="top" align="center" width="19">&nbsp;</td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2">&nbsp;</td>
+                              <td width="188" valign="top" align="center" rowspan="22"></td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider" colspan="2">&nbsp;</td>
+                            </tr>
+					       <tr>
+                              <td valign="top" align="right">1. Choli Length <span class="redText">&nbsp;</span></td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select style="width: 70px;" id="choli_length" name="choli_length" class="select_box">
+								<option  value="">Select</option>
+								<?php  for($i=10;$i<=20;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>" <?php if(isset($mformeasurmentmodellahenga[0]['choli_length']) && $mformeasurmentmodellahenga[0]['choli_length'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>&nbsp;in Inches &nbsp;
+							  
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Choli Length' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="CL">
+							  <div class="highslide-maincontent"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/Choli_length.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Choli Length" ?</strong></p>
+									  <p class="text"> Place the tip of the tape on any side of your neck and bring it down the back to a desired length just below the bust.</p></td>
+									</tr>
+								  </tbody></table>	
+							  </div>								</td>
+                            </tr>
+                            
+                            <tr>
+                              <td valign="top" align="right" height="22"><strong>Bottom</strong></td>
+                              <td valign="top" align="center">&nbsp;</td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2">&nbsp;</td>
+                            </tr>
+                            
+                            <tr>
+                              <td valign="top" align="right">1. Lehnga Style <span class="redText">*</span></td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2">
+								<input type="text" readonly="readonly" value="<?php echo $mformeasurmentmodellahenga[0]['lehnga_style'] ?>" id="lehnga_style" name="lehnga_style" class="input_area required-entry">
+								<a onclick="return hs.htmlExpand(this, { headingText: 'Set Lehnga Style' })" href="index.htm">
+								<img style="cursor:pointer" title="Set Lehnga Style" src="<?php echo $this->getSkinUrl()?>highslide/img3/search_style_btn.jpg">								</a>
+								  <div class="highslide-maincontent">
+								  
+								  <?php $lehngaStyleCol = Mage::getModel('measurementadmin/measurementstyle')->getCollection()
+																									->addFieldToFilter('style_category', 'Lehnga Style')
+																									->addFieldToFilter('style_for', 'Choli')
+																									->addFieldToFilter('status', 1)
+																									->setOrder('style_name', 'ASC'); ?>	
+									<?php if($lehngaStyleCol->count() > 0){ ?>
+										<div class="area">
+										<?php foreach($lehngaStyleCol as $data){ ?>
+											<div class="popup_area">
+											<img width="107" hspace="5" border="0" height="107" alt="<?php echo $data->getStyleName()?>" src="<?php echo Mage::getBaseUrl('media').$data->getStyleImage()?>">									<br>
+											<div class="setMeasRbox"><input type="radio" value="<?php echo $data->getStyleName()?>" name="rdo_lehnga_style" <?php if(isset($mformeasurmentmodellahenga[0]['rdo_lehnga_style']) && $mformeasurmentmodellahenga[0]['rdo_lehnga_style'] == $data->getStyleName() ) { ?> checked="checked" <?php } ?>></div> <div class="setMeas"><?php echo $data->getStyleName()?></div>	
+											</div>											
+										<?php } ?>					
+								 	 </div>
+									 <p>&nbsp;</p>
+									 <p align="center">
+									 	<img border="0" alt="Set Style" onclick="set_lehnga_style();return hs.close(this)" style="cursor:pointer;" src="<?php echo $this->getSkinUrl()?>highslide/images/set_style.jpg">									
+									 </p>										
+									<?php } ?>	
+								  
+								  </div>							  </td>
+                            </tr>
+				
+					       <tr>
+                              <td valign="top" align="right">2. Lehenga Length <span class="redText">&nbsp;</span></td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2">
+							  <select style="width: 70px;" id="lehenga_length" name="lehenga_length" class="select_box">
+								<option  value="">Select</option>
+								<?php  for($i=30;$i<=60;$i=$i+(1/2)){ ?>
+									<option value="<?php echo $i ?>" <?php if(isset($mformeasurmentmodellahenga[0]['lehenga_length']) && $mformeasurmentmodellahenga[0]['lehenga_length'] == $i ) { ?> selected="selected" <?php } ?>><?php echo $i ?></option>
+								<?php } ?>
+							  </select>&nbsp;in Inches &nbsp;
+							  
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Lehenga Length' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="LL">
+							  <div class="highslide-maincontent"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/S2706.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>How to measure "Lehenga Length" ?</strong></p>
+									  <p class="text"> Place the tip of the tape on any side of your waist or hipbone, depending on where you wear you lehnga or saree. Then let it fall down straight. Hold it slightly above your ankles.</p></td>
+									</tr>
+								  </tbody></table>	
+							  </div>								</td>
+                            </tr>
+                            
+		                    <tr>
+                              <td valign="top" align="right">3. Back Elastic <span class="redText">&nbsp;</span></td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2"><input type="checkbox" value="yes" id="elastic" name="elastic" <?php if($mformeasurmentmodellahenga[0]['elastic']=='yes'){ echo "checked"; } ?>>
+							  <img border="0" onclick="return hs.htmlExpand(this, { headingText: 'Back Elastic' })" title="Help" alt="Help" style="cursor:pointer" src="<?php echo $this->getSkinUrl()?>highslide/img3/help_icon.jpg" id="BE">
+							  <div class="highslide-maincontent"> 
+								 <table width="580" cellspacing="0" cellpadding="0" border="0" class="popup1">
+									<tbody><tr>
+									  <td width="360" valign="top" align="left" class="popup1_right"><img src="<?php echo $this->getSkinUrl()?>highslide/img3/noImg.jpg"></td>
+									  <td width="220" valign="top" align="left" class="popup1_left">
+									  <p class="heading_text"><strong>What is "Back Elastic" ?</strong></p>
+									  <p class="text"> Its recommended </p></td>
+									</tr>
+								  </tbody></table>	
+							  </div>							  </td>
+                            </tr>
+                            
+														<tr>
+                              <td valign="top" align="right">Instruction (if any)<br>Maximum 500 characters<span class="redText">&nbsp;</span></td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2">
+<textarea onclick="textCounter(document.measure.instructions,document.measure.remLen,500)" onkeydown="textCounter(document.measure.instructions,document.measure.remLen,500)" onfocus="textCounter(document.measure.instructions,document.measure.remLen,500)" rows="3" cols="45" class="carttext" name="instructions" id="instructions">
+<?php echo $mformeasurmentmodellahenga[0]['instructions']  ?>
+</textarea>
+							  <br>
+							  <span class="carttext">You have
+							  <input type="text" style="border-width:0;text-align:center;width:40px" value="500" class="input_area" name="remLen" readonly="">
+							  characters left.</span>							  
+							  
+							  <div class="highslide-maincontent"> 
+							  <p>
+							  <img src="<?php echo $this->getSkinUrl()?>highslide/img3/sleeve_length.jpg">							  </p>
+							  <p>
+							  Starting from the outside edge of shoulder bone and measure upto the desired length.							  </p>
+							  </div>							  </td>
+                            </tr>
+				<tr>
+                              <td valign="top" align="right"></td>
+                              <td valign="top" align="center"></td>
+                              <td valign="top" align="left" class="form_small_ass" colspan="2"><input class="button" type="submit" name="submit" value="Submit">
+                                    &nbsp;&nbsp;
+                                    <input class="button" type="reset" name="reset" value="Reset"></td></tr>			
+                        </tbody></table></td>
+                      </tr>
+                    </tbody></table>
+					
+					<table cellspacing="0" cellpadding="0" style="margin:10px 0 0 0;">
+						<tbody><tr>
+							<td colspan="2"><a href="#"></a></td>
+						</tr>
+												<tr>
+							<td colspan="2"><img width="1" border="0" height="10" alt="" src="<?php echo $this->getSkinUrl()?>highslide/img3/pixel_trans.gif"></td>
+						</tr>
+					  <tr>
+				<td width="756px" bgcolor="#FFFFFF" background="<?php echo $this->getSkinUrl()?>highslide/img3/measurement_footer.jpg" height="205px" colspan="2">
+				  <p></p></td>
+					  </tr>
+					</tbody></table>
+					
+			  </td>
+			</tr>
+		</tbody></table>
+		</form>
+		<script type="text/javascript">
+		//<![CDATA[
+		var measureForm = new VarienForm('measure', true);
+		//]]>
+		</script>

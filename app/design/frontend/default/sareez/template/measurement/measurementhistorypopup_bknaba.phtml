@@ -1,0 +1,830 @@
+<?php
+
+if(Mage::getSingleton('customer/session')->isLoggedIn())
+ {
+	 $customerId = Mage::getModel('customer/session')->getCustomer()->getId();
+ }
+ 
+ 
+$measurement_id	= $this->getRequest()->getParam('m_id');
+/*$mforusermodel = Mage::getModel('measurement/measurementforuser')->getCollection()
+->AddFieldToFilter('user_id' , $customerId)
+->AddFieldToFilter('measurement_id' , $measurement_id )
+->getData();
+*/
+
+
+?>
+
+<table style="margin-top:36px">
+<tr>
+<td>
+
+
+<?php
+$mformeasurmentmodel = Mage::getModel('measurement/measurement')->getCollection()
+->AddFieldToFilter('measurement_id' ,$measurement_id)
+->getData();
+
+
+if(count($mformeasurmentmodel)>0)
+{
+ $measurement_type = $mformeasurmentmodel[0]['measurement_type'];
+
+if($measurement_type == 'blouse')
+{
+
+?>
+<table width="706" cellspacing="0" cellpadding="0" class="address_book_text">
+                       <tbody>
+                       <tr>
+                        <td width="176" valign="top" align="right" class="form_divider">Stitching Id :<?php echo $_REQUEST['stitchingid']; ?> &nbsp;</td>
+                        <td width="10" valign="top" align="center" class="form_divider">SKU Code :<?php echo $_REQUEST['sku']; ?>&nbsp;</td>
+                       </tr>
+                       <tr>
+                        <td width="520" valign="top" align="left" class="form_divider">Master Name :<?php echo $_REQUEST['tailormaster']; ?>&nbsp;</td>
+                        <td width="520" valign="top" align="left" class="form_divider">Order Id :<?php echo $_REQUEST['orderid']; ?>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td valign="middle" align="center" class="form_area_heading" colspan="3"><strong><span class="redText"></span> (<?php echo $mformeasurmentmodel[0]['body_garment']; ?>)</strong></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                        <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                        <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td valign="top" align="left" colspan="3">
+						<table width="700" border="1" cellspacing="0" cellpadding="0">
+						<tbody><tr>
+						  <td width="170" valign="middle" align="left" class="form_area_heading"><img alt="" src="images/form_arrow.jpg">&nbsp;&nbsp;<strong>General Measurement:</strong></td>
+						  
+						  <td width="10" valign="middle" align="left" class="form_area_heading">&nbsp;</td>
+						  <td width="520" valign="middle" align="left" class="form_area_heading1">&nbsp;</td>
+						</tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">1. Around Bust</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							<?php echo $mformeasurmentmodel[0]['around_bust']; ?>							</td>
+                          </tr>
+						  
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="left">2. Around Above Waist</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							<?php echo $mformeasurmentmodel[0]['around_above_waist']; ?>								</td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">3. Shoulder</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							 <?php echo $mformeasurmentmodel[0]['shoulder']; ?>								  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">4. Sleeve Length</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['sleeve_length']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                          	
+													    <tr>
+                              <td valign="top" align="left"> Sleeve Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['sleeve_style']; ?>							  </td>
+                            </tr>
+                          <tr>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  						  
+						  <tr>
+                            <td valign="top" align="left">5. Around Arm Hole</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['around_arm_hole']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">6. Around Arm</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							 <?php echo $mformeasurmentmodel[0]['around_arm']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">7. Front Neck Depth </td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							 <?php echo $mformeasurmentmodel[0]['measurement_type']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						                              <tr>
+                              <td valign="top" align="left"> Front Neck Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['front_neck_depth']; ?>								  </td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+						  						  
+						  <tr>
+                            <td valign="top" align="left">8. Back Neck Depth</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['back_neck_depth']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                            
+														<tr>
+                              <td valign="top" align="left"> Back Neck Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['back_neck_style']; ?>							  </td>
+                            </tr>						
+							
+                           						   
+							
+						  						                            <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                                                 <tr>
+							  <td width="176" valign="middle" align="left" class="form_area_heading"><img alt="" src="images/form_arrow.jpg">&nbsp;&nbsp;<strong>Blouse (Top):</strong></td>
+							  
+							  <td width="10" valign="middle" align="left" class="form_area_heading">&nbsp;</td>
+							  <td width="520" valign="middle" align="left" class="form_area_heading1">&nbsp;</td>
+							</tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+                          <tr>
+                              <td valign="top" align="left">1. Blouse Length </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['blouse_length']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							                                                 <tr>
+							  <td width="170" valign="middle" align="left" class="form_area_heading"><img alt="" src="images/form_arrow.jpg">&nbsp;&nbsp;<strong>Petticoat (Bottom Skirt)</strong></td>
+							  
+							  <td width="10" valign="middle" align="left" class="form_area_heading">&nbsp;</td>
+							  <td width="520" valign="middle" align="left" class="form_area_heading1">&nbsp;</td>
+							</tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="left">1. Petticoat Length </td>
+                              <td valign="top" align="center">&nbsp;</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['petticoat_length']; ?>	 							  </td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							                                          							<tr>
+                              <td valign="top" align="left">Instruction </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+								<?php echo $mformeasurmentmodel[0]['instructions']; ?>							  </td>
+                            </tr>
+							<tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+                        </tbody></table>
+						</td>
+                      </tr>
+                    </tbody></table>
+<?php
+ }
+ elseif($measurement_type == 'lehenga')
+ {
+?>
+<table width="706" border="0" cellspacing="0" cellpadding="0" class="address_book_text">
+                                                 <tbody>
+                        <tr>
+                        <td width="176" valign="top" align="right" class="form_divider">Stitching Id :<?php echo $_REQUEST['stitchingid']; ?> &nbsp;</td>
+                        <td width="10" valign="top" align="center" class="form_divider">SKU Code :<?php echo $_REQUEST['sku']; ?>&nbsp;</td>
+                       </tr>
+                       <tr>
+                        <td width="520" valign="top" align="left" class="form_divider">Master Name :<?php echo $_REQUEST['tailormaster']; ?>&nbsp;</td>
+                        <td width="520" valign="top" align="left" class="form_divider">Order Id :<?php echo $_REQUEST['orderid']; ?>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td valign="middle" align="center" class="form_area_heading" colspan="3"><strong><span class="redText"></span> (<?php echo $mformeasurmentmodel[0]['body_garment']; ?>)</strong></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                        <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                        <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td valign="top" align="left" colspan="3">
+						<table width="700" border="1" cellspacing="0" cellpadding="0">
+						<tbody><tr>
+						  <td width="170" valign="middle" align="left" class="form_area_heading"><img alt="" src="images/form_arrow.jpg">&nbsp;&nbsp;<strong>General Measurement:</strong></td>
+						  
+						  <td width="10" valign="middle" align="left" class="form_area_heading">&nbsp;</td>
+						  <td width="520" valign="middle" align="left" class="form_area_heading1">&nbsp;</td>
+						</tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">1. Around Bust</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							<?php echo $mformeasurmentmodel[0]['around_bust']; ?>							</td>
+                          </tr>
+						  
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="left">2. Around Above Waist</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							<?php echo $mformeasurmentmodel[0]['around_above_waist']; ?>								</td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">3. Shoulder</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							 <?php echo $mformeasurmentmodel[0]['shoulder']; ?>								  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">4. Sleeve Length</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['sleeve_length']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                          	
+													    <tr>
+                              <td valign="top" align="left"> Sleeve Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['sleeve_style']; ?>							  </td>
+                            </tr>
+                          <tr>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  						  
+						  <tr>
+                            <td valign="top" align="left">5. Around Arm Hole</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['around_arm_hole']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">6. Around Arm</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							 <?php echo $mformeasurmentmodel[0]['around_arm']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">7. Front Neck Depth </td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							 <?php echo $mformeasurmentmodel[0]['front_neck_depth']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						                              <tr>
+                              <td valign="top" align="left"> Front Neck Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['front_neck_style']; ?>								  </td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+						  						  
+						  <tr>
+                            <td valign="top" align="left">8. Back Neck Depth</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['back_neck_depth']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                            
+														<tr>
+                              <td valign="top" align="left"> Back Neck Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['back_neck_style']; ?>							  </td>
+                            </tr>						
+							
+                           						   
+							
+						  						                            <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                                                 <tr>
+							  <td width="176" valign="middle" align="left" class="form_area_heading"><img alt="" src="images/form_arrow.jpg">&nbsp;&nbsp;<strong>Blouse (Top):</strong></td>
+							  
+							  <td width="10" valign="middle" align="left" class="form_area_heading">&nbsp;</td>
+							  <td width="520" valign="middle" align="left" class="form_area_heading1">&nbsp;</td>
+							</tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+                          <tr>
+                              <td valign="top" align="left">1. Choli Length </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['choli_length']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							                                                 <tr>
+							  <td width="170" valign="middle" align="left" class="form_area_heading"><img alt="" src="images/form_arrow.jpg">&nbsp;&nbsp;<strong>Petticoat (Bottom Skirt)</strong></td>
+							  
+							  <td width="10" valign="middle" align="left" class="form_area_heading">&nbsp;</td>
+							  <td width="520" valign="middle" align="left" class="form_area_heading1">&nbsp;</td>
+							</tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="left">1. lehenga Length </td>
+                              <td valign="top" align="center">&nbsp;</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['lehnga_style']; ?>	 							  </td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							                                          							<tr>
+                              <td valign="top" align="left">Instruction </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+								<?php echo $mformeasurmentmodel[0]['instructions']; ?>							  </td>
+                            </tr>
+							<tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+                        </tbody></table>
+						</td>
+                      </tr>
+                    </tbody></table>
+<?php
+}
+else
+{
+?>
+<table width="706" border="0" cellspacing="0" cellpadding="0" class="address_book_text">
+                                                 <tbody>
+                       <tr>
+                        <td width="176" valign="top" align="right" class="form_divider">Stitching Id :<?php echo $_REQUEST['stitchingid']; ?> &nbsp;</td>
+                        <td width="10" valign="top" align="center" class="form_divider">SKU Code :<?php echo $_REQUEST['sku']; ?>&nbsp;</td>
+                       </tr>
+                       <tr>
+                        <td width="520" valign="top" align="left" class="form_divider">Master Name :<?php echo $_REQUEST['tailormaster']; ?>&nbsp;</td>
+                        <td width="520" valign="top" align="left" class="form_divider">Order Id :<?php echo $_REQUEST['orderid']; ?>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td valign="middle" align="center" class="form_area_heading" colspan="3"><strong><span class="redText"></span> (<?php echo $mformeasurmentmodel[0]['body_garment']; ?> )</strong></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                        <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                        <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td valign="top" align="left" colspan="3">
+						<table width="700" border="1" cellspacing="0" cellpadding="0">
+						<tbody><tr>
+						  <td width="170" valign="middle" align="left" class="form_area_heading"><img alt="" src="images/form_arrow.jpg">&nbsp;&nbsp;<strong>General Measurement:</strong></td>
+						  
+						  <td width="10" valign="middle" align="left" class="form_area_heading">&nbsp;</td>
+						  <td width="520" valign="middle" align="left" class="form_area_heading1">&nbsp;</td>
+						</tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">1. Around Bust</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							<?php echo $mformeasurmentmodel[0]['around_bust']; ?>							</td>
+                          </tr>
+						  
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="left">2. Around Above Waist</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							<?php echo $mformeasurmentmodel[0]['around_above_waist']; ?>								</td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">3. Shoulder</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							 <?php echo $mformeasurmentmodel[0]['shoulder']; ?>								  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">4. Sleeve Length</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['sleeve_length']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                          	
+													    <tr>
+                              <td valign="top" align="left"> Sleeve Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['sleeve_style']; ?>							  </td>
+                            </tr>
+                          <tr>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  						  
+						  <tr>
+                            <td valign="top" align="left">5. Around Arm Hole</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['around_arm_hole']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">6. Around Arm</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							 <?php echo $mformeasurmentmodel[0]['around_arm']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  <tr>
+                            <td valign="top" align="left">7. Front Neck Depth </td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							 <?php echo $mformeasurmentmodel[0]['front_neck_depth']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+						  
+						                              <tr>
+                              <td valign="top" align="left"> Front Neck Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['front_neck_style']; ?>								  </td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+						  						  
+						  <tr>
+                            <td valign="top" align="left">8. Back Neck Depth</td>
+                            <td valign="top" align="center">:</td>
+                            <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['back_neck_depth']; ?>							  </td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                            
+														<tr>
+                              <td valign="top" align="left"> Back Neck Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['back_neck_style']; ?>							  </td>
+                            </tr>						
+							
+                           						   
+							
+						  						                            <tr>
+                            <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                            <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                          </tr>
+                                                
+                          <tr>
+                              <td valign="top" align="left">Around Hips  </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['around_hips']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							                                               
+							<tr>
+                              <td valign="top" align="left">Your height </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['your_height']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<tr>
+                              <td valign="top" align="left">kameez_style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['kameez_style']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<tr>
+                              <td valign="top" align="left">kameez_length </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['kameez_length']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<tr>
+                              <td valign="top" align="left"> Salwar Length </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['salwar_length']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<tr>
+                              <td valign="top" align="left"> Salwar Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['salwar_style']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<tr>
+                              <td valign="top" align="left"> Around Bottom </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['around_bottom']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							<tr>
+                              <td valign="top" align="left"> Around Thigh </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['around_thigh']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							 <tr>
+                              <td valign="top" align="left"> Around Knee </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['around_knee']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							 <tr>
+                              <td valign="top" align="left"> Around Calf </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['around_calf']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							
+							 <tr>
+                              <td valign="top" align="left"> Around Ankle </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['around_ankle']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+							
+							 <tr>
+                              <td valign="top" align="left"> Churidar Style </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+							  <?php echo $mformeasurmentmodel[0]['churidar_style']; ?>									</td>
+                            </tr>
+                            <tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+
+							 <tr>
+                              <td valign="top" align="left">Instruction </td>
+                              <td valign="top" align="center">:</td>
+                              <td valign="top" align="left" class="ass_text">
+								<?php echo $mformeasurmentmodel[0]['instructions']; ?>							  </td>
+                            </tr>
+							<tr>
+                              <td valign="top" align="right" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="center" class="form_divider">&nbsp;</td>
+                              <td valign="top" align="left" class="form_divider">&nbsp;</td>
+                            </tr>
+                        </tbody></table>
+						</td>
+                      </tr>
+                    </tbody></table>
+<?php 
+}
+}
+else
+{
+?>
+<table> 
+<tr>
+<td>
+No records found
+</td>
+</tr>
+</table>
+<?php
+}
+?>
+</td>
+</tr>
+</table>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sn_Sorder>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Sn_Sorder>
+    </modules>
+</config> 

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <manufacturers_adminhtml_manufacturers_index>
+        <reference name="content">
+            <block type="manufacturers/adminhtml_manufacturers" name="manufacturers" />
+        </reference>
+    </manufacturers_adminhtml_manufacturers_index>
+	
+	
+</layout>

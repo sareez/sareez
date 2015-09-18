@@ -1,0 +1,407 @@
+<?php 
+// print_r($this->orderProcess());
+require_once("app/Mage.php");
+$app = Mage::app('');
+
+$resource = Mage::getSingleton('core/resource');
+$readConnection = $resource->getConnection('core_read');
+
+
+// $resource = Mage::getSingleton('core/resource');
+// $readConnection = $resource->getConnection('core_read');
+
+$salesModel=Mage::getModel("sales/order");
+$salesCollection = $salesModel->getCollection();
+
+$i=1;
+foreach($salesCollection as $order)
+{
+    
+    $orderId= $order->getIncrementId();
+     "<b>".$orderId."</b>";
+	// echo $order->getEntityId();
+	
+	$GLOBALS['entityId'] = $order->getEntityId();
+	
+    $orderId;
+    $orderIncrementId = $orderId;
+    // $orderIncrementId = $i;
+    
+    $order = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId);
+    $items = $order->getAllVisibleItems();
+    
+    
+   
+   
+  
+    ?>
+<table width="100%" border="1" cellpadding="3" cellspacing="3" style="display: none;">
+
+  <tr>
+<!--    <td><b>Item Id</b></td> -->
+        <td><b>Product Id</b></td>
+        <td><b>Name</b></td>
+        <td><b>SKU</b></td>
+        <td><b>Quantity</b></td>
+        <td><b>Stock</b></td>
+        <td><b>Option Product</b></td>
+        <td><b>Option Product Price</b></td>
+        <td><b>Catalog Name</b></td>
+        <td><b>Manufacturers / Vendor</b></td>
+        <td><b>Manufacturer Design</b></td>
+        <td><b>Order Date</b></td>
+        <td><b>Product Allocation Status</b></td>
+        <td><b>Product Allocation Date</b></td>
+  </tr>
+<?php
+    
+       // foreach($items as $item):
+    foreach($items as $item){
+        
+        
+        
+
+              ?>
+
+
+  <tr>
+<!--    <td><?php // echo $item->getItemId(); ?></td>-->
+    <td><?php echo $item->getProductId(); ?></td>
+    <td><?php echo $item->getName(); $GLOBALS['name'] = $item->getName(); ?></td>
+    <td><?php echo $item->getSku(); $GLOBALS['sku'] = $item->getSku(); ?></td>
+    <td><?php echo $item->getQtyOrdered(); ?></td>
+      <td><?php  
+      $product = Mage::getModel('catalog/product')->load($item->getProductId());
+      echo $qty = $product->getStockItem()->getQty(); 
+      $GLOBALS['qty_avaliable']=$qty;
+      ?></td>
+      
+      <td><?php
+    $product = Mage::getModel("catalog/product")->load($item->getId()); //product id
+    foreach ($product->getOptions() as $_option) {
+        $values = $_option->getValues();
+        
+        $GLOBALS['option_value'] = $values;
+        foreach ($values as $v) {
+            print_r($v->getTitle());
+            //echo " | ";
+            //echo $v->price; 
+            echo "<br />";
+        }
+    }
+?></td>
+      
+      <td><?php
+//    $product = Mage::getModel("catalog/product")->load($item->getId()); //product id
+//    foreach ($product->getOptions() as $_option) {
+//        $values = $_option->getValues();
+//        foreach ($values as $v) {
+//            //print_r($v->getTitle());
+//            //echo " | ";
+//            echo $v->price; 
+//            echo "<br />";
+//        }
+//    }
+//    
+    
+    
+    
+             /////////////////////////////////////////////////////////////////
+     $options = $item->getProductOptions();
+    $customOptions = $options['options'];   
+   if(!empty($customOptions))
+   {
+
+
+foreach ($customOptions as $option)
+{	   
+//echo  $optionTitle = $option['label'];
+//echo "<br />";
+//echo $optionId = $option['option_id'];
+//echo "<br />";
+//echo $optionType = $option['type'];
+//echo "<br />";
+echo $optionName = $option['value'];
+$GLOBALS['optionName'] = $option['value'];
+//echo "<br />";
+//$piece = explode("-", $optionValue);
+//
+//for($i=0;$i<=count($piece); $i++){
+//
+//echo $piece[$i];
+//echo "<br />";
+//}
+
+
+
+// echo $option->value;
+}
+
+   }
+    /////////////////////////////////////////////////////////////////
+?></td>
+      
+      <td>
+          <?php
+          $_id = $item->getProductId();
+$_resource = Mage::getSingleton('catalog/product')->getResource();
+$optionValue = $_resource->getAttributeRawValue($_id,  'catalogmaster_id', Mage::app()->getStore());
+$optionValue;
+      
+
+
+    $query = "SELECT * FROM int_catalogmaster where catalog_id = '".$optionValue."'";
+    $results = $readConnection->fetchAll($query);
+    foreach($results as $r) { echo $r['catalog_name']; $GLOBALS['catalog_name']=$r['catalog_name']; }
+
+
+      ?></td>
+      
+      <td>
+                    <?php
+          $_id = $item->getProductId();
+$_resource = Mage::getSingleton('catalog/product')->getResource();
+$optionValue = $_resource->getAttributeRawValue($_id,  'manufacturers_id', Mage::app()->getStore());
+$optionValue;
+
+
+    $query = "SELECT * FROM manufacturers where manufacturers_id = '".$optionValue."'";
+    $results = $readConnection->fetchAll($query);
+    foreach($results as $r) { echo $r['manufacturers_name']; $GLOBALS['manufac_name'] = $r['manufacturers_name']; }
+
+?>
+          
+          </td>
+          
+          <td> <?php
+          $_id = $item->getProductId();
+$_resource = Mage::getSingleton('catalog/product')->getResource();
+$manufact_design = $_resource->getAttributeRawValue($_id,  'manufacturer_design', Mage::app()->getStore());
+echo $manufact_design;
+$GLOBALS['design'] = $manufact_design;
+
+
+//    $query = "SELECT * FROM manufacturers where manufacturers_id = '".$optionValue."'";
+//    $results = $readConnection->fetchAll($query);
+//    foreach($results as $r) { echo $r['manufacturers_name']; }
+
+?></td>
+          
+     
+          <td><?php echo $order->getCreatedAt(); $GLOBALS['orderdate'] = $order->getCreatedAt();  ?></td>
+       <td><?php  
+	   
+/*      $product = Mage::getModel('catalog/product')->load($item->getProductId());
+      $qty = $product->getStockItem()->getQty(); 
+      if($qty > 0)
+      {
+       echo "Complete.";    
+      } else {
+       echo "Processing...";    
+      }*/
+	  
+	  
+	  // $item->getProductId();
+	  
+	  
+	  
+/*	$resource = Mage::getSingleton('core/resource');
+    $readConnection = $resource->getConnection('core_read');	*/
+/*   echo $query = "SELECT * FROM sales_flat_order_item_stitching where order_id = '".$GLOBALS['entityId']."' and product_id = '".$item->getProductId()."' ";
+    $results = $readConnection->fetchAll($query);
+	
+	echo $results->allocationstatus_id;
+	
+	  echo $results['allocationstatus_id'];
+	  echo $results['allocation_date'];*/
+	  
+	  
+	     $query = "SELECT * FROM sales_flat_order_item_stitching where order_id = '".$GLOBALS['entityId']."' and product_id = '".$item->getProductId()."'";
+    $results = $readConnection->fetchAll($query);
+	$i=1;
+    foreach($results as $values) { 
+	if($i=="1"){
+	  
+		  if($values['allocationstatus_id'] == "1")
+		  {
+			echo "Pending.";  
+			$product_allocation_status = "Pending.";
+		  } else if($values['allocationstatus_id'] == "2"){
+			echo "Complete.";  
+			$product_allocation_status = "Complete.";
+		  } else if($values['allocationstatus_id'] == "3"){
+			echo "Cancle.";  
+			$product_allocation_status = "Cancle.";
+		  }
+                  
+                  $GLOBALS['allocationstatus_id'] = $values['allocationstatus_id'];
+		  
+	}
+	   $i++; 
+	  }
+      ?></td>
+       <td>
+       <?php
+        $query = "SELECT * FROM sales_flat_order_item_stitching where order_id = '".$GLOBALS['entityId']."' and product_id = '".$item->getProductId()."'";
+    $results = $readConnection->fetchAll($query);
+	$i=1;
+    foreach($results as $values) { 
+	if($i=="1"){
+
+	  echo $values['allocation_date'];
+          $GLOBALS['allocation_date'] = $values['allocation_date'];
+	}
+	   
+	   $i++;
+	   } 
+	   ?></td>
+  </tr>
+
+<?php
+
+$connection = Mage::getSingleton('core/resource')->getConnection('core_write');
+// insert
+
+//  foreach ($GLOBALS['option_value'] as $v) {
+//            $optionName .= $v->getTitle()." (".$v->price."), ";
+//            // echo " | ";
+//            // echo $v->price; 
+//            // echo "<br />";
+//  }
+
+        
+        
+    $query = "SELECT * FROM ordercsv where order_id = '".$orderId."' and sku = '".$GLOBALS['sku']."'";
+    $results = $readConnection->fetchAll($query);
+    
+    //echo count($results); exit;
+    //foreach($results as $r) { echo $r['manufacturers_name']; }
+
+    if(count($results)>0){
+        
+        
+    } else {
+    
+    //  
+ $sql = "INSERT INTO ordercsv set
+        
+        order_id            = '".$orderId."',
+        product_name        = '".$GLOBALS['name']."',
+        sku                 = '".$GLOBALS['sku']."',
+        design_no           = '".$GLOBALS['design']."',
+        manufacturer        = '".$GLOBALS['manufac_name']."',
+        catalog_name        = '".$GLOBALS['catalog_name']."',
+        stock_available     = '".$GLOBALS['qty_avaliable']."',
+        option_name         = '".$GLOBALS['optionName']."',
+        order_date          = '".$GLOBALS['orderdate']."',
+            
+
+        allocationstatus_id  = '".$GLOBALS['allocationstatus_id']."',
+        allocation_date      = '".$GLOBALS['allocation_date']."',
+
+
+        download_status     = 'N'";
+
+$connection->query($sql);
+    }
+
+            
+} 
+
+?>
+  <tr>
+       <td colspan="13">&nbsp;</td>
+  </tr>
+  </table>
+  <?php
+        //endforeach;
+    
+ $i++;   
+}
+?>
+
+
+
+<!--
+<script src="<?php echo Mage::getBaseUrl('js')."calendar/calendar.js" ?>" type="text/javascript"></script>
+ 
+<script src="<?php echo Mage::getBaseUrl('js')."calendar/calendar-setup.js" ?>" type="text/javascript"></script>
+ 
+<link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl('js') ?>calendar/calendar-win2k-1.css"  />
+-->
+ 
+<?php echo $this->getLayout()->createBlock('core/html_calendar')->setTemplate('page/js/calendar.phtml')->toHtml();?>
+ 
+<?php echo $this->getChildHtml('html_calendar') ?>
+
+
+
+
+ 
+
+
+<!--<script type="text/javascript">
+ Calendar.setup({ inputField : 'shipping_pickup_at_store_date', ifFormat : '%m/%e/%y', button : 'date_from_trig', align : 'Bl', singleClick : true }); 
+</script>-->
+<!--<form name="form2" method="get" action="<?php //echo Mage::getBaseUrl(); ?>http://www.sareees.com/csv_upload/export_csv44.php">-->
+<form name="form2" method="get" action="<?php //echo Mage::getBaseUrl(); ?>http://www.sareees.com/csv_upload/csv_data_update.php" >
+<table width="100%" border="0" cellspacing="3" cellpadding="3">
+  <tr>
+    <td width="33%">&nbsp;</td>
+    <td width="2%">&nbsp;</td>
+    <td width="65%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+<!--      <input type="text" name="shipping_pickup_at_store_date" id="shipping_pickup_at_store_date">-->
+        <label for="date_pick"><?php echo $this->__('Select Date') ?> </label>
+<!--<img style="" title="Select Date" id="date_pick" alt="" src="<?php // echo $this->getSkinUrl("images/calendar.gif");?> "/>-->
+<input type="text" name="date_pick" id="date_pick" value=""/>
+<script type="text/javascript">
+// <![CDATA[
+Calendar.setup({
+inputField : 'date_pick',
+// ifFormat : %Y-%m-%d',
+ifFormat : '%m-%d-%Y',
+showsTime: false,
+// button : 'date_select_trig',
+singleClick : true,
+//disableFunc: function(date) {
+////disable previous day in datepicker
+//var now= new Date();
+//if(date.getFullYear()<now.getFullYear())
+//{
+//return true;
+//}
+//if(date.getFullYear()==now.getFullYear())
+//{
+//if(date.getMonth()<now.getMonth())
+//{
+//return true;
+//}
+//}
+//if(date.getMonth()==now.getMonth())
+//{
+//if(date.getDate()<now.getDate())
+//{
+//return true;
+//}
+//}
+//},
+});
+// ]]>
+</script>
+   </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+      <input type="submit" name="button" id="button" value="Order Request">&nbsp;&nbsp;
+      <input type="submit" name="button2" id="button2" value="Order Process"></td>
+  <input type="hidden" name="current_url" value="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" >
+  </tr>
+</table>
+</form>

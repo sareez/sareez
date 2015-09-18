@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <catalogmaster_adminhtml_catalogmaster_index>
+        <reference name="content">
+            <block type="catalogmaster/adminhtml_catalogmaster" name="catalogmaster" />
+        </reference>
+    </catalogmaster_adminhtml_catalogmaster_index>
+	
+	 <catalogmaster_adminhtml_producttype_index>
+        <reference name="content">
+            <block type="catalogmaster/adminhtml_producttype" name="producttype" />
+        </reference>
+    </catalogmaster_adminhtml_producttype_index>
+</layout>

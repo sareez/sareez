@@ -1,0 +1,14 @@
+<?php echo Mage::app()->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+<div class="page-title"><h1 class="measurement_heading">My Measurements</h1></div>
+<div class="choiceCont">
+    <h3 class="measurement_link_heading">Add New Measurements in Advance</h3>
+    <ul class="add_link_measurement">
+        <li><a href="<?php echo $this->getUrl('measurement/index/blouse') ?>">Add Measurement for Blouse and Petticoat</a></li>
+        <li><a href="<?php echo $this->getUrl('measurement/index/salwar') ?>">Add Measurement for Salwar or Churidar Kameez</a></li>
+        <li><a href="<?php echo $this->getUrl('measurement/index/lehenga') ?>">Add Measurement for Lehenga Choli</a></li>
+        <li><a href="<?php echo $this->getUrl('measurement/index/viewallmeasurement') ?>">View all the measurements I have made.</a></li>
+        <li><a href="<?php echo $this->getUrl('measurement/index/viewblouse') ?>">Blouse &amp; Petticoat only.</a></li>
+        <li><a href="<?php echo $this->getUrl('measurement/index/viewsalwar') ?>">Salwar / Churidar only.</a></li>
+        <li><a href="<?php echo $this->getUrl('measurement/index/viewlehenga') ?>">Lehenga Choli only.</a></li>
+    </ul>
+</div>

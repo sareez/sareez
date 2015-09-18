@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Last_Viewed>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Last_Viewed>
+    </modules>
+</config> 

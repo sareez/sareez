@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl() ?>highslide/highslide_area.css">
+<div class="page-title"><h1>Make a choice</h1></div>
+<div class="choiceCont">
+                     <h3 class="file_mgnt_edit_subheading">Please Select Measurement Option</h3>
+               <div class="choiceLftCont">
+                 <p> The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham </p>
+                 <div>
+                     <?php $params = $this->getRequest()->getParams() ?>
+            <?php
+            if ($params['pid'] && $params['oid']) {
+                $readyMadeUrl = $this->getUrl('measurement/index/readymadelehenga') . '?pid=' . $params['pid'] . '&oid=' . $params['oid'];
+            } else {
+                $readyMadeUrl = '#';
+            }
+            ?>
+                 </div>
+                 <a style="text-decoration:none;" href="<?php echo $readyMadeUrl ?>">
+                   <input type="button" value="Select Ready Made Size" name="submit" class="button">
+                   </a> </a>
+               </div>
+               <div class="choiceRtCont">
+                 <p> The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham </p>
+                 <a style="text-decoration:none" href="<?php echo $this->getUrl('measurement/index/customlehenga') . '?pid=' . $params['pid'] . '&oid=' . $params['oid']; ?>">
+                   <input type="button" value="Submit Custom Measurement" name="submit" class="button">
+                   </a>
+               </div>
+             </div>
+             <div class="choiceCont">
+              <h3 class="file_mgnt_edit_subheading">You can submit this measurement form later.</h3>
+             
+               <p>You can submit this measurment form later from your "My Account" section.</p>
+                  <a href="<?php echo Mage::getBaseUrl("customer/account/");?>">
+                 <input type="button" value="Submit Later" name="submit" class="button">
+                 </a>
+             </div>

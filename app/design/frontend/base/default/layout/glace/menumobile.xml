@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+	<default>
+	
+		<reference name="head">
+			<block type="page/html" name="top.Js" as="topJs" template="glace/menumobile/mobile_css.phtml"/>
+			<!-- CSS -->
+			<action method="addItem"><type>skin_css</type><name>css/glace/menumobile/_shared/accordion.css</name><params/></action>
+			<action method="addItem"><type>skin_css</type><name>css/glace/menumobile/menu.css</name></action>
+			<action method="addItem"><type>skin_css</type><name>css/glace/menumobile/menu-accordion.css</name></action>
+			<action method="addItem"><type>skin_css</type><name>css/glace/menumobile/mobile.css</name></action>
+			<!-- js -->
+			<action method="addJs"><script>glace/menumobile/jquery-1.7.2.min.js</script></action>
+			<action method="addJs"><script>glace/menumobile/jquery-noconflict.js</script></action>
+			
+			<action method="addJs"><script>glace/menumobile/jquery.easing.min.js</script></action>
+			<action method="addJs"><script>glace/menumobile/jquery.accordion.min.js</script></action>
+			
+			<!-- Remove Magento's default menu script -->
+			<action method="removeItem"><type>js</type><name>varien/menu.js</name><params/></action>
+		</reference>
+
+		<reference name="top.menu">
+			<block type="menumobile/navigation" name="catalog.topnav.menu" template="glace/menumobile/mainmenu.phtml"/>
+		</reference>
+
+	</default>
+	
+</layout>

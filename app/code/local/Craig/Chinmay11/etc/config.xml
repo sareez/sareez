@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+<!--
+/*
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Craig Christenson
+ * @package    Chinmay (2Checkout.com)
+ * @copyright  Copyright (c) 2010 Craig Christenson
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+
+<config>
+    <modules>
+        <Craig_Chinmay>
+            <version>2.4.2</version>
+        </Craig_Chinmay>
+    </modules>
+    <global>
+    	<models>
+    		<Chinmay>
+	    		<class>Craig_Chinmay_Model</class>
+	    	</Chinmay>
+    	</models>
+    	<helpers>
+    		<Chinmay>
+    			<class>Craig_Chinmay_Helper</class>
+    		</Chinmay>
+    	</helpers>
+    	<blocks>
+            <Chinmay>
+            	<class>Craig_Chinmay_Block</class>
+            </Chinmay>
+        </blocks>
+        <resources>
+            <Chinmay_setup>
+                <setup>
+                    <module>Craig_Chinmay</module>
+                </setup>
+                <connection>
+                    <use>directory_setup</use>
+                </connection>
+            </Chinmay_setup>
+            <Chinmay_write>
+                <connection>
+                    <use>local_write</use>
+                </connection>
+            </Chinmay_write>
+            <Chinmay_read>
+                <connection>
+                    <use>local_read</use>
+                </connection>
+            </Chinmay_read>
+        </resources>
+      <events>
+        <controller_action_postdispatch_checkout_onepage_saveOrder>
+          <observers>
+            <output_Chinmay_redirect>
+              <type>singleton</type>
+              <class>Craig_Chinmay_Model_Observer</class>
+              <method>output_Chinmay_redirect</method>
+            </output_Chinmay_redirect>
+          </observers>
+        </controller_action_postdispatch_checkout_onepage_saveOrder>
+        <sales_order_creditmemo_refund>
+          <observers>
+            <issue_creditmemo_refund>
+              <type>singleton</type>
+              <class>Craig_Chinmay_Model_Observer</class>
+              <method>issue_creditmemo_refund</method>
+            </issue_creditmemo_refund>
+          </observers>
+        </sales_order_creditmemo_refund>
+      </events>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <Chinmay>
+                    <file>Chinmay.xml</file>
+                </Chinmay>
+            </updates>
+        </layout>
+        <routers>
+            <Chinmay>
+                <use>standard</use>
+                <args>
+                    <module>Craig_Chinmay</module>
+                    <frontName>Chinmay</frontName>
+                </args>
+            </Chinmay>
+        </routers>
+        <secure_url>
+            <Chinmay_redirect>/Chinmay/redirect/</Chinmay_redirect>
+        </secure_url>
+    </frontend>
+	<default>
+        <payment>
+            <Chinmay>
+                <active>1</active>
+                <submit_url>1</submit_url>
+                <model>Chinmay/checkout</model>
+                <title>2Checkout (Visa, MasterCard, Amex, Discover, JCB, Diners Club, Debit Card, PayPal)</title>
+                <sid>Enter 2Checkout Account Number</sid>
+                <secret_word>Enter your Secret Word</secret_word>
+		        <submit_url>1</submit_url>
+        		<demo>0</demo>
+                <sort_order>1</sort_order>
+            </Chinmay>
+        </payment>
+    </default>
+</config>

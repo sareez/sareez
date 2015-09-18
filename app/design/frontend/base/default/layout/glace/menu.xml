@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>glace/menu/css/menu.css</stylesheet></action>
+            <action method="addCss"><stylesheet>glace/menu/css/menu_style01.css</stylesheet></action>
+            <action method="addCss"><stylesheet>glace/menu/css/menu_white.css</stylesheet></action>
+
+            <action method="addJs"><script>glace/menu/jquery.min.js</script></action>
+            <action method="addJs"><script>glace/menu/underscore.js</script></action>
+            <action method="addJs"><script>glace/menu/backbone.js</script></action>
+            <action method="addJs"><script>glace/menu/dropdown.js</script></action>
+        </reference>
+
+        <reference name="header">
+            <block type="menu/menu" name="menu" as="menu">
+                <action method="placeMenu">
+                    <position>top</position>
+                    <name>catalog.topnav</name>
+                </action>
+            </block>
+        </reference>
+
+        <reference name="right">
+            <block type="menu/menu" name="menu.right" as="menu.right" before="-">
+                <action method="placeMenu">
+                    <position>right</position>
+                    <name>menu.right</name>
+                </action>
+            </block>
+        </reference>
+
+        <reference name="left">
+            <block type="menu/menu" name="menu.left" as="menu.left" before="-">
+                <action method="placeMenu">
+                    <position>left</position>
+                    <name>menu.left</name>
+                </action>
+            </block>
+        </reference>
+
+        <reference name="footer">
+            <block type="menu/menu" name="cms_footer_links" as="cms_footer_links">
+                <action method="placeMenu">
+                    <position>footer</position>
+                    <name>cms_footer_links</name>
+                </action>
+            </block>
+            <remove name="footer_links" />
+        </reference>
+
+    </default>
+</layout>
