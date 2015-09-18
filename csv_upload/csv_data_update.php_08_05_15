@@ -1,0 +1,73 @@
+<?php
+include '../db/connection.php';
+$piece = explode("-", $_REQUEST['date_pick']);
+
+$query = "select * from ordercsv where download_status = 'N' and allocationstatus_id = '2' and allocation_date = '".$piece[2].'-'.$piece[0].'-'.$piece[1]."'";
+if($_REQUEST['button']!="")
+{
+ $query .= " and stock_available <= '0'";    
+} else if($_REQUEST['button2']!=""){
+ $query .= " and stock_available >= '0'";    
+}
+
+
+// echo $query;
+
+if(mysql_num_rows(mysql_query($query)) > 0){
+    
+
+
+
+$query2 = mysql_query($query);
+while($result = mysql_fetch_assoc($query2))
+{
+ // echo "update ordercsv set download_status = 'Y' where ordercsv_id = '".$result['ordercsv_id']."'";
+ mysql_query("update ordercsv set download_status = 'Y' where ordercsv_id = '".$result['ordercsv_id']."'");
+ $update = mysql_query("update ordercsv set download_status_process = 'N' where ordercsv_id = '".$result['ordercsv_id']."'");
+}
+
+
+//header('Location:http://www.sareees.com/csv_upload/export_csv44.php')
+
+
+//header("Content-type: application/octet-stream");
+//header("Content-Disposition: attachment; filename=your_desired_name.xls");
+//header("Pragma: no-cache");
+//header("Expires: 0");
+//print "$header\n$data";
+
+if($update){
+    //$base_url = $GLOBALS['base_url'];
+   // header('Location: csv_upload/export_csv44.php')
+//    echo 'ok';
+?>
+
+<center>
+<a href="http://www.sareees.com/csv_upload/export_csv44.php"> Click here for Download</a>
+</center>
+
+<script>
+   // window.location="<?php echo $GLOBALS['base_url']; ?>csv_upload/export_csv44.php";
+</script>
+<?php } ?>
+<center>Click here to <a href="<?php echo $_REQUEST['current_url']; ?>" ><< BACK</a></center>
+<?php
+} else {
+    ?>
+
+<!--<script>
+    //window.location="window.history.go(-1)";
+</script>-->
+
+<center>No Result Found!</center>
+<center>Click here to <a href="<?php echo $_REQUEST['current_url']; ?>" ><< BACK</a></center>
+<?php
+}
+?>
+<!--<a href="Javascript:window.history.go(-1);" ><< BACK</a>-->
+
+
+
+
+
+

@@ -1,0 +1,140 @@
+<?php
+// include '../db/connection.php';
+
+$conn = mysql_connect("localhost","root","rootwdp") or die("ERROR::Not connected to SERVER"); 
+$db = mysql_select_db("sareees_db",$conn) or die("ERROR::Not connected to DATABASE");
+//$piece = explode("-", $_REQUEST['date_pick']);
+// $piece[2].'-'.$piece[0].'-'.$piece[1]
+// and allocationstatus_id = '2' 
+//session_start();
+//$_SESSION['current_url'] = $_REQUEST['current_url']; 
+if($_REQUEST['refresh']=="refresh"){
+	
+// $query = "select * from ordercsv";
+/*if($_REQUEST['button']!="")
+{
+ $query .= " and stock_available <= '0'";    
+} else if($_REQUEST['button2']!=""){
+ $query .= " and stock_available >= '0'";    
+}*/
+
+
+// echo $query;
+
+//if(mysql_num_rows(mysql_query($query)) > 0){
+    
+
+
+
+/*$query2 = mysql_query($query);
+while($result = mysql_fetch_assoc($query2))
+{
+/* echo $queryUpdateThree = "update ordercsv set download_status = 'Y' where ordercsv_id = '".$result['ordercsv_id']."'";
+ mysql_query($queryUpdateThree);*/
+ mysql_query("UPDATE `ordercsv` SET `download_status_process` = ''");
+ echo $queryUpdateFour = "UPDATE `ordercsv` SET `download_status` = 'N', `download_status_process` = ''"; // exit;
+ $update = mysql_query($queryUpdateFour);
+/*}*/
+	if($update){
+	?>
+    <script >
+	//window.location="http://www.sareees.com/index.php/ordercsv/adminhtml_ordercsv/index/key/7e800a249207b0a26a6097bb793d3235/";
+	</script>
+    <a href="http://www.sareees.com/index.php/ordercsv/adminhtml_ordercsv/index/key/7e800a249207b0a26a6097bb793d3235/" ><< Back</a>
+	<?php
+	}
+	//}
+	
+}
+
+ mysql_query("UPDATE `ordercsv` SET `download_status_process` = ''");
+$query = "select * from ordercsv where download_status = 'N' and order_date = '".$_REQUEST['date_pick']."'";
+if($_REQUEST['button']!="")
+{
+ $query .= " and stock_available <= '0'";    
+} else if($_REQUEST['button2']!=""){
+ $query .= " and stock_available >= '0'";    
+}
+
+
+ $query;
+
+if(mysql_num_rows(mysql_query($query)) > 0){
+    
+
+
+
+$query2 = mysql_query($query);
+while($result = mysql_fetch_assoc($query2))
+{
+  $queryUpdateThree = "update ordercsv set download_status = 'Y' where ordercsv_id = '".$result['ordercsv_id']."'";
+ if($_REQUEST['button']!="")
+{
+ $queryUpdateThree .= " and stock_available <= '0'";    
+} else if($_REQUEST['button2']!=""){
+ $queryUpdateThree .= " and stock_available >= '0'";    
+}
+ mysql_query($queryUpdateThree);
+ 
+  $queryUpdateFour = "update ordercsv set download_status_process = 'N' where ordercsv_id = '".$result['ordercsv_id']."'";
+  if($_REQUEST['button']!="")
+{
+ $queryUpdateFour .= " and stock_available <= '0'";    
+} else if($_REQUEST['button2']!=""){
+ $queryUpdateFour .= " and stock_available >= '0'";    
+}
+ $update = mysql_query($queryUpdateFour);
+}
+
+
+//header('Location:http://www.sareees.com/csv_upload/export_csv44.php')
+
+
+//header("Content-type: application/octet-stream");
+//header("Content-Disposition: attachment; filename=your_desired_name.xls");
+//header("Pragma: no-cache");
+//header("Expires: 0");
+//print "$header\n$data";
+
+if($update){
+    //$base_url = $GLOBALS['base_url'];
+   // header('Location: csv_upload/export_csv44.php')
+//    echo 'ok';
+?>
+
+<center>
+<h2>
+<?php if($_REQUEST['button']!="") { ?>
+<a href="http://www.sareees.com/csv_upload/order_request.php"> Click here for Download</a>
+<?php } else { ?>
+<a href="http://www.sareees.com/csv_upload/order_process.php"> Click here for Download</a>
+<?php } ?>
+</h2>
+</center>
+
+<script>
+   // window.location="<?php echo $GLOBALS['base_url']; ?>csv_upload/export_csv44.php";
+</script>
+<?php } ?>
+<center>Click here to <a href="<?php echo $_REQUEST['current_url']; ?>" ><< BACK</a></center>
+<!--<center>Click here to <a href="http://www.sareees.com/csv_upload/csv_data_update.php?refresh=refresh&date_pick=<?php echo $_REQUEST['date_pick']; ?>&current_url = <?php echo $_REQUEST['current_url']; ?>" ><< BACK</a></center>
+--><?php
+} else {
+    ?>
+
+<!--<script>
+    //window.location="window.history.go(-1)";
+</script>-->
+
+<center>No Result Found!</center>
+<center>Click here to <a href="<?php echo $_REQUEST['current_url']; ?>" ><< BACK</a></center>
+<?php
+}
+?>
+<!--<a href="Javascript:window.history.go(-1);" ><< BACK</a>-->
+
+
+
+
+
+

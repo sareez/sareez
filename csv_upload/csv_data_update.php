@@ -1,0 +1,75 @@
+<?php require_once('../app/Mage.php');
+
+function isBackendUserLoggedIn() {
+    if (!array_key_exists('adminhtml', $_COOKIE)) return false;
+
+    if(!session_id()) session_start();
+    $oldSession = $_SESSION;
+
+    Mage::app();
+
+    $sessionFilePath = Mage::getBaseDir('session') . DS . 'sess_' . $_COOKIE['adminhtml'];
+    $sessionContent  = file_get_contents($sessionFilePath);
+
+    session_decode($sessionContent);
+
+    /** @var Mage_Admin_Model_Session $session */
+    $session  = Mage::getSingleton('admin/session');
+    $loggedIn = $session->isLoggedIn();
+
+    //set old session back to current session
+    $_SESSION = $oldSession;
+
+    return $loggedIn;
+}
+?>
+<?php date_default_timezone_set("Asia/Kolkata"); ?>
+<?php
+ include '../db/connection.php';
+        if($_REQUEST['process']=='download'){
+// $ifUpdate = mysql_query("UPDATE ordercsv SET download_status_process = ''");
+ //if($ifUpdate){
+$query = "select * from sales_flat_order_item_stitching where download_status_process = 'N' and allocation_date <= '".$_REQUEST['date_pick']."'";
+//}
+if($_REQUEST['button']!="")
+{
+ $query .= " and allocationstatus_id = '1'";    
+} else if($_REQUEST['button2']!=""){
+ $query .= " and allocationstatus_id = '2'";    
+}
+
+
+ $query; 
+ mysql_num_rows(mysql_query($query));
+if(mysql_num_rows(mysql_query($query)) > 0){
+    
+
+?>
+        <center>
+<h2>
+<?php if($_REQUEST['button']!="") { ?>
+<a href="http://www.sareez.com/csv_upload/order_request.php?date_pick=<?php echo $_REQUEST['date_pick'] ?>"> Click here for Download</a>
+<?php } else { ?>
+<a href="http://www.sareez.com/csv_upload/order_process.php?date_pick=<?php echo $_REQUEST['date_pick'] ?>"> Click here for Download</a>
+<?php } ?>
+</h2>
+</center>
+
+        <?php
+
+}
+else{
+	?>
+	<center>
+    <div style="font-size:45px; color:#F00; padding:50px;">
+	No Record found.
+    </div>
+	</center>
+    <?php
+	}
+?>
+<!--<a href="Javascript:window.history.go(-1);" ><< BACK</a>-->
+<center>Click here to <a href="<?php echo $_REQUEST['current_url']; ?>" ><< BACK</a></center>
+<?php
+        }
+?>

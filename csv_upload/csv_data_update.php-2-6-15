@@ -1,0 +1,147 @@
+<?php
+ include '../db/connection.php';
+
+
+
+
+        
+        if($_REQUEST['process']=='download'){
+            
+
+
+// $ifUpdate = mysql_query("UPDATE ordercsv SET download_status_process = ''");
+ //if($ifUpdate){
+$query = "select * from ordercsv where download_status = 'N' and order_date = '".$_REQUEST['date_pick']."'";
+//}
+if($_REQUEST['button']!="")
+{
+ $query .= " and stock_available <= '0'";    
+} else if($_REQUEST['button2']!=""){
+ $query .= " and stock_available >= '0'";    
+}
+
+
+ $query; 
+ mysql_num_rows(mysql_query($query));
+if(mysql_num_rows(mysql_query($query)) > 0){
+    
+
+?>
+        <center>
+<h2>
+<?php if($_REQUEST['button']!="") { ?>
+<a href="http://www.sareees.com/csv_upload/order_request.php"> Click here for Download</a>
+<?php } else { ?>
+<a href="http://www.sareees.com/csv_upload/order_process.php"> Click here for Download</a>
+<?php } ?>
+</h2>
+</center>
+        
+<center>Click here to <a href="http://www.sareees.com/csv_upload/csv_data_update.php?button=<?php echo $_REQUEST['button'] ?>&button2=<?php echo $_REQUEST['button2'] ?>&refresh=refresh&date_pick=<?php echo $_REQUEST['date_pick']; ?>&current_url=<?php echo $_REQUEST['current_url']; ?>" ><< BACK</a></center>
+         
+ <script >
+	 // window.location="<?php echo $_REQUEST['current_url']; ?>";
+         
+	</script>
+
+        <?php
+
+$query2 = mysql_query($query);
+while($result = mysql_fetch_assoc($query2))
+{
+
+ 
+    $ordercsv_id = $result['ordercsv_id'];
+    $queryUpdateThree = "update ordercsv set download_status = 'Y', download_status_process = 'N' where ordercsv_id = '".$ordercsv_id."'";
+    $sqlUpdate = mysql_query($queryUpdateThree);
+ 
+
+}
+ 
+
+
+} else {
+    ?>
+
+
+
+<center>No Result Found!</center>
+<center>Click here to <a href="<?php echo $_REQUEST['current_url']; ?>" ><< BACK</a></center>
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+<?php
+}
+?>
+<!--<a href="Javascript:window.history.go(-1);" ><< BACK</a>-->
+
+<?php
+        }
+        ?>
+
+
+<?php
+if($_REQUEST['refresh']=="refresh"){
+	//echo "qqqqqqqqqqqqqqqqqqqqqqqqq";
+ $ifUpdate = mysql_query("UPDATE `ordercsv` SET `download_status_process` = ''");
+ 
+  //if($ifUpdate){
+$query1 = "select * from ordercsv where download_status = 'Y' and order_date = '".$_REQUEST['date_pick']."'";
+//}
+if($_REQUEST['button']!="")
+{
+ $query1 .= " and stock_available <= '0'";    
+} else if($_REQUEST['button2']!=""){
+ $query1 .= " and stock_available >= '0'";    
+}
+
+
+ //echo $query1; 
+ //mysql_num_rows(mysql_query($query));
+//if(mysql_num_rows(mysql_query($query)) > 0){
+ 
+ //$flag = 1;
+   $query22 = mysql_query($query1);
+while($result1 = mysql_fetch_assoc($query22))
+{
+
+ 
+    $ordercsv_id = $result1['ordercsv_id'];
+    $queryUpdateThree = "update ordercsv set download_status_process = '' where ordercsv_id = '".$ordercsv_id."'";
+    $sqlUpdate = mysql_query($queryUpdateThree);
+ 
+//$flag = 1;
+}
+    
+ //$queryUpdateFour = "UPDATE ordercsv SET download_status_process = ''"; 
+
+ //$update = mysql_query($queryUpdateFour);
+ 
+ //if($flag == 1){
+//header('Location:'.$_REQUEST['current_url']);
+    ?>
+     <script >
+	 // window.location="<?php //echo $_REQUEST['current_url']; ?>";
+	</script>
+<!--    <a href="<?php // echo $_REQUEST['current_url']; ?>" ><< Back </a>-->
+    <center>Click here to <a href="<?php echo $_REQUEST['current_url']; ?>" ><< BACK</a></center>
+
+<?php
+ //}
+	
+//}
+}
+?>
