@@ -1,0 +1,985 @@
+# Copyright (C) 2012 Silesia
+# This file is distributed under the same license as the Silesia package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Silesia 1.0\n"
+"Report-Msgid-Bugs-To: http://nattywp.com\n"
+"POT-Creation-Date: 2012-03-26 19:47:15+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: NattyWP <support@nattywp.com>\n"
+"Language-Team: \n"
+
+#: 404.php:4
+msgid "Error 404"
+msgstr ""
+
+#: 404.php:6
+msgid "It appears you've missed you're intended destination, either through a bad or outdated link, or a typo in the page you were hoping to reach."
+msgstr ""
+
+#: 404.php:7
+msgid "You can take a look through my recent posts."
+msgstr ""
+
+#: archive.php:9
+#, php-format
+msgid "Daily Archives: %s"
+msgstr ""
+
+#: archive.php:11
+#, php-format
+msgid "Monthly Archives: %s"
+msgstr ""
+
+#: archive.php:13
+#, php-format
+msgid "Yearly Archives: %s"
+msgstr ""
+
+#: archive.php:15
+msgid "Blog Archives"
+msgstr ""
+
+#: archive.php:23
+#: attachment.php:9
+#: author.php:36
+#: index.php:11
+#: search.php:12
+#: single.php:8
+msgid "Posted:"
+msgstr ""
+
+#: archive.php:25
+#: author.php:38
+#: index.php:13
+#: search.php:14
+#: single.php:10
+msgid "Tags:"
+msgstr ""
+
+#: archive.php:26
+#: author.php:39
+#: index.php:14
+#: search.php:15
+#: single.php:11
+msgid "Comments:"
+msgstr ""
+
+#: archive.php:27
+#: author.php:40
+#: index.php:15
+#: search.php:16
+#: single.php:12
+msgid "0 Comments"
+msgstr ""
+
+#: archive.php:27
+#: author.php:40
+#: index.php:15
+#: search.php:16
+#: single.php:12
+msgid "1 Comment"
+msgstr ""
+
+#: archive.php:27
+#: author.php:40
+#: index.php:15
+#: search.php:16
+#: single.php:12
+msgid "% Comments"
+msgstr ""
+
+#: archive.php:28
+#: attachment.php:22
+#: author.php:41
+#: index.php:16
+#: search.php:17
+#: single.php:13
+msgid "Edit entry"
+msgstr ""
+
+#: archive.php:28
+#: attachment.php:22
+#: author.php:41
+#: index.php:16
+#: page.php:13
+#: search.php:17
+#: single.php:13
+msgid "Edit"
+msgstr ""
+
+#: archive.php:42
+#: attachment.php:73
+#: author.php:55
+#: index.php:30
+#: page.php:13
+#: search.php:31
+#: single.php:22
+msgid "Pages:"
+msgstr ""
+
+#: archive.php:57
+#: author.php:70
+#: index.php:45
+#, php-format
+msgid "<h2 class='center'>Sorry, but there aren't any posts in the %s category yet.</h2>"
+msgstr ""
+
+#: archive.php:59
+#: author.php:72
+#: index.php:47
+msgid "<h2>Sorry, but there aren't any posts with this date.</h2>"
+msgstr ""
+
+#: archive.php:62
+#: author.php:75
+#: index.php:50
+#, php-format
+msgid "<h2 class='center'>Sorry, but there aren't any posts by %s yet.</h2>"
+msgstr ""
+
+#: archive.php:64
+#: author.php:77
+#: index.php:52
+msgid "<h2 class='center'>No posts found.</h2>"
+msgstr ""
+
+#: archives.php:9
+msgid "Archives"
+msgstr ""
+
+#: archives.php:11
+msgid "Archives by Month:"
+msgstr ""
+
+#: archives.php:17
+msgid "Archives by Subject:"
+msgstr ""
+
+#: attachment.php:14
+msgid "<h5>Full size:</h5>"
+msgstr ""
+
+#: attachment.php:17
+msgid "Link to full-size image"
+msgstr ""
+
+#: attachment.php:27
+#, php-format
+msgid "Return to %s"
+msgstr ""
+
+#: attachment.php:29
+#, php-format
+msgid "<span class=\"meta-nav\">&larr;</span> %s"
+msgstr ""
+
+#: attachment.php:84
+#: search.php:45
+#: single.php:38
+msgid "Not Found"
+msgstr ""
+
+#: attachment.php:85
+#: search.php:47
+#: single.php:39
+msgid "Sorry, but you are looking for something that isn't here."
+msgstr ""
+
+#: author.php:10
+#, php-format
+msgid ""
+"\n"
+"Author Archives: %s"
+msgstr ""
+
+#: author.php:21
+#, php-format
+msgid "About %s"
+msgstr ""
+
+#: comments.php:17
+msgid "No Responses"
+msgstr ""
+
+#: comments.php:17
+msgid "One Response"
+msgstr ""
+
+#: comments.php:17
+msgid "% Responses"
+msgstr ""
+
+#: comments.php:22
+#: comments.php:34
+msgid "<span class=\"meta-nav\">&larr;</span> Older Comments"
+msgstr ""
+
+#: comments.php:23
+#: comments.php:35
+msgid "Newer Comments <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: comments.php:56
+msgid "Leave a Reply"
+msgstr ""
+
+#: comments.php:57
+#, php-format
+msgid "Leave a Reply to %s"
+msgstr ""
+
+#: comments.php:58
+msgid "Cancel reply"
+msgstr ""
+
+#: comments.php:59
+msgid "Post Comment"
+msgstr ""
+
+#: footer.php:2
+#, php-format
+msgid "Copyright &copy; %s All rights reserved."
+msgstr ""
+
+#: footer.php:3
+msgid "Designed by"
+msgstr ""
+
+#: header.php:23
+#, php-format
+msgid "Page %s"
+msgstr ""
+
+#: header.php:46
+msgid "Welcome"
+msgstr ""
+
+#: header.php:47
+msgid "Welcome to <strong>Silecia theme.</strong> This area is completely widgetized."
+msgstr ""
+
+#: header.php:51
+#: sidebar.php:7
+#: sitemap.php:18
+msgid "Categories"
+msgstr ""
+
+#: header.php:59
+msgid "Twitter Updates"
+msgstr ""
+
+#: header.php:63
+msgid "Follow us on Twitter"
+msgstr ""
+
+#: searchform.php:2
+#: searchform.php:3
+msgid "Search"
+msgstr ""
+
+#: sidebar.php:13
+msgid "Archive"
+msgstr ""
+
+#: sidebar.php:21
+msgid "Meta"
+msgstr ""
+
+#: sidebar.php:25
+msgid "This page validates as XHTML 1.0 Transitional"
+msgstr ""
+
+#: sidebar.php:25
+msgid "Valid"
+msgstr ""
+
+#: sidebar.php:25
+msgid "eXtensible HyperText Markup Language"
+msgstr ""
+
+#: sidebar.php:25
+msgid "XHTML"
+msgstr ""
+
+#: sidebar.php:27
+#: sidebar.php:29
+msgid "Read in RSS"
+msgstr ""
+
+#: sidebar.php:34
+msgid "Twitter profile"
+msgstr ""
+
+#: sidebar.php:34
+msgid "Twitter"
+msgstr ""
+
+#: single.php:24
+msgid ", "
+msgstr ""
+
+#: single.php:26
+#, php-format
+msgid "This entry was posted in %s"
+msgstr ""
+
+#: sitemap.php:10
+msgid "Sitemap"
+msgstr ""
+
+#: sitemap.php:12
+msgid "Pages"
+msgstr ""
+
+#: sitemap.php:35
+msgid "Comments"
+msgstr ""
+
+#: functions/admin-framework.php:137
+msgid "None found"
+msgstr ""
+
+#: functions/admin-framework.php:177
+msgid "&laquo; First"
+msgstr ""
+
+#: functions/admin-framework.php:191
+msgid "Last &raquo;"
+msgstr ""
+
+#: functions/admin-framework.php:282
+msgid "View Posts in"
+msgstr ""
+
+#: functions/admin-framework.php:321
+#, php-format
+msgid "View all posts under %s"
+msgstr ""
+
+#: functions/admin-natty.php:5
+msgid "More NattyWP Themes"
+msgstr ""
+
+#: functions/admin-natty.php:7
+msgid "Join the NattyWP Club"
+msgstr ""
+
+#: functions/admin-natty.php:7
+msgid "NattyWP Services"
+msgstr ""
+
+#: functions/admin-natty.php:21
+msgid "An error has occured with the RSS feed."
+msgstr ""
+
+#: functions/admin-natty.php:30
+msgid "No items"
+msgstr ""
+
+#: functions/custom-title.php:10
+msgid "Custom Post Title"
+msgstr ""
+
+#: functions/custom-title.php:11
+msgid "By default, natty uses the title of your post as the contents of the <code>&lt;title&gt;</code> tag. You can override this and further extend your on-page <acronym title=\"Search Engine Optimization\">SEO</acronym> by entering your own <code>&lt;title&gt;</code> tag below."
+msgstr ""
+
+#: functions/custom-title.php:12
+msgid "Value for <code>&lt;title&gt;</code> tag"
+msgstr ""
+
+#: functions/custom-title.php:17
+msgid "Meta Description"
+msgstr ""
+
+#: functions/custom-title.php:19
+msgid "Value for <code>&lt;meta&gt;</code> description"
+msgstr ""
+
+#: functions/custom-title.php:24
+msgid "Meta Keywords"
+msgstr ""
+
+#: functions/custom-title.php:25
+msgid "Like the <code>&lt;meta&gt;</code> description, <code>&lt;meta&gt;</code> keywords are yet another on-page <acronym title=\"Search Engine Optimization\">SEO</acronym> opportunity. Enter a few keywords that are relevant to your article."
+msgstr ""
+
+#: functions/custom-title.php:26
+msgid "Value for <code>&lt;meta&gt;</code> keywords"
+msgstr ""
+
+#: functions/custom-title.php:110
+#: functions/custom-title.php:111
+msgid "SEO settings"
+msgstr ""
+
+#: functions/custom-video.php:117
+#: functions/custom-video.php:123
+msgid "Upload your image with \"Add Media\" post window, copy the url and paste it here."
+msgstr ""
+
+#: functions/custom-video.php:134
+msgid "Video Type"
+msgstr ""
+
+#: functions/custom-video.php:135
+msgid "Video ID"
+msgstr ""
+
+#: functions/custom-video.php:186
+msgid "Select Video Type and insert Video ID"
+msgstr ""
+
+#: functions/custom-video.php:236
+#: functions/custom-video.php:237
+msgid "Video Settings"
+msgstr ""
+
+#: functions/settings-general.php:20
+#: functions/settings-general.php:122
+msgid "Theme Options"
+msgstr ""
+
+#: functions/settings-general.php:21
+msgid "Color Options"
+msgstr ""
+
+#: functions/settings-general.php:22
+msgid "More themes"
+msgstr ""
+
+#: functions/settings-general.php:123
+msgid "Theme Version:"
+msgstr ""
+
+#: functions/settings-general.php:126
+msgid "Theme by"
+msgstr ""
+
+#: functions/settings-general.php:129
+msgid "Follow Us:"
+msgstr ""
+
+#: functions/settings-general.php:141
+msgid "Theme Documentation"
+msgstr ""
+
+#: functions/settings-general.php:142
+msgid "Submit a Ticket <small>(register first)</small>"
+msgstr ""
+
+#: functions/settings-general.php:145
+#: functions/settings-general.php:167
+msgid "Update Options"
+msgstr ""
+
+#: functions/settings-theme-color.php:13
+msgid "Color Settings"
+msgstr ""
+
+#: functions/settings-theme.php:108
+msgid "Yes"
+msgstr ""
+
+#: functions/settings-theme.php:109
+msgid "No"
+msgstr ""
+
+#: functions/settings-theme.php:123
+msgid "Upload Image"
+msgstr ""
+
+#: functions/settings-theme.php:129
+msgid "Remove"
+msgstr ""
+
+#: functions/settings-validate.php:44
+msgid "Expecting a Numeric value! Please fix."
+msgstr ""
+
+#: functions/settings-validate.php:111
+msgid "Upload Error: "
+msgstr ""
+
+#: functions/settings-validate.php:121
+msgid "Wrong image type. Upload only .jpeg, .png or .gif images."
+msgstr ""
+
+#: functions/shortcodes.php:118
+msgid ""
+"<h3>Available Shortcodes</h3><p>Shortcodes are a very easy way to display lot of things on your blog posts and sidebars by inserting a very simple code. Its easy to use. Just paste a shortcode [your_shortcode] while editing a page(post). Here is the list of supported shortcodes:</p>\n"
+" <ul class=\"short-codes\">\n"
+" <li><strong>Messages:</strong>\n"
+"    <ul>\n"
+"      <li><pre>[notice]Your text...[/notice]</pre></li>\n"
+"      <li><pre>[alert]Your text...[/alert]</pre></li>\n"
+"    </ul>\n"
+" </li>\n"
+" <li><strong>Text features:</strong>\n"
+"    <ul>\n"
+"        <li><pre>[button link=\"http://yourlink.com\"]Button text[/button]</pre></li>\n"
+"        <li><pre>[dropcap]Y[/dropcap]</pre></li>\n"
+"        <li><pre>[highlight]Your text...[/highlight]</pre></li>\n"
+"        <li><pre>[highlightbold]Your text...[/highlightbold]</pre></li>\n"
+"        <li><pre>[green]Your text...[/green]</pre></li>\n"
+"        <li><pre>[red]Your text...[/red]</pre></li>\n"
+"        <li><pre>[yellow]Your text...[/yellow]</pre></li>\n"
+"        <li><pre>[blue]Your text...[/blue]</pre></li>\n"
+"        <li><pre>[toggle title=\"Toggle Title\"]Your text...[/toggle]</pre></li>\n"
+"    </ul>\n"
+" </li>\n"
+" <li><strong>Text boxes:</strong>\n"
+"    <ul>\n"
+"      <li><pre>[insetleft title=\"help\"]Hello this is content[/insetleft]</pre></li>\n"
+"      <li><pre>[insetright title=\"help\"]Hello this is content[/insetright]</pre></li>\n"
+"      <li><pre>[important title=\"help\"]Hello this is content[/important]</pre></li>\n"
+"    </ul>\n"
+" </li> \n"
+" <li><strong>Layout:</strong>\n"
+"    <ul>\n"
+"      <li><pre>[col2]...content...[/col2]</pre></li>\n"
+"      <li><pre>[col3]...content...[/col3]</pre></li>\n"
+"      <li><pre>[col4]...content...[/col4]</pre></li>\n"
+"    </ul>\n"
+" </li> \n"
+" <li><strong>Misc:</strong>\n"
+"    <ul>\n"
+"      <li><pre>[clear]</pre></li>\n"
+"      <li><pre>[divider]</pre></li>\n"
+"    </ul>\n"
+" </li> \n"
+" </ul><p><a href=\"http://support.nattywp.com/index.php?act=article&code=view&id=37\">Using Shortcodes tutorial</a></p>"
+msgstr ""
+
+#: include/hooks.php:31
+msgid "Primary Menu"
+msgstr ""
+
+#: include/hooks.php:49
+msgid "Blue"
+msgstr ""
+
+#: include/hooks.php:54
+msgid "Green"
+msgstr ""
+
+#: include/hooks.php:165
+msgid "<p><strong>Note:</strong> The Custom Header is currently disabled. You should get back to Theme Options and configure Header Area Settings. To do this, open <a href=\"?page=nattywp_home\">Theme Options</a> select <strong>Front Page Settings</strong> tab and choose <strong>Display Header Image</strong> value from drop down list.</p>."
+msgstr ""
+
+#: include/hooks.php:192
+msgid "Read more <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: include/hooks.php:219
+#, php-format
+msgid "%1$s"
+msgstr ""
+
+#: include/hooks.php:256
+msgid "Archive by category"
+msgstr ""
+
+#: include/hooks.php:287
+msgid "Nothing to display"
+msgstr ""
+
+#: include/hooks.php:312
+msgid "Search results for"
+msgstr ""
+
+#: include/hooks.php:315
+msgid "Posts tagged"
+msgstr ""
+
+#: include/hooks.php:320
+msgid "Articles posted by"
+msgstr ""
+
+#: include/hooks.php:328
+msgid "Page"
+msgstr ""
+
+#: include/settings-color.php:22
+msgid "Preset Color scheme."
+msgstr ""
+
+#: include/settings-color.php:23
+msgid "Header."
+msgstr ""
+
+#: include/settings-color.php:24
+msgid "Slide Sidebar."
+msgstr ""
+
+#: include/settings-color.php:25
+msgid "Post Text and Link styles."
+msgstr ""
+
+#: include/settings-color.php:26
+msgid "Sidebar."
+msgstr ""
+
+#: include/settings-color.php:36
+msgid "Preset Color scheme"
+msgstr ""
+
+#: include/settings-color.php:40
+msgid "Silesia default style"
+msgstr ""
+
+#: include/settings-color.php:41
+msgid "Custom style"
+msgstr ""
+
+#: include/settings-color.php:48
+msgid "Header - Background color"
+msgstr ""
+
+#: include/settings-color.php:57
+msgid "Header - Logo Text color"
+msgstr ""
+
+#: include/settings-color.php:66
+msgid "Header - Text color"
+msgstr ""
+
+#: include/settings-color.php:76
+msgid "Slide - Background color"
+msgstr ""
+
+#: include/settings-color.php:85
+msgid "Slide - Text color"
+msgstr ""
+
+#: include/settings-color.php:94
+msgid "Slide - Link color"
+msgstr ""
+
+#: include/settings-color.php:103
+msgid "Slide - Link hover"
+msgstr ""
+
+#: include/settings-color.php:114
+msgid "H1 Title text color"
+msgstr ""
+
+#: include/settings-color.php:123
+msgid "Text color"
+msgstr ""
+
+#: include/settings-color.php:132
+msgid "Link color"
+msgstr ""
+
+#: include/settings-color.php:141
+msgid "Link hover (highlight) color"
+msgstr ""
+
+#: include/settings-color.php:153
+msgid "Sidebar - H1 Title color"
+msgstr ""
+
+#: include/settings-color.php:162
+msgid "Sidebar - Text color"
+msgstr ""
+
+#: include/settings-color.php:171
+msgid "Sidebar - Link color"
+msgstr ""
+
+#: include/settings-color.php:180
+msgid "Sidebar - Link hover color"
+msgstr ""
+
+#: include/settings-comments.php:28
+msgid "Pingback:"
+msgstr ""
+
+#: include/settings-comments.php:28
+msgid "(Edit)"
+msgstr ""
+
+#: include/settings-intro.php:3
+msgid "Earn Money"
+msgstr ""
+
+#: include/settings-intro.php:4
+#, php-format
+msgid ""
+"You can resell all of our commercial themes by becoming an affiliate, earning an impressive\n"
+"<strong>40% on all sales</strong> and 10% on all refferal sales. Refer webmasters to our affiliate program and get 10% from their earnings."
+msgstr ""
+
+#: include/settings-intro.php:6
+msgid "Click here for more details"
+msgstr ""
+
+#: include/settings-intro.php:7
+msgid "Make Money"
+msgstr ""
+
+#: include/settings-intro.php:9
+msgid "Colors"
+msgstr ""
+
+#: include/settings-intro.php:10
+msgid "To make it super easy to customize your theme, we have added color control module. You can find and set these up under <strong>\"Appearance\" > \"Color Options\"</strong>"
+msgstr ""
+
+#: include/settings-intro.php:12
+msgid "Widgets"
+msgstr ""
+
+#: include/settings-intro.php:13
+msgid "We have added a number of additional widgets to provide this theme with advanced tools. You can install and configure them under <strong>\"Appearance\" > \"Widgets\""
+msgstr ""
+
+#: include/settings-intro.php:17
+msgid "Read documentation to find more information about this"
+msgstr ""
+
+#: include/settings-intro.php:17
+msgid "theme configuration"
+msgstr ""
+
+#: include/settings-theme.php:20
+msgid "General Options"
+msgstr ""
+
+#: include/settings-theme.php:21
+msgid "Front Page Settings"
+msgstr ""
+
+#: include/settings-theme.php:22
+msgid "Social Profiles & Tracking"
+msgstr ""
+
+#: include/settings-theme.php:35
+msgid "Custom Logo"
+msgstr ""
+
+#: include/settings-theme.php:38
+msgid "Default logo text can be edited under Wordpress <a href=\"options-general.php\">General Settings -> Site Title</a> or replaced by your custom logo image."
+msgstr ""
+
+#: include/settings-theme.php:43
+msgid "Hide Tagline under Logo?"
+msgstr ""
+
+#: include/settings-theme.php:47
+msgid "Control visibility of tagline. You can configure tagline text under Wordpress Settings -> <a href=\"options-general.php\">General tab</a>."
+msgstr ""
+
+#: include/settings-theme.php:52
+msgid "Home Link Text"
+msgstr ""
+
+#: include/settings-theme.php:55
+msgid "Enter a Home link text for breadcrumbs navigation."
+msgstr ""
+
+#: include/settings-theme.php:60
+msgid "Custom Favicon.ico upload"
+msgstr ""
+
+#: include/settings-theme.php:63
+msgid "Upload .ICO file"
+msgstr ""
+
+#: include/settings-theme.php:64
+msgid "Use <a href=\"http://www.faviconer.com\" target=\"_blank\">Faviconer.com</a> to create unique favicon.ico image."
+msgstr ""
+
+#: include/settings-theme.php:72
+msgid "Enter a blurb about your site here, and it will show up on the &lt;meta name=&quot;description&quot;&gt; tag. Useful for SEO. <br/><br/>Just plain text, all HTML tags will be removed."
+msgstr ""
+
+#: include/settings-theme.php:79
+msgid "Show Fullposts?"
+msgstr ""
+
+#: include/settings-theme.php:83
+msgid "Show fullposts instead of post summary?"
+msgstr ""
+
+#: include/settings-theme.php:88
+msgid "Header Navigation"
+msgstr ""
+
+#: include/settings-theme.php:92
+msgid "Display Breadcrumbs"
+msgstr ""
+
+#: include/settings-theme.php:93
+msgid "Display Navigation menu"
+msgstr ""
+
+#: include/settings-theme.php:95
+msgid "Choose Header navigation style"
+msgstr ""
+
+#: include/settings-theme.php:101
+msgid "Header Area Settings"
+msgstr ""
+
+#: include/settings-theme.php:105
+msgid "Turn Off Header section"
+msgstr ""
+
+#: include/settings-theme.php:106
+msgid "Display Header Image"
+msgstr ""
+
+#: include/settings-theme.php:107
+msgid "Display Page Slideshow"
+msgstr ""
+
+#: include/settings-theme.php:109
+msgid ""
+"This option helps you to control your header area. Select: <br />\n"
+"\t\t\t<strong>Turn Off Header section</strong> - to completely remove header area from display.<br />\n"
+"\t\t\t<strong>Header Image</strong> - to display <a href=\"?page=custom-header\">Uploaded Header</a>.<br />\n"
+"\t\t\t<strong>Page Slideshow</strong> - to create a Page-based slider with Featured images."
+msgstr ""
+
+#: include/settings-theme.php:118
+msgid "Homepage Scrolling pages"
+msgstr ""
+
+#: include/settings-theme.php:121
+msgid "<strong>Note:</strong> Please make sure that you selected <i>\"Display Page Slideshow\"</i> option under <strong>Header Area Settings</strong>.<br/> To add pages click on the \"Plus\" icon at the right side. To order pages click and move item at the left side."
+msgstr ""
+
+#: include/settings-theme.php:127
+msgid "Slideshow effect"
+msgstr ""
+
+#: include/settings-theme.php:160
+msgid "Select transition effect for homepage slideshow."
+msgstr ""
+
+#: include/settings-theme.php:165
+msgid "Timeout"
+msgstr ""
+
+#: include/settings-theme.php:168
+msgid "Milliseconds between slide transitions (0 to disable auto advance)"
+msgstr ""
+
+#: include/settings-theme.php:175
+msgid "Slide speed"
+msgstr ""
+
+#: include/settings-theme.php:179
+msgid "Speed of the transition (in milliseconds)"
+msgstr ""
+
+#: include/settings-theme.php:186
+msgid "Hide Social Profile Links (Header area) ?"
+msgstr ""
+
+#: include/settings-theme.php:190
+msgid "Control visibility of the Social Buttons."
+msgstr ""
+
+#: include/settings-theme.php:195
+msgid "Twitter URL"
+msgstr ""
+
+#: include/settings-theme.php:198
+msgid "Link to your twitter page. Start with http://"
+msgstr ""
+
+#: include/settings-theme.php:204
+msgid "Facebook URL"
+msgstr ""
+
+#: include/settings-theme.php:207
+msgid "Link to your facebook page. Start with http://"
+msgstr ""
+
+#: include/settings-theme.php:213
+msgid "Feedburner URL"
+msgstr ""
+
+#: include/settings-theme.php:217
+msgid "<a href=\"http://feedburner.google.com\" target=\"_blank\">Feedburner</a> URL. This will replace RSS feed link. Start with http://"
+msgstr ""
+
+#: include/settings-theme.php:222
+msgid "Tracking Code"
+msgstr ""
+
+#: include/settings-theme.php:225
+msgid "Put your tracking code here and manage your website statistics. <br /><br /><strong>Note:</strong> JS code including <i>&lt;script&gt;...&lt;/script&gt; tags</i>"
+msgstr ""
+
+#: include/sidebar-init.php:4
+msgid "Sidebar (Main)"
+msgstr ""
+
+#: include/sidebar-init.php:11
+msgid "Sidebar (Inner Page/Post)"
+msgstr ""
+
+#: include/sidebar-init.php:12
+msgid "Add widgets for single Page and Post. Displaying Sidebar (Main) if empty."
+msgstr ""
+
+#: include/sidebar-init.php:20
+msgid "Slide Navigation (Left)"
+msgstr ""
+
+#: include/widgets/feedburner.php:25
+msgid "Enter your e-mail address"
+msgstr ""
+
+#: include/widgets/feedburner.php:29
+msgid "Subscribe"
+msgstr ""
+
+#: include/widgets/feedburner.php:55
+msgid "Your Feedburner ID:"
+msgstr ""
+
+#: include/widgets/feedburner.php:62
+#: include/widgets/feedburner.php:63
+msgid "NattyWP Feedburner Subscription"
+msgstr ""
+
+#: include/widgets/flickr.php:44
+#: include/widgets/twitter.php:59
+msgid "Title:"
+msgstr ""
+
+#: include/widgets/flickr.php:48
+msgid "Flickr ID"
+msgstr ""
+
+#: include/widgets/flickr.php:51
+msgid "Number of photos:"
+msgstr ""
+
+#: include/widgets/flickr.php:58
+#: include/widgets/flickr.php:59
+msgid "NattyWP Flickr"
+msgstr ""
+
+#: include/widgets/twitter.php:55
+msgid "Account:"
+msgstr ""
+
+#: include/widgets/twitter.php:63
+msgid "Show:"
+msgstr ""
+
+#: include/widgets/twitter.php:71
+#: include/widgets/twitter.php:72
+msgid "NattyWP Twitter"
+msgstr ""
+
