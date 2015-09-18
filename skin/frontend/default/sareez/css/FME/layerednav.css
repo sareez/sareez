@@ -1,0 +1,22 @@
+
+
+.catalogfilter {
+    width:100%;
+}
+
+.cf-ajax-load{
+    
+    height: 100%;
+    left: 0;
+    opacity: 0.99;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.cf-ajax-load img{
+    left: 50%;
+    top:50%;
+    position: absolute;
+}

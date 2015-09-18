@@ -1,0 +1,107 @@
+#measure body, #measure html {
+    color: #000000;
+    font: 12px/14px Arial,Helvetica,sans-serif;
+    text-align: left;
+}
+#measure .highslide-container div {
+    font-family: Verdana,Helvetica;
+    font-size: 10pt;
+}
+#measure .highslide-html {
+    background-color: #FFFFFF;
+}
+
+#measure div, #measure p, #measure span, #measure a {
+    outline: medium none;
+}
+#measure table, #measure tr, #measure td, #measure div, #measure span, #measure h1, #measure h2, #measure h3, #measure hr, #measure img, #measure p, #measure form, #measure input, #measure select, #measure textarea, #measure label {
+    margin: 0 0 10px;
+    padding: 0;
+}
+#measure .highslide-html-content {
+    display: none;
+    padding: 0 5px 5px;
+    width: 400px;
+}
+#measure .draggable-header .highslide-header {
+    border-bottom: 1px solid #DDDDDD;
+    height: 18px;
+    margin-bottom: 0.5em;
+}
+#measure .highslide-header {
+    padding-bottom: 5px;
+}
+#measure .highslide-header ul {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+#measure .draggable-header .highslide-header .highslide-move {
+    cursor: move;
+    display: block;
+    height: 16px;
+    position: absolute;
+    right: 24px;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+#measure .draggable-header .highslide-header .highslide-close a {
+    background-image: url("http://static.sareez.com/highslide/graphics/closeX.png");
+    display: block;
+    height: 16px;
+    width: 16px;
+}
+
+#measure .draggable-header .highslide-header .highslide-close {
+    float: right;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+}
+#measure .area1 {
+    border: 2px solid #CCCCCC;
+}
+#measure .highslide-container table {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+#measure .popup1 {
+    color: #000000;
+    font: 12px/12px Arial,Helvetica,sans-serif;
+    margin: 10px 0 0 10px;
+}
+
+#measure .heading_text {
+    color: #BF070D;
+    font: bold 12px/15px Arial,Helvetica,sans-serif;
+    margin: 3px 0;
+}
+#measure .text {
+    color: #000000;
+    font: 12px/15px Arial,Helvetica,sans-serif;
+}
+#measure .highslide-footer {
+    height: 11px;
+}
+#measure .highslide-footer .highslide-resize {
+    background: url("http://static.sareez.com/highslide/graphics/resize.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    float: right;
+    height: 11px;
+    width: 11px;
+}
+#measure .highslide-resize {
+    cursor: nw-resize;
+}
+#measure .popup1_left {
+    border-left: 1px solid #CCCCCC;
+    padding-left: 10px;
+}
+#measure .highslide-heading {
+    display: none;
+    font-weight: bold;
+    margin: 0.4em;
+}
+#measure .draggable-header .highslide-heading {
+    margin: 2px 0.4em;
+    position: absolute;
+}

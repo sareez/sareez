@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<iframe id="myFrame" src="/default.asp" width="900" height="200"></iframe>
+
+<p>Click the button to change the value of the src attribute in the iframe.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+
+<a href="#" onclick="myFunction('http://www.sareez.com/contacts')">Contact</a>
+<a href="#" onclick="myFunction('http://www.sareez.com/sarees.html')">Sareees</a>
+
+
+
+<script>
+function myFunction(linkurl) {
+    document.getElementById("myFrame").src = linkurl;
+}
+</script>
+
+</body>
+</html>

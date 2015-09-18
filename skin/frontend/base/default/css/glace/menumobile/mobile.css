@@ -1,0 +1,51 @@
+
+	
+@media (max-width:1000px){
+
+	#header .menu-style01
+
+	{
+
+		display:none !important;
+
+	} 
+
+	#header-nav {
+
+		display:block !important;
+		background: none repeat scroll 0 0 #ededed;
+	} 
+	a.skip-link {
+    	width: 33.33%;
+	}
+	a.skip-nav{
+		display:none !important;
+	}
+	.slideshow-container{
+		display: inline-block !important;
+	}
+}
+
+
+
+@media (min-width:1001px){
+
+	.mobnav-trigger-wrapper
+
+	{
+
+		display:none !important;
+
+	} 
+
+	#nav.nav-mobile{
+		display: none !important;
+		overflow: hidden;
+	}
+
+	
+}
+
+
+
+

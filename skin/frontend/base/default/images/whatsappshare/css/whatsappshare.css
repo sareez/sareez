@@ -1,0 +1,52 @@
+/**
+* 
+* Do not edit or add to this file if you wish to upgrade the module to newer
+* versions in the future. If you wish to customize the module for your 
+* needs please contact us to https://www.milople.com/magento-extensions/contact-us.html 
+* 
+* @category    Ecommerce
+* @package     Indies_Whatsappshare
+* @copyright   Copyright (c) 2015 Milople Technologies Pvt. Ltd. All Rights Reserved.
+* @url	       https://www.milople.com/magento-extensions/whatsapp-share.html
+*
+* Milople was known as Indies Services earlier.
+*
+*/
+
+@charset "utf-8";
+.wa_btn_s {
+	background:url(../images/whatsappsmall.png) no-repeat;
+	float:left;
+	height:17px;
+	font-size: 0px;
+    background-size: 16px;
+    background-position: 5px 2px;
+    padding: 3px 6px 3px 25px;
+}
+
+.wa_btn_m {
+	background:url(../images/whatsappmedium.png) no-repeat scroll 0 0 !important;
+	float:left;
+	font-size:0;
+	width:90px;
+	height:42px;
+    background-size: 20px;
+    background-position: 4px 2px;
+    padding: 4px 6px 4px 30px;
+	margin:15px 0 0 0;
+}
+
+.wa_btn_l {
+	background:url(../images/whatsapplarge.jpg) no-repeat scroll 0 0 !important;
+    font-size: 16px;
+    background-size: 20px;
+    background-position: 5px 5px;
+    padding: 6px 8px 30px !important;
+	width:274px;
+	height:54px;
+	float:left;
+	font-size:0;
+	margin:10px 0 0 0 !important;
+}
+
+

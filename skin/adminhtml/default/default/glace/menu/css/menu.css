@@ -1,0 +1,161 @@
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.menu-side-col .x-tree-node-el .x-tree-node-icon {
+  background: none;
+  height: 16px;
+  width: 16px;
+  margin-top: -2px;
+}
+.menu-side-col .x-tree-node-el.no-active {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.menu-adminhtml-menu-index .switcher{
+  background: #50bacc !important; 
+  border: none;
+}
+
+.menu-adminhtml-menu-index .menu-content .content-header{
+  border-bottom: 1px solid #50bacc;
+}
+
+.menu-adminhtml-menu-index .side-col .switcher label{
+  color: #fff;
+}
+.menu-adminhtml-menu-index .content-header h3{
+  text-transform: capitalize;
+  padding-left: 0;
+  margin: 0.6em 0.5em 0 0;
+}
+
+.menu-adminhtml-menu-index .entry-edit fieldset, .entry-edit .fieldset{
+  border: none !important;
+  background: #fff !important;
+}
+
+.menu-adminhtml-menu-index .content-header button{
+  background: none repeat scroll 0 0 #ff8b00 !important;
+  border: medium none;
+  padding: 4px 10px;
+}
+
+.menu-adminhtml-menu-index button.add span {
+    background-image: url("../images/icon_cong_button.png");
+    padding-left: 15px;
+}
+
+.menu-adminhtml-menu-index ul.tabs-horiz{
+  background: none;
+  border-bottom: 2px solid #50bacc;
+}
+
+.menu-adminhtml-menu-index ul.tabs-horiz li{
+  margin: 0 1px !important;
+}
+.menu-adminhtml-menu-index ul.tabs-horiz li a{
+  color: #fff !important;
+  text-transform: uppercase;
+  padding: 3px 15px;
+  font-weight: 700;
+  background: rgb(176,176,176) !important;
+  border: 1px solid rgb(176,176,176) !important;
+}
+.menu-adminhtml-menu-index ul.tabs-horiz li a.active{
+  background: #50bacc !important;
+  border: 1px solid #50bacc !important;
+}
+
+.menu-adminhtml-menu-index .x-tree-lines .x-tree-elbow-end-plus{
+  background: url("../images/icon_cong.png") no-repeat scroll 0 0 transparent !important;
+  background-position: center !important;
+}
+.menu-adminhtml-menu-index .x-tree-lines .x-tree-elbow-end-minus{
+  background: url("../images/icon_tru.png") no-repeat scroll 0 0 transparent !important;
+  background-position: center !important;
+}
+
+.menu-adminhtml-menu-index .x-tree-lines .x-tree-elbow-plus{
+  background: url("../images/icon_cong.png") no-repeat scroll 0 0 transparent !important;
+  background-position: center !important;
+}
+
+.menu-adminhtml-menu-index .x-tree-lines .x-tree-elbow-minus{
+  background: url("../images/icon_tru.png") no-repeat scroll 0 0 transparent !important;
+  background-position: center !important;
+}
+
+.menu-adminhtml-menu-index .entry-edit .entry-edit-head{
+  background: none !important;
+}
+
+.menu-adminhtml-menu-index .entry-edit .entry-edit-head h4{
+  color: #eb5e00;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 4px 0;
+}
+
+.menu-adminhtml-menu-index div.side-col{
+  width: 300px !important;
+  border-right: 1px solid #50bacc;
+  min-height: 521px; 
+}
+.menu-adminhtml-menu-index div.main-col{
+  margin-left: 300px;
+}
+
+.menu-adminhtml-menu-index .columns{
+  background: none !important;
+}
+.menu-adminhtml-menu-index .columns .form-list td.value{
+  width: 100%;
+}
+
+.menu-adminhtml-menu-index .form-list td.value textarea,
+.menu-adminhtml-menu-index .form-list td.value input.input-text
+{
+  width: 527px;
+  padding: 5px;
+}
+.menu-adminhtml-menu-index .form-list td.value input.color{
+  border: 1px solid #000;
+  padding: 3px;
+}
+
+.menu-adminhtml-menu-index select{
+  height: 25px;
+}
+
+.menu-adminhtml-menu-index .store-scope select{
+  min-height: 170px;
+}
+
+.menu-adminhtml-menu-index .middle{
+  background: #fff !important;
+}

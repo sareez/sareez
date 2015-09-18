@@ -1,0 +1,15 @@
+.acco{list-style-type:none;}
+.acco li.nav-item{list-style-type:none;display:block;float:left;width:100% !important;padding:0 !important;margin:0 !important;position:relative;border-bottom:1px solid #FFF;background:#FCD8C5;}
+.acco ul.nav-panel{display:block;float:left;width:100%;padding:0;margin:0;}
+.acco li.parent > a{padding-right:54px;}
+.acco .nav-item > a{display:block;padding:5px 10px;font-size:13px;line-height:19px;}
+.acco li.level0 > a{font-size:13px;}
+.acco li.level1 > a{padding-left:30px;font-size:13px;background:#FFF;border-bottom:1px solid #D4D4D4;color:#CB0303;font-weight:bold;}
+.acco li.level1 > a:hover{color:#000;}
+.acco li.level2 > a{padding-left:50px;font-size:13px;text-transform:none;background:#009CED;color:#fff;font-weight:bold;}
+.acco li.level2 > a:hover{background:#FF0000;color:#FFF;}
+.acco li.level3 > a{padding-left:70px;font-size:13px;text-transform:none;}
+.acco li.level3 .nav-item > a{padding-left:90px;font-size:12px;text-transform:none;}
+.acco .opener{position:absolute;right:0;top:0;display:block;cursor:pointer;text-align:center;width:49px;height:30px;line-height:49px;background:url(../../../images/glace/menumobile/_shared/accordion/opener.png) center center no-repeat;}
+.acco .opener:hover{background-color:#FF2847;}
+.acco li.item-active > .opener{background-image:url(../../../images/glace/menumobile/_shared/accordion/opener-active.png);}

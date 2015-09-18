@@ -1,0 +1,91 @@
+.wrapper{
+	height: auto;
+	background: #f7f5ee !important;
+	filter: none;
+}
+.header.scroll-to-fixed-fixed{
+	position: relative !important;
+}
+.mobnav-trigger-wrapper{
+	display: none !important;
+}
+.container {
+    width: 1075px;
+}
+.mobile_banner_side {
+    display: none;
+}
+.row{
+	margin-right: -15px;
+    margin-left: -15px;
+}
+.col-md-2{
+	float: left;
+	width: 16.66666667%;
+}
+.col-md-3, .col-sm-3{
+	width: 25%;
+	float: left;
+}
+.col-md-5 {
+	float: left;
+    width: 41.66666667%;
+}
+.col-md-6 {
+	float: left;
+    width: 50%;
+}
+.col-md-7{
+	float: left;
+	width: 58.33333333%;
+}
+.col-md-9,
+.side_slider_product{
+	width: 74%;
+	float: right;
+}
+.col-md-10{
+	float: left;
+	width: 83.33333333%;
+}
+.new-product-left-slider-button, .new-product-right-slider-button{
+	left: 16px;
+}
+/**  */
+.filter_morebotton{
+	display: none;
+}
+.toolbar .sorter{
+	width: 150px;
+}
+.sorter .sort-by{
+	float: none;
+}
+.pager .limiter{
+	width: 120px;
+}
+.mobile_footer_sareez,
+.mobile_payment_options,
+.mobile_connect{
+	display: none;
+}
+.banner_side{
+	margin: 0 !important;
+	padding: 10px 5px !important;
+	width: 75%;
+}
+.side_gallery{
+	width: 25%;
+    padding: 0px 5px !important;
+    margin: 0 !important;
+}
+/*.main-container .main{padding: 15px 20px !important;}*/
+.main-container .main{padding:0px !important;}
+.img_footer_contact img, .product-view{width: 100%;}
+.filterMoreTogglr{display: none;}
+.product-view .product-shop {width: 53%;}
+.hader-wishlist {width: 81px;}
+.sareez-header-wishlist-icon {width: 30px;}
+
+
+

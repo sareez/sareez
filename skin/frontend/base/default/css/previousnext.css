@@ -1,0 +1,7 @@
+.previous_next_before_box, .previous_next_after_box{margin:0;}
+.previous_next_before_box .block-title, .previous_next_after_box .block-title{padding: 0 5px;}
+.next_link_box, .next_button_box{/*float:right;*/}
+.previous_button_box, .next_button_box{max-width: 49%; display: inline-block;}
+.previous_button, .next_button{max-width: 100%; overflow:hidden;}
+.previous_empty, .next_empty{display: inline-block;}
+.previous_empty .previous_button{visibility:hidden;}

@@ -1,0 +1,335 @@
+@import "menu.less";
+
+.menu-style01 {
+    @columnWidth: 205px;
+    @bgColorStart: #2c5987;
+    @bgColorEnd: #23486d;
+    @hoverBgColorStart: #6ad8f5;
+    @hoverBgColorEnd: #32b8eb;
+    @a1Color: #fff;
+    @a1Shadow: rgba(0, 0, 0, .75);
+    @a1NoteColor: #eee;
+    @li1BorderRight: #15416F;
+    @li1BorderLeft: #3B6692;
+    @bgSubColor: @bgColorStart;
+    @headerColor: @bgColorStart;
+
+    // @bgColorStart: #efefef;
+    // @bgColorEnd: #b6b6b6;
+    // @hoverBgColorStart: #b6b6b6;
+    // @hoverBgColorEnd: #efefef;
+    // @a1Color: #333;
+    // @a1Shadow: rgba(255, 255, 255, .75);
+    // @a1NoteColor: #999;
+    // @bgSubColor: #d2d2d2;
+    // @headerColor: #333;
+
+    // @li1BorderRight: #efefef;
+    // @li1BorderLeft: #b6b6b6;
+
+    #gradient > .vertical-three-colors(@bgColorStart, @bgColorStart, 70%, @bgColorEnd);
+    .clearfix();
+    z-index: 1000;
+
+    .h1 {
+        border-bottom: 1px solid #E8E8E8;
+        color: @headerColor;
+        font-size: 15px;
+        line-height: 15px;
+        margin-bottom: 5px;
+        padding: 5px 3px 5px 3px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .h2 {
+        .h1();
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .h3 {
+        .h1();
+        font-size: 13px;
+        line-height: 13px;
+    }
+
+    .h4 {
+        .h1();
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    .h5 {
+        .h1();
+        font-size: 11px;
+        line-height: 11px;
+    }
+
+    .h6 {
+        .h1();
+        font-size: 10px;
+        line-height: 10px;
+    }
+
+    li {
+        position: relative;
+
+        &.level1 {
+            #gradient > .vertical-three-colors(@bgColorStart, @bgColorStart, 70%, @bgColorEnd);
+            height: 38px;
+
+            div.note {
+                color: #999;
+                font-size: 10px;
+                text-transform: none;
+                font-weight: normal;
+                text-shadow: none;
+            }
+
+            >a {
+                color: @a1Color;
+                display: block;
+                font-weight: bold;
+                font: bold 10px Verdana, helvetica, sans-serif;
+                margin: 0;
+                padding: 13px 10px 13px 10px;
+                position: relative;
+                text-decoration: none;
+                text-shadow: 0 1px 1px @a1Shadow;
+                text-transform: uppercase;
+
+                &.note {
+                    padding: 7px 10px 13px 10px;
+                }
+
+                div.note {
+                    color: @a1NoteColor;
+                }
+            }
+
+            &.open {
+                #gradient > .vertical(@hoverBgColorStart, @hoverBgColorEnd);
+
+                div.sub {
+                    display: block;
+                }
+            }
+
+            div.sub {
+                z-index: 1000;
+                position: absolute;
+                display: none;
+                background:@bgSubColor;
+                padding: 10px;
+                width: auto;
+
+                .sub-container {
+                    .border-radius(7px);
+                    background: #ffffff;
+                    border-top: 1px solid #ABAAAA;
+
+                    >ul, >div {
+                        .border-radius(7px);
+                        margin-left: 0px;
+                        padding: 10px;
+                        min-width: @columnWidth;
+                    }
+                }
+            }
+
+            li {
+                display: block;
+                padding: 1px 0px;
+                position: relative;
+                text-align: left;
+
+                a {
+                    color: #2c59a5;
+                    text-decoration: none;
+                    font-size: 12px;
+                    font-family: Verdana, helvetica, sans-serif;
+                    padding: 0px 3px 0px 3px;
+                    display: block;
+                    text-align: left;
+
+                    &:hover {
+                        background: rgba(217, 238, 250, 0.5);
+                        color: #2c59a5;
+                    }
+                }
+
+                a.h1 {.h1();}
+                a.h2 {.h2();}
+                a.h3 {.h3();}
+                a.h4 {.h4();}
+                a.h5 {.h5();}
+                a.h6 {.h6();}
+
+                ul {
+                    margin-left: 15px;
+                }
+
+                &.divider {
+                    padding: 0;
+                    background: #e8e8e8;
+                    border: none;
+                    margin: 3px 0px;
+                    height: 1px;
+                }
+
+                &.text {padding: 5px;}
+            }
+        }
+
+        &.head {.h6();}
+        &.head.h1 {.h1();}
+        &.head.h2 {.h2();}
+        &.head.h3 {.h3();}
+        &.head.h4 {.h4();}
+        &.head.h5 {.h5();}
+
+        &.active {
+            >a {
+                background: rgba(217, 238, 250, 0.8);
+            }
+
+            &.level1 {
+                >a {
+                    #gradient > .vertical(@hoverBgColorStart, @hoverBgColorEnd);
+                }
+            }
+        }
+    }
+
+    &.menu-top {
+        margin: 0 auto;
+        width: 950px;
+        z-index: 200;
+
+        li {
+            &.level1 {
+                border-width: 0 1px;
+                border-style: solid;
+                border-color: transparent @li1BorderRight transparent @li1BorderLeft;
+                float: left;
+
+                &.first {
+                    border-color: transparent @li1BorderRight transparent transparent;
+                }
+
+                &.last {
+                    border-color: transparent transparent transparent @li1BorderLeft;
+                }
+
+                >a {
+                    text-align: center;
+                }
+
+                div.sub {
+                    z-index: 201;
+                    position: absolute;
+                    top: 38px;
+                    left: 0px;
+                    .border-radius(0px 0px 7px 7px);
+                }
+
+                &.first {
+                    div.sub {
+                        left: -1px;
+                    }
+                }
+            }
+        }
+    }
+
+    &.menu-right, &.menu-left {
+        margin-bottom: 15px;
+        z-index: 100;
+
+        li {
+            &.level1 {
+                border-color: @li1BorderRight @li1BorderRight @li1BorderLeft @li1BorderLeft;
+                border-style: solid;
+                border-width: 1px 0px;
+
+                >a {
+                    text-align: left;
+                }
+                div.sub {
+                    z-index: 101;
+                    position: absolute;
+                    top: -1px;
+                }
+            }
+        }
+    }
+
+    &.menu-right {
+        li {
+            &.level1 {
+                div.sub {
+                    right: 195px;
+                    .border-radius(7px 0px 7px 7px);
+                }
+            }
+        }
+    }
+
+    &.menu-left {
+        li {
+            &.level1 {
+                div.sub {
+                    left: 195px;
+                    .border-radius(0px 7px 7px 7px);
+                }
+            }
+        }
+    }
+
+    .columns {
+        .clearfix();
+
+        .column {
+            float: left;
+            position: relative;
+            width: @columnWidth;
+            z-index: 100;
+            margin-right: 10px;
+
+            >ul {
+                margin-left: 0px;
+            }
+        }
+
+        &.columns-2 {
+            width: @columnWidth * 2 + 10 * 2;
+        }
+
+        &.columns-3 {
+            width: @columnWidth * 3 + 10 * 3;
+        }
+
+        &.columns-4 {
+            width: @columnWidth * 4 + 10 * 4;
+        }
+
+        &.columns-5 {
+            width: @columnWidth * 5 + 10 * 5;
+        }
+    }
+
+    table {
+        tr {
+            td {
+                padding: 5px;
+            }
+        }
+    }
+
+    // img.image {
+    //     position: absolute;
+    //     bottom: 10px;
+    //     right: 10px;
+    // }
+}

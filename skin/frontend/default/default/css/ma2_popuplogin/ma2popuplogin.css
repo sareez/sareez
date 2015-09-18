@@ -1,0 +1,92 @@
+
+.ma2-popup-fieldset {
+  margin: 8px 0;
+  padding: 15px 9px 5px;
+}
+
+.ma2-popup-fieldset .legend {
+  color: #E76200;
+  font-size: 13px;
+  font-weight: bold;
+}
+.ma2-popup-fieldset label {
+  font-size: 12px;
+}
+p.ma2-popup-required {
+  color: #EB340A;
+  float: right;
+  font-size: 11px;
+  padding-left: 10px;
+  padding-right: 4px;
+  text-align: right;
+}
+
+.ma2-popup-buttons-set
+{
+  clear: both;
+  text-align: right;
+  padding-bottom: 4px;
+}
+.magento_content
+{
+	padding: 10px 2px 6px;
+/*overflow: hidden !important;*/
+
+}
+.ma2_popup_login{position: fixed !important; top:50px !important;}
+.ma2_popup_login .magento_close {
+  top: 0;
+  right: 0;
+}
+.overlay_ma2_popup {
+  background-color: #000000;
+  opacity: 0.68;
+}
+
+td.ma2_popup{
+	padding:0px;
+}
+
+.ma2_popup_title {
+  background: none repeat-x scroll 0 100% #333333;
+  border-bottom: 1px solid #E6E6E6;
+  opacity: 0.88;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.ma2_popup_close{
+	width:16px;
+	height:16px;
+	background:url(images/window_close.png) no-repeat 0 0;
+	position:absolute;
+	top:8px;
+	right:6px;
+	cursor:pointer;
+	z-index:1000;
+}
+.table_window{border: 8px solid #CFCFCF;}
+/* Tabbed login popup */
+.tabsLoginRegister { padding-bottom:15px; margin:0 0 15px; }
+.tabsLoginRegister .tab { position:relative; z-index:2; margin-right:4px; margin-left: 6px; /*background:#EEE; border: 1px solid #C4C4C4;*/ color:#000; padding:0 0 0 15px; font-size:14px;  border-top: 2px solid #000;  border-bottom: 2px solid #000; border-left: none; border-right: none;}
+.tabsLoginRegister .tab span { padding:0 15px 0 0; line-height:24px; float:left;}
+.tabsLoginRegister .last {}
+.tabsLoginRegister .active { color:#E76200; z-index:3; background:#fff!important; border-left: none; border-right: none; /*border-bottom:0; 
+  background-image: -moz-linear-gradient(top, #CDCDCD, #FFFFFF);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#CDCDCD), to(#FFFFFF));
+  background-image: -webkit-linear-gradient(top, #CDCDCD, #FFFFFF);
+  background-image: -o-linear-gradient(top, #CDCDCD, #FFFFFF);
+  background-image: linear-gradient(to bottom, #CDCDCD, #FFFFFF);
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFCDCDCD', endColorstr='#FFFFFFFF', GradientType=0);*/
+  border-top: 2px solid #F00; border-bottom: 2px solid #F00;
+}
+.tabsLoginRegister .active span { background-position:100% 0; padding-bottom:1px; }
+.tabsLoginRegister .tab-container { z-index:1; top:25px; background:#fff; }
+.tabsLoginRegister .tab-content {/* padding: 1px; background:#fff; border:1px solid #c4c4c4; font-size:12px;*/ }
+.tabsLoginRegister .tab-content object,
+.tabsLoginRegister .tab-content embed { width:100% !important; height:auto !important; }
+
+

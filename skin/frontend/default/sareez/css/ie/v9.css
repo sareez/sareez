@@ -1,0 +1,55 @@
+
+
+	.button
+	{
+		background-image: url('images/grad0-20.svg');
+	}
+	
+	.box-feature1
+	{
+	}
+	
+		.box-feature1 header.second
+		{
+			left: 0;
+		}
+
+
+
+	#footer-wrapper
+	{
+		background-image: url('images/grad0-35.svg');
+	}
+		
+
+
+	#header
+	{
+	}
+
+		#header .inner
+		{
+			background-image: url('images/grad0-35.svg');
+		}
+
+
+	
+	.dropotron
+	{
+		background-image: url('images/grad35-0.svg');
+	}
+	
+
+
+	#titleBar
+	{
+		background-image: url('images/grad0-35.svg');
+	}
+
+	#navPanel
+	{
+		background-image: url('images/grad0-35.svg');
+	}
+	
+	
+	.main-container .main{padding:0px !important;}

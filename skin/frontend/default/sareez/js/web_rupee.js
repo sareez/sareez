@@ -1,0 +1,1 @@
+$(document).ready(function(){var e=$("body").html().replace(/\Rs./g,'<span class="indRupee">&#96;</span>');$("body").html(e)})

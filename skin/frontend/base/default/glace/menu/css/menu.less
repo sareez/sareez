@@ -1,0 +1,105 @@
+@import "mixin.less";
+
+.menu-default {
+    &#nav {
+        ul.level0 {
+            background: #ECF3F6;
+
+            &.rows {
+                width: auto;
+            }
+            li {
+                background: none;
+            }
+            li.parent {
+                a {
+                    background: none;
+                    &:hover {
+                        background: #D5E4EB;
+                    }
+                }
+            }
+            ul {
+                position: relative;
+                display: block;
+                left: auto;
+                top: auto;
+                margin-left: 10px;
+                border: none;
+                width: auto;
+            }
+
+            li.divider {
+                background: #ccc;
+                height: 1px;
+                padding: 0;
+            }
+        }
+
+        li.level0 {
+            &.open {
+                >ul {
+                    display: block;
+                    left: 0;
+                    display: block;
+                }
+            }
+            >ul {
+                display: block;
+                left: 0;
+                display: none;
+            }
+        }
+
+        .columns {
+            @columnWidth: 197px;
+            .clearfix();
+
+            .column {
+                float: left;
+                position: relative;
+                width: @columnWidth;
+                z-index: 100;
+                margin-right: 10px;
+
+                >ul {
+                    margin-left: 0px;
+                }
+            }
+
+            &.columns-2 {
+                width: @columnWidth * 2 + 10 * 3;
+                >ul {
+                    width: @columnWidth * 2 + 10 * 3;
+                    .clearfix();
+                }
+            }
+
+            &.columns-3 {
+                width: @columnWidth * 3 + 10 * 3;
+                >ul {
+                    width: @columnWidth * 3 + 10 * 4;
+                    .clearfix();
+                }
+            }
+
+            &.columns-4 {
+                width: @columnWidth * 4 + 10 * 4;
+                >ul {
+                    width: @columnWidth * 4 + 10 * 5;
+                    .clearfix();
+                }
+            }
+
+            &.columns-5 {
+                width: @columnWidth * 5 + 10 * 5;
+                >ul {
+                    width: @columnWidth * 5 + 10 * 6;
+                    .clearfix();
+                }
+            }
+        }
+
+
+    }
+}

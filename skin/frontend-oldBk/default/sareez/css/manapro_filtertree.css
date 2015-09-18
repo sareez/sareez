@@ -1,0 +1,28 @@
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterTree
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.m-expanded > .m-tree-item, .m-collapsed > .m-tree-item, .m-leaf > .m-tree-item { padding-left: 0px; }
+.m-expanded > .m-tree-item, .m-collapsed > .m-tree-item { cursor: pointer; }
+
+.m-expanded > .m-tree-item {
+    background: url("../images/manapro_filterslider/expanded.png") no-repeat scroll right 18px transparent;
+    border-top: 1px solid #CCCCCC;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 21px 0;
+    padding: 13px 0 0;
+}
+.m-collapsed > .m-tree-item {
+ background: transparent url(../images/manapro_filtertree/collapsed.png) right 18px no-repeat; border-top: 	1px solid #CCCCCC;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 21px 0;
+	padding: 13px 0 0;
+ }
+
+.m-expanded > .m-tree-item:hover { background: transparent url(../images/manapro_filterslider/expanded_over.png) right 18px no-repeat; }
+.m-collapsed > .m-tree-item:hover { background: transparent url(../images/manapro_filtertree/collapsed_over.png) right 18px no-repeat; }
+.m-expanded > ul, .m-collapsed > ul { margin-left:0px; }
