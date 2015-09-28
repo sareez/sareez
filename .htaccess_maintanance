@@ -1,0 +1,12 @@
+
+
+# MAINTENANCE-PAGE REDIRECT maintanance
+
+# MAINTENANCE-PAGE REDIRECT
+<IfModule mod_rewrite.c>
+ RewriteEngine on
+ RewriteCond %{REMOTE_ADDR} !^223\.30\.65\.67
+ RewriteCond %{REQUEST_URI} !/maintanance.html$ [NC]
+ RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif) [NC]
+ RewriteRule .* /maintanance.html [R=302,L]
+</IfModule>

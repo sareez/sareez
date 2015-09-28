@@ -1,0 +1,408 @@
+############################################
+## uncomment these lines for CGI mode
+## make sure to specify the correct cgi php binary file name
+## it might be /cgi-bin/php-cgi
+
+#    Action php5-cgi /cgi-bin/php5-cgi
+#    AddHandler php5-cgi .php
+
+############################################
+## GoDaddy specific options
+
+#   Options -MultiViews
+
+## you might also need to add this line to php.ini
+##     cgi.fix_pathinfo = 1
+## if it still doesn't work, rename php.ini to php5.ini
+
+############################################
+## this line is specific for 1and1 hosting
+
+    #AddType x-mapp-php5 .php
+    #AddHandler x-mapp-php5 .php
+
+############################################
+## default index file
+
+    DirectoryIndex index.php
+
+<IfModule mod_php5.c>
+
+############################################
+## adjust memory limit
+
+    php_value memory_limit 1024M
+    php_value max_execution_time 18000
+
+############################################
+## disable magic quotes for php request vars
+
+    php_flag magic_quotes_gpc off
+
+############################################
+## disable automatic session start
+## before autoload was initialized
+
+    php_flag session.auto_start off
+
+############################################
+## enable resulting html compression
+
+    #php_flag zlib.output_compression on
+
+###########################################
+# disable user agent verification to not break multiple image upload
+
+    php_flag suhosin.session.cryptua off
+
+###########################################
+# turn off compatibility with PHP4 when dealing with objects
+
+    php_flag zend.ze1_compatibility_mode Off
+
+</IfModule>
+
+<IfModule mod_security.c>
+###########################################
+# disable POST processing to not break multiple image upload
+
+    SecFilterEngine Off
+    SecFilterScanPOST Off
+</IfModule>
+
+<IfModule mod_deflate.c>
+
+############################################
+## enable apache served files compression
+## http://developer.yahoo.com/performance/rules.html#gzip
+
+    # Insert filter on all content
+    ###SetOutputFilter DEFLATE
+    # Insert filter on selected content types only
+    #AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+
+    # Netscape 4.x has some problems...
+    #BrowserMatch ^Mozilla/4 gzip-only-text/html
+
+    # Netscape 4.06-4.08 have some more problems
+    #BrowserMatch ^Mozilla/4\.0[678] no-gzip
+
+    # MSIE masquerades as Netscape, but it is fine
+    #BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+    # Don't compress images
+    #SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+
+    # Make sure proxies don't deliver the wrong content
+    #Header append Vary User-Agent env=!dont-vary
+
+</IfModule>
+
+<IfModule mod_ssl.c>
+
+############################################
+## make HTTPS env vars available for CGI mode
+
+    SSLOptions StdEnvVars
+
+</IfModule>
+
+<IfModule mod_rewrite.c>
+
+############################################
+## enable rewrites
+
+    Options +FollowSymLinks
+    RewriteEngine on
+
+############################################
+## you can put here your magento root folder
+## path relative to web root
+
+    #RewriteBase /magento/
+
+############################################
+## workaround for HTTP authorization
+## in CGI environment
+
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+############################################
+## always send 404 on missing files in these folders
+
+    RewriteCond %{REQUEST_URI} !^/(media|skin|js)/
+
+############################################
+## never rewrite for existing files, directories and links
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+
+############################################
+## rewrite everything else to index.php
+
+    RewriteRule .* index.php [L]
+redirect 301 /Sarees-collection/ /sarees.html
+redirect 301 /Sarees/By-Work/Designer-Sarees/ /designer-sarees.html
+redirect 301 /Sarees/By-Work/Traditional-Sarees/ /traditional-sarees.html
+redirect 301 /Sarees/By-Work/Embroidery-Sarees/ /embroidery-sarees.html
+redirect 301 /Sarees/By-Work/Printed-Sarees/ /printed-sarees.html
+redirect 301 /Sarees/By-Work/Lehenga-Sarees/ /lehenga-sarees.html
+redirect 301 /Sarees/By-Work/Handloom/ /handloom.html
+
+redirect 301 /Sarees/By-Occasion/Wedding-Sarees/ /wedding-sarees.html
+redirect 301 /Sarees/By-Occasion/Bridal-Sarees/ /bridal-sarees.html
+redirect 301 /Sarees/By-Occasion/Party-Sarees/ /party-sarees.html 
+redirect 301 /Sarees/By-Occasion/Festival-Sarees/ /festival-sarees.html
+redirect 301 /Sarees/By-Occasion/Casual-Sarees/ /casual-sarees.html
+redirect 301 /Sarees/By-Fabric/Crush/ /crush.html
+redirect 301 /Sarees/By-Fabric/Jamawar/ /jamawar-8.html
+redirect 301 /Sarees/By-Fabric/Lazer/ /lazer.html
+redirect 301 /Sarees/By-Fabric/Pure-Georgette/ /pure-georgette.html
+redirect 301 /Sarees/By-Fabric/Satin-Crush/ /satin-crush.html
+redirect 301 /Sarees/By-Fabric/Shimmer-Georgette/ /shimmer-georgette.html
+redirect 301 /Sarees/By-Fabric/Super-Net/ /super-net.html
+redirect 301 /Sarees/By-Fabric/Velvette/ /velvette.html
+redirect 301 /Sarees/By-Fabric/Viscose/ /viscose.html
+redirect 301 /Sarees/By-Fabric/Crepe-Sarees/ /crepe-sarees.html
+redirect 301 /Sarees/By-Fabric/Faux-Georgette/ /faux-georgette.html
+redirect 301 /Sarees/By-Fabric/Benarasi-Sarees/ /benarasi-sarees.html
+redirect 301 /Sarees/By-Fabric/Faux-Crepe-Sarees/ /faux-crepe-sarees.html
+redirect 301 /Sarees/By-Fabric/Cotton-Sarees/ /cotton-sarees.html
+redirect 301 /Sarees/By-Fabric/Silk-Sarees/ /silk-sarees.html
+redirect 301 /Sarees/By-Fabric/Chiffon-Sarees/ /chiffon-sarees.html
+redirect 301 /Sarees/By-Fabric/Net-Sarees/ /net-sarees.html
+redirect 301 /Sarees/By-Fabric/Glass-Tissue-Sarees/ /glass-tissue-sarees.html
+redirect 301 /Sarees/By-Fabric/Jacquard-Sarees/ /jacquard-sarees.html
+redirect 301 /Sarees/By-Fabric/Brasso-Sarees/ /brasso-sarees.html 
+
+redirect 301 /Sarees/By-Color/Red/ /sarees/shopby/color-red.html
+redirect 301 /Sarees/By-Color/Brown/ /sarees/shopby/color-brown.html
+redirect 301 /Sarees/By-Color/Yellow/ /sarees/shopby/color-yellow.html
+redirect 301 /Sarees/By-Color/Blue/ /sarees/shopby/color-blue.html
+redirect 301 /Sarees/By-Color/Violet/ /sarees/shopby/color-violet.html
+redirect 301 /Sarees/By-Color/Teal/ /sarees/shopby/color-teal.html
+redirect 301 /Sarees/By-Color/Purple/ /sarees/shopby/color-purple.html
+redirect 301 /Sarees/By-Color/Pink/ /sarees/shopby/color-pink.html
+redirect 301 /Sarees/By-Color/Peach/ /sarees/shopby/color-peach.html
+redirect 301 /Sarees/By-Color/Green/ /sarees/shopby/color-green.html
+redirect 301 /Sarees/By-Color/Orange/ /sarees/shopby/color-orange.html
+redirect 301 /Sarees/By-Color/Olive/ /sarees/shopby/color-olive.html
+redirect 301 /Sarees/By-Color/Magenta/ /sarees/shopby/color-magenta.html
+redirect 301 /Sarees/By-Color/Turquoise/ /sarees/shopby/color-turquoise.html
+redirect 301 /Sarees/By-Color/Wheat/ /sarees/shopby/color-wheat.html
+redirect 301 /Sarees/By-Color/Violet-Red/ /sarees/shopby/color-violet-red.html
+redirect 301 /Sarees/By-Color/Beige/ /sarees/shopby/color-beige.html
+redirect 301 /Sarees/By-Color/Gray/ /sarees/shopby/color-gray.html
+redirect 301 /Sarees/By-Color/Salmon/ /sarees/shopby/color-salmon.html
+redirect 301 /Sarees/By-Color/White/ /sarees/shopby/color-white.html
+redirect 301 /Sarees/By-Color/Black/ /sarees/shopby/color-black.html
+redirect 301 /Sarees/By-Color/Maroon/ /sarees/shopby/color-maroon.html
+
+
+redirect 301 /Sarees/By-Price/Less-than-25-USD/ /sarees/shopby/price-15-25.html
+redirect 301 /Sarees/By-Price/26-USD-to-50-USD/ /sarees/shopby/price-26-50.html
+redirect 301 /Sarees/By-Price/51-USD-to-100-USD/ /sarees/shopby/price-51-100.html
+redirect 301 /Sarees/By-Price/101-USD-to-200-USD/ /sarees/shopby/price-101-200.html
+
+redirect 301 /Sarees/7-Days-Delivery/ /sarees/shopby/exprees_shipping_available-7_days.html
+redirect 301 /Sarees/Bollywood-Sarees/ /sarees.html
+redirect 301 /Sarees/South-Indian-Sarees/ /sarees.html
+
+
+redirect 301 /Salwar-collection/ /salwar-kameez.html
+redirect 301 /Salwar-Kameez/By-Work/Embroidery-Salwar/ /embroidery-salwar.html
+redirect 301 /Salwar-Kameez/By-Work/Lawn-Salwar/ /lawn-salwar.html
+redirect 301 /Salwar-Kameez/By-Work/Printed-Salwar/ /printed-salwar.html
+redirect 301 /Salwar-Kameez/By-Work/Anarkali-Salwar/ /anarkali-salwar.html
+redirect 301 /Salwar-Kameez/By-Occasion/Wedding-Salwar/ /wedding-salwar.html
+redirect 301 /Salwar-Kameez/By-Occasion/Casual-Salwar/ /casual-salwar.html
+redirect 301 /Salwar-Kameez/By-Occasion/Party-Salwar/ /party-salwar.html
+redirect 301 /Salwar-Kameez/By-Occasion/Festival-Salwar/ /festival-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Brocade/ /brocade.html
+redirect 301 /Salwar-Kameez/By-Fabric/Chanderi-Chikan/ /chanderi-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Cotton-Salwar/ /cotton-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Cotton-Silk/ /cotton-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Dupion-Silk/ /dupion-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Jamawar/ /jamawar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Laser/ /laser.html
+redirect 301 /Salwar-Kameez/By-Fabric/Net-Salwar/ /net-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Shimmer-Georgette/ /shimmer-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Velvet/ /velvet.html
+redirect 301 /Salwar-Kameez/By-Fabric/Viscose/ /viscose.html
+redirect 301 /Salwar-Kameez/By-Fabric/Crepe-Salwar/ /crepe-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Georgette-Salwar/ /georgette-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Silk-Salwar/ /silk-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Chiffon-Salwar/ /chiffon-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Benarasi-Salwar/ /benarasi-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Handloom-Salwar/ /handloom-salwar.html
+redirect 301 /Salwar-Kameez/By-Fabric/Jacquard/ /jacquard.html
+redirect 301 /Salwar-Kameez/By-Fabric/Pashmina-Salwar/ /pashmina-salwar.html
+
+redirect 301 /Salwar-Kameez/By-Color/Red/ /salwar-kameez/shopby/color-red.html
+redirect 301 /Salwar-Kameez/By-Color/Brown/ /salwar-kameez/shopby/color-brown.html
+redirect 301 /Salwar-Kameez/By-Color/Yellow/ /salwar-kameez/shopby/color-yellow.html
+redirect 301 /Salwar-Kameez/By-Color/Blue/ /salwar-kameez/shopby/color-blue.html
+redirect 301 /Salwar-Kameez/By-Color/Violet/ /salwar-kameez/shopby/color-violet.html
+redirect 301 /Salwar-Kameez/By-Color/Teal/ /salwar-kameez/shopby/color-teal.html
+redirect 301 /Salwar-Kameez/By-Color/Purple/ /salwar-kameez/shopby/color-purple.html
+redirect 301 /Salwar-Kameez/By-Color/Pink/ /salwar-kameez/shopby/color-pink.html
+redirect 301 /Salwar-Kameez/By-Color/Peach/ /salwar-kameez/shopby/color-peach.html
+redirect 301 /Salwar-Kameez/By-Color/Green/ /salwar-kameez/shopby/color-green.html
+redirect 301 /Salwar-Kameez/By-Color/Orange/ /salwar-kameez/shopby/color-orange.html
+redirect 301 /Salwar-Kameez/By-Color/Olive/ /salwar-kameez/shopby/color-olive.html
+redirect 301 /Salwar-Kameez/By-Color/Magenta/ /salwar-kameez/shopby/color-magenta.html
+redirect 301 /Salwar-Kameez/By-Color/Turquoise/ /salwar-kameez/shopby/color-turquoise.html
+redirect 301 /Salwar-Kameez/By-Color/Wheat/ /salwar-kameez/shopby/color-wheat.html
+redirect 301 /Salwar-Kameez/By-Color/Violet-Red/ /salwar-kameez/shopby/color-red-violet.html
+redirect 301 /Salwar-Kameez/By-Color/Beige/ /salwar-kameez/shopby/color-beige.html
+redirect 301 /Salwar-Kameez/By-Color/Gray/ /salwar-kameez/shopby/color-gray.html
+redirect 301 /Salwar-Kameez/By-Color/Salmon/ /salwar-kameez/shopby/color-salmon.html
+redirect 301 /Salwar-Kameez/By-Color/White/ /salwar-kameez/shopby/color-white.html
+redirect 301 /Salwar-Kameez/By-Color/Black/ /salwar-kameez/shopby/color-black.html
+redirect 301 /Salwar-Kameez/By-Color/Maroon/ /salwar-kameez/shopby/color-maroon.html
+
+redirect 301 /Salwar-Kameez/By-Price/Less-than-25-US-/ /salwar-kameez/shopby/price-15-25.html
+redirect 301 /Salwar-Kameez/By-Price/26-US-to-50-US-/ /salwar-kameez/shopby/price-26-50.html
+redirect 301 /Salwar-Kameez/By-Price/51-US-to-100-US-/ /salwar-kameez/shopby/price-51-100.html
+redirect 301 /Salwar-Kameez/By-Price/101-US-to-200-US-/ /salwar-kameez/shopby/price-101-200.html
+redirect 301 /Salwar-Kameez/By-Price/More-than-200-US-/ /salwar-kameez/shopby/price-200-637.html
+redirect 301 /Salwar-Kameez/7-Days-Delivery/ /salwar-kameez/shopby/exprees_shipping_available-7_days.html
+redirect 301 /Salwar-Kameez/ReadyMade-Salwar/ /readymade-salwar.html
+redirect 301 /Salwar-Kameez/Bollywood-Salwar/ /bollywood-salwar.html
+
+
+redirect 301 /Lehenga-collection/ /lehenga-choli.html
+redirect 301 /Lehenga-Choli/By-Occasion/Bridal-Lehengas/ /bridal-lehengas.html
+redirect 301 /Lehenga-Choli/By-Occasion/Wedding-Lehengas/ /wedding-lehengas.html
+redirect 301 /Lehenga-Choli/By-Occasion/Festival-Lehengas/ /festival-lehengas.html
+redirect 301 /Lehenga-Choli/By-Occasion/Wedding-Gowns/ /wedding-gowns.html
+redirect 301 /Lehenga-Choli/By-Fabric/Crepe/ /crepe.html
+redirect 301 /Lehenga-Choli/By-Fabric/Jamawar/ /jamawar-31.html
+redirect 301 /Lehenga-Choli/By-Fabric/Net-Lehengas/ /net-lehengas.html
+redirect 301 /Lehenga-Choli/By-Fabric/Velvet-Lehengas/ /velvet-lehengas.html
+redirect 301 /Lehenga-Choli/By-Fabric/Georgette-Lehengas/ /georgette-lehengas.html
+redirect 301 /Lehenga-Choli/By-Fabric/Silk-Lehengas/ /silk-lehengas.html
+redirect 301 /Lehenga-Choli/By-Fabric/Jacquard-Lehengas/ /jacquard-lehengas.html
+redirect 301 /Lehenga-Choli/By-Fabric/Benarasi/ /benarasi.html
+
+redirect 301 /Lehenga-Choli/By-Price/101-US-to-200-US-/	/lehenga-choli/shopby/price-101-200.html
+redirect 301 /Lehenga-Choli/By-Price/201-US-to-300-US-/	/lehenga-choli/shopby/price-201-300.html
+redirect 301 /Lehenga-Choli/By-Price/301-US-to-400-US-/	/lehenga-choli/shopby/price-301-400.html
+redirect 301 /Lehenga-Choli/By-Price/401-US-to-500-US-/	/lehenga-choli/shopby/price-401-500.html
+redirect 301 /Lehenga-Choli/By-Price/501-US-to-1000-US/	/lehenga-choli/shopby/price-501-1000.html
+redirect 301 /Lehenga-Choli/By-Price/More-than-1000-US-/ /lehenga-choli/shopby/price-1000-4193.html
+
+redirect 301 /Lehenga-Choli/7-Days-Delivery/ /lehenga-choli/shopby/exprees_shipping_available-7_days.html
+redirect 301 /Lehenga-Choli/Bollywood-Lehengas/ /bollywood-lehengas.html
+
+redirect 301 /Kurti/By-Work/Embroidered-Kurti/ /embroidered-kurti.html
+redirect 301 /Kurti/By-Work/Printed-Kurti/ /printed-kurti.html
+redirect 301 /Kurti/By-Price/Less-than-50-USD/ /kurti/shopby/price-10-50.html
+redirect 301 /Kurti/By-Price/51-USD-to-100-USD/ /kurti/shopby/price-51-100.html
+redirect 301 /Kurti/By-Price/101-USD-to-200-USD/ /kurti/shopby/price-101-200.html
+redirect 301 /Kurti/By-Price/More-than-200-USD/ /kurti/shopby/price-200-250.html
+redirect 301 /Kids-Wear/Kids-Salwar-Kameez/ /kids-salwar-kameez.html
+redirect 301 /Kids-Wear/Kids-Lehenga-Choli/	/kids-lehenga-choli.html
+redirect 301 /Kids-Wear/Kids-Gown/ /kids-wear.html
+redirect 301 /Kids-Wear/Kids-Sarees/ /kids-sarees.html
+redirect 301 /Kids-Wear/Kids-Dresses/ /kids-dresses.html
+
+
+redirect 301 /Accessories/Leggings-Patiala/	/leggings-patiala.html
+redirect 301 /Accessories/Chunni/Bridal-Chunni/	/bridal-chunni.html
+redirect 301 /Accessories/Chunni/Designer-Chunni/ /designer-chunni.html
+redirect 301 /Accessories/Chunni/Casual-Chunni/	/casual-chunni.html
+redirect 301 /Accessories/Designer-Blouses/	/designer-blouses.html
+redirect 301 /Accessories/Designer-Petticoat/ /designer-petticoat.html
+redirect 301 /Accessories/Shawl/ /shawl.html
+redirect 301 /Accessories/Scarfs/ /scarfs.html
+redirect 301 /Accessories/Bindi/ /bindi.html
+redirect 301 /Accessories/Kaftans/ /kaftans.html
+redirect 301 /Accessories/Bags/	/bags.html
+
+
+
+redirect 301 /Jewellery/By-Type/Necklace-Sets/ /necklace-sets.html
+redirect 301 /Jewellery/By-Type/Bangles-Bracelets/ /Bangles-Bracelets
+redirect 301 /Jewellery/By-Type/Earrings/ /earrings.html
+redirect 301 /Jewellery/By-Type/Rings/ /rings.html
+redirect 301 /Jewellery/By-Occasion/Party-Jewellery/ /party-jewellery.html
+redirect 301 /Jewellery/By-Occasion/Wedding-Jewellery/ /wedding-jewellery.html
+redirect 301 /Jewellery/By-Occasion/Bridal-Jewellery/ /bridal-jewellery.html
+redirect 301 /Jewellery/Accessories/Brooches/ /brooches.html
+redirect 301 /Jewellery/Accessories/Hair-Clips/ /hair-clips.html
+redirect 301 /Jewellery/Accessories/Kamar-Bandh/ /kamar-bandh.html	
+redirect 301 /Jewellery/Accessories/Baju-Bandh/ /baju-gandh.html
+redirect 301 /Jewellery/Accessories/Key-Chain/ /key-khain.html
+redirect 301 /Jewellery/Accessories/Tiara/ /tiara.html
+redirect 301 /Jewellery/Accessories/Mangtika/ /mangtika.html
+redirect 301 /Jewellery/By-Price/Less-than-50-USD/ /jewellery/shopby/price-15-50.html
+redirect 301 /Jewellery/By-Price/50-USD-to-100-USD/ /jewellery/shopby/price-50-100.html
+redirect 301 /Jewellery/By-Price/101-USD-to-200-USD/ /jewellery/shopby/price-101-200.html
+redirect 301 /Jewellery/By-Price/More-than-200-USD/ /jewellery/shopby/price-201-776.html
+redirect 301 /Jewellery/7-Days-Delivery/ /jewellery/shopby/exprees_shipping_available-7_days.html
+
+
+redirect 301 /Sherwani-Mens/By-Work/Sherwani/ /sherwani-19732.html
+redirect 301 /Sherwani-Mens/By-Work/Kurta/ /kurta-16.html
+redirect 301 /Sherwani-Mens/By-Occasion/Wedding-Sherwani/ /wedding-sherwani.html
+redirect 301 /Sherwani-Mens/By-Occasion/Party-Sherwani/ /party-sherwani.html
+redirect 301 /Sherwani-Mens/By-Occasion/Casual-Sherwani/ /casual-sherwani.html
+redirect 301 /Sherwani-Mens/By-Price/50-USD-to-100-USD/ /mens/shopby/price-50-100.html
+redirect 301 /Sherwani-Mens/By-Price/101-USD-to-200-USD/ /mens/shopby/price-101-200.html
+redirect 301 /Sherwani-Mens/By-Price/201-USD-to-300-USD/ /mens/shopby/price-201-300.html
+redirect 301 /Sherwani-Mens/By-Price/301-USD-to-400-USD/ /mens/shopby/price-301-400.html
+redirect 301 /Sherwani-Mens/By-Price/401-USD-to-500-USD/ /mens/shopby/price-401-500.html
+redirect 301 /Sherwani-Mens/By-Price/More-than-500-USD/ /mens/shopby/price-501-800.html
+redirect 301 /Sherwani-Mens/Waist-Coat/ /waist-coat.html
+redirect 301 /Sherwani-Mens/Blazer/ /blazer.html
+redirect 301 /Sherwani-Mens/Accessories/Turban/ /turban.html
+redirect 301 /Sherwani-Mens/Accessories/Mens-Chunni/ /mens-chunni.html
+redirect 301 /Sherwani-Mens/Accessories/Mojri/ /mojri.html
+
+
+redirect 301 /products_new.php /sarees.html
+redirect 301 /Jewellery-collection/ /jewellery.html
+redirect 301 /Accessories-collection/ /accessories.html
+redirect 301 /trendy.php /sarees.html
+redirect 301 /premium.php /premium.html
+redirect 301 /premium.php?categories_id=356 /sarees-33.html
+redirect 301 /premium.php?categories_id=357	/salwar-kameez-33.html
+redirect 301 /premium.php?categories_id=358	/lehenga-choli-33.html
+
+redirect 301 /specials.php /sale.html
+redirect 301 /candid.php /lovesareez
+</IfModule>
+
+
+############################################
+## Prevent character encoding issues from server overrides
+## If you still have problems, use the second line instead
+
+    AddDefaultCharset Off
+    #AddDefaultCharset UTF-8
+
+<IfModule mod_expires.c>
+
+############################################
+## Add default Expires header
+## http://developer.yahoo.com/performance/rules.html#expires
+
+    ExpiresDefault "access plus 1 year"
+
+</IfModule>
+
+############################################
+## By default allow all access
+
+    Order allow,deny
+    Allow from all
+
+############################################
+## If running in cluster environment, uncomment this
+## http://developer.yahoo.com/performance/rules.html#etags
+
+    #FileETag none
+
